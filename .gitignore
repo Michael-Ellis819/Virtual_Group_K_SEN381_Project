@@ -427,3 +427,18 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Cameron M2 local configuration and keys
+**/bin/
+**/obj/
+.vs/
+.idea/
+*.user
+*.suo
+.env
+.env.*
+!.env.example
+**/appsettings.Local.json
+**/DataProtection-Keys/
+*.pfx
+*.key

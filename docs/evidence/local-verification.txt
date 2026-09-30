@@ -1,0 +1,30 @@
+PASS S01 owner reads status and timestamp [FR-003]
+PASS S02 requester sees public notes only [NFR-001 FR-011 partial]
+PASS S03 another requester denied [AC-FR-003-2]
+PASS S04 staff category grant includes internal notes [FR-008]
+PASS S05 staff outside category denied [FR-008]
+PASS S06 management detail access denied [NFR-001]
+PASS S07 anonymous direct service caller denied [FR-016]
+PASS S08 inactive identity denied [NFR-001]
+PASS S09 unknown role denied [NFR-001]
+PASS S10 missing user ID denied
+PASS S11 ambiguous roles denied
+PASS S12 mixed identities denied
+PASS S13 missing record denied
+PASS S14 empty ID denied
+PASS S15 read cancellation propagated
+PASS H01 Razor landing route renders
+PASS H02 signed-out request returns 401 without redirect
+PASS H03 tampered cookie returns 401
+PASS H04 owner receives JSON status [FR-003]
+PASS H05 private fields absent from serialised response
+PASS H06 protected response is not cached
+PASS H07 missing and forbidden share status and title
+PASS H08 category-authorised staff get private notes
+PASS H09 unauthorised category returns 404
+PASS H10 malformed and empty IDs return 400
+PASS H11 caller cannot elevate via query parameters
+PASS H12 store failure returns safe 500 [NFR-008 partial]
+PASS H13 failure response is not cached
+PASS H14 no write endpoint exists
+RESULT 29 checks passed; 0 failed. In-memory read slice only; no database/login/production acceptance claimed.
