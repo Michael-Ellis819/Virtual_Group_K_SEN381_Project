@@ -3,10 +3,13 @@ using CivicConnect.Data;
 using CivicConnect.Security;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 namespace CivicConnect;
 public static class Composition
 {
-    public static IServiceCollection AddCivicConnect(this IServiceCollection services)
+    public static IServiceCollection AddCivicConnect(
+        this IServiceCollection services,
+        IConfiguration configuration)
     {
         services.AddControllersWithViews().AddApplicationPart(typeof(Composition).Assembly);
         services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(o =>
@@ -21,6 +24,13 @@ public static class Composition
         services.AddSingleton<IRequestAccessPolicy, RequestAccessPolicy>();
         services.AddSingleton<IRequestReader, DevelopmentRequestReader>();
         services.AddScoped<RequestQueryService>();
+        var connectionString =
+            configuration.GetConnectionString("CivicConnect")
+            ?? throw new InvalidOperationException(
+                "CivicConnect database connection is not configured.");
+
+        services.AddDbContext<CivicConnectDbContext>(options =>
+            options.UseNpgsql(connectionString));
         return services;
     }
     public static WebApplication UseCivicConnect(this WebApplication app)

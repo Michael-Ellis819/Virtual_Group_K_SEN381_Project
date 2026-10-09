@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Configuration;
 
 int passed = 0;
 void Check(string id, bool condition)
@@ -70,7 +71,14 @@ var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 });
 builder.Logging.ClearProviders();
 builder.WebHost.UseUrls("http://127.0.0.1:0");
-builder.Services.AddCivicConnect();
+builder.Services.AddCivicConnect(
+    new ConfigurationBuilder()
+        .AddInMemoryCollection(new Dictionary<string, string?>
+        {
+            ["ConnectionStrings:CivicConnect"] =
+                "Host=localhost;Database=civicconnect_dev;Username=postgres"
+        })
+        .Build());
 builder.Services.AddDataProtection().UseEphemeralDataProtectionProvider();
 builder.Services.AddSingleton<IRequestReader, FaultInjectingReader>();
 await using var app = builder.Build();
