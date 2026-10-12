@@ -187,7 +187,255 @@ try
             "FAIL: Unauthenticated user accessed the request.");
 
     Console.WriteLine("PASS: Unauthenticated user is denied.");
+    
+    
+    // TEST: Two database contexts attempt to update the same request.
+    await using var firstContext = new CivicConnectDbContext(options);
+    await using var secondContext = new CivicConnectDbContext(options);
 
+    var firstRequest = await firstContext.ServiceRequests
+        .SingleAsync(r => r.RequestId == requestId);
+
+    var secondRequest = await secondContext.ServiceRequests
+        .SingleAsync(r => r.RequestId == requestId);
+
+    var originalVersion = firstRequest.Version;
+
+    // First user updates the request.
+    firstRequest.Status = "In Progress";
+    await firstContext.SaveChangesAsync();
+
+    if (firstRequest.Version != originalVersion + 1)
+    {
+        throw new Exception(
+            "FAIL: Request version did not increase.");
+    }
+
+    Console.WriteLine("PASS: Request version increases after update.");
+
+    // Second user tries to save an outdated copy.
+    secondRequest.Status = "Resolved";
+
+    var conflictDetected = false;
+
+    try
+    {
+        await secondContext.SaveChangesAsync();
+    }
+    catch (DbUpdateConcurrencyException)
+    {
+        conflictDetected = true;
+    }
+
+    if (!conflictDetected)
+    {
+        throw new Exception(
+            "FAIL: Concurrent update was not rejected.");
+    }
+
+    Console.WriteLine("PASS: Conflicting update is rejected.");
+
+    // Confirm the second update did not overwrite the first.
+    await using var verificationContext =
+        new CivicConnectDbContext(options);
+
+    var savedRequest = await verificationContext.ServiceRequests
+        .AsNoTracking()
+        .SingleAsync(r => r.RequestId == requestId);
+
+    if (savedRequest.Status != "In Progress")
+    {
+        throw new Exception(
+            "FAIL: Conflicting update overwrote the saved status.");
+    }
+
+    Console.WriteLine("PASS: First successful update is preserved.");
+
+    
+    // TEST: Save and retrieve a status-history record.
+    var historyId = Guid.NewGuid();
+
+    var historyEntry = new RequestStatusHistoryEntity
+    {
+        HistoryId = historyId,
+        RequestId = requestId,
+        PreviousStatus = "New",
+        NewStatus = "In Progress",
+        ChangedByUserId = "staff-1",
+        ChangedAt = DateTimeOffset.UtcNow
+    };
+
+    dbContext.RequestStatusHistory.Add(historyEntry);
+    await dbContext.SaveChangesAsync();
+
+    await using var historyContext =
+        new CivicConnectDbContext(options);
+
+    var savedHistory = await historyContext.RequestStatusHistory
+        .AsNoTracking()
+        .SingleOrDefaultAsync(h => h.HistoryId == historyId);
+
+    if (savedHistory is null)
+    {
+        throw new Exception(
+            "FAIL: Status-history record was not saved.");
+    }
+
+    Console.WriteLine("PASS: Status history saved to PostgreSQL.");
+
+    if (savedHistory.RequestId != requestId ||
+        savedHistory.PreviousStatus != "New" ||
+        savedHistory.NewStatus != "In Progress" ||
+        savedHistory.ChangedByUserId != "staff-1")
+    {
+        throw new Exception(
+            "FAIL: Status-history information is incorrect.");
+    }
+
+    Console.WriteLine("PASS: Status-history information is correct.");
+
+    
+    await using var writerContext =
+        new CivicConnectDbContext(options);
+
+    var writer = new EfRequestStatusWriter(writerContext);
+
+    await writer.SaveStatusChangeAsync(
+        requestId,
+        "In Progress",
+        "Resolved",
+        "staff-1",
+        "Your request has been resolved.");
+
+    await using var transactionCheckContext =
+        new CivicConnectDbContext(options);
+
+    var updatedRequest = await transactionCheckContext.ServiceRequests
+        .AsNoTracking()
+        .SingleAsync(r => r.RequestId == requestId);
+
+    if (updatedRequest.Status != "Resolved")
+    {
+        throw new Exception(
+            "FAIL: Transaction did not save the new status.");
+    }
+
+    Console.WriteLine("PASS: Transaction saved request status.");
+
+    var savedTransition = await transactionCheckContext.RequestStatusHistory
+        .AsNoTracking()
+        .SingleOrDefaultAsync(h =>
+            h.RequestId == requestId &&
+            h.PreviousStatus == "In Progress" &&
+            h.NewStatus == "Resolved");
+
+    if (savedTransition is null)
+    {
+        throw new Exception(
+            "FAIL: Transaction did not save status history.");
+    }
+
+    Console.WriteLine("PASS: Transaction saved status history.");
+
+    var savedFeedback = await transactionCheckContext.RequestNotes
+        .AsNoTracking()
+        .SingleOrDefaultAsync(n =>
+            n.RequestId == requestId &&
+            n.Content == "Your request has been resolved.");
+
+    if (savedFeedback is null ||
+        !savedFeedback.IsRequesterVisible)
+    {
+        throw new Exception(
+            "FAIL: Transaction did not save requester feedback.");
+    }
+
+    Console.WriteLine("PASS: Transaction saved requester feedback.");
+
+    
+    // TEST: A failed transaction must roll back every change.
+    await using var rollbackContext =
+        new CivicConnectDbContext(options);
+
+    var rollbackWriter =
+        new EfRequestStatusWriter(rollbackContext);
+
+    var historyCountBefore =
+        await rollbackContext.RequestStatusHistory
+            .CountAsync(h => h.RequestId == requestId);
+
+    var noteCountBefore =
+        await rollbackContext.RequestNotes
+            .CountAsync(n => n.RequestId == requestId);
+
+    var rollbackDetected = false;
+
+    try
+    {
+        // The feedback exceeds the database's 2000-character limit.
+        // This forces a database write failure.
+        await rollbackWriter.SaveStatusChangeAsync(
+            requestId,
+            "Resolved",
+            "Closed",
+            "staff-1",
+            new string('X', 2500));
+    }
+    catch (DbUpdateException)
+    {
+        rollbackDetected = true;
+    }
+
+    if (!rollbackDetected)
+    {
+        throw new Exception(
+            "FAIL: Expected database write failure did not occur.");
+    }
+
+    Console.WriteLine("PASS: Database write failure detected.");
+
+    // Use a fresh context to verify the actual database state.
+    await using var rollbackCheckContext =
+        new CivicConnectDbContext(options);
+
+    var requestAfterFailure =
+        await rollbackCheckContext.ServiceRequests
+            .AsNoTracking()
+            .SingleAsync(r => r.RequestId == requestId);
+
+    if (requestAfterFailure.Status != "Resolved")
+    {
+        throw new Exception(
+            "FAIL: Request status was not rolled back.");
+    }
+
+    Console.WriteLine("PASS: Request status rolled back.");
+
+    var historyCountAfter =
+        await rollbackCheckContext.RequestStatusHistory
+            .CountAsync(h => h.RequestId == requestId);
+
+    if (historyCountAfter != historyCountBefore)
+    {
+        throw new Exception(
+            "FAIL: Failed transaction left a history record.");
+    }
+
+    Console.WriteLine("PASS: Status history rolled back.");
+
+    var noteCountAfter =
+        await rollbackCheckContext.RequestNotes
+            .CountAsync(n => n.RequestId == requestId);
+
+    if (noteCountAfter != noteCountBefore)
+    {
+        throw new Exception(
+            "FAIL: Failed transaction left requester feedback.");
+    }
+
+    Console.WriteLine("PASS: Requester feedback rolled back.");
+
+    
     Console.WriteLine("All database integration checks passed.");
 }
 finally

@@ -18,5 +18,8 @@ public sealed class ServiceRequestEntity
 
     public DateTimeOffset UpdatedAt { get; set; }
 
+    // Used to detect competing updates to the same request.
+    public long Version { get; set; } = 1;
+
     public List<RequestNoteEntity> Notes { get; set; } = new();
 }

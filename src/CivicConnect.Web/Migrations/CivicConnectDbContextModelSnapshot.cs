@@ -46,6 +46,40 @@ namespace CivicConnect.Web.Migrations
                     b.ToTable("RequestNotes");
                 });
 
+            modelBuilder.Entity("CivicConnect.Data.Entities.RequestStatusHistoryEntity", b =>
+                {
+                    b.Property<Guid>("HistoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset>("ChangedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("ChangedByUserId")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("NewStatus")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)");
+
+                    b.Property<string>("PreviousStatus")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)");
+
+                    b.Property<Guid>("RequestId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("HistoryId");
+
+                    b.HasIndex("RequestId", "ChangedAt");
+
+                    b.ToTable("RequestStatusHistory");
+                });
+
             modelBuilder.Entity("CivicConnect.Data.Entities.ServiceRequestEntity", b =>
                 {
                     b.Property<Guid>("RequestId")
@@ -85,6 +119,12 @@ namespace CivicConnect.Web.Migrations
                     b.Property<DateTimeOffset>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<long>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasDefaultValue(1L);
+
                     b.HasKey("RequestId");
 
                     b.HasIndex("ReferenceNumber")
@@ -97,6 +137,17 @@ namespace CivicConnect.Web.Migrations
                 {
                     b.HasOne("CivicConnect.Data.Entities.ServiceRequestEntity", "ServiceRequest")
                         .WithMany("Notes")
+                        .HasForeignKey("RequestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ServiceRequest");
+                });
+
+            modelBuilder.Entity("CivicConnect.Data.Entities.RequestStatusHistoryEntity", b =>
+                {
+                    b.HasOne("CivicConnect.Data.Entities.ServiceRequestEntity", "ServiceRequest")
+                        .WithMany()
                         .HasForeignKey("RequestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
