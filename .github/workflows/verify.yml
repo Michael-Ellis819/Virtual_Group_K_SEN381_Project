@@ -1,11 +1,16 @@
 
 name: CivicConnect verification
 
+
 on:
-  pull_request:
-    branches: [main]
   push:
-    branches: [main]
+    branches:
+      - main
+      - feature/m3-data-persistence
+  pull_request:
+    branches:
+      - main
+
 
 permissions:
   contents: read
