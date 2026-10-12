@@ -22,7 +22,7 @@ public static class Composition
         });
         services.AddAuthorization(o => o.FallbackPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build());
         services.AddSingleton<IRequestAccessPolicy, RequestAccessPolicy>();
-        services.AddSingleton<IRequestReader, DevelopmentRequestReader>();
+        services.AddScoped<IRequestReader, EfRequestReader>();
         services.AddScoped<RequestQueryService>();
         var connectionString =
             configuration.GetConnectionString("CivicConnect")
