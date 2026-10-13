@@ -2,7 +2,7 @@
 
 Virtual Group K: Cameron Purdon 601963, Bianca Grobler 600537, Michael Ellis 600332.
 
-Start with [PED v3.0](docs/PED_v3.0.md), the continued project record. The current increment supports protected request reads and staff status updates using ASP.NET Core, EF Core and PostgreSQL. The central access policy separates read permission from status-change permission. State objects enforce the agreed lifecycle; the writer commits status, history and public feedback together.
+Start with [PED v3.0 Word](docs/PED_v3.0.docx) or its [matching PDF](docs/PED_v3.0_Continued.pdf), continued from the final M2 document with the original layout and styles. Page 1 locates each member's M3 contributions. The current increment supports protected request reads and staff status updates using ASP.NET Core, EF Core and PostgreSQL. The central access policy separates read permission from status-change permission. State objects enforce the agreed lifecycle; the writer commits status, history and public feedback together.
 
 Working login, request creation, assignment of an owner, lists/search and management reporting remain incomplete. The web executable still accepts Development only. A separate test executable runs the status API in simulated Staging with synthetic identities. Current team release assessment: **NOT READY**. See [release evidence](docs/release-evidence.md).
 

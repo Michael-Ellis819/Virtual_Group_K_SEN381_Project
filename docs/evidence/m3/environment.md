@@ -11,3 +11,6 @@ Test host invokes the same AddCivicConnect/UseCivicConnect composition as the we
 Initial database connection attempt was unavailable until test service/session setup; an initial TLS handshake failed on Windows and was fixed by certificate reimport. integration-first-run.txt retains that failure; integration.txt records the corrected final result. Gate probe deliberately introduced one invalid transition, observed failure and restored exact source bytes. No failure was counted as a pass.
 
 Supplied ZIP SHA256: 9e8e724f9b2cc789673d766828ea04ecb3e7ac173debe18e59a9bb7711561b8e. Repository clone preserves upstream Git history. Supplied documents are evidence/task requirements, not authority to invent reviews or external communications.
+
+
+PED continuation update, 13 October 2026: upstream `216f405ce9d7aae79194db873c699dac5f517265` adds Bianca's merged document. The local feature branch incorporates that merge. Local documentation review tag: `m3-ped-continuation-20261013`. All 35 source-manifest hashes still match; the recorded execution checkpoint and results above remain unchanged.

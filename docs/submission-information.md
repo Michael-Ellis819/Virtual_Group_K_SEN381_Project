@@ -5,9 +5,9 @@
 | Team | Virtual Group K - CivicConnect |
 | Members | Cameron Purdon 601963; Bianca Grobler 600537; Michael Ellis 600332 |
 | Repository | https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project |
-| Local review baseline | `m3-cameron-local-review-20261013`; local tag, not yet the approved/submitted team candidate. Implementation/test commit: `fef0469d27fffb1a7b10de0acbd9a3faae703717`. |
-| Upstream base | `62e183b0d610fff0521b2116f6dec15b0319b22d`; merged Michael M3 persistence. |
-| PED | v3.0; controlled Markdown source PED_v3.0.md; required export PED_v3.0.pdf. |
+| Local review baseline | `m3-ped-continuation-20261013`; local tag, not yet the approved/submitted team candidate. Implementation/test commit: `fef0469d27fffb1a7b10de0acbd9a3faae703717`. |
+| Upstream base | `216f405ce9d7aae79194db873c699dac5f517265`; Michael persistence and Bianca PR15 contribution merged. |
+| PED | v3.0; continued Word source PED_v3.0.docx and matching required export PED_v3.0_Continued.pdf; Markdown is a generated text mirror. |
 | RTM | docs/CivicConnect_RTM_v2.0.xlsx; established location retained, M3 evidence updated. |
 | CI/test evidence | docs/evidence/m3; .github/workflows/verify.yml; historical run https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/38218128326. New-baseline CI pending. |
 | Test/staging access | Assessor can observe the Release M3 harness with --database on a disposable PostgreSQL database; see README and testing-m3.md. Final Michael staging link/startup and rerun pending. |
