@@ -1,4 +1,4 @@
-<!-- Generated text mirror of PED_v3.0.docx. Edit the continued Word source and regenerate its matching PDF; original Word layout is authoritative. -->
+<!-- Generated text mirror of PED_v3.0.docx. The original Word layout is authoritative. Matching PDF: PED_v3.0_Updated.pdf. -->
 
 # CivicConnect Project Engineering Document
 
@@ -8,7 +8,7 @@ Virtual Group K | SEN381 | 13 October 2026
 
 Cameron Purdon 601963 | Bianca Grobler 600537 | Michael Ellis 600332
 
-This document continues PED v2.0 into Milestone 3. It retains the approved requirements and M2 decisions, incorporates Michael's persistence implementation and Bianca's architecture, testing and risk work, and records Cameron's integrated status API and verification evidence. The status workflow is locally tested; the complete agreed scope remains NOT READY pending the recorded blockers and final team review.
+This document continues PED v2.0 into Milestone 3, retaining the approved requirements, architecture and earlier project history. It records implemented persistence, central authorisation, the status API and personal verification completed on 13 October 2026. The demonstrated increment is protected request retrieval and status management. The evidence supports this increment; the recorded release classification is NOT READY because required performance and current-candidate review/CI evidence are incomplete.
 
 ## Document control
 
@@ -18,7 +18,7 @@ This document continues PED v2.0 into Milestone 3. It retains the approved requi
 | 2.0 architecture draft | 24 September 2026; Bianca contribution, PR #10 | ASRs, architecture, State direction and R-008 to R-045. |
 | 2.0 data and technology draft | Michael PR #11; approved by two distinct peers on 29 September | PostgreSQL data direction; MVC/Razor/EF Core stack; deployment considerations. |
 | 2.0 | 30 September 2026; consolidated by Cameron Purdon and reviewed by Bianca Grobler and Michael Ellis | M1 continuity retained; M2 architecture, data, technology, design, integration, RTM, application documentation and verification evidence consolidated. |
-| 3.0 | 13 October 2026; continued by Cameron Purdon from the final M2 baseline and merged team contributions; final review pending | M3 persistence, architecture conformance, access/API integration, tests, risks, debt, release judgement and submission information. |
+| 3.0 | 13 October 2026; M2 continuation and personal verification at 18:18-18:19 SAST | Integrated status workflow; 19 M3 cases, 29 regression checks and 25 database checks; current configuration, traceability and release evidence. |
 
 ## Navigation
 
@@ -26,11 +26,11 @@ Part I retains the M1 foundation. Part II continues the M2 architecture and deci
 
 Controlled supporting artefacts include docs/CivicConnect_RTM_v2.0.xlsx, docs/decisions/README.md and README.md.
 
-| Contribution | M3 locations in this continued PED |
+| Evidence area | Location in this PED |
 | --- | --- |
-| Michael Ellis | 5.4.14 (pp. 28-29) and 7.2-7.7 (pp. 49-57): persistence, decisions, database tests and integration handover. |
-| Bianca Grobler | 5.3.1 (p. 21) and 5.6.1 (p. 36): conformance; 7.8.1 (pp. 57-58): test designs; 11.2-11.3 (pp. 71-73): risk/debt; 14 (pp. 75-76): release and residual risk. |
-| Cameron Purdon | 5.6.2 (p. 38) and 5.7.2 (p. 41): access/API integration; 7.8-7.10 (pp. 57-59): test results; 9.1 and 10.2 (pp. 61, 63): trace/review; 12.1 and 15 (pp. 74, 76-77): AI/submission. |
+| Persistence | 5.4.14 and 7.2-7.7: implementation, decisions, database verification and integrated workflow. |
+| Conformance and quality | 5.3.1, 5.6.1, 7.8.1, 11.2-11.3 and 14: architecture, rule-test design, risks, debt and release judgement. |
+| API and verification | 5.6.2, 5.7.2, 7.8.2-7.10, 8-10, 12.1 and 15: access/API, execution evidence, technical documentation, traceability and submission record. |
 
 ## Part I Retained M1 engineering foundation
 
@@ -982,14 +982,14 @@ Later Consequence (M3 update, 13 October 2026): Layering is retained in the impl
 
 ### 5.3.1 Milestone 3 Architecture Conformance Review
 
-Owner: Bianca Grobler. Her 10 October contribution reviews ADR-M2-01 and ADR-M2-02 against the available M2 baseline. The following implementation update consolidates the merged persistence work and Cameron's local integration evidence for her final review.
+The M3 conformance record compares ADR-M2-01 and ADR-M2-02 with the implemented MVC services, access policy, State component and relational persistence. The original architectural direction is retained; the principal implementation consequence is an explicit coordinator for approved status changes.
 
-| Original decision | M3 observation and consequence | Evidence and remaining review |
+| Original decision | Implemented consequence | Evidence and limitation |
 | --- | --- | --- |
-| ADR-M2-01: one layered web application and relational store | Retained. MVC delegates to application services, a central policy and EF Core/PostgreSQL adapters. Required status effects share one transaction. One project keeps deployment manageable but does not enforce folder boundaries. | Source folders; local build; E01/E02/A05. Bianca must review dependency direction and final deployment. |
-| ADR-M2-02: State controls legal transitions | The State service was absent from the supplied main. A minimal six-state implementation was added as a dependency of Cameron's integration. State decides legality; the coordinator checks permission; the writer physically commits the approved command. | C01/C02/C04 and E01/E02. Michael reviews the lifecycle component; Bianca confirms conformance and later consequences. |
+| ADR-M2-01: one layered web application and relational store | MVC delegates to application services, a central policy and EF Core/PostgreSQL adapters. Required status effects share one transaction. | Source folders and E01/E02/A05. Layers share one project; dependency enforcement is logical rather than a separate-assembly boundary. |
+| ADR-M2-02: State controls legal transitions | The missing six-state component was added as an integration dependency. State checks legality, the coordinator checks permission, and the writer commits approved changes. | C01/C02/C04 and E01/E02. Future low-level-writer bypass remains a documented design risk. |
 
-No reopening, new requirement or accepted architecture change is introduced. This update records original decision, observed problem, implementation response and consequence. Final independent conformance approval remains pending; a folder structure alone does not establish enforcement.
+No reopening or new requirement is introduced. The record connects each original decision to an implementation observation and consequence; passing checks establish selected behaviour rather than architectural enforcement in every future route.
 
 ### 5.4 Data & Persistence Baseline
 
@@ -1382,13 +1382,13 @@ The existing verification suite had previously completed 29 checks successfully,
 
 The GitHub Actions verification workflow was extended to support a temporary PostgreSQL test database. A workflow run on the feature/m3-data-persistence branch completed successfully, providing independent CI execution evidence.
 
-Implementation Limitations and Remaining Work
+Implementation Scope and Limitations
 
-The persistence component does not independently authorise users or validate permitted lifecycle transitions. Full application-level status updates still require integration with the team's authorisation and status-transition components.
+The raw persistence adapter does not independently authorise users or decide legal transitions. The implemented application coordinator supplies those checks before saving; the personal component/API/system cases verify the supported status path.
 
 The current tests demonstrate selected database integrity and persistence behaviours. They do not yet establish complete acceptance of FR-010, FR-011, FR-015 or NFR-003, including all lifecycle, audit-history and duplicate-submission requirements.
 
-Staging deployment, recovery testing and pilot-load performance verification remain outstanding.
+The simulated test host exercises Staging configuration and HTTPS. Normal Staging web startup, recovery acceptance and pilot-load performance are not established by the recorded evidence.
 
 Supporting Evidence
 
@@ -1427,8 +1427,6 @@ Risks: R-014, R-015, R-016, R-017, R-018, R-019, R-025 and R-037.
 Evidence: Initial ERD/schema, migration, PostgreSQL connection spike, transactional save spike and GitHub PR. Evidence currently Planned until committed.
 
 Later Consequence (M3 update, 13 October 2026): PostgreSQL migrations, version checks and transactional status/history/feedback writes are implemented. Twenty-five database checks pass locally. Broader audit, idempotency and recovery remain incomplete; see 5.4.14, 7.3 and 7.9.
-
-M3 later consequence for ADR-M2-03, 13 October 2026: Michael implemented the relational adapter, migrations, version token and transactional status/history/public-feedback writer. His 25 database checks passed again locally. The writer is a low-level persistence component; the authorised application workflow is now connected through RequestStatusService. Broader audit events, creation idempotency and recovery remain incomplete. Evidence: 5.4.14, 7.3 and 7.9.
 
 ### 5.5 Technology-Stack Decision
 
@@ -1731,8 +1729,6 @@ Evidence: Working application bootstrap, EF Core/PostgreSQL connection, initial 
 
 Later Consequence (M3 update, 13 October 2026): The selected stack builds with zero warnings/errors. Local PostgreSQL 18.4 differs from CI 17; the actual web Staging guard and real accounts remain unresolved. See 5.8.16 and 7.9.
 
-M3 later consequence for ADR-M2-04, 13 October 2026: the selected ASP.NET Core/EF Core/PostgreSQL stack is implemented and builds with zero warnings/errors. Local verification used .NET SDK 8.0.425/runtime 8.0.31 and PostgreSQL 18.4; CI declares PostgreSQL 17. Package inventory and the dated advisory scan are in docs/evidence/m3. Live identity provisioning and final staging compatibility remain outstanding.
-
 ### 5.6 Initial Design Decision: Request Status Transition (Design Problem 1 of 2)
 
 This is one of the two required M2 design-pattern decisions. The second (owned by Cameron) addresses a separate design problem and is documented under Cameron's section of this PED.
@@ -1765,13 +1761,13 @@ M2 checkpoint, 30 September 2026: PLANNED. State code had not been written; evid
 
 ### 5.6.1 Milestone 3 State Implementation and Conformance
 
-Owner: Michael Ellis for implementation; Bianca Grobler for conformance. The minimal State dependency was produced during Cameron's integration because no transition service existed in the supplied main. New allows Assigned or Rejected; Assigned allows In Progress; In Progress allows Resolved; Resolved allows Closed; Closed and Rejected are terminal. Six classes implement one shared State interface behind StatusTransitionService.
+The status workflow uses six State classes behind StatusTransitionService. New allows Assigned or Rejected; Assigned allows In Progress; In Progress allows Resolved; Resolved allows Closed. Closed and Rejected are terminal. This dependency was introduced during integration because it was absent from the earlier main snapshot.
 
 C01 verifies the five legal edges; C02 checks the full matrix and unknown values; C04 rejects New to Closed before writing. A deliberate forbidden-transition injection failed C02, after which the original source was restored. The State decision is retained. The added classes separate legality from access and persistence, but future entry points must still be reviewed for bypasses. Sources: Bianca TC-ST-01 to TC-ST-14, the unchanged lifecycle and docs/decisions/M3-conformance-update.md.
 
 ### 5.6 Second design decision Central authorisation
 
-Owner: Cameron Purdon (601963). Date: 30 September 2026.
+Date: 30 September 2026.
 
 Status: Accepted for the M2 baseline and implemented in the protected request read slice.
 
@@ -1817,13 +1813,13 @@ Figure 1. Cameron's implemented read collaboration. PostgreSQL and State are fut
 
 ### 5.6.2 Milestone 3 Central Authorisation Implementation
 
-Owner: Cameron Purdon. ADR-M2-05 is retained and extended with CanChangeStatus. An active, unambiguous Staff identity with the matching category may mutate; requester ownership permits reading only. Both HTTP and direct RequestStatusService calls use the policy. Clients cannot supply the audit actor, role or category permission through request parameters.
+ADR-M2-05 is retained and extended with CanChangeStatus. An active, unambiguous Staff identity with the matching category may mutate; requester ownership permits reading only. Both HTTP and direct RequestStatusService calls use the policy. Clients cannot supply the audit actor, role or category permission through request parameters.
 
 The checked snapshot version is passed to the writer. A changed category or record version invalidates the previous permission decision before saving. C03 and BB05 verify denied changes; A06 verifies stale category/version rejection; E01 verifies public-note filtering after a saved update. Real account sign-in, permission persistence and ticket freshness remain unverified.
 
 ### 5.7 Initial API and integration decision
 
-Owner: Cameron Purdon (601963). Date: 30 September 2026.
+Date: 30 September 2026.
 
 Status: Accepted for the M2 baseline. The read contract is implemented; write coordination remains planned.
 
@@ -1861,7 +1857,7 @@ Virtual Group K (2026), Assignment 2 Virtual Group K.docx, Task 1 Problem 1, Tas
 
 #### 5.7.1 Established interface contract
 
-Owner: Cameron. Contract date: 30 September 2026. Decisions: ADR-M2-05 and ADR-M2-06.
+Contract date: 30 September 2026. Decisions: ADR-M2-05 and ADR-M2-06.
 
 #### Established HTTP boundary
 
@@ -1930,7 +1926,7 @@ Before write routes are built: decide DTO bounds, category key mapping, permissi
 
 ### 5.7.2 Milestone 3 Status API and Explicit Integration
 
-Owner: Cameron Purdon. ADR-M2-06 is retained. RequestsController delegates to RequestStatusService, which loads the request, checks action permission and input, validates the expected status, asks StatusTransitionService, and passes one versioned command to Michael's transactional writer. Status, history and public feedback are required effects and succeed together. This is a same-application API; no public third-party interface or broker is introduced.
+ADR-M2-06 is retained. RequestsController delegates to RequestStatusService, which loads the request, checks action permission and input, validates the expected status, asks StatusTransitionService, and passes one versioned command to Michael's transactional writer. Status, history and public feedback are required effects and succeed together. This is a same-application API; no public third-party interface or broker is introduced.
 
 | Operation | Contract and outcome |
 | --- | --- |
@@ -2265,13 +2261,13 @@ The specific hosting provider remains deliberately deferred until a working depl
 
 ### 5.8.16 Milestone 3 Environment Verification
 
-Owner: Michael Ellis. The new status journeys ran in a separate Release test host configured as Staging, using loopback HTTPS, a temporary certificate, ephemeral protected identities and a disposable PostgreSQL database. The same application composition is invoked, but the test host does not execute Program's Development-only guard. This is partial simulated-staging evidence. The actual web executable still rejects Staging; final target startup and critical-journey rerun remain required.
+The personal run used a Release test host configured as Staging, loopback HTTPS, a temporary certificate, ephemeral identities and a fresh PostgreSQL database. It invokes the application composition but does not execute the normal Program guard. The actual web entry point accepts Development only; this difference bounds the simulated-staging evidence.
 
-No separate performance/load exercise or backup/restore result was present in the updated team snapshot. NFR-002 retains its 95% within 3 seconds and at most 1% failures targets, with 10 users, 1,000 requests and 10 minutes after 2 minutes warm-up, at least 100 runs per operation. A smaller justified milestone exercise must state its limitations. Application rollback must consider database schema/data; reverting code alone does not restore data.
+No performance/load or backup/restore measurement is recorded at the evidence cutoff. NFR-002 retains its pilot targets and NFR-007 its recovery targets. The rollback baseline is reviewed main revision 216f405ce9d7aae79194db873c699dac5f517265: restore a build of that revision with compatible configuration and preserve the database. The status integration adds no schema migration; compatibility and restoration measurements are not established by a code rollback. Reverting application code alone does not reverse schema or data changes.
 
 ## 6 Architecture technology and initial design baseline
 
-M3 baseline status, 13 October 2026: the accepted M2 decisions remain the starting point. The evidence now includes merged PostgreSQL persistence and a locally tested authorised status API. Approval of the M2 design is not approval of the M3 release. Final independent review and release sign-off remain pending; see sections 10.2, 14 and 15.
+At 13 October 2026, the M2 decisions remain the architecture baseline. PostgreSQL persistence and the authorised status API are implemented and personally verified. Historical M2 acceptance concerns the design baseline; the M3 evidence and release judgement are recorded separately in sections 7.9, 10.2 and 14.
 
 Baseline: CivicConnect M2, PED v2.0, dated 30 September 2026. It includes the retained M1 requirements and scope, ADR-M2-01 to ADR-M2-07, data, technology and deployment directions, the updated RTM, the protected read implementation and local verification. Bianca Grobler, Michael Ellis and Cameron Purdon reviewed and accepted this baseline for M2 submission.
 
@@ -2388,11 +2384,11 @@ Evidence: GitHub Actions – Successful Verification Run
 
 The workflow reported a non-blocking warning relating to Node.js compatibility in third-party GitHub Actions. This warning did not prevent the workflow from completing successfully.
 
-#### 7.3.6 Limitations and Outstanding Verification
+#### 7.3.6 Verification Scope and Limitations
 
-Although the persistence tests passed, complete system acceptance has not yet been demonstrated.
+The persistence checks passed and the integrated status workflow was subsequently verified through the API. This evidence covers the demonstrated increment rather than every project acceptance criterion.
 
-Outstanding verification includes integration with the authorised status-transition workflow, full audit-history coverage, duplicate-submission protection, staging deployment, recovery testing and performance testing against the pilot-load targets.
+The broader audit-event model, request-creation idempotency, real account workflow, performance and recovery acceptance are outside the recorded verification. The system journeys use synthetic protected identities and a Staging HTTPS test host.
 
 The successful database tests therefore provide implementation evidence for selected acceptance criteria, rather than proof that all related functional and non-functional requirements are fully satisfied.
 
@@ -2400,42 +2396,42 @@ The successful database tests therefore provide implementation evidence for sele
 
 #### 7.4.1 Identified Risks
 
-The Milestone 3 persistence implementation introduces several engineering risks that must be managed before the system can be considered fully integrated and ready for deployment.
+The persistence risks below are reconciled with the personally executed status workflow. Status reflects the recorded evidence; remaining uncertainty is retained in the registers.
 
-| Risk ID | Risk description | Impact | Mitigation / planned action | Status |
+| Risk ID | Risk description | Impact | Current control and evidence | Status |
 | --- | --- | --- | --- | --- |
-| M3-R01 | Persistence operations are not yet integrated with the team's status-transition and authorisation components. | Unauthorised or invalid status changes could occur if the persistence writer is called without the required application-level checks. | Integrate the persistence writer through a controlled application service that enforces authorisation and valid transitions before saving. | Open |
+| M3-R01 | A future route could bypass application permission or lifecycle checks by calling the low-level writer. | Unauthorised or illegal stored changes would undermine confidentiality and audit integrity. | The implemented coordinator applies policy and State checks; C03/C04/BB05/E01/E02 pass. | Mitigated for tested API; residual bypass risk |
 | M3-R02 | Concurrent operations may attempt to modify the same request. | Without correct conflict handling, changes could be lost or users could receive unclear errors. | Retain optimistic concurrency protection and introduce appropriate user-facing conflict handling. | Partially mitigated |
 | M3-R03 | Database migrations may behave differently in staging or deployment environments. | Schema changes could fail or interrupt application availability. | Test migrations against a separate staging database and document a recovery procedure. | Open |
 | M3-R04 | Database credentials could be exposed through configuration or source control. | Unauthorised database access and exposure of request information. | Continue using local user secrets and environment variables, with no real credentials committed to GitHub. | Ongoing |
-| M3-R05 | Performance and recovery requirements have not yet been verified. | The system may fail to meet the agreed pilot-load or recovery targets. | Perform controlled performance, backup and restore tests and record the results. | Open |
+| M3-R05 | Performance and recovery requirements have not yet been verified. | The system may fail to meet the agreed pilot-load or recovery targets. | No measured load or restoration result is recorded; NFR-002/007 acceptance remains unverified. | Open |
 
 #### 7.4.2 Technical Debt Register
 
 Technical debt refers to implementation work that remains necessary to improve the system's completeness, maintainability or operational readiness.
 
-| Debt ID | Outstanding work | Reason | Planned resolution | Priority |
+| Debt ID | Recorded item | Reason | Resolution or control | Priority/status |
 | --- | --- | --- | --- | --- |
-| TD-M3-01 | Integrate persistence with lifecycle validation and authorisation. | Components were developed separately by team members. | Introduce and verify a coordinated application-level status-update workflow. | High |
+| TD-M3-01 | Application-level persistence integration | Originally separate components are now connected through RequestStatusService. | C01-C06, A05/A06 and E01/E02 personally passed. | Resolved locally |
 | TD-M3-02 | Expand audit-history coverage beyond status changes. | The current implementation records status history but not every event required by FR-015. | Extend persistence and tests to cover additional required audit events. | High |
 | TD-M3-03 | Implement duplicate-submission protection. | Request creation idempotency has not yet been demonstrated. | Add a duplicate-submission safeguard and repeatable tests. | High |
 | TD-M3-04 | Complete staging and database recovery verification. | Testing has primarily focused on local development and GitHub Actions. | Configure staging, test migrations, and perform backup and restore verification. | High |
 
 #### 7.4.3 Risk and Technical Debt Management
 
-The team will manage these items through GitHub Issues, engineering documentation and controlled Pull Requests. High-priority items will be addressed before the affected functionality is considered complete.
+Issues, decision records and controlled PRs provide the engineering record for these items. The supported status path has application checks and transactional persistence; the broader debt remains visible with its consequences.
 
 The existing GitHub review process, automated verification checks and database transaction controls provide safeguards against introducing regressions during integration.
 
-Remaining technical debt will be reassessed during Milestone 4, with unresolved items documented alongside their impact on requirements, acceptance criteria and deployment readiness.
+Open debt remains linked to requirement acceptance and deployment limitations. A passing status-slice test does not close unrelated creation, audit or recovery debt.
 
 #### 7.4.4 Current Implementation Boundary
 
-The PostgreSQL persistence implementation has passed its local integration tests, and the GitHub Actions workflow has completed successfully.
+The persistence implementation passed 25 personal database checks. The integrated status API passed the 19-case M3 suite. Historical Actions run 38218128326 concerns the earlier persistence revision.
 
 However, these results do not establish that the complete CivicConnect application is ready for deployment.
 
-The persistence component must still be integrated with the team's authorisation and lifecycle rules. Staging, recovery and performance evidence must also be collected before the corresponding requirements can be considered verified.
+The supported status route is integrated with permission and State checks. Performance, restoration and a normal Staging web startup are not established by the recorded run.
 
 ### 7.5 Milestone 3 Requirements Traceability – Data Persistence
 
@@ -2450,11 +2446,11 @@ The matrix links requirements to implementation components, verification evidenc
 | Requirement ID | Requirement description | Implementation evidence | Verification evidence | Status |
 | --- | --- | --- | --- | --- |
 | FR-003 | Requesters can view their own request status without accessing another requester's records. | EfRequestReader, RequestQueryService, RequestAccessPolicy | Database retrieval and protected-read access tests | Partially verified |
-| FR-010 | Request status changes must follow the permitted lifecycle. | EfRequestStatusWriter, RequestStatusHistoryEntity | Status persistence and transaction tests | Pending lifecycle integration |
+| FR-010 | Request status changes must follow the permitted lifecycle. | StatusTransitionService, RequestStatusService, EfRequestStatusWriter | C01-C06, A03/A05/A06 and E01/E02 | Partially verified; status slice |
 | FR-011 | Request actions and notes must respect visibility requirements. | RequestNoteEntity, EfRequestReader, EfRequestStatusWriter | Requester-visible and internal-note tests | Partially verified |
 | FR-015 | Maintain accountability and history for request-related changes. | RequestStatusHistoryEntity | Status-history persistence tests | Partially verified |
 | NFR-003 | Preserve data integrity when saving changes. | EF Core concurrency token, database transactions | Conflicting-update and rollback tests | Partially verified |
-| NFR-009 | Support repeatable verification of core business rules. | CivicConnect.DatabaseTests and CivicConnect.Verification | 25 database checks and 29 application verification checks passed locally | Partially verified |
+| NFR-009 | Support repeatable verification of core business rules. | CivicConnect.DatabaseTests and CivicConnect.Verification | 19 M3 cases, 25 DB checks and 29 regression checks; personal run | Partially verified |
 
 #### 7.5.3 Traceability Explanation
 
@@ -2462,19 +2458,19 @@ FR-003 – Protected Request Retrieval
 
 The implementation retrieves service requests from PostgreSQL and uses the application's access policy to restrict protected reads.
 
-Tests verify selected ownership and staff-category access scenarios. Complete end-to-end acceptance remains outstanding.
+E01 verifies the saved lifecycle/read/audit path; E02/A04 verify foreign-record isolation. Real credential login and full browser acceptance are outside this run.
 
 FR-010 – Request Lifecycle
 
 The persistence writer can save a request's updated status and its history record within a database transaction.
 
-However, the writer does not independently determine whether a transition is permitted. Integration with the team's lifecycle validation component is required before FR-010 can be considered fully verified.
+The coordinator invokes State validation and permission checks before the transactional writer. Prohibited, unauthorised, stale and failing mutations are exercised by the component/API cases; the raw adapter does not independently enforce application rules.
 
 FR-011 – Request Notes and Visibility
 
 Request notes are stored in PostgreSQL with visibility information. Tests verify selected requester-visible and internal-note behaviours.
 
-Further application-level testing is required to confirm that all permitted actions and note-visibility rules are enforced.
+Requester note filtering and status feedback are tested. The broader note-author/time/correction workflow is not implemented in this increment.
 
 FR-015 – Accountability and History
 
@@ -2486,31 +2482,17 @@ NFR-003 – Data Integrity
 
 The implementation uses optimistic concurrency and database transactions to protect against selected conflicting updates and incomplete writes.
 
-Tests demonstrate stale-update rejection and transaction rollback. Duplicate-submission protection and broader data-integrity acceptance remain outstanding.
+A05 verifies rollback and A06 verifies stale category/version rejection. Request creation, idempotency and restart acceptance are not covered by these results.
 
 NFR-009 – Testability
 
 Automated verification is supported by repeatable application checks and PostgreSQL integration tests.
 
-The local test suites passed 54 checks in total, and the GitHub Actions verification workflow completed successfully. Further tests are required as additional components are integrated.
+Personal execution recorded 19 M3 cases plus 29 regression and 25 database checks. The original 54-check total belongs to the earlier persistence checkpoint and is retained as history, not as 54 distinct M3 cases.
 
-#### 7.5.4 Outstanding Traceability Work
+#### 7.5.4 Traceability Interpretation
 
-Before the relevant requirements can be marked as fully accepted, the team must:
-
-- Integrate persistence with lifecycle validation and authorisation.
-
-- Verify complete status-transition and request-action workflows.
-
-- Expand audit-history coverage.
-
-- Implement and verify duplicate-submission protection.
-
-- Complete end-to-end integration tests.
-
-- Record staging, performance and recovery evidence for the relevant non-functional requirements.
-
-The traceability matrix must be updated as new evidence becomes available. A passing component test does not automatically establish acceptance of the complete requirement.
+The continuing RTM retains 27 requirements and 54 acceptance criteria. Test links show which part of each criterion is supported; criteria outside the demonstrated status increment remain partially verified or unverified. Component and API results are not treated as complete product acceptance.
 
 ### 7.6 Milestone 3 Implementation Evidence and GitHub Traceability
 
@@ -2572,43 +2554,43 @@ The workflow completed successfully on the persistence feature branch, providing
 
 The persistence implementation and CI configuration changes were committed and pushed to the feature/m3-data-persistence branch.
 
-At the time of this documentation, the work had not yet been submitted through a Pull Request or merged into the protected main branch.
+Persistence PR14 was merged into protected main. The recorded approvals are distinct; the returned approval bodies contain no detailed checking explanation.
 
-Before integration, the team must review the changes, resolve any integration conflicts and verify compatibility with the status-transition and authorisation components developed by other team members.
+The status integration is recorded separately on feature/cameron-m3-integration and is personally tested. At the repository evidence cutoff, this branch has no published PR or remote workflow run.
 
-The Pull Request record, reviewer approvals and merge evidence will be added once those activities have been completed.
+Repository controls and candidate-specific evidence are summarised in section 10.2.
 
 #### 7.6.6 Evidence Limitations
 
 The available evidence demonstrates selected persistence functionality, successful local verification and a successful CI workflow.
 
-It does not yet establish complete end-to-end integration, staging deployment, performance compliance, disaster recovery capability or full acceptance of all related requirements.
+The integrated status slice is exercised through HTTP and PostgreSQL. Broader product acceptance, measured load, restoration and normal Staging web startup are not established.
 
-The engineering documentation will be updated as the remaining implementation and verification activities are completed.
+The execution record identifies the tested revision and source fingerprints, separating current verification from historical workflow success.
 
-### 7.7 Milestone 3 Integration Readiness and Handover
+### 7.7 Milestone 3 Integrated Status Workflow
 
 #### 7.7.1 Integration Overview
 
 The Milestone 3 data persistence implementation provides PostgreSQL-backed storage for service requests, notes and request status history.
 
-The persistence component has passed its dedicated database integration tests. However, full application integration requires coordination with the status-transition and authorisation components developed by other team members.
+The database adapter is connected to central action permission, State validation and RequestStatusService. The personal run exercises lawful and denied changes, transactional failure and saved requester feedback.
 
-The purpose of this handover is to identify the integration responsibilities, required verification and outstanding dependencies.
+The following record describes implemented component boundaries and observed verification.
 
 #### 7.7.2 Component Integration Responsibilities
 
-| Component | Responsibility | Integration requirement | Current status |
+| Component | Implemented responsibility | Boundary | Observed status |
 | --- | --- | --- | --- |
-| PostgreSQL persistence | Store requests, notes and status history while protecting database integrity. | Connect database operations to the approved application workflow. | Component implemented and tested |
-| Status-transition component | Determine whether a requested status change is permitted. | Validate the transition before invoking persistence. | Awaiting team integration |
-| Authorisation component | Determine whether the current user may perform the requested action. | Check user permissions before permitting a status update. | Awaiting team integration |
-| Application coordination | Connect validation, authorisation and persistence. | Ensure checks are applied in the correct order and errors are handled consistently. | Outstanding |
-| End-to-end verification | Confirm that integrated components satisfy the required behaviour. | Test valid, invalid, unauthorised and conflicting status updates. | Outstanding |
+| PostgreSQL adapter | Persist requests, notes and history. | One versioned command; required effects commit together. | 25 DB checks and A05/A06 pass |
+| State service | Determine legal lifecycle edges. | Six states; five allowed edges; terminal states deny reopening. | C01/C02/C04 pass |
+| Central policy | Determine action-specific permission. | Staff category permits mutation; requester ownership permits read. | C03/BB05/A04 pass |
+| Application coordinator | Check request, permission, input and State; map outcomes. | Observed version protects the checked snapshot before saving. | C05/C06/A03/A06 pass |
+| System verification | Exercise saved lifecycle and rejection journeys. | HTTP, authentication, services and PostgreSQL; synthetic identities. | E01/E02 pass |
 
-#### 7.7.3 Proposed Status-Update Workflow
+#### 7.7.3 Implemented Status Update Workflow
 
-The intended integrated workflow is as follows:
+The integrated workflow performs these steps:
 
 - A user submits a request to change the status of an existing service request.
 
@@ -2624,54 +2606,42 @@ The intended integrated workflow is as follows:
 
 - The application returns an appropriate success or failure response.
 
-This workflow is the proposed integration approach and must be verified once the team's components are connected.
+The client receives 204 on save, 400 for invalid input/transition, 404 for unavailable or denied resources, 409 for a stale conflict and a safe 500 for an unexpected store failure. Required status/history/public-feedback effects are transactional.
 
-#### 7.7.4 Integration Verification Plan
+#### 7.7.4 Integration Verification Results
 
-The following scenarios must be tested after integration:
+The original integration scenarios are linked below to the personally executed cases:
 
-| Test ID | Test scenario | Expected result |
+| Scenario | Boundary or rule | Observed execution |
 | --- | --- | --- |
-| INT-M3-01 | Authorised user requests a valid status transition. | Status, history and feedback are saved successfully. |
-| INT-M3-02 | User requests a transition that is not permitted. | Operation is rejected without changing database records. |
-| INT-M3-03 | Unauthorised user attempts to change a request. | Operation is denied and no database changes are committed. |
-| INT-M3-04 | Two users attempt conflicting updates. | A stale update is rejected without overwriting the committed change. |
-| INT-M3-05 | A required database write fails during an update. | The transaction rolls back without leaving partial changes. |
-| INT-M3-06 | Requester retrieves the updated request. | The requester sees the permitted status and feedback without exposure of internal notes. |
+| INT-M3-01 | Authorised lawful status change | C06/E01: status, history and public feedback saved; pass. |
+| INT-M3-02 | Prohibited lifecycle transition | C02/C04/E02: invalid edge/reopening rejected without a saved mutation; pass. |
+| INT-M3-03 | Unauthorised mutation | C03/BB05: requester and wrong-category Staff denied; pass. |
+| INT-M3-04 | Concurrent/stale change | C05/A03/A06 and DB competing contexts: stale operation rejected; pass for these cases. |
+| INT-M3-05 | Required DB write fails | A05/DB checks: safe failure and complete rollback; pass. |
+| INT-M3-06 | Requester reads updated request | E01/E02: saved status/public feedback visible to owner; internal notes filtered; pass. |
 
-These scenarios represent planned integration tests and must not be reported as passed until executed successfully.
+These mappings describe observed cases, not additional independent tests. A simultaneous pair of HTTP mutations with exhaustive audit ordering is outside the recorded run.
 
-#### 7.7.5 Handover and Merge Requirements
+#### 7.7.5 Integration and Repository Evidence
 
-Before the persistence feature is merged into the protected main branch, the team must:
-
-- Confirm compatibility between the persistence, authorisation and status-transition interfaces.
-
-- Complete the required application-level integration.
-
-- Execute the relevant automated verification suites.
-
-- Review the changes through a GitHub Pull Request.
-
-- Obtain the required two reviewer approvals before merging.
-
-- Update the engineering documentation with the final integration and merge evidence.
+The data contribution was merged through PR14; PR15 added the architecture/test-design document. Local status integration and the personal execution evidence are versioned separately. The active Main ruleset requires two non-author approvals and dismisses stale approvals; it contains no required-status-check rule at the evidence cutoff.
 
 #### 7.7.6 Current Integration Status
 
-The persistence component is implemented, and its local PostgreSQL integration checks have passed. A GitHub Actions verification workflow has also completed successfully on the feature branch.
+The supported status workflow is integrated and personally verified. Nineteen M3 cases passed, alongside 25 database and 29 regression checks. All 35 source fingerprints match the previously verified implementation.
 
-Full integration with the status-transition and authorisation components remains outstanding.
+The current evidence concerns the status-management API increment, using synthetic identities and a temporary test host.
 
-The persistence implementation should therefore be described as component-tested and awaiting integration, rather than fully accepted as an end-to-end application workflow.
+The recorded result is successful local verification of this increment; whole-product acceptance and current-candidate remote CI/review are separate evidence.
 
 ### 7.8 Quality Strategy and Test Design
 
-Owners: Bianca Grobler for business-rule test design; Cameron Purdon for black-box and system verification. The strongest checks address unauthorised disclosures/changes, invalid transitions, partial writes and competing updates because they threaten confidentiality and accountability. Requirements and acceptance targets remain unchanged.
+The strongest checks address unauthorised disclosures/changes, invalid transitions, partial writes and competing updates because they threaten confidentiality and accountability. Requirements and acceptance targets remain unchanged.
 
-#### 7.8.1 Bianca Status Transition Test Specifications
+#### 7.8.1 Business Rule Test Specifications
 
-Bianca's merged contribution specifies TC-ST-01 to TC-ST-14. The table below adapts the inputs to the approved lifecycle and current API, and links design to later execution. A specified expected result is not itself a passed test. Techniques shown describe the applied test design; full preconditions and steps remain in Milestone3 Bianca.docx and docs/testing-m3.md.
+TC-ST-01 to TC-ST-14 provide the business-rule test basis. The table adapts their inputs to the approved lifecycle and API, linking design to personal execution. Full preconditions and steps are retained in the merged test-design contribution and docs/testing-m3.md.
 
 | Design ID | Input or precondition | Expected result | Technique | Execution and limit |
 | --- | --- | --- | --- | --- |
@@ -2686,11 +2656,11 @@ Bianca's merged contribution specifies TC-ST-01 to TC-ST-14. The table below ada
 | TC-ST-09 | Successful saved lifecycle | Correct previous/new status, actor/time | Integration | E01 audit assertions pass |
 | TC-ST-10 | Rejected operation | No misleading success history | Negative integrity | C04/BB05/E02 support |
 | TC-ST-11 | Prohibited transition | Validate before writer call | Component / negative | C04 passes |
-| TC-ST-12 | Supported service and HTTP entry points | Both enforce central rules | Integration / negative | Partial; low-level writer review pending |
+| TC-ST-12 | Supported service and HTTP entry points | Both enforce central rules | Integration / negative | Partial; raw-writer bypass outside tested route |
 | TC-ST-13 | Required DB write fails | Safe failure; complete rollback | Fault injection | A05 and Michael rollback checks pass |
-| TC-ST-14 | Competing updates from same baseline | Reject stale update; consistent audit | Concurrency | Partial; HTTP pair/audit scenario pending |
+| TC-ST-14 | Competing updates from same baseline | Reject stale update; consistent audit | Concurrency | Partial; simultaneous HTTP pair not executed |
 
-#### 7.8.2 Cameron Black Box and System Test Design
+#### 7.8.2 Black Box and System Test Design
 
 The new suite has 19 distinct cases: six component, five black-box, six API/integration and two system. The black-box cases legitimately cross API/database boundaries but are counted once overall. BVA selects 1, 2000 and 2001 feedback code units from the nonblank 1-2000 contract; EP separates valid/invalid inputs and permitted/requester/wrong-category identities. At least three cases are negative and at least five address high-priority requirements/risks.
 
@@ -2705,87 +2675,107 @@ E01 progresses a seeded New request through Assigned, In Progress, Resolved and 
 
 ### 7.9 Current Integrated Verification Results
 
-Executed by OpenAI Codex on 13 October 2026 for Cameron's contribution. Local Release builds use .NET SDK 8.0.425/runtime 8.0.31, PostgreSQL 18.4 and a separate Staging HTTPS test host with synthetic protected identities. Personal/team reproduction and independent approval remain pending.
+Cameron Purdon personally executed the complete verification on 13 October 2026, 18:18-18:19 SAST, against revision f774bf851e6b0c8d69cd9b37f6849fb0d853d661. Release builds used .NET SDK 8.0.425/runtime 8.0.31 and PostgreSQL 18.4. The system cases ran in a Staging HTTPS test host with synthetic identities. The current report directory is docs/evidence/m3/personal-20261013-181846; execution.json and source-fingerprints.json establish the operator, revision and 35 matching source files.
 
-| Evidence | Observed result | Interpretation and limit |
+| File in personal report directory | Observed result | Interpretation and limit |
 | --- | --- | --- |
-| docs/evidence/m3/integration.txt | 19 cases passed; zero failed | Status-management API slice; six component, five black-box, six integration and two system cases. |
-| docs/evidence/m3/regression.txt | 29 existing checks passed | Preserves the original in-memory read behaviour; not 29 additional independent M3 cases automatically. |
-| docs/evidence/m3/database.txt | 25 database checks passed | Michael's persistence, concurrency and rollback assertions. Raw adapter tests can bypass lifecycle by design. |
-| docs/evidence/m3/static-analysis.txt | Zero build warnings/errors | Enabled SDK analyzer set; no measured coverage or defect-free claim. |
-| docs/evidence/m3/dependencies.json | No vulnerable packages reported on query date | Dated NuGet advisory evidence; not complete security assurance. |
+| integration.txt | 19 cases passed; zero failed | Status-management API slice; six component, five black-box, six integration and two system cases. |
+| regression.txt | 29 existing checks passed | Preserves the original in-memory read behaviour; not 29 additional independent M3 cases automatically. |
+| database.txt | 25 database checks passed | Persistence, competing-context and rollback checks; raw adapter tests do not alone establish application legality. |
+| static-analysis.txt | Zero build warnings/errors | Enabled SDK analyzer set; no measured coverage or defect-free claim. |
+| dependencies.json | No vulnerable packages reported on query date | Dated NuGet advisory evidence; not complete security assurance. |
 
-A05 temporarily constrains the dedicated test database to force a write failure and verifies no partial status/history/feedback commit. A06 changes category/version after a checked snapshot and confirms stale mutation rejection. Initial Windows test TLS setup failed before API execution; certificate import was corrected and the final run passed. The original failure log is retained. Separate load and recovery exercises remain absent.
+A05 forces a required database write failure and verifies no partial status/history/feedback commit. A06 changes category/version after the checked snapshot and confirms stale mutation rejection. The earlier TLS failure was corrected before this run. All final suites exit successfully; no load or restore measurement is implied.
 
 ### 7.10 CI and Meaningful Quality Gates
 
-Michael's merged workflow builds and runs the original verification and database harnesses using PostgreSQL 17. Inspected run 38218128326 succeeded on f1b11d7f36a8e67570052ddf073879a2c3f35117. Cameron's local workflow extends it with the M3 cases, SDK analysis and a dependency gate that fails on reported high/critical advisories or an incomplete scan. A workflow source file does not establish a passed run on the new revision.
+The workflow retains the existing build/database checks and adds M3 cases, SDK analysis and a dependency gate for high/critical advisories or an incomplete scan. Historical run 38218128326 succeeded on f1b11d7f36a8e67570052ddf073879a2c3f35117. No remote workflow run exists for the current local branch at the repository cutoff.
 
-A controlled local probe deliberately allowed New to Closed. C02 failed and the executable exited nonzero; the exact original source was restored and all 19 cases passed on rerun. That failure would stop the configured CI job. The probe demonstrates test detection and local exit behaviour; it does not establish that the check is required for merging. Current-branch remote CI, branch-protection settings and two independent approvals still require verification. Evidence: docs/evidence/m3/gate-negative-control.txt and .github/workflows/verify.yml.
+During the personal run, a controlled probe temporarily permitted New to Closed. C02 detected the forbidden edge and returned nonzero. The exact original source was restored, rebuilt and followed by a passing 19-case run. Evidence: gate-driver.txt, gate-negative-control.txt and integration.txt in the personal report directory. This proves local detection and the configured job failure path. The active Main ruleset requires two approvals but contains no required CI-status-check rule.
 
 ## 8 Application and technical documentation
 
-CivicConnect currently implements persisted request reads and authorised staff status changes. The application remains one ASP.NET Core MVC unit with a Razor landing page, a central resource policy, State validation and EF Core/PostgreSQL adapters. Real login, request creation, owner assignment, lists/search and management reporting remain incomplete.
+CivicConnect currently provides persisted protected request reads and authorised Staff status changes. MVC delegates to application services, a central policy, State validation and EF Core/PostgreSQL adapters. The normal browser interface contains a Razor landing page; real account sign-in, request submission, owner assignment, lists/search and reporting are outside this demonstrated increment.
 
-#### 8.1 Build and Verification
+#### 8.1 Prerequisites and Versions
 
-Use a .NET 8 SDK allowed by global.json and a disposable PostgreSQL database. Configure ConnectionStrings__CivicConnect through environment variables or suitable secret storage; do not commit live credentials. The M3 fault suite requires a database name ending in _test and serial execution.
+Use a .NET 8 SDK compatible with global.json: 8.0.300 or a later stable 8.0 feature band, with matching .NET and ASP.NET Core runtimes. Personal verification used SDK 8.0.425/runtime 8.0.31 and PostgreSQL 18.4. The CI database service is PostgreSQL 17. C# 12, MVC/Razor, cookie authentication and dependency injection are provided by the .NET/ASP.NET Core stack; EF Core and the Npgsql provider are package dependencies.
 
-From the repository root: build each test project with --configuration Release, then run the original verification and database executables with --no-build. Run the M3 executable with -- --database. These are custom executable harnesses; dotnet test does not execute their checks. Exact commands and environment details are in README.md and docs/testing-m3.md.
+The database suites use a dedicated disposable PostgreSQL database. The M3 fault suite requires its name to end in _test. Supply ConnectionStrings__CivicConnect through an environment variable or suitable secret storage. The prepared local cluster listens on 127.0.0.1:55438 and uses the civicconnect_test account with loopback trust; this is a test configuration, not a deployment credential model.
 
-dotnet build tests/CivicConnect.M3Tests --configuration Release
+#### 8.2 Build and Verify
+
+Run the following from the repository root with the test database connection configured:
+
+$env:ConnectionStrings__CivicConnect = 'Host=127.0.0.1;Port=55438;'
+
+$env:ConnectionStrings__CivicConnect += 'Database=civicconnect_personal_20261013_181846_test;'
+
+$env:ConnectionStrings__CivicConnect += 'Username=civicconnect_test'
+
+dotnet --info
+
+dotnet build tests/CivicConnect.Verification --configuration Release
+
+dotnet build tests/CivicConnect.DatabaseTests --configuration Release
+
+dotnet build tests/CivicConnect.M3Tests -c Release -p:AnalysisLevel=latest
+
+dotnet run --project tests/CivicConnect.Verification --configuration Release --no-build
+
+dotnet run --project tests/CivicConnect.DatabaseTests --configuration Release --no-build
 
 dotnet run --project tests/CivicConnect.M3Tests --configuration Release --no-build -- --database
 
-#### 8.2 Components and Configuration
+These are executable harnesses; dotnet test does not execute them. The recorded results are 29 regression checks, 25 database checks and 19 M3 cases. The M3 harness migrates its database, creates synthetic records, starts a loopback HTTPS host, executes HTTP/component/system cases and removes its test records. Its temporary certificate and authentication tickets are created inside the harness. Run the fault suite serially on its own disposable database.
 
-| Component | Current responsibility |
+Dependency check: dotnet list src/CivicConnect.Web package --include-transitive --vulnerable --format json. The workflow passes the saved report to tools/check_dependencies.py; the dated personal report records no reported vulnerabilities and a successful configured gate.
+
+#### 8.3 Run the Development Application
+
+Set the database connection first, then use PowerShell:
+
+$env:ASPNETCORE_ENVIRONMENT = 'Development'
+
+dotnet run --project src/CivicConnect.Web --configuration Release --no-launch-profile --urls http://127.0.0.1:5080
+
+Open http://127.0.0.1:5080/ for the landing page. Protected request routes return 401 while signed out. The application has no real sign-in flow or test-login endpoint. Use the M3 harness to reproduce authenticated status journeys over HTTPS; the normal HTTP landing page is not proof of authenticated mutation or HTTPS acceptance. Ctrl+C stops the development app. The harness cleans its own records after each run.
+
+#### 8.4 Structure and Responsibilities
+
+| Component | Implemented responsibility |
 | --- | --- |
-| RequestsController | UUID/body validation, authentication/antiforgery boundary and response mapping. |
-| RequestQueryService / IRequestAccessPolicy | Resource-authorised reads and filtered DTO; separate status action permission. |
-| RequestStatusService / StatusTransitionService | Explicit status coordination and legal lifecycle State rules. |
-| EfRequestReader / EfRequestStatusWriter | PostgreSQL reads; status/history/feedback transaction and concurrency check. |
-| tests/CivicConnect.M3Tests | Controlled component/API/system verification; temporary ticket/certificate generation exists only here. |
+| Controllers/RequestsController | HTTP validation, authentication/antiforgery boundary and response mapping. |
+| Application/RequestQueryService | Resource-authorised reads and filtered response DTOs. |
+| Security/RequestAccessPolicy | Separate resource-read and status-change permission. |
+| Application/RequestStatusService and StatusTransitionService | Explicit command coordination and legal lifecycle State rules. |
+| Data/EfRequestReader and EfRequestStatusWriter | PostgreSQL reads; versioned status/history/feedback transaction. |
+| Data/Entities and Migrations | EF mappings and version-controlled relational schema. |
+| tests/CivicConnect.M3Tests | Component, black-box, API/integration and system execution. |
 
-#### 8.3 Demonstration Boundary and Remaining Work
+Application component paths are relative to src/CivicConnect.Web/. The public read DTO filters private notes; caller-supplied data never sets the audit actor or grants a role/category permission.
 
-The web executable still starts only in Development and has no real sign-in. Its public landing page can be opened, while protected routes return 401 without a valid identity. The M3 test executable runs the same composition under Staging and stops after its cases. No test-login endpoint or client role selector is added to the application. Final deployed startup, trusted account provisioning, live permission freshness, browser usability, load and restore evidence remain outstanding.
+#### 8.5 Configuration and Data Protection
+
+ConnectionStrings__CivicConnect is consumed by the EF Core configuration. Keep real credentials outside repository files and the PED. PostgreSQL migrations are applied by the database harnesses. The normal local app may use framework data-protection key storage; test hosts use ephemeral keys. No key files or certificate private keys are committed. Deployment cookie-key persistence is outside the current verification.
+
+#### 8.6 Verified Behaviour and Limitations
+
+Personal execution verifies protected persisted reads, legal and prohibited status changes, feedback bounds, antiforgery, stale conflicts, safe failure, transactional rollback and saved audit effects. System tests E01/E02 span HTTP, application services and PostgreSQL. They use synthetic identities and do not establish a real login, new-request submission/reporting UI, pilot-load performance, restoration, or complete product acceptance. The normal Program accepts Development only; the separate test host uses Staging without that guard.
 
 ## 9 Traceability demonstration
 
-FR-003 provides the M2 requirement-to-implementation trace. The trace demonstrates the current protected read path; durable database acceptance remains future work.
+#### Retained M2 Traceability Checkpoint
 
-1. Requirement: Requirements sheet, FR-003 and AC-FR-003-1/-2. The requester sees their own status and cannot reveal another requester's record. NFR-001 is the access-isolation driver; NFR-009 requires repeatable controlled-data checks.
+At 30 September 2026, FR-003 was traced to AC-FR-003-1/2, the layered application decision ADR-M2-01, relational model ADR-M2-03 and central policy/API decisions ADR-M2-05/06. The protected in-memory read fixture supported ownership, category permission and note filtering. Its 29 service/HTTP checks included S01/S03 and H04/H07, while persisted updates and reads were not implemented at that checkpoint.
 
-2. Architecture: ADR-M2-01 allocates HTTP handling, application logic and data access within one application. Open RequestsController and RequestQueryService.
-
-3. Data decision: ADR-M2-03 gives ServiceRequest a RequesterId and RequestNote a visibility flag. The development snapshot models these facts. The PostgreSQL adapter is still planned; do not call the fixture a working database.
-
-4. Design: ADR-M2-05 selects a central policy behind IRequestAccessPolicy; A2 Task 1 Problem 2 provides the alternatives. Open RequestAccessPolicy to show requester ownership, staff categories and default denial. Explain why three Strategy implementations were unnecessary here.
-
-5. Interface and technology: ADR-M2-06 defines GET /requests/{id}; ADR-M2-04 selects MVC/C#. Show UUID validation, the trusted principal and the filtered response DTO. State transitions remain Bianca's responsibility.
-
-6. Application evidence: Run the verification executable. S01/S03 and H04/H07 demonstrate own-status reads and rejection of another owner. H05 checks the actual response has no private note. S07 demonstrates direct service calls cannot bypass the check.
-
-7. Limit: RTM status is In Development. Live login, database persistence and an authorised update followed by a persisted read are not implemented, so AC-FR-003-1 is only partially evidenced.
-
-#### Short defence notes
-
-- The selected approach is a central policy with dependency injection rather than separate Strategy classes for the current three-role model.
-
-- Authentication establishes identity; the policy checks access to this record; DTO projection controls which notes leave the service.
-
-- Explicit write coordination is selected over Observer because the small current workflow requires state/history/feedback to succeed together. Those writes are still forward work.
-
-- All 27 requirement IDs and 54 acceptance criteria are preserved. Design/data/technology links have evolved; initial tests are narrower than complete verification.
-
-- A changed permission rule requires updates to the ADR, policy, tests, interface documentation, RTM and relevant risks. A passing local check supports only the implemented read slice.
+That earlier result remains part of the project history. By 13 October, the relational adapter and authorised status coordinator are implemented, and the personal system cases exercise saved lifecycle and requester reads. The evolved requirement-to-evidence chain follows below; full account/UI acceptance remains distinct from the verified API increment.
 
 ### 9.1 Milestone 3 Requirement to Evidence Trace
 
-FR-003 requester need: view the saved progress of an own request without another user's information. AC-FR-003-1/2 -> ADR-M2-05/06 -> RequestQueryService, RequestAccessPolicy, EfRequestReader and RequestStatusService -> E01 saved update/read and E02/A04 foreign denial -> docs/evidence/m3/integration.txt -> the existing RTM row and open live-account/environment gaps.
+FR-003 requester need: read the saved progress of an own request without another user's information. AC-FR-003-1/2 -> ADR-M2-05/06 -> RequestQueryService, RequestAccessPolicy, EfRequestReader and RequestStatusService -> E01 saved lifecycle/read and E02/A04 foreign denial -> docs/evidence/m3/personal-20261013-181846/integration.txt -> existing RTM row and recorded acceptance status.
 
-The existing docs/CivicConnect_RTM_v2.0.xlsx retains 18 FRs, nine NFRs and 54 ACs. M3 updates code/test/results and adds expected/observed result, remaining defect/gap, execution evidence and executor/date. The filename is retained to preserve continuity. Requirements remain Planned or In Development where full acceptance is incomplete; synthetic ticket checks do not establish real credential login.
+The continuing RTM retains 18 functional requirements, nine non-functional requirements and 54 acceptance criteria. Its execution fields identify Cameron's personal run, expected/observed results and remaining acceptance gaps. Requirement status remains partial where the complete criterion is not evidenced; synthetic identity checks do not establish real credential login.
 
 ## 10 Collaborative engineering evidence
 
@@ -2809,7 +2799,7 @@ Links: M1 #2 (https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project
 
 ### 10.1 Repeatable check decision
 
-Owner: Cameron Purdon. Date: 30 September 2026. Status: Accepted for the M2 baseline; local build and verification evidence completed.
+Date: 30 September 2026. Status: Accepted for the M2 baseline; local build and verification evidence completed.
 
 Assignment 2 Task 4 recommends short-lived issue-linked branches, protected main, two non-author approvals and progressive CI. Manual-only checking is easy to start but easy to omit. A complete deployment pipeline exceeds this slice's needs. Select a proportionate build plus the actual 29-check harness on pull requests to main and pushes to main. Fail on compilation warnings/errors or failed assertions. No deployment is performed.
 
@@ -2819,13 +2809,13 @@ Consequences: the package-free harness is straightforward to run but lacks a sta
 
 Evidence: docs/evidence/local-verification.txt records 29 passing checks. Public inspection confirmed protected main, two distinct reviewers on PR #11 and one on PR #10; detailed protection settings were not publicly accessible. Risks R-038 and R-044 remain open. GitHub protected-branch guidance: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches (accessed 30 September 2026).
 
-### 10.2 Milestone 3 Collaboration and Current Review Status
+### 10.2 Milestone 3 Collaboration and Configuration Evidence
 
 Inspected main after Bianca's merge: 216f405ce9d7aae79194db873c699dac5f517265. Michael PR14 and Bianca PR15 are merged; PR12 and PR14 have two distinct approvals, and PR15 also recorded Michael/RinNoKaze approvals. Approval bodies returned empty, so detailed checking/rework cannot be inferred. Bianca's merged file is Milestone3 Bianca.docx; it did not add new application code.
 
-Cameron's local feature/cameron-m3-integration branch retains separate implementation, testing/CI and documentation commits and now incorporates merged main. Implementation/test checkpoint: fef0469d27fffb1a7b10de0acbd9a3faae703717. Publication, substantive peer findings, two non-author approvals and current-revision CI remain pending. Bianca should check lifecycle/conformance/registers; Michael should check transactions, versions, State and CI. No agent review substitutes for independent teammates.
+The local feature/cameron-m3-integration branch contains separate implementation, test/CI, document-continuation and personal-evidence commits. The tested revision is f774bf851e6b0c8d69cd9b37f6849fb0d853d661; the 18:18-18:19 personal reports preserve its source fingerprints. At the repository cutoff the branch is local, with no corresponding published PR or Actions run.
 
-CR-M3-C01 records the controlled integration impact: original central policy/explicit coordination decisions -> missing authorised status path and stale-category gap -> coordinator, State dependency, antiforgery and observed-version transfer -> tested status slice with live account and deployment gaps. No requirement/AC wording changes or invented lecturer/client scope request occur. Current protection settings must be confirmed by a repository maintainer.
+The active Main ruleset requires two approving reviews from non-authors and dismisses stale approvals after a push. No required-status-check rule is present. CR-M3-C01 records the missing authorised status path and stale-category gap, the coordinator/State/antiforgery/version response and its tested consequences. Original requirement/AC wording is unchanged.
 
 ## 11 Updated risks and forward engineering
 
@@ -3293,7 +3283,7 @@ Contingency: Use the controlled-change process (Master Brief §14) to revise the
 
 Note: Owner assignments follow the team's M2 work distribution (Bianca: architecture/baseline; Michael: data/technology/deployment; Cameron: design/integration/documentation/GitHub). Risks needing input from more than one owner are marked accordingly.
 
-### 11.1 Cameron risk and dependency updates
+### 11.1 Integration Risk and Dependency Updates
 
 | Record | M2 update and residual work |
 | --- | --- |
@@ -3309,29 +3299,29 @@ Note: Owner assignments follow the team's M2 work distribution (Bianca: architec
 
 ### 11.2 Milestone 3 Implementation Risk Register
 
-Owner: Bianca Grobler. The following entries continue R-001-R-045 with her proposed R-046-R-058, reconciled against current evidence on 13 October. M/H denotes Medium likelihood/High impact; M/M denotes Medium/Medium. Proposed closure and owner assignments require real team review. Michael's original M3-R01-R05 remain in 7.4 and are cross-referenced rather than renumbered.
+R-046-R-058 continue R-001-R-045 and are reconciled with the personal execution evidence. M/H denotes Medium likelihood/High impact; M/M denotes Medium/Medium. M3-R01-R05 remain cross-referenced in section 7.4, with their current treatment status.
 
 | ID | Risk and earlier link | L / I | Treatment and closure evidence | Owner and status |
 | --- | --- | --- | --- | --- |
-| R-046 | Lifecycle bypass; relates R-011/027, M3-R01 | M / H | Current API validates centrally; inspect raw-writer/future route bypasses. | Michael/Cameron; partial |
-| R-047 | Incorrect lifecycle matrix; R-026 | M / H | C01/C02 pass; Michael/Bianca review exact State rules. | Michael/Bianca; partial |
+| R-046 | Lifecycle bypass; relates R-011/027, M3-R01 | M / H | Current API validates centrally; raw-writer/future-route bypass remains a residual risk. | Michael/Cameron; partial |
+| R-047 | Incorrect lifecycle matrix; R-026 | M / H | C01/C02 pass against the original five-edge lifecycle. | Michael/Bianca; partial |
 | R-048 | Inconsistent status/audit effects; R-015 | M / H | E01/A05 and database rollback pass; broaden audit coverage. | Michael; partial |
 | R-049 | Inconsistent authorisation; R-004/013/017 | M / H | BB05/A04/A06 pass; implement live permissions/freshness. | Cameron/Michael; partial |
 | R-050 | Concurrent overwrite; R-016, M3-R02 | M / H | Version/competing-context checks pass; simultaneous HTTP/audit check pending. | Michael/Cameron; partial |
 | R-051 | Layer coupling; R-008/009 | M / M | Controllers delegate; review one-project dependencies. | Bianca; Open |
 | R-052 | Green checks omit important workflow; R-032 | M / H | Selected levels covered; creation/login/reporting remain absent. | Team; Open |
-| R-053 | Custom harness skipped; R-038/044 | M / M | All three harnesses configured; new CI and required-check settings pending. | Michael/Cameron; Open |
-| R-054 | Target startup/config fails; R-021/040 | M / H | Harness Staging passes; actual web Staging guard remains blocker. | Michael; Open |
-| R-055 | Uncontrolled release severity; R-045 | M / H | Severity/blocker policy recorded; final team judgement pending. | Bianca; Open |
-| R-056 | Unsupported acceptance status; R-045 | M / H | RTM uses actual results and explicit gaps; review before Verified. | Cameron; partial |
-| R-057 | Pilot performance unverified; R-018/025 | M / M | Run justified workload; no NFR-002 achievement claimed. | Michael; Open |
-| R-058 | Documents differ from final release; R-012/038 | M / M | Dated updates identify checkpoints; freeze final code/PED/evidence. | Cameron/Bianca; Open |
+| R-053 | Custom harness skipped; R-038/044 | M / M | Three harnesses configured; no current remote run or required CI merge check. | Michael/Cameron; Open |
+| R-054 | Target startup/config fails; R-021/040 | M / H | Harness Staging passes; normal Program remains Development-only. | Michael; Open |
+| R-055 | Uncontrolled release severity; R-045 | M / H | Severity/blocker policy recorded; no formal risk acceptance attributed. | Bianca; Open |
+| R-056 | Unsupported acceptance status; R-045 | M / H | RTM links observed results and explicit acceptance gaps. | Cameron; partial |
+| R-057 | Pilot performance unverified; R-018/025 | M / M | No measured workload recorded; NFR-002 unverified. | Michael; Open |
+| R-058 | Documents differ from final release; R-012/038 | M / M | Dated checkpoints and source fingerprints identify the recorded code/evidence. | Cameron/Bianca; Open |
 
 M3-R04 continues secrets risk R-005/024: configuration remains outside committed credentials. M3-R05 also covers NFR-007 recovery, which remains unverified. These entries reflect residual uncertainty rather than a claim that every scenario failed.
 
 ### 11.3 Milestone 3 Architecture and Design Technical Debt
 
-Owner: Bianca Grobler. Her TD-01-TD-05 identifiers are retained below. Michael's data/deployment TD-M3-01-TD-M3-04 remain in 7.4; the current status of TD-M3-01 is integrated locally, awaiting peer review. Broader history, idempotency and staging/recovery debt remain open.
+TD-01-TD-05 retain the architecture/design debt identifiers. Data/deployment items TD-M3-01-TD-M3-04 remain in section 7.4. The status coordinator resolves local integration debt; broader audit, idempotency, identity and deployment acceptance gaps remain recorded.
 
 | Debt ID and compromise | Consequence and closure action | Priority owner and status |
 | --- | --- | --- |
@@ -3344,17 +3334,17 @@ Owner: Bianca Grobler. Her TD-01-TD-05 identifiers are retained below. Michael's
 
 ### 11.4 Milestone 3 Defects and Findings
 
-Critical/High defects affecting confidentiality, integrity or essential agreed scope block release. Lower-severity deferral requires a named owner, impact and explicit team acceptance. No accepted deferral is inferred here.
+Critical/High confidentiality, integrity or agreed-core-scope defects block release. Lower-severity deferral requires documented impact, owner and acceptance. No team acceptance of a deferred release blocker is recorded for this candidate.
 
-| Finding | Status and impact | Action or regression evidence |
+| Finding | Recorded status and impact | Evidence or scope limitation |
 | --- | --- | --- |
-| DEF-M3-C01: persistence lacked authorised status API | High; fixed locally; review pending | Coordinator/policy/State/POST; C03/C04/BB05/E01/E02. |
-| DEF-M3-C02: stale checked category permission | High; fixed locally; review pending | Carry observed version; A06 confirms rejection. |
+| DEF-M3-C01: persistence lacked authorised status API | High; fixed locally and personally regression-tested | Coordinator/policy/State/POST; C03/C04/BB05/E01/E02. |
+| DEF-M3-C02: stale checked category permission | High; fixed locally and personally regression-tested | Carry observed version; A06 confirms rejection. |
 | DEF-M3-C03: Windows test TLS setup | Medium; corrected test infrastructure | Initial log retained; certificate import fixed; 19-case rerun passes. |
-| DEF-M3-C04: actual web refuses Staging | High; Open | Michael: validate actual deployed startup and rerun journey. |
-| DEF-M3-C05: essential account/submission/assignment/reporting gaps | High; Open | Team: implement agreed core scope or explicitly approve assessed increment; retain historical requirements. |
+| DEF-M3-C04: actual web refuses Staging | High; Open | Normal Program rejects Staging; separate test host uses Staging without the guard. |
+| DEF-M3-C05: full-baseline account/submission/assignment/reporting gaps | High; Open | Outside the demonstrated status increment; original RTM acceptance remains incomplete. |
 
-The forbidden-transition gate probe was a deliberate experiment, not a discovered production defect. Full defect evidence remains in docs/defects.md. Missing performance/recovery evidence and review/CI controls remain release concerns in section 14.
+The forbidden-transition probe is an intentional experiment, not a production defect. Source restoration and the subsequent passing run are recorded. Detailed findings remain in docs/defects.md; missing performance and candidate-specific CI/review evidence affect the release judgement in section 14.
 
 ## 12 AI usage record
 
@@ -3396,13 +3386,13 @@ What was changed/rejected: Unsupported implementation claims, unsuitable technol
 
 ### 12.1 Milestone 3 AI Usage Register
 
-| Member | AI assistance and output | Verification and accountability |
+| Member | AI assistance and output | Human verification and accountability |
 | --- | --- | --- |
 | Michael Ellis 600332 | ChatGPT assisted M3 C#/EF Core/PostgreSQL troubleshooting, testing and documentation; recorded 12 October. | His supplied record reports local review/tests and Git commits. Full integration/acceptance remained pending at that checkpoint. |
-| Cameron Purdon 601963 | Codex inspected sources, implemented access/API integration and the missing State dependency, created tests, and consolidated RTM/PED/registers. | Codex executed builds, 19 new cases, 29 legacy checks, 25 DB checks, analysis/advisory query and negative gate probe. Cameron personal reproduction and independent team review pending. |
-| Bianca Grobler 600537 | M3 AI use is not separately declared in her merged contribution. Her historical M2 disclosure above is retained. | Bianca must confirm any M3 assistance and how it was checked; no new personal AI use is invented. |
+| Cameron Purdon 601963 | Codex inspected sources, implemented access/API integration and the missing State dependency, created tests, and consolidated RTM/PED/registers. | Cameron personally executed Release builds, 19 M3 cases, 29 regression checks, 25 DB checks, SDK analysis, dependency scan/gate and restored negative probe on 13 October, 18:18-18:19 SAST. Raw reports and metadata establish the current result. |
+| Bianca Grobler 600537 | No separate M3 tool declaration is recorded in the merged contribution; the historical M2 disclosure is retained. | No new M3 assistance or personal verification is attributed beyond the supplied record. |
 
-Corrected AI-assisted output includes the initial Windows TLS setup and incomplete null-target/version test coverage. Unsupported whole-release claims were rejected; NOT READY retained. The human team remains responsible for understanding, reviewing and submitting assisted work. Current runs are not described as Cameron's personal execution.
+Corrected AI-assisted output includes Windows TLS setup, null-target and stale-category/version coverage, and launcher startup/account assumptions. The current run is Cameron's personal execution. Earlier AI-run evidence is preserved historically. Personal execution does not imply independent teammate review or a complete product acceptance result.
 
 ## 13 M2 references and provenance
 
@@ -3434,28 +3424,28 @@ Virtual Group K repository evidence (30 September 2026). Public API responses fo
 
 ### 13.1 Milestone 3 Sources and Evidence
 
-SEN381 Teaching Team (2026). CivicConnect Milestone 3 Controlled Construction Integration Quality and Release Readiness. Supplied SEN381_M3.pdf, sections 4-17. The compulsory recorded-video notice replaces the original live presentation method; real visible participation remains required.
+SEN381 Teaching Team (2026). CivicConnect Milestone 3 Controlled Construction Integration Quality and Release Readiness. SEN381_M3.pdf, sections 3-17 and 22-24.
 
 Virtual Group K (2026). Final PED v2.0, 30 September baseline. Michael Ellis supplied PED_v3.0 (2).docx, including 5.4.14 and 7.2-7.7. Bianca Grobler (2026). Milestone3 Bianca.docx, 10 October contribution, merged PR15. Current inspected main: 216f405ce9d7aae79194db873c699dac5f517265.
 
-Current evidence: docs/evidence/m3/integration.txt, regression.txt, database.txt, static-analysis.txt, dependencies.json, gate-negative-control.txt and source-manifest.json; docs/testing-m3.md; docs/change-control-m3.md; .github/workflows/verify.yml. The source manifest checks all 35 implementation/test/tool files; documentation-only continuation does not change verified code.
+Current execution evidence: docs/evidence/m3/personal-20261013-181846/execution.json, integration.txt, regression.txt, database.txt, static-analysis.txt, dependencies.json, dependency-gate.txt, gate-negative-control.txt and source-fingerprints.json. Full case basis: docs/testing-m3.md. Controlled changes: docs/change-control-m3.md. Workflow: .github/workflows/verify.yml. The original 35-file manifest and the personal fingerprints match.
 
 ## 14 Release Evidence Summary and Residual Risk
 
-Owner: Bianca Grobler; consolidated evidence updated by Cameron on 13 October 2026 for team review. Current classification: NOT READY for the complete agreed CivicConnect scope. The status API is demonstrable, but essential functionality, final environment/performance evidence and current review/CI controls remain incomplete. No final risk acceptance or team release approval is recorded.
+Classification at the evidence cutoff, 13 October 2026: NOT READY for release recommendation. The protected-read/status-management increment is integrated and personally verified. Required performance evidence and current-candidate remote CI/independent reviews are not recorded. Normal web Staging startup and broader baseline acceptance remain limited. This classification records the evidence state, not a claim that every project feature is required to be complete in M3.
 
 ### 14.1 Release Evidence Summary
 
-| Evidence area | Current result | Release interpretation and action |
+| Evidence area | Recorded result | Interpretation and limitation |
 | --- | --- | --- |
-| Build and code analysis | Pass locally; zero warnings/errors | Enabled checks executed; coverage/absence of defects not proven. |
-| Functional tests | 19 new cases plus 29 legacy and 25 DB checks pass | Correct mix for status slice. Login/submission/reporting/UI acceptance not established. |
-| CI and failing gate | Historical Michael run passes; local injected defect fails C02 | New branch CI and required-merge check remain pending. |
-| Dependency security | No vulnerability reported by dated NuGet query | Not a complete security audit or ongoing guarantee. |
-| System and staging | E01/E02 pass in Staging HTTPS test host | Actual web startup still rejects Staging; final candidate rerun required. |
-| Performance and recovery | No measured evidence | Michael: justified workload and recovery checks; NFR-002/007 unverified. |
-| Defects and acceptance | Open High scope/startup gaps | DEF-M3-C04/C05 block complete-scope readiness. |
-| Review and baseline | Team PR14/15 merged; Cameron local contribution pending | Two substantive independent reviews/current CI and final freeze required. |
+| Build and code analysis | Personal run passes; zero warnings/errors | Enabled SDK checks executed; no measured coverage or defect-free claim. |
+| Functional verification | 19 M3 cases, 29 regression and 25 DB checks pass | Required functional categories and selected negative/high-priority cases are evidenced for the status slice. |
+| CI and failure gate | Historical CI succeeds; personal forbidden-edge probe fails as expected | Current branch has no remote run. Two-review rule is active; CI is not configured as a required merge check. |
+| Dependency security | Personal query reports no vulnerabilities; gate passes | Dated dependency evidence, not a complete security audit. |
+| System and simulated staging | E01/E02 pass in HTTPS Staging test host | Synthetic identities and separate startup; normal web Program is Development-only. |
+| Performance and reliability | No load or restore measurement recorded | NFR-002/007 remain unverified; rollback approach accounts for schema/configuration. |
+| Defects and acceptance | Status integration fixes regression-tested; broader baseline gaps open | Unmet full-baseline criteria remain visible in the RTM. |
+| Candidate and collaboration | Identified local evidence candidate; team PR14/15 merged | No independent reviews or remote CI are recorded for the current local increment. |
 
 ### 14.2 Residual Risk Statement
 
@@ -3467,20 +3457,18 @@ Owner: Bianca Grobler; consolidated evidence updated by Cameron on 13 October 20
 | Load and recovery uncertainty | Correctness checks do not measure pilot latency or restoration. | Workload and backup/restore evidence / Michael. |
 | Future layer/writer bypass | One project and callable low-level writer leave enforcement dependent on review. | Inspect future routes and dependencies / Bianca and Cameron. |
 
-Before reconsidering readiness, agree the assessed core scope, resolve release-blocking defects, validate actual target startup and critical journeys, collect performance evidence, obtain two independent reviews/current CI and freeze matching code/PED/RTM/evidence. CONDITIONALLY READY requires credible essential behaviour and only explicit nonblocking conditions with owners and accepted risks. The deadline alone does not justify accepting a critical gap.
+The judgement combines successful local verification with material missing evidence and known configuration/acceptance limits. READY and CONDITIONALLY READY are not supported by this recorded candidate. Residual risks remain visible even where selected tests pass; their owners and treatment are recorded in the registers.
 
 ## 15 Required Submission Information
 
-| Field | Current information |
+| Field | Recorded information |
 | --- | --- |
 | Team and members | Virtual Group K; Cameron Purdon 601963; Bianca Grobler 600537; Michael Ellis 600332. |
 | Repository | https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project |
-| M3 baseline | Local review tag m3-ped-continuation-20261013; final approved/submitted candidate not yet frozen. Current merged upstream: 216f405ce9d7aae79194db873c699dac5f517265. Verified implementation/test checkpoint: fef0469d27fffb1a7b10de0acbd9a3faae703717. |
-| PED version | v3.0; continued Word source docs/PED_v3.0.docx and matching PDF docs/PED_v3.0_Continued.pdf. |
-| RTM location | docs/CivicConnect_RTM_v2.0.xlsx; established filename retained with M3 evidence. |
-| CI and test evidence | docs/evidence/m3 and .github/workflows/verify.yml; historical run 38218128326; new-baseline CI pending. |
-| Test/staging access | Observe Release M3 harness with --database on a disposable PostgreSQL database; README/docs/testing-m3.md. Final target startup/link and critical rerun pending. |
-| Video | Not recorded/submitted. Provide an assessor-accessible playable link or ZIP containing the complete team recording. |
-| Date submitted | Not submitted; enter actual date after final freeze. Prepared 13 October 2026. Deadline 16 October 2026, 23:59 SAST. |
-
-All three real members must visibly identify themselves and participate in the recorded engineering review. Each must explain a requirement trace, engineering decision, result/limitation, failure/risk and readiness judgement. The team should meet, map rubric areas to evidence, rehearse, check readable screen sharing/audio/camera, verify final playback and access, then submit the continued PED PDF, repository URL, exact candidate ID, environment instructions and compulsory video. Detailed speaking/evidence guide: docs/presentation-guide.md.
+| Candidate identifier | m3-personal-evidence-20261013 (local evidence tag). Personal execution: f774bf851e6b0c8d69cd9b37f6849fb0d853d661; 35 matching source fingerprints. Inspected main: 216f405ce9d7aae79194db873c699dac5f517265. |
+| PED version | v3.0; docs/PED_v3.0.docx and matching docs/PED_v3.0_Updated.pdf. |
+| RTM location | docs/CivicConnect_RTM_v2.0.xlsx; continuing 27-requirement, 54-criterion matrix. |
+| CI and test evidence | docs/evidence/m3/personal-20261013-181846; docs/testing-m3.md; .github/workflows/verify.yml. Historical CI run 38218128326; no current-branch remote run recorded. |
+| Test/staging demonstration | Section 8 commands and docs/testing-m3.md reproduce the Release status API suites on a disposable PostgreSQL database. The M3 host uses Staging/HTTPS and synthetic identities, then stops after execution. |
+| Evidence date | 13 October 2026; personal verification 18:18-18:19 SAST. |
+| Date submitted | Formal submission is not recorded at the 13 October 2026 evidence cutoff. |

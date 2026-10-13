@@ -1,0 +1,32 @@
+{
+  "input_sha256": "4c07accecb7f3c8c9c93de3fe23079ed803c7e4493c7fa4b0af4ab97a8329f70",
+  "output_sha256": "1846db89599d020f676695b6482502c97c8678420208fb27006b809888d09923",
+  "changed_package_parts": [
+    "word/document.xml",
+    "word/settings.xml",
+    "docProps/core.xml"
+  ],
+  "M1_elements_preserved": 407,
+  "styles_theme_fonts_geometry_diagrams_numbering_relationships_preserved": true,
+  "personal_executor": "Cameron Purdon 601963",
+  "personal_revision": "f774bf851e6b0c8d69cd9b37f6849fb0d853d661",
+  "personal_evidence": "docs/evidence/m3/personal-20261013-181846",
+  "matching_source_files": 35,
+  "candidate_tag": "m3-personal-evidence-20261013",
+  "readiness": "NOT READY; factual missing evidence retained",
+  "date": "2026-10-13",
+  "pdf_pages": 77,
+  "pdf_sha256": "489d4fdb5907a6bc20bbac340e5e2ce32cf2a36e8c272a65f24a52ec6dfca53f",
+  "pdf_file": "docs/PED_v3.0_Updated.pdf",
+  "canonical_word": "docs/PED_v3.0.docx",
+  "rtm_cells_updated": 28,
+  "rtm_requirement_and_acceptance_ids_preserved": true,
+  "section_8_pages": [
+    59,
+    60,
+    61
+  ],
+  "visual_review": "All 77 pages inspected; final local command-format change affects pages 59 and 60 only.",
+  "render_engine": "Microsoft Word native PDF export",
+  "current_main_rule": "Two approvals; no required CI-status check at cutoff."
+}

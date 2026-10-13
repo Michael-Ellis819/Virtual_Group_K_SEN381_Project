@@ -1,6 +1,6 @@
 # Release Evidence Summary - 13 October 2026
 
-Prepared from Bianca's preliminary framework, Michael's merged persistence evidence and Cameron's local integration results. Bianca owns final release classification. Current assessment: **NOT READY for the complete agreed CivicConnect scope**. The status API increment is demonstrable, but essential functionality and final-baseline controls remain incomplete. No residual risk acceptance or team sign-off is claimed.
+Prepared from Bianca's preliminary framework, Michael's merged persistence evidence and Cameron's local integration results. Bianca owns final release classification. Current assessment at the 13 October evidence cutoff: **NOT READY for release recommendation**. The protected read/status increment is demonstrable and personally verified. Required performance evidence and current-candidate remote CI/independent reviews are absent; normal Staging startup and broader baseline acceptance remain limited. This does not imply every future product feature must be completed in M3. No residual risk acceptance or team sign-off is claimed.
 
 | Area | Result | Meaning / required action |
 | --- | --- | --- |
@@ -9,12 +9,12 @@ Prepared from Bianca's preliminary framework, Michael's merged persistence evide
 | CI | Historical run 38218128326 passes on Michael's f1b11d7 revision. New workflow prepared. | Current local branch is not remotely verified; retrieve a run on the submitted baseline and confirm required check. |
 | Meaningful failing gate | Controlled New -> Closed defect failed C02; source restored and passing rerun retained. | Nonzero test failure stops configured CI job. This local probe does not prove repository merge protection. |
 | Dependency security | NuGet scan reports no vulnerable packages on this date. | Advisory data is time-dependent; no penetration or complete secrets-history audit claimed. |
-| Staging/system | Staging HTTPS test host with real PostgreSQL completes E01/E02. | Simulated host uses synthetic identities. Final web startup is blocked outside Development; rerun against Michael's deployment. |
-| Performance and recovery | Not run / evidence absent. | Michael: one justified load scenario and recovery evidence. NFR-002/007 remain unverified. |
+| Staging/system | Staging HTTPS test host with real PostgreSQL completes E01/E02. | Simulated host uses synthetic identities. Normal web startup accepts Development only; the separate simulated host and its limitations are recorded. |
+| Performance and recovery | Not run / evidence absent. | A separate load exercise is required. NFR-002/007 remain unverified; no restore measurement is claimed. |
 | Collaboration | PRs 12/14 have two approvals; new contribution has local history only. | Obtain Bianca and Michael's meaningful independent reviews and current checks; approval-only historic records do not prove detailed checking. |
-| Acceptance | Existing 27 requirements/54 ACs preserved; progress partial. | Core creation/login/owner assignment/reporting gaps prevent a complete release claim. |
+| Acceptance | Existing 27 requirements/54 ACs preserved; progress partial. | Unverified broader baseline criteria remain visible; they do not automatically expand the agreed M3 increment. |
 
-Blockers: resolve DEF-M3-C04/C05; agree the assessed scope explicitly; validate target environment and critical journey; collect performance evidence; pass CI and two independent reviews on the final baseline. Record any remaining nonblocking conditions with owner, impact and explicit team acceptance before using CONDITIONALLY READY.
+Material gaps at cutoff: required performance evidence, current-candidate remote CI and independent review records. DEF-M3-C04/C05 describe normal Staging and broader acceptance limits. A release recommendation requires an explicit judgement against the agreed increment and target configuration.
 
 ## Residual risks after the passing tests
 
@@ -26,7 +26,7 @@ Blockers: resolve DEF-M3-C04/C05; agree the assessed scope explicitly; validate 
 | Performance/recovery | No representative timing or restore measurements. | Measure workload and verify recovery / Michael. |
 | Future bypass/coupling | Logical layers share one assembly; raw writer remains callable internally. | Review future routes and dependencies / Bianca/Cameron. |
 
-An honest NOT READY decision is supported by both positive evidence and material gaps. Passing the status slice allows a controlled demonstration; it does not justify releasing unverified essential scope.
+An honest NOT READY decision is supported by both positive evidence and material gaps. Passing the status slice allows a controlled demonstration; it does not establish unverified acceptance criteria or operational readiness.
 
 
 Personal verification checkpoint: Cameron's own run at [evidence/m3/personal-20261013-181846/summary.md](evidence/m3/personal-20261013-181846/summary.md) reproduces the passing build/test/security-gate results on `f774bf851e6b0c8d69cd9b37f6849fb0d853d661`. It does not add performance measurements, a real login/browser journey, peer approvals or a current remote CI run.
