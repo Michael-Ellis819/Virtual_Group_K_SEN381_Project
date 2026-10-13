@@ -34,7 +34,8 @@ public sealed class EfRequestReader : IRequestReader
                     .Select(n => new RequestNote(
                         n.Content,
                         n.IsRequesterVisible))
-                    .ToList()
+                    .ToList(),
+                r.Version
             ))
             .FirstOrDefaultAsync(cancellationToken);
     }

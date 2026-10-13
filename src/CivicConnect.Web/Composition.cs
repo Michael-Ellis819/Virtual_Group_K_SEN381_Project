@@ -21,9 +21,17 @@ public static class Composition
             o.Events.OnRedirectToAccessDenied = c => { c.Response.StatusCode = 403; return Task.CompletedTask; };
         });
         services.AddAuthorization(o => o.FallbackPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build());
+        services.AddAntiforgery(o =>
+        {
+            o.HeaderName = "X-CSRF-TOKEN";
+            o.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+        });
         services.AddSingleton<IRequestAccessPolicy, RequestAccessPolicy>();
         services.AddScoped<IRequestReader, EfRequestReader>();
         services.AddScoped<RequestQueryService>();
+        services.AddSingleton<StatusTransitionService>();
+        services.AddScoped<IRequestStatusWriter, EfRequestStatusWriter>();
+        services.AddScoped<RequestStatusService>();
         var connectionString =
             configuration.GetConnectionString("CivicConnect")
             ?? throw new InvalidOperationException(
