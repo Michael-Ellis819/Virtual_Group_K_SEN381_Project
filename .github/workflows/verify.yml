@@ -7,6 +7,7 @@ on:
     branches:
       - main
       - feature/m3-data-persistence
+      - feature/cameron-m3-integration
   pull_request:
     branches:
       - main
@@ -56,3 +57,14 @@ jobs:
         env:
           ConnectionStrings__CivicConnect: "Host=localhost;Port=5432;Database=civicconnect_test;Username=postgres;Password=testpassword"
         run: dotnet run --project tests/CivicConnect.DatabaseTests --configuration Release --no-build
+
+      - name: Build M3 tests and run SDK code analysis
+        run: dotnet build tests/CivicConnect.M3Tests --configuration Release -p:AnalysisLevel=latest -p:EnforceCodeStyleInBuild=true -p:NuGetAuditMode=all
+
+      - name: Run M3 black-box API and system cases
+        run: dotnet run --project tests/CivicConnect.M3Tests --configuration Release --no-build -- --database
+
+      - name: Check dependency advisories
+        run: |
+          dotnet list src/CivicConnect.Web package --include-transitive --vulnerable --format json > dependency-report.json
+          python3 tools/check_dependencies.py dependency-report.json
