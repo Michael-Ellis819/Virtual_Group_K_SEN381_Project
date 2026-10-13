@@ -1,0 +1,8 @@
+  CivicConnect.Web -> D:\uni\year 3\SEN\Milestone 3\CivicConnect\src\CivicConnect.Web\bin\Release\net8.0\CivicConnect.Web.dll
+  CivicConnect.M3Tests -> D:\uni\year 3\SEN\Milestone 3\CivicConnect\tests\CivicConnect.M3Tests\bin\Release\net8.0\CivicConnect.M3Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.95

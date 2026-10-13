@@ -1,36 +1,25 @@
-# Design and responsibility views
+# M3 design and integration
 
-Solid nodes below identify the implemented read slice. PostgreSQL/EF Core and State are planned integrations described separately in the PED.
+The application remains one deployable unit with logical layers. Controllers handle HTTP and antiforgery; application services coordinate use cases; the access policy decides resource permissions; State objects decide transition legality; EF Core adapters own database operations.
 
 ```mermaid
 flowchart TD
-    HTTP[HTTP request and validated cookie] --> C[RequestsController]
-    C --> S[RequestQueryService]
-    S --> R[IRequestReader]
-    R --> D[DevelopmentRequestReader]
-    S --> P[IRequestAccessPolicy]
-    P --> A[RequestAccessPolicy]
-    S --> DTO[Authorised RequestDetailsDto]
-    DTO --> C
-    C --> JSON[JSON with permitted notes only]
+    HTTP[Cookie-authenticated request] --> C[RequestsController]
+    C --> Q[RequestQueryService: read]
+    Q --> R[IRequestReader / EfRequestReader]
+    Q --> P[IRequestAccessPolicy]
+    Q --> DTO[Filtered requester or staff DTO]
+    C --> S[RequestStatusService: update]
+    S --> R
+    S --> P
+    S --> T[StatusTransitionService / State objects]
+    S --> W[IRequestStatusWriter / EfRequestStatusWriter]
+    W --> DB[(PostgreSQL transaction)]
+    DB --> H[Status + history + public feedback]
 ```
 
-```mermaid
-sequenceDiagram
-    participant Client
-    participant Controller
-    participant Service as RequestQueryService
-    participant Reader as IRequestReader
-    participant Policy as IRequestAccessPolicy
-    Client->>Controller: GET /requests/id with authenticated ticket
-    Controller->>Controller: Validate UUID
-    Controller->>Service: ReadAsync(principal, id, cancellation)
-    Service->>Reader: FindAsync(id)
-    Reader-->>Service: Snapshot or null
-    Service->>Policy: EvaluateRead(principal, snapshot) if found
-    Policy-->>Service: Allowed and internal-note permission
-    Service-->>Controller: Filtered DTO or null
-    Controller-->>Client: 200 JSON or 404 ProblemDetails
-```
+Read access does not grant write access. Only active, unambiguous Staff identities with the matching category can request status changes. Requesters see only their own records and public notes. Management reporting permission does not grant details or mutation permission.
 
-Authentication is not the resource decision. Permission is checked before a DTO leaves the service. Exceptions reach a generic 500 boundary. Future writes use a distinct application service: authorise action -> Bianca's transition service -> Michael's transactional store. They are not implemented by this diagram.
+The coordinator loads a snapshot, checks action permission, validates input and current status, asks the State service, then sends one command to the writer. The command includes the server-derived actor and observed version. The writer compares status/version and saves all three required effects atomically. A concurrent category or record change invalidates the checked version. Unexpected database failures reach the generic HTTP 500 boundary.
+
+The State service was absent from supplied main. A small integration dependency was added using Bianca's approved lifecycle and test specifications; Michael remains its allocated implementation owner and must review it. The database writer remains a low-level persistence component, not an independently authorised public entry point.

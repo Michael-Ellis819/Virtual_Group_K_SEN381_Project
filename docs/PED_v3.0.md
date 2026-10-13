@@ -1,3 +1,103 @@
+# CivicConnect Project Engineering Document v3.0
+
+Virtual Group K - SEN381. Updated 13 October 2026.
+Cameron Purdon 601963; Bianca Grobler 600537; Michael Ellis 600332.
+
+## Document control and continuity
+
+This continues the existing PED v3.0 Markdown supplied by Michael, which already carries the M1/M2 project history. The original text is retained below; this current M3 evidence index supersedes dated implementation statements in that retained record. No requirement or acceptance wording changes. Cameron's concise additions consolidate his integration/testing work, Michael's persistence evidence and Bianca's 10 October review/test/risk proposals. Team review/sign-off is pending.
+
+| Version / checkpoint | Date | Change / evidence |
+| --- | --- | --- |
+| M1 / M2 history | Retained | Existing PED text, requirements, decisions, risk history and approvals preserved. |
+| Michael M3 source | 12 October 2026 | Existing PED conversion and persistence contribution from merged PR14. |
+| v3.0 local review | 13 October 2026 | Cameron's API/access integration, tests, RTM, registers, AI disclosure and evidence index. Independent approval pending. |
+
+## Required Submission Information Block
+
+| Field | Information |
+| --- | --- |
+| Team and members | Virtual Group K; Cameron Purdon 601963, Bianca Grobler 600537, Michael Ellis 600332. |
+| Repository | https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project |
+| M3 candidate / version | `m3-cameron-local-review-20261013` is the local review tag. It is not yet the final approved/submitted release. Implementation/test commit `fef0469d27fffb1a7b10de0acbd9a3faae703717`; upstream main `62e183b0d610fff0521b2116f6dec15b0319b22d`. |
+| PED | v3.0; source docs/PED_v3.0.md; submission export docs/PED_v3.0.pdf. |
+| RTM | [docs/CivicConnect_RTM_v2.0.xlsx](CivicConnect_RTM_v2.0.xlsx); established filename retained, M3 evidence continued. |
+| CI / test evidence | [docs/evidence/m3](evidence/m3); [workflow](../.github/workflows/verify.yml); historical [Actions run 38218128326](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/38218128326). New-baseline CI pending. |
+| Staging / demonstration | Release M3 harness using Staging, HTTPS and a disposable PostgreSQL database. [Reproduction instructions](../README.md). Final Michael staging startup/link and critical rerun pending. |
+| Video | Team recording still required; supply accessible playable link or ZIP containing complete video. |
+| Date submitted | Not submitted. Prepared 13 October 2026; deadline 16 October 2026, 23:59 SAST. |
+
+## M3.1 Implemented scope and baseline conformance
+
+The increment now connects protected reads and authorised staff status changes to PostgreSQL. It uses the accepted lifecycle: New -> Assigned -> In Progress -> Resolved -> Closed, with New -> Rejected and a reason. Reopening remains excluded. Status transitions do not assign an actual owner; account login, requester creation/history, staff lists/search and management reporting remain incomplete.
+
+| M2 decision | Current implementation | Consequence / evidence |
+| --- | --- | --- |
+| ADR-M2-01 layered application | MVC delegates to use-case services and EF Core adapters in one application. | Retained. Simple integration/deployment; folder boundaries still need review. |
+| ADR-M2-02 State | Minimal StatusTransitionService and six State classes validate legal edges. | Added as missing integration dependency; Michael owns review/continuation. C01/C02/E01/E02. |
+| ADR-M2-03/04 data/stack | Michael's EF Core/Npgsql entities, migrations, concurrency and transactional writer preserved. | 25 database checks passed; broader audit/recovery remains pending. |
+| ADR-M2-05 central policy | Separate action policy protects direct and HTTP status changes; requester reads filter private notes. | C03/BB05/A06/E01 passed. Live permissions/freshness remain incomplete. |
+| ADR-M2-06 explicit coordination | Coordinator checks access/input/State and sends one versioned command to writer. | Status/history/feedback commit together; A05 rollback passes. |
+
+Current consequence entries: [ADR01/02 update](decisions/M3-conformance-update.md), [ADR05](decisions/ADR-M2-05-authorisation.md), [ADR06](decisions/ADR-M2-06-integration.md). Bianca's preliminary conformance review was based on M2; it is not represented as a final review of this new code.
+
+## M3.2 Controlled construction and configuration
+
+[CR-M3-C01](change-control-m3.md) records original decision -> implementation problem -> resulting implementation -> consequence and affected requirements/tests. This extends approved integration decisions; no new client scope-change request or approval is invented. Current read DTO remains compatible; an internal snapshot version prevents a changed category from invalidating the checked permission unnoticed.
+
+Local branch `feature/cameron-m3-integration` contains separate implementation, testing/CI and documentation work. [GitHub evidence](github-evidence.md) verifies two approvals on PR12/14 and identifies still-open PR15. Historic approval bodies are empty; meaningful checking/rework cannot be inferred. The new branch still needs publication, two real non-author reviews, current CI and verified protection settings.
+
+Connection configuration comes from environment/user-secret support; no real credentials are added. The new harness uses only explicitly supplied disposable test database configuration, generated fixtures and temporary protected identities. Synthetic tickets exist in test code, not an application login route.
+
+## M3.3 CI, quality strategy and automated verification
+
+Risk-based priority is confidentiality, legal lifecycle, atomic effects and competing updates (R-046-R-050). These failures can expose data or corrupt accountability, so tests check rejection and stored state as well as successful responses.
+
+[Workflow](../.github/workflows/verify.yml) retains Michael's database service and both old harnesses, adds the M3 harness/SDK analysis and dependency gate. A failed build, assertion or high/critical advisory exits nonzero and fails the job. A controlled local mutation that incorrectly allowed New -> Closed failed C02; the original rule was restored and all 19 cases passed. This establishes test detection and local exit behaviour; current-branch remote CI and merge-required configuration remain pending.
+
+| Evidence | Actual result | Limit |
+| --- | --- | --- |
+| [New suite](evidence/m3/integration.txt) | 19 cases passed: 6 component, 5 black-box, 6 API/integration, 2 system. | Status API slice; cases counted once overall. |
+| [Legacy regression](evidence/m3/regression.txt) | 29 checks passed. | In-memory read regression. |
+| [Database checks](evidence/m3/database.txt) | 25 checks passed. | Michael's persistence checks; direct adapter writes do not imply legal lifecycle routes. |
+| [Static/build](evidence/m3/static-analysis.txt) | Zero warnings/errors in enabled SDK analysis. | No measured coverage or defect-free claim. |
+| [Dependency query](evidence/m3/dependencies.json) | No vulnerable packages reported on this date. | Time-limited advisory data; not complete security assurance. |
+| [Historical CI](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/38218128326) | Successful; existing build/harness steps. | Michael f1b11d7 revision; not Cameron's new code. |
+
+Detailed basis, inputs, expected/actual results and interpretation: [testing-m3.md](testing-m3.md). Local environment: Windows, .NET SDK 8.0.425/runtime 8.0.31, PostgreSQL 18.4. CI declares PostgreSQL 17; final parity must be verified.
+
+## M3.4 Black-box, integration and system validation
+
+BVA checks feedback lengths 1/2000/2001, derived from the API's nonblank 1-2000 bound. EP checks valid/invalid text/status groups and permitted/requester/wrong-category callers. BB03/BB04/BB05 assert unchanged status/version/notes/history after rejection. A01 rejects missing antiforgery; A02 denies signed-out changes; A03 maps stale state to 409; A04 conceals absent/inaccessible records; A05 forces DB failure and verifies rollback; A06 rejects stale checked category/version.
+
+E01 follows staff status progression through HTTP to persistence, then requester HTTP read and audit inspection. E02 follows rejection with a reason, own feedback, denied reopening and foreign-request isolation. Both ran in a harness-operated Staging HTTPS environment. They are system journeys through the implemented status API, not full browser login/submission journeys. Michael's final deployed environment still needs the critical rerun.
+
+## M3.5 Traceability, defects and continuing registers
+
+The original RTM retains 18 FRs, nine NFRs and 54 ACs, with original requirement formulas and IDs. Current evidence fields evolve from implementation -> cases -> result -> defect/gap. Full acceptance is not claimed while broader criteria remain incomplete. Example: FR-003 -> AC1/2 -> ADR05/06 -> query/access/persistence/coordinator -> E01/E02/A04 -> integration.txt -> partial status and release concerns. [Trace walkthrough](traceability-demo.md).
+
+[Defect register](defects.md) records fixed integration/version gaps, the corrected test-certificate failure, and open staging/core-scope blockers. [Risk register](risk-register.md) continues R-001-R-045 in the retained PED and reconciles Bianca R-046-R-058 with Michael M3-R01-R05. [Technical debt](technical-debt.md) preserves both members' IDs and current follow-up. [AI register](ai-usage.md) retains existing entries and explicitly states that Codex executed the new checks; personal/team review remains pending.
+
+## M3.6 Performance, staging and release readiness
+
+Separate performance evidence is absent. Michael owns the workload/report. NFR-002 retains its 95% within 3 seconds / at most 1% failure targets, 10 users/1,000 requests/10 minutes after 2 minutes warm-up and at least 100 runs per operation. A justified smaller milestone exercise must clearly state its limits. Correctness tests do not establish timing targets or backup recovery.
+
+The simulated Staging host demonstrates the status API with independent test configuration, real PostgreSQL and temporary HTTPS. The real web Program still rejects Staging; final startup/deployment, release-ID validation and E01/E02 rerun remain required. Restore/rollback must consider schema/data, not only application code.
+
+Current classification: **NOT READY for the complete agreed scope**. Positive tests support the implemented increment. Missing essential functions, final environment/performance evidence, current CI and peer reviews remain blockers. [Release Evidence Summary](release-evidence.md) links the gates, blockers and residual risks. Bianca must confirm the final classification after team review. Residual risks include live permission freshness, concurrent timing, environment differences, unmeasured load/recovery and future layer/writer bypasses. No accepted residual risk or release approval is invented.
+
+## M3.7 Presentation and finalisation
+
+[Recording guide](presentation-guide.md) maps all team rubric areas and Cameron's five individual dimensions to real evidence. The supplied compulsory video notice replaces the original live-assessment method. All three real members must visibly identify themselves and speak; no documentation substitutes for participation. Submit an accessible playable link or ZIP containing the complete recording by 16 October 2026, 23:59 SAST.
+
+Before submission: complete/review agreed scope; verify staging and performance; obtain two meaningful peer approvals/current CI; freeze the exact release tag/commit; update this block and RTM/evidence; regenerate this PED's PDF; check assessor access; record and verify the team meeting. [Full submission fields/actions](submission-information.md).
+
+## Current-source provenance
+
+Supplied handover dated 13 October; SEN381_M3.pdf (13 pages); compulsory recorded-video guidelines (4 pages); Bianca's Milestone3 PDF dated 10 October (27 pages); supplied GitHub ZIP and inspected main `62e183b0d610fff0521b2116f6dec15b0319b22d`. Bianca's contribution is retained at [source PDF](sources/Bianca_M3_2026-10-10.pdf). Retained PED text below matches supplied main's Markdown source; its older planned/current statements are historical checkpoints.
+
+# Retained project history - original supplied PED content
+
 Virtual Group K \| SEN381 \| 30 September 2026
 
 Cameron Purdon 601963 \| Bianca Grobler 600537 \| Michael Ellis 600332

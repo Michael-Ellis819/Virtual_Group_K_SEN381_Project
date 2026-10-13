@@ -1,24 +1,22 @@
-# GitHub and collaborative engineering evidence
+# GitHub and controlled-review evidence - 13 October 2026
 
-Repository: https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project
+Existing repository: https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project. Current inspected main: `62e183b0d610fff0521b2116f6dec15b0319b22d`. Local feature branch: `feature/cameron-m3-integration`. Implementation/test checkpoint: `fef0469d27fffb1a7b10de0acbd9a3faae703717`. These are authentic new local commits; publication is pending.
 
-Checkpoint: 30 September 2026. Public repository information was inspected read-only; no remote setting, workflow result, commit, issue, pull request or review was invented.
-
-## Observed history
-
-| Item | Observed evidence |
+| Evidence | Observed status / limit |
 | --- | --- |
-| Main | Commit `fef07828d1`; merged final A2 report on 15 September 2026; the tree still contained Assignment 2 material at the checkpoint |
-| Main protection | The public branch response reported `protected=true`; detailed protection settings were not publicly accessible |
-| Cameron M1 | PR #2 added the requirements and RTM; PR #3 refined rules and scope; both were merged on 9 September with approvals from Michael and Bianca |
-| Cameron A2 | PR #8 was merged on 15 September; Michael and Bianca approved it |
-| Bianca M2 | PR #10 was open at the checkpoint; Michael approved that revision and no second independent approval was publicly visible |
-| Michael M2 | PR #11 was open at the checkpoint; Bianca and RinoKaze approved that revision and no requested changes were publicly visible |
-| Final PED review | Bianca Grobler and Michael Ellis reviewed the consolidated M2 PED and accepted it for submission on 30 September 2026 |
-| Remote checks | No GitHub Actions run was visible at the public checkpoint; the submission therefore relies on the recorded local build and verification result |
+| [PR12 Complete Milestone 2 contribution](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/pull/12) | Bianca and Michael approvals present. The handover's unknown second-review state is superseded. |
+| [PR14 persistence implementation](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/pull/14) | Merged in inspected main; approvals by Bianca333-b and RinNoKaze. Review bodies returned empty. |
+| [PR15 my parts](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/pull/15) | Open, Bianca PDF contribution; Michael and RinNoKaze approvals present. Not yet merged. Supplied PDF used for consolidation. |
+| [Actions run 38218128326](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/38218128326) | Successful on f1b11d7f36a8e67570052ddf073879a2c3f35117. Build and both existing harness steps succeeded. This predates Cameron's new code. |
+| Main protection / new checks | Historical protection evidence exists. Current rules and required-check names were not independently retrieved. Maintainer must confirm two approvals and civicconnect-build-and-check required on current main. |
 
-Permanent references: [M1 PR #2](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/pull/2), [M1 PR #3](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/pull/3), [A2 PR #8](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/pull/8), [Bianca M2 PR #10](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/pull/10), [Michael M2 PR #11](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/pull/11), [M1 issue #1](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/issues/1) and [A2 issue #7](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/issues/7).
+The root file github_workflows_auto-merge-approved-prs.yml is outside .github/workflows, so its presence does not establish an active automation. No protection weakening or merge was performed.
 
-## Repeatable verification decision
+## Publish and review Cameron's contribution
 
-ADR-M2-07 selects a build and the 29-check verification harness for pull requests and pushes to main. The workflow source is `.github/workflows/verify.yml`. A workflow file shows the intended check but is not evidence of a successful remote run. The local result is recorded in `docs/evidence/local-verification.txt`. Risks R-038 and R-044 retain the clean-environment and remote-CI limitations.
+1. Open this checkout/branch in GitHub Desktop. Inspect the implementation, test/CI and documentation commits, then publish the branch to the existing repository and open a PR into main. A prepared title/body is in [pr-description.md](pr-description.md).
+2. Bianca independently checks lifecycle/conformance, invalid transitions and the release/register statements. Michael checks transactional integration, version handling, migrations, CI and the State dependency. Each records what was actually checked and any findings on the PR before approving.
+3. Fix review findings on the feature branch; rerun affected checks. Both non-author approvals and required CI must apply to the current revision. An agent's own review cannot substitute for two independent peers.
+4. Merge only after required reviews/checks. Freeze the final assessed commit/tag and align PED, RTM, environment, evidence and recorded demo with it.
+
+Suggested review checklist: reproduce E01/E02; inspect BB03 and A05 no-write/rollback assertions; verify A06 rejects stale category/version; confirm no new input supplies actor/roles; compare unchanged requirement/AC IDs; confirm honest pending scope; check current CI and staging parity. Review comments and any rework must be real; no example comment should be posted as if it occurred.
