@@ -1,6 +1,6 @@
 # M3 test basis and execution
 
-Owner: Cameron Purdon. Executed by Codex on 13 October 2026; personal/team reproduction is still required. Tests were derived from the unchanged PED requirements, the M2 lifecycle, the current API contract and Bianca's TC-ST specifications.
+Owner and current executor: Cameron Purdon 601963. Personal verification completed on 13 October 2026, 18:18-18:19 SAST, against revision f774bf851e6b0c8d69cd9b37f6849fb0d853d661. [Execution metadata](evidence/m3/personal-20261013-181846/execution.json) records the operator, environment, revision and result. Earlier AI-run evidence is retained as historical provenance. Tests were derived from the unchanged PED requirements, the M2 lifecycle, the current API contract and Bianca's TC-ST specifications.
 
 Risk priority: authorisation (R-049), invalid lifecycle changes (R-046/047), partial writes (R-048), conflicts (R-050) and misleading evidence (R-052/056). These receive stronger verification because they affect confidentiality and record integrity.
 
@@ -14,7 +14,7 @@ BVA uses 1, 2000 and 2001 code units around the nonblank 1-2000 feedback contrac
 
 ## Case records
 
-All cases below use fresh synthetic records where applicable. Each row's final result is tied to its ID in [integration.txt](evidence/m3/integration.txt). Source: [M3 harness](../tests/CivicConnect.M3Tests/Program.cs).
+All cases below use fresh synthetic records where applicable. Each row's final result is tied to its ID in [integration.txt](evidence/m3/personal-20261013-181846/integration.txt). Source: [M3 harness](../tests/CivicConnect.M3Tests/Program.cs).
 
 | ID | Level / technique | Basis | Input / precondition | Expected result | Actual result | Status |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -48,11 +48,11 @@ These are system tests of the integrated status-management API slice. Synthetic 
 
 ## Regression, static and security evidence
 
-- [regression.txt](evidence/m3/regression.txt): 29 existing service/HTTP checks passed.
-- [database.txt](evidence/m3/database.txt): Michael's 25 database checks passed, including competing contexts and transaction rollback.
-- [static-analysis.txt](evidence/m3/static-analysis.txt): SDK code analysis/build completed with zero warnings/errors. This is the enabled analyzer set, not proof of zero defects or measured code coverage.
-- [dependencies.json](evidence/m3/dependencies.json): NuGet advisory query reported no vulnerable packages on this date. [Dependency gate](../tools/check_dependencies.py) rejects reported high/critical advisories and incomplete scans. This does not establish future dependency safety or a full security audit.
-- [gate-negative-control.txt](evidence/m3/gate-negative-control.txt): deliberately permitting New -> Closed caused C02 to fail and the executable to exit nonzero. Original source restored, rebuilt and 19 cases rerun successfully. The CI job stops on such a failure; requiring that job for merge must be confirmed in repository protection settings.
+- [regression.txt](evidence/m3/personal-20261013-181846/regression.txt): 29 existing service/HTTP checks passed.
+- [database.txt](evidence/m3/personal-20261013-181846/database.txt): Michael's 25 database checks passed, including competing contexts and transaction rollback.
+- [static-analysis.txt](evidence/m3/personal-20261013-181846/static-analysis.txt): SDK code analysis/build completed with zero warnings/errors. This is the enabled analyzer set, not proof of zero defects or measured code coverage.
+- [dependencies.json](evidence/m3/personal-20261013-181846/dependencies.json): NuGet advisory query reported no vulnerable packages on this date. [Dependency gate](../tools/check_dependencies.py) rejects reported high/critical advisories and incomplete scans. This does not establish future dependency safety or a full security audit.
+- [gate-negative-control.txt](evidence/m3/personal-20261013-181846/gate-negative-control.txt): deliberately permitting New -> Closed caused C02 to fail and the executable to exit nonzero. Original source restored, rebuilt and 19 cases rerun successfully. The CI job stops on such a failure; requiring that job for merge must be confirmed in repository protection settings.
 
 Bianca TC-ST coverage: 01/02/03 -> C01/C02/E01; 04/05 -> BB04; 06/07 -> C03/BB05/C06/E01; 08/10/11 -> C04/BB03/BB04; 09 -> E01/E02; 12 -> direct service C04 and the supported HTTP route (E02 terminal-state denial), with broader internal writer bypass retained as debt; 13 -> A05; 14 -> C05/A03/A06 and Michael's competing-context checks. A simultaneous pair of HTTP updates with audit inspection remains additional verification work.
 

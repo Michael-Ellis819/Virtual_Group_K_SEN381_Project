@@ -37,3 +37,6 @@ Set `ASPNETCORE_ENVIRONMENT=Development` and the configured database connection,
 - [Submission information](docs/submission-information.md)
 - [Team recording and Cameron's defence](docs/presentation-guide.md)
 - [AI usage register](docs/ai-usage.md)
+
+
+Current personal verification: Cameron Purdon completed the recorded local run on 13 October 2026, 18:18-18:19 SAST, against `f774bf851e6b0c8d69cd9b37f6849fb0d853d661`. [Execution metadata](docs/evidence/m3/personal-20261013-181846/execution.json) and [results summary](docs/evidence/m3/personal-20261013-181846/summary.md) identify the current evidence. Earlier runs remain archived.

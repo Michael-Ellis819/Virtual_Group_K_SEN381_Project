@@ -14,3 +14,6 @@ Supplied ZIP SHA256: 9e8e724f9b2cc789673d766828ea04ecb3e7ac173debe18e59a9bb77115
 
 
 PED continuation update, 13 October 2026: upstream `216f405ce9d7aae79194db873c699dac5f517265` adds Bianca's merged document. The local feature branch incorporates that merge. Local documentation review tag: `m3-ped-continuation-20261013`. All 35 source-manifest hashes still match; the recorded execution checkpoint and results above remain unchanged.
+
+
+Personal verification update: Cameron Purdon 601963 executed the complete runner on 13 October 2026, 18:18:47-18:19:10 SAST, against `f774bf851e6b0c8d69cd9b37f6849fb0d853d661`. Evidence: `personal-20261013-181846`. A fresh loopback-only PostgreSQL database used the existing `civicconnect_test` role. Builds, 29 regression checks, 25 database checks, 19 M3 cases, the restored negative gate and dependency gate passed. All 35 source fingerprints match the earlier verified implementation. Initial launcher issues (waiting for a persistent process and assuming a nonexistent postgres role) were corrected before this successful run. Independent peer review and remote CI are separate evidence.

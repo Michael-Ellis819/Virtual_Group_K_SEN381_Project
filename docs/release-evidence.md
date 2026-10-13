@@ -27,3 +27,6 @@ Blockers: resolve DEF-M3-C04/C05; agree the assessed scope explicitly; validate 
 | Future bypass/coupling | Logical layers share one assembly; raw writer remains callable internally. | Review future routes and dependencies / Bianca/Cameron. |
 
 An honest NOT READY decision is supported by both positive evidence and material gaps. Passing the status slice allows a controlled demonstration; it does not justify releasing unverified essential scope.
+
+
+Personal verification checkpoint: Cameron's own run at [evidence/m3/personal-20261013-181846/summary.md](evidence/m3/personal-20261013-181846/summary.md) reproduces the passing build/test/security-gate results on `f774bf851e6b0c8d69cd9b37f6849fb0d853d661`. It does not add performance measurements, a real login/browser journey, peer approvals or a current remote CI run.

@@ -33,7 +33,7 @@ Changes made after review: Incorrect or unclear explanations were corrected. The
 | Student / responsibility | Cameron Purdon 601963; responsible for understanding, reviewing and maintaining the submitted contribution. |
 | Tool / purpose | OpenAI Codex; inspect handover/briefs/team work; implement access/API coordination; create tests; evolve RTM/PED and supporting evidence. |
 | Output used | C# implementation, executable cases, workflow additions, Markdown consolidation, RTM evidence and PDF export. |
-| Verification actually performed | Codex ran builds, 19 new cases, 29 old checks, 25 database checks, SDK analysis, dependency query and a controlled failing gate. Source logs are in evidence/m3. These runs are not labelled as Cameron's personal execution. |
+| Verification actually performed | Initial Codex execution is retained in evidence/m3. Cameron personally reran Release builds, SDK analysis, the 19 M3 cases, 29 regression checks, 25 database checks, a controlled failing gate with restoration and a dependency query/gate on 13 October 2026, 18:18-18:19 SAST. Current evidence: evidence/m3/personal-20261013-181846; revision f774bf851e6b0c8d69cd9b37f6849fb0d853d661. |
 | Changed/corrected AI output | Initial Windows test TLS setup failed; certificate import corrected. Missing target and stale-category/version verification strengthened. Unsupported full-release claims rejected; NOT READY retained. |
-| Human verification | Cameron's personal reproduction/understanding and Bianca/Michael independent review remain pending. No approval or personal test run is invented. |
+| Human verification | Cameron's personal execution is recorded in the current run's execution.json and raw reports. No independent peer approval or code-understanding assessment is inferred from the passing run. |
 | Scope limit | AI cannot provide authentic peer approval, team risk acceptance or the required personal camera participation. |

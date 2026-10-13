@@ -1,0 +1,2 @@
+PASS dependency gate: no reported high/critical advisory; review lower-severity findings in the report.
+PROCESS_EXIT_CODE=0
