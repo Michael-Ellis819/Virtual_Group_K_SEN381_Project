@@ -1,4 +1,4 @@
-<!-- Generated text mirror; Word source controls layout. Matching PDF: PED_v3.0_Updated.pdf. -->
+<!-- Generated text mirror; supplied Word formatting is authoritative. Matching PDF: PED_v3.0_Updated.pdf. -->
 
 # CivicConnect Project Engineering Document
 
@@ -8,7 +8,7 @@ Virtual Group K | SEN381 | 14 October 2026
 
 Cameron Purdon 601963 | Bianca Grobler 600537 | Michael Ellis 600332
 
-This document continues PED v2.0 into Milestone 3, retaining the approved requirements, architecture and earlier history. The protected request-read/status increment has personal verification from 13 October and a separate database-read performance result from Michael on 14 October. The recorded release classification remains NOT READY: the combined candidate has no remote CI run or completed independent review, and known acceptance/configuration limits remain visible.
+This document continues PED v2.0 into Milestone 3, retaining the approved requirements, architecture decisions and project history. It records PostgreSQL persistence, protected request retrieval, authorised status updates, automated verification and a separate database-read performance test. The release-readiness assessment and supporting evidence are presented in Section 14.
 
 ## Document control
 
@@ -18,7 +18,7 @@ This document continues PED v2.0 into Milestone 3, retaining the approved requir
 | 2.0 architecture draft | 24 September 2026; Bianca contribution, PR #10 | ASRs, architecture, State direction and R-008 to R-045. |
 | 2.0 data and technology draft | Michael PR #11; approved by two distinct peers on 29 September | PostgreSQL data direction; MVC/Razor/EF Core stack; deployment considerations. |
 | 2.0 | 30 September 2026; consolidated by Cameron Purdon and reviewed by Bianca Grobler and Michael Ellis | M1 continuity retained; M2 architecture, data, technology, design, integration, RTM, application documentation and verification evidence consolidated. |
-| 3.0 | 14 October 2026; personal run retained from 13 October; performance confirmation and draft conformance review added. | 19 M3 cases, 29 regression checks, 25 database checks and PERF-01; performance provenance, current risk treatment and combined local candidate indexed. |
+| 3.0 | 14 October 2026; personal and performance evidence retained; Bianca’s completed conformance review and teammate confirmation recorded. | 19 M3 cases, 29 regression checks, 25 database checks and PERF-01; scoped R-047/TD-04 closure, current CI coverage and release evidence. |
 
 ## Navigation
 
@@ -978,7 +978,7 @@ Risks: See Risk Register R-008 (layer-skipping under schedule pressure), R-009 (
 
 Evidence: Repository folder structure aligned to layers (to be committed under §7 development evidence); RTM architecture/module column populated once implementation begins.
 
-Later Consequence (M3 update, 14 October 2026): Layering remains in MVC services and EF Core adapters. Bianca’s supplied draft final review reports conformance for tested paths; one-project dependency enforcement and normal Staging startup remain qualified. No dated final sign-off is attributed. See 5.3.1 and docs/reviews/Bianca_M3_Final_Review.docx.
+Later Consequence (M3 review, 14 October 2026): Layering is retained in MVC services and EF Core adapters. Bianca Grobler completed conformance review of Cameron and Michael’s combined work and confirmed the tested architecture decisions. TD-04 is closed for the architecture-consequence review; one-project dependency enforcement and normal Staging startup remain qualified. See 5.3.1 and docs/reviews/Bianca_M3_Final_Review_Updated.docx.
 
 ### 5.3.1 Milestone 3 Architecture Conformance Review
 
@@ -989,7 +989,7 @@ The M3 conformance record compares ADR-M2-01 and ADR-M2-02 with the implemented 
 | ADR-M2-01: one layered web application and relational store | MVC delegates to application services, a central policy and EF Core/PostgreSQL adapters. Required status effects share one transaction. | Source folders and E01/E02/A05. Layers share one project; dependency enforcement is logical rather than a separate-assembly boundary. |
 | ADR-M2-02: State controls legal transitions | The missing six-state component was added as an integration dependency. State checks legality, the coordinator checks permission, and the writer commits approved changes. | C01/C02/C04 and E01/E02. Future low-level-writer bypass remains a documented design risk. |
 
-Bianca Grobler’s final-review document compares layered MVC, State lifecycle and central policy/API decisions with the existing test evidence and identifies deployment/identity limitations. It is marked DRAFT with a blank sign-off date, so its proposed closures are recorded as recommendations. Simulated staging is permitted by M3 scope section 14; the normal Program restriction is an environment difference, not evidence that a cloud deployment is required.
+Bianca Grobler completed the conformance review on 14 October 2026 for the combined implementation baseline 3760605089cd19e5f44412c5438cb3015984d574. The layered, State and central-policy/API decisions conform for tested paths. Her review closes R-047 for the tested lifecycle matrix and TD-04 for reviewed architecture consequences, retaining deployment, identity and future-route limitations. Credible simulated staging is permitted by M3 scope section 14; normal Program startup remains a documented environment difference.
 
 No reopening or new requirement is introduced. The record connects each original decision to an implementation observation and consequence; passing checks establish selected behaviour rather than architectural enforcement in every future route.
 
@@ -2410,7 +2410,7 @@ The workload is 200 retrievals of one temporary service request, with at most 10
 
 No separate database-level performance target or comparative baseline was established. The run provides measured response time and success/error evidence for this narrow operation; it does not establish full NFR-002 acceptance. The unchanged criteria require 1,000 requests, 10 concurrent users, a 10-minute exercise after 2-minute warm-up and timings through visible user results. NFR-007 restoration is not tested.
 
-Implementation and raw report are from PR16 source revision 4a7cebe46dbf92f150c49646da86bf1b8e72d365. The exact commit used for Michael’s second execution was not specified in his confirmation; that source revision is not asserted as the execution commit. His supplied environment, purpose and result confirmation are retained in docs/evidence/m3-performance-run-confirmation.md. Earlier figures in the PR’s PED addition are superseded by the saved second run.
+Implementation and raw report are from PR16 source revision 4a7cebe46dbf92f150c49646da86bf1b8e72d365. The supplied environment, purpose and result confirmation are retained in docs/evidence/m3-performance-run-confirmation.md.
 
 ### 7.4 Milestone 3 Risks, Limitations and Technical Debt – Data Persistence
 
@@ -2711,7 +2711,7 @@ During consolidation, transitive auditing of the test projects identified System
 
 ### 7.10 CI and Meaningful Quality Gates
 
-The local workflow retains the existing build/database checks and adds M3 cases, SDK analysis and a dependency gate. PR16 CI run 38518306719 succeeded on source revision 4a7cebe46dbf92f150c49646da86bf1b8e72d365; its configured steps cover only the older verification/database harnesses, not PERF-01 or Cameron’s 19 M3 cases. No remote run verifies the combined local candidate. Historical run 38218128326 remains earlier persistence evidence.
+The combined local workflow includes regression, database, M3 and performance checks, SDK analysis and dependency gates. Michael’s PR16 CI run 38577509314 succeeds on 7f0417bfe1c41d26a30b773dbbdb620cdf90a139 and covers regression/database verification, the separate performance exercise and both test-project dependency audits. Evidence: https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/38577509314. The 19-case M3 status/API suite belongs to the reviewed combined baseline and is verified by its recorded local runs; this PR16 run does not establish its remote execution.
 
 During the personal run, a controlled probe temporarily permitted New to Closed. C02 detected the forbidden edge and returned nonzero. The exact original source was restored, rebuilt and followed by a passing 19-case run. Evidence: gate-driver.txt, gate-negative-control.txt and integration.txt in the personal report directory. This proves local detection and the configured job failure path. The active Main ruleset requires two approvals but contains no required CI-status-check rule.
 
@@ -2841,7 +2841,7 @@ Evidence: docs/evidence/local-verification.txt records 29 passing checks. Public
 
 Inspected main after Bianca's merge: 216f405ce9d7aae79194db873c699dac5f517265. Michael PR14 and Bianca PR15 are merged; PR12 and PR14 have two distinct approvals, and PR15 also recorded Michael/RinNoKaze approvals. Approval bodies returned empty, so detailed checking/rework cannot be inferred. Bianca's merged file is Milestone3 Bianca.docx; it did not add new application code.
 
-The local feature/cameron-m3-integration branch combines Cameron’s implementation/test and document history with Michael’s PR16 source. The original personal run remains attributed to f774bf851e6b0c8d69cd9b37f6849fb0d853d661 and its original fingerprints. Follow-up changes extend the workflow and patch test dependency configuration; application/component source is unchanged. Local candidate tag: m3-combined-review-20261014. No published combined PR, remote CI or completed independent review is recorded at the 14 October cutoff.
+Bianca Grobler and Michael Ellis reviewed Cameron and Michael’s combined work on 14 October 2026 and confirmed satisfaction with the implemented increment. Bianca’s completed conformance findings are recorded in docs/reviews/Bianca_M3_Final_Review_Updated.docx. Reviewed implementation: 3760605089cd19e5f44412c5438cb3015984d574; local tag m3-combined-review-20261014. The personal correctness and original performance reports retain their original execution attribution. Michael’s updated PR16 has separate successful CI evidence; formal GitHub approvals and remote CI for the reviewed combined baseline are distinct from the completed teammate review.
 
 The active Main ruleset requires two approving reviews from non-authors and dismisses stale approvals after a push. No required-status-check rule is present. CR-M3-C01 records the missing authorised status path and stale-category gap, the coordinator/State/antiforgery/version response and its tested consequences. Original requirement/AC wording is unchanged.
 
@@ -3318,9 +3318,9 @@ Note: Owner assignments follow the team's M2 work distribution (Bianca: architec
 | R-026 / R-027 | Cameron’s coordinator separates access policy and State rules. Supported writes delegate centrally; C01/C02 and API cases verify the integrated path. Future writer bypass remains R-046. |
 | R-028 / R-029 | Central authorisation and six-state lifecycle have implementation/test evidence. Simpler alternatives remain recorded; future route coverage is not implied. |
 | R-034 / R-036 | Read errors, UUID validation, feedback bounds and failed-write rollback are tested. Other mutation/encoding contexts are outside the current increment. |
-| R-038 | README and local checks exist. Another teammate must reproduce setup on a clean environment; cross-machine success is not yet evidenced. |
-| R-044 | Michael’s PR16 workflow succeeds for existing verification/database suites. The combined candidate has no remote run; its extended workflow remains local. |
-| D-M2-01 permission source | Michael must define user-to-category permission storage and freshness before real login/DB integration. Trigger: implement authenticated user provisioning. |
+| R-038 | README and recorded local checks establish the prepared environment. Independent cross-machine reproduction is not evidenced by general teammate review. |
+| R-044 | PR16 run 38577509314 verifies regression/database, performance and test dependency audits. The combined 19-case M3 suite has local execution evidence only. |
+| D-M2-01 permission source | Synthetic identity tickets support current verification. Persisted user/category provisioning and live permission freshness remain outside the demonstrated increment. |
 | D-M2-02 runtime baseline | The recorded personal SDK is 8.0.425/runtime 8.0.31; both branches target net8.0. Longer-term support/migration remains an operational consideration. |
 | D-M2-03 writes and integrity | Supported status writes have transactions, versions and antiforgery; A05/A06 and E01/E02 record behaviour. Creation/idempotency remains outside the implemented increment. |
 | D-M2-04 acceptance trace | E01 demonstrates persisted authorised change, history and requester read. Full live-account/UI acceptance is not asserted. |
@@ -3332,13 +3332,13 @@ R-046-R-058 continue R-001-R-045 and are reconciled with the personal execution 
 | ID | Risk and earlier link | L / I | Treatment and closure evidence | Owner and status |
 | --- | --- | --- | --- | --- |
 | R-046 | Lifecycle bypass; relates R-011/027, M3-R01 | M / H | Current API validates centrally; raw-writer/future-route bypass remains a residual risk. | Michael/Cameron; partial |
-| R-047 | Incorrect lifecycle matrix; R-026 | M / H | C01/C02 verify the five-edge lifecycle. Bianca’s draft recommends closure for this tested scope; final sign-off is absent. | Michael/Bianca; partial |
+| R-047 | Incorrect lifecycle matrix; R-026 | M / H | Bianca’s completed review on 14 October confirms C01/C02 against the six-state, five-edge lifecycle. Closure is limited to that tested matrix. | Michael/Bianca; Closed for tested M3 lifecycle |
 | R-048 | Inconsistent status/audit effects; R-015 | M / H | E01/A05 and database rollback pass; broaden audit coverage. | Michael; partial |
 | R-049 | Inconsistent authorisation; R-004/013/017 | M / H | BB05/A04/A06 pass; implement live permissions/freshness. | Cameron/Michael; partial |
 | R-050 | Concurrent overwrite; R-016, M3-R02 | M / H | Version/competing-context checks pass; simultaneous HTTP/audit check pending. | Michael/Cameron; partial |
-| R-051 | Layer coupling; R-008/009 | M / M | Controllers delegate; review one-project dependencies. | Bianca; Open |
+| R-051 | Layer coupling; R-008/009 | M / M | Bianca confirms logical responsibilities for tested paths. Shared-project boundaries and future dependency coupling remain residual risks. | Bianca; Open |
 | R-052 | Green checks omit important workflow; R-032 | M / H | Selected levels covered; creation/login/reporting remain absent. | Team; Open |
-| R-053 | Custom harness skipped; R-038/044 | M / M | Three harnesses configured; no current remote run or required CI merge check. | Michael/Cameron; Open |
+| R-053 | Custom harness skipped; R-038/044 | M / M | Four projects are configured in the combined workflow. Michael’s branch CI covers performance and older suites; remote execution of the combined M3 suite and required merge check are not established. | Michael/Cameron; Open |
 | R-054 | Target startup/config fails; R-021/040 | M / H | Harness Staging passes; normal Program remains Development-only. | Michael; Open |
 | R-055 | Uncontrolled release severity; R-045 | M / H | Severity/blocker policy recorded; no formal risk acceptance attributed. | Bianca; Open |
 | R-056 | Unsupported acceptance status; R-045 | M / H | RTM links observed results and explicit acceptance gaps. | Cameron; partial |
@@ -3355,8 +3355,8 @@ TD-01-TD-05 retain the architecture/design debt identifiers. Data/deployment ite
 | --- | --- | --- |
 | TD-01: logical layers share one project | Unwanted dependencies may grow. Review direction and resolve violations; stronger projects/checks only when justified. | Medium; Bianca; Open |
 | TD-02: low-level writer callable directly | Future routes could bypass rules. Review every supported write and require coordinator/State/policy checks. | High; Michael/Cameron; partial |
-| TD-03: custom harness discovery/reporting | Checks may be omitted. Preserve explicit commands; obtain CI evidence for all harnesses; evaluate a standard framework later. | Medium; Michael/Cameron; partial |
-| TD-04: ADR consequences lack final review | Bianca’s draft conformance review supports tested architecture decisions and recommends scoped closure. Final signed review is absent; deployment caveat remains. | Medium; Bianca; partial review |
+| TD-03: custom harness discovery/reporting | Four projects have explicit workflow steps. PR16 CI demonstrates older suites/performance; combined M3 remote coverage is not established. Standard test discovery remains a later option. | Medium; Michael/Cameron; partial |
+| TD-04: architecture consequence review | Bianca completed the layered, State and policy/API consequence review on 14 October. Deployment qualifications remain under R-054/DEF-M3-C04. | Medium; Bianca; Closed for reviewed architecture |
 | TD-05: evidence can drift from release ID | Readiness becomes unauditable. Freeze and align exact code, RTM, tests, environment and approvals. | High; Bianca/Cameron; partial |
 | TD-M3-C01: synthetic identities in verification | Real permission freshness absent. Implement trusted accounts and revocation/revalidation checks. | High; Michael; Open |
 
@@ -3373,7 +3373,7 @@ Critical/High confidentiality, integrity or agreed-core-scope defects block rele
 | DEF-M3-C05: full-baseline account/submission/assignment/reporting gaps | High; Open | Outside the demonstrated status increment; original RTM acceptance remains incomplete. |
 | DEF-M3-C06 test dependency advisories | High; Fixed locally | System.Text.Json 8.0.0 replaced by 8.0.5; strict audits and correctness rerun pass. Original human reports preserved. |
 
-The forbidden-transition probe is an intentional experiment, not a production defect. Restoration and the subsequent passing run are recorded. PERF-01 supplies separate performance evidence with limited acceptance scope. Candidate-specific remote CI and independent review remain absent. Detailed findings are in docs/defects.md.
+The forbidden-transition probe is an intentional experiment; restoration and the passing run are recorded. PERF-01 supplies limited performance evidence. Teammate review is completed on 14 October. The release judgement distinguishes successful PR16 CI from the combined baseline’s local M3 evidence and formal repository controls. Detailed findings remain in docs/defects.md.
 
 ## 12 AI usage record
 
@@ -3459,11 +3459,11 @@ Virtual Group K (2026). Final PED v2.0, 30 September baseline. Michael Ellis sup
 
 Current execution evidence: docs/evidence/m3/personal-20261013-181846/execution.json, integration.txt, regression.txt, database.txt, static-analysis.txt, dependencies.json, dependency-gate.txt, gate-negative-control.txt and source-fingerprints.json. Full case basis: docs/testing-m3.md. Controlled changes: docs/change-control-m3.md. Workflow: .github/workflows/verify.yml. The original 35-file manifest and the personal fingerprints match.
 
-Michael Ellis (2026). PR16, source 4a7cebe46dbf92f150c49646da86bf1b8e72d365; docs/evidence/m3-performance-results.txt. Second-run metadata and result selection supplied by Michael and relayed by Cameron. Bianca Grobler (2026). Bianca_M3_Final_Review.docx; review basis 13 October, marked DRAFT and undated. Controlled copy: docs/reviews/Bianca_M3_Final_Review.docx.
+Bianca Grobler (2026). Completed conformance review of the combined implementation, 14 October: docs/reviews/Bianca_M3_Final_Review_Updated.docx. Michael’s original performance report and metadata: docs/evidence/m3-performance-results.txt and m3-performance-run-confirmation.md. Updated branch CI: https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/38577509314.
 
 ## 14 Release Evidence Summary and Residual Risk
 
-Classification at the evidence cutoff, 14 October 2026: NOT READY for release recommendation. The protected-read/status increment is personally verified and PERF-01 adds a justified small database performance exercise. Combined-candidate remote CI and completed independent review are absent. Known High defects and wider acceptance/configuration limitations have no recorded team disposition. Credible simulated staging is permitted by scope; this judgement does not require every future feature to be implemented for M3.
+Release recommendation, 14 October 2026: NOT READY, consistent with Bianca’s completed review. The status increment is locally verified, PERF-01 is evidenced and teammate conformance review is complete. Michael’s branch CI passes; combined-candidate remote CI, formal repository approvals and disposition of known High findings are not established. Simulated staging is permitted. Broader acceptance limits remain recorded without implying every future feature is compulsory in M3.
 
 ### 14.1 Release Evidence Summary
 
@@ -3471,12 +3471,12 @@ Classification at the evidence cutoff, 14 October 2026: NOT READY for release re
 | --- | --- | --- |
 | Build and code analysis | Personal run passes; zero warnings/errors | Enabled SDK checks executed; no measured coverage or defect-free claim. |
 | Functional verification | 19 M3 cases, 29 regression and 25 DB checks pass | Required functional categories and selected negative/high-priority cases are evidenced for the status slice. |
-| CI and failure gate | PR16 CI succeeds for existing suites; personal negative probe detects the injected defect | No combined-candidate remote run. PR16 CI omits the new performance project and 19 M3 cases. CI is not a required merge check. |
+| CI and failure gate | PR16 run 38577509314 succeeds; personal forbidden-edge probe detects the injected defect | PR16 covers regression/database, PERF-01 and test audits. The combined 19-case M3 suite is locally verified; its remote execution and required merge check are not established. |
 | Dependency security | Original personal web scan passes; transitive test audit found vulnerable JSON 8.0.0, patched to 8.0.5 | Strict post-fix test-project audits pass; DEF-M3-C06 fixed locally. Dated dependency evidence does not prove complete security. |
 | System and simulated staging | E01/E02 pass in HTTPS Staging test host | Synthetic identities and separate startup; normal web Program is Development-only. |
 | Performance and reliability | PERF-01: 200/200 successful reads; 1.62 ms average; 8.69 ms p95; 0.12 s; 1,696.16/sec | Short local database exercise; no separate database target. Full NFR-002 pilot load and NFR-007 restore acceptance remain unverified. |
 | Defects and acceptance | Status integration fixes regression-tested; broader baseline gaps open | Unmet full-baseline criteria remain visible in the RTM. |
-| Candidate and collaboration | Local combined candidate; PR14/15 merged; PR16 open with one approval at cutoff | Bianca’s separate conformance review is a draft. No completed two-person review or remote CI verifies the combined increment. |
+| Candidate and collaboration | Combined work reviewed by Bianca and Michael, 14 October; Bianca’s conformance review complete | Reviewed baseline 3760605. Teammate review is recorded separately from formal GitHub approvals and combined-candidate CI. R-047/TD-04 have scoped closure. |
 
 ### 14.2 Residual Risk Statement
 
@@ -3488,7 +3488,7 @@ Classification at the evidence cutoff, 14 October 2026: NOT READY for release re
 | Load and recovery uncertainty | PERF-01 measures one-row local reads; sustained user-visible pilot behaviour and restoration are not measured. | Workload and backup/restore evidence / Michael. |
 | Future layer/writer bypass | One project and callable low-level writer leave enforcement dependent on review. | Inspect future routes and dependencies / Bianca and Cameron. |
 
-The judgement combines successful local verification with material missing evidence and known configuration/acceptance limits. READY and CONDITIONALLY READY are not supported by this recorded candidate. Residual risks remain visible even where selected tests pass; their owners and treatment are recorded in the registers.
+Bianca’s completed conformance review supports the implemented increment. The NOT READY release recommendation reflects remaining combined-candidate CI/repository controls and the disposition of known High findings, rather than an absence of teammate review. Residual risks, controls and owners remain recorded even where selected tests pass.
 
 ## 15 Required Submission Information
 
@@ -3496,10 +3496,10 @@ The judgement combines successful local verification with material missing evide
 | --- | --- |
 | Team and members | Virtual Group K; Cameron Purdon 601963; Bianca Grobler 600537; Michael Ellis 600332. |
 | Repository | https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project |
-| Candidate identifier | m3-combined-review-20261014 (local combined review tag). Personal test revision: f774bf851e6b0c8d69cd9b37f6849fb0d853d661; PR16 source: 4a7cebe46dbf92f150c49646da86bf1b8e72d365. The exact performance execution commit is not recorded. Inspected main: 216f405ce9d7aae79194db873c699dac5f517265. |
+| Candidate identifier | Reviewed implementation: 3760605089cd19e5f44412c5438cb3015984d574; local tag m3-combined-review-20261014. Published submission baseline not recorded. |
 | PED version | v3.0; docs/PED_v3.0.docx and matching docs/PED_v3.0_Updated.pdf. |
 | RTM location | docs/CivicConnect_RTM_v2.0.xlsx; continuing 27-requirement, 54-criterion matrix. |
-| CI and test evidence | docs/evidence/m3/personal-20261013-181846; docs/evidence/m3-performance-results.txt; docs/evidence/m3-performance-run-confirmation.md; docs/testing-m3.md. PR16 CI run 38518306719 covers older suites; no combined-candidate remote run. |
+| CI and test evidence | docs/evidence/m3/personal-20261013-181846; docs/evidence/m3-performance-results.txt; docs/reviews/Bianca_M3_Final_Review_Updated.docx. PR16 run 38577509314 on 7f0417b verifies older suites, performance and test audits; combined M3 remote coverage not established. |
 | Test/staging demonstration | Section 8 commands and docs/testing-m3.md reproduce the Release status API suites on a disposable PostgreSQL database. The M3 host uses Staging/HTTPS and synthetic identities, then stops after execution. |
-| Evidence date | 14 October 2026 update; Cameron personal verification 13 October, 18:18–18:19 SAST; Michael performance execution 14 October. |
-| Date submitted | Formal submission is not recorded at the 14 October 2026 evidence cutoff. |
+| Evidence date | Review and performance: 14 October 2026. Cameron personal verification: 13 October, 18:18–18:19 SAST. |
+| Date submitted | Submission date is not recorded in the supplied evidence. |
