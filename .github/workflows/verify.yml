@@ -56,3 +56,10 @@ jobs:
         env:
           ConnectionStrings__CivicConnect: "Host=localhost;Port=5432;Database=civicconnect_test;Username=postgres;Password=testpassword"
         run: dotnet run --project tests/CivicConnect.DatabaseTests --configuration Release --no-build
+
+      - name: Build performance tests
+        run: dotnet build tests/CivicConnect.PerformanceTests/CivicConnect.PerformanceTests.csproj --configuration Release
+
+      - name: Run performance tests
+        run: dotnet run --project tests/CivicConnect.PerformanceTests --configuration Release --no-build
+
