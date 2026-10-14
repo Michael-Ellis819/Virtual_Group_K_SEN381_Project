@@ -16,3 +16,8 @@ Bianca's supplied TD-01-TD-05 and Michael's PED TD-M3-01-TD-M3-04 retain their I
 | TD-M3-C01 | Synthetic identity tickets used for verification; live permission freshness absent. | High / Michael | Implement trusted accounts/permissions and revocation/revalidation tests. | Open |
 
 Preserved database tests exercise raw persistence writes to isolate the adapter. Their direct New -> In Progress assignment is not a legal application lifecycle example. Supported mutations use RequestStatusService. Adding another route requires the same policy and State controls.
+
+
+## 14 October review update
+
+TD-04 has a draft conformance review and scoped closure recommendation; deployment caveat and final sign-off remain open. TD-03 has explicit CI steps for all four projects locally; remote execution is absent. PERF-01 reduces the absence-of-measurement concern but does not establish pilot performance or recovery. DEF-M3-C06 records and locally fixes vulnerable test dependencies. No teammate sign-off is invented.

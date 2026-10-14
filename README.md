@@ -40,3 +40,6 @@ Set `ASPNETCORE_ENVIRONMENT=Development` and the configured database connection,
 
 
 Current personal verification: Cameron Purdon completed the recorded local run on 13 October 2026, 18:18-18:19 SAST, against `f774bf851e6b0c8d69cd9b37f6849fb0d853d661`. [Execution metadata](docs/evidence/m3/personal-20261013-181846/execution.json) and [results summary](docs/evidence/m3/personal-20261013-181846/summary.md) identify the current evidence. Earlier runs remain archived.
+
+
+14 October consolidation: Michael’s separate database-read benchmark is indexed in PED 7.3.7 and the RTM. Original human-run reports remain preserved. Follow-up test-project dependency fixes and local checks are indexed in docs/evidence/m3/combined-20261014/summary.md. The final peer/CI baseline remains unapproved.

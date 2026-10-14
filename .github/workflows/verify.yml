@@ -51,7 +51,7 @@ jobs:
         run: dotnet run --project tests/CivicConnect.Verification --configuration Release --no-build
 
       - name: Build database tests
-        run: dotnet build tests/CivicConnect.DatabaseTests/CivicConnect.DatabaseTests.csproj --configuration Release
+        run: dotnet build tests/CivicConnect.DatabaseTests/CivicConnect.DatabaseTests.csproj --configuration Release -p:NuGetAudit=true -p:NuGetAuditMode=all -p:TreatWarningsAsErrors=true
 
       - name: Run database integration tests
         env:
@@ -63,6 +63,12 @@ jobs:
 
       - name: Run M3 black-box API and system cases
         run: dotnet run --project tests/CivicConnect.M3Tests --configuration Release --no-build -- --database
+
+      - name: Build performance project and audit dependencies
+        run: dotnet build tests/CivicConnect.PerformanceTests --configuration Release -p:NuGetAudit=true -p:NuGetAuditMode=all -p:TreatWarningsAsErrors=true
+
+      - name: Run separate database-read performance exercise
+        run: dotnet run --project tests/CivicConnect.PerformanceTests --configuration Release --no-build
 
       - name: Check dependency advisories
         run: |

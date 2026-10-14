@@ -57,3 +57,8 @@ These are system tests of the integrated status-management API slice. Synthetic 
 Bianca TC-ST coverage: 01/02/03 -> C01/C02/E01; 04/05 -> BB04; 06/07 -> C03/BB05/C06/E01; 08/10/11 -> C04/BB03/BB04; 09 -> E01/E02; 12 -> direct service C04 and the supported HTTP route (E02 terminal-state denial), with broader internal writer bypass retained as debt; 13 -> A05; 14 -> C05/A03/A06 and Michael's competing-context checks. A simultaneous pair of HTTP updates with audit inspection remains additional verification work.
 
 Performance: no load exercise was present in the supplied work or executed for Cameron's allocation. Michael must collect the separate scenario. NFR-002's unchanged target is 95% within 3 seconds, at most 1% failures, 10 concurrent users/1,000 requests/10 minutes after 2 minutes warm-up, at least 100 runs per operation. A smaller justified M3 load exercise may satisfy the milestone evidence requirement while leaving NFR-002 partially verified.
+
+
+## Separate performance exercise PERF-01
+
+Michael’s second run: 200 direct reader operations, maximum concurrency 10; 1.62 ms mean, 8.69 ms p95, 0 failures, 0.12 seconds. Raw evidence and environment confirmation: evidence/m3-performance-results.txt and evidence/m3-performance-run-confirmation.md. No database target; full NFR-002 acceptance remains unverified. The performance project requires a migrated disposable database and uses environment/User Secrets configuration. The original report is retained independently of dependency-fix follow-up checks.

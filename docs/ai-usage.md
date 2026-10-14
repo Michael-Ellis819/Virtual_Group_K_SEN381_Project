@@ -37,3 +37,8 @@ Changes made after review: Incorrect or unclear explanations were corrected. The
 | Changed/corrected AI output | Initial Windows test TLS setup failed; certificate import corrected. Missing target and stale-category/version verification strengthened. Unsupported full-release claims rejected; NOT READY retained. |
 | Human verification | Cameron's personal execution is recorded in the current run's execution.json and raw reports. No independent peer approval or code-understanding assessment is inferred from the passing run. |
 | Scope limit | AI cannot provide authentic peer approval, team risk acceptance or the required personal camera participation. |
+
+
+## Consolidation 14 October
+
+Codex assisted with merging PR16 locally, preserving supplied Word/RTM formatting, reconciling Michael’s confirmed results, detecting/fixing transitive dependency advisories and checking the combined working copy. Agent follow-up logs are labelled in evidence/m3/combined-20261014; Cameron’s personal run and Michael’s human performance run retain their original attribution. Bianca’s review remains a supplied draft; no AI-created teammate approval or sign-off is recorded.

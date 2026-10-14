@@ -12,3 +12,8 @@ Date: 13 October 2026. Owner: Cameron Purdon. Status: implemented locally; indep
 Impact: FR-003/005/010/012/015/016 and NFR-001/003/008/009 gain partial implementation evidence. No requirement ID, wording, priority or acceptance criterion changes. Existing database migrations remain unchanged. GET output remains compatible; the snapshot's version is internal and is not added to the public DTO. Tests, API documentation, ADR consequences, RTM and risk records evolve together.
 
 Validation: six component, five black-box, six API/integration and two system cases passed. Existing 29 verification and 25 database checks passed. A controlled forbidden-transition injection failed C02; the original source was restored. Human review and CI on the new branch remain pending.
+
+
+## CR-M3-C02 Combined performance evidence and dependency audit
+
+14 October 2026: integrate PR16 source/report into Cameron’s existing branch; preserve Michael’s second-run report and correct final PED/RTM figures. Add benchmark/strict transitive-audit CI steps. Fix DEF-M3-C06 using JSON 8.0.5 in database/performance projects. No requirement or acceptance-criterion change, schema migration or new production route. Preserve the human-run evidence and mark new local checks separately.

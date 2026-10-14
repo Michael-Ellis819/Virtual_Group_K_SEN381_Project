@@ -1,14 +1,14 @@
-<!-- Generated text mirror of PED_v3.0.docx. The original Word layout is authoritative. Matching PDF: PED_v3.0_Updated.pdf. -->
+<!-- Generated text mirror; Word source controls layout. Matching PDF: PED_v3.0_Updated.pdf. -->
 
 # CivicConnect Project Engineering Document
 
 Version 3.0 Controlled Construction Integration Quality and Release Readiness
 
-Virtual Group K | SEN381 | 13 October 2026
+Virtual Group K | SEN381 | 14 October 2026
 
 Cameron Purdon 601963 | Bianca Grobler 600537 | Michael Ellis 600332
 
-This document continues PED v2.0 into Milestone 3, retaining the approved requirements, architecture and earlier project history. It records implemented persistence, central authorisation, the status API and personal verification completed on 13 October 2026. The demonstrated increment is protected request retrieval and status management. The evidence supports this increment; the recorded release classification is NOT READY because required performance and current-candidate review/CI evidence are incomplete.
+This document continues PED v2.0 into Milestone 3, retaining the approved requirements, architecture and earlier history. The protected request-read/status increment has personal verification from 13 October and a separate database-read performance result from Michael on 14 October. The recorded release classification remains NOT READY: the combined candidate has no remote CI run or completed independent review, and known acceptance/configuration limits remain visible.
 
 ## Document control
 
@@ -18,7 +18,7 @@ This document continues PED v2.0 into Milestone 3, retaining the approved requir
 | 2.0 architecture draft | 24 September 2026; Bianca contribution, PR #10 | ASRs, architecture, State direction and R-008 to R-045. |
 | 2.0 data and technology draft | Michael PR #11; approved by two distinct peers on 29 September | PostgreSQL data direction; MVC/Razor/EF Core stack; deployment considerations. |
 | 2.0 | 30 September 2026; consolidated by Cameron Purdon and reviewed by Bianca Grobler and Michael Ellis | M1 continuity retained; M2 architecture, data, technology, design, integration, RTM, application documentation and verification evidence consolidated. |
-| 3.0 | 13 October 2026; M2 continuation and personal verification at 18:18-18:19 SAST | Integrated status workflow; 19 M3 cases, 29 regression checks and 25 database checks; current configuration, traceability and release evidence. |
+| 3.0 | 14 October 2026; personal run retained from 13 October; performance confirmation and draft conformance review added. | 19 M3 cases, 29 regression checks, 25 database checks and PERF-01; performance provenance, current risk treatment and combined local candidate indexed. |
 
 ## Navigation
 
@@ -629,25 +629,25 @@ During M4, the team will validate the completed product against the agreed requi
 
 Individual items of work will follow a controlled cycle:
 
-- Identify and define the required work.
+Identify and define the required work.
 
-- Record the work as a GitHub Issue.
+Record the work as a GitHub Issue.
 
-- Assign responsibility to a team member.
+Assign responsibility to a team member.
 
-- Develop the change on a separate branch.
+Develop the change on a separate branch.
 
-- Test and verify the change.
+Test and verify the change.
 
-- Submit a Pull Request.
+Submit a Pull Request.
 
-- Obtain meaningful peer reviews and required approvals.
+Obtain meaningful peer reviews and required approvals.
 
-- Address review findings.
+Address review findings.
 
-- Merge the approved change into the protected main branch.
+Merge the approved change into the protected main branch.
 
-- Update relevant documentation, requirements traceability and project evidence.
+Update relevant documentation, requirements traceability and project evidence.
 
 This approach provides a balance between Agile flexibility and the engineering controls required by the project. Requirements and implementation can evolve when justified, while changes remain traceable and controlled. Risks, defects and important engineering decisions will be recorded and reviewed throughout the project.
 
@@ -659,109 +659,109 @@ The CivicConnect team agrees to work collaboratively and maintain shared respons
 
 ## 1. Communication
 
-- Team members will communicate regularly using the team's agreed communication channel.
+Team members will communicate regularly using the team's agreed communication channel.
 
-- Important project decisions will be documented rather than relying only on informal conversations.
+Important project decisions will be documented rather than relying only on informal conversations.
 
-- Team members will communicate as soon as possible if they are unable to complete an assigned task or encounter a significant problem.
+Team members will communicate as soon as possible if they are unable to complete an assigned task or encounter a significant problem.
 
 ## 2. Meetings
 
-- The team will hold regular project meetings to review progress, upcoming work, risks and problems.
+The team will hold regular project meetings to review progress, upcoming work, risks and problems.
 
-- Meeting outcomes and significant decisions will be recorded where appropriate.
+Meeting outcomes and significant decisions will be recorded where appropriate.
 
-- Team members will attend agreed meetings and contribute to discussions.
+Team members will attend agreed meetings and contribute to discussions.
 
 ## 3. Task Allocation
 
-- Engineering work will be represented using GitHub Issues where appropriate.
+Engineering work will be represented using GitHub Issues where appropriate.
 
-- Tasks will be assigned to specific team members to establish accountability.
+Tasks will be assigned to specific team members to establish accountability.
 
-- Work will be divided according to workload and project requirements rather than allowing one member to become responsible for an entire area of the system.
+Work will be divided according to workload and project requirements rather than allowing one member to become responsible for an entire area of the system.
 
-- Team members will keep their GitHub Issues updated as work progresses.
+Team members will keep their GitHub Issues updated as work progresses.
 
 ## 4. GitHub and Code Changes
 
-- Team members will work using branches rather than making substantive changes directly to main.
+Team members will work using branches rather than making substantive changes directly to main.
 
-- Substantive changes will be submitted through Pull Requests.
+Substantive changes will be submitted through Pull Requests.
 
-- Pull Requests will require review by other team members before merging.
+Pull Requests will require review by other team members before merging.
 
-- Reviewers will provide meaningful feedback rather than approving changes without inspection.
+Reviewers will provide meaningful feedback rather than approving changes without inspection.
 
-- The Pull Request author will not count their own approval.
+The Pull Request author will not count their own approval.
 
-- Team members will not commit passwords, API keys, private keys or other sensitive credentials to the repository.
+Team members will not commit passwords, API keys, private keys or other sensitive credentials to the repository.
 
 ## 5. Quality and Testing
 
-- Team members are responsible for testing the work they produce.
+Team members are responsible for testing the work they produce.
 
-- Defects discovered during development will be recorded and addressed appropriately.
+Defects discovered during development will be recorded and addressed appropriately.
 
-- Code will be reviewed before being incorporated into the controlled baseline.
+Code will be reviewed before being incorporated into the controlled baseline.
 
-- The team will not deliberately reduce required testing or security activities simply to meet a deadline.
+The team will not deliberately reduce required testing or security activities simply to meet a deadline.
 
 ## 6. Documentation and Traceability
 
-- Requirements, risks and significant engineering decisions will be documented.
+Requirements, risks and significant engineering decisions will be documented.
 
-- Changes to baseline requirements will follow the project's change-control process.
+Changes to baseline requirements will follow the project's change-control process.
 
-- Team members will maintain evidence of their contributions through GitHub commits Issues, Pull Requests, reviews and relevant documentation.
+Team members will maintain evidence of their contributions through GitHub commits Issues, Pull Requests, reviews and relevant documentation.
 
-- The PED will be maintained as a single integrated engineering document.
+The PED will be maintained as a single integrated engineering document.
 
 ## 7. AI Usage
 
-- AI tools may be used where appropriate to support project activities.
+AI tools may be used where appropriate to support project activities.
 
-- Material AI-assisted contributions will be recorded in the AI Usage Register.
+Material AI-assisted contributions will be recorded in the AI Usage Register.
 
-- AI-generated content and code will be reviewed and verified by the team before being accepted.
+AI-generated content and code will be reviewed and verified by the team before being accepted.
 
-- Team members remain responsible for understanding and being able to explain any AI-assisted work they use.
+Team members remain responsible for understanding and being able to explain any AI-assisted work they use.
 
 ## 8. Collaboration and Knowledge Sharing
 
-- Each team member will remain familiar with the overall CivicConnect system and not only their assigned tasks.
+Each team member will remain familiar with the overall CivicConnect system and not only their assigned tasks.
 
-- Team members will explain important technical or engineering decisions to the rest of the team.
+Team members will explain important technical or engineering decisions to the rest of the team.
 
-- Team members will support one another when difficulties arise.
+Team members will support one another when difficulties arise.
 
-- No team member will intentionally withhold information required for another member to complete their work.
+No team member will intentionally withhold information required for another member to complete their work.
 
 ## 9. Conflict Resolution
 
-- Technical disagreements will be discussed using project requirements, evidence, risks and engineering reasoning.
+Technical disagreements will be discussed using project requirements, evidence, risks and engineering reasoning.
 
-- Where the team cannot immediately agree, alternatives will be considered and the decision will be documented where it represents a significant engineering choice.
+Where the team cannot immediately agree, alternatives will be considered and the decision will be documented where it represents a significant engineering choice.
 
-- Personal disagreements will not be allowed to interfere with project responsibilities.
+Personal disagreements will not be allowed to interfere with project responsibilities.
 
 ## 10. Accountability
 
 Each team member agrees to:
 
-- Complete their assigned work within agreed timeframes.
+Complete their assigned work within agreed timeframes.
 
-- Maintain evidence of their contributions.
+Maintain evidence of their contributions.
 
-- Review other team members' work when requested.
+Review other team members' work when requested.
 
-- Communicate problems early.
+Communicate problems early.
 
-- Participate in project meetings and milestone preparation.
+Participate in project meetings and milestone preparation.
 
-- Understand the overall project sufficiently to defend the team's work.
+Understand the overall project sufficiently to defend the team's work.
 
-- Take responsibility for the quality of their contributions.
+Take responsibility for the quality of their contributions.
 
 #### Agreement
 
@@ -782,13 +782,13 @@ By adopting this working agreement, all three team members agree to follow the p
 
 #### 7.1.2 Operational questions the team is holding open (not deciding yet)
 
-- What free-tier hosting/DB option will be evaluated first, and against what criteria (cost, ease of use, team familiarity)?
+What free-tier hosting/DB option will be evaluated first, and against what criteria (cost, ease of use, team familiarity)?
 
-- What minimum logging is needed to know a request was created/updated, for later accountability evidence?
+What minimum logging is needed to know a request was created/updated, for later accountability evidence?
 
-- What would "the system is degrading" look like for CivicConnect specifically (e.g. requests silently failing to save)?
+What would "the system is degrading" look like for CivicConnect specifically (e.g. requests silently failing to save)?
 
-- Who is responsible for secrets/config once a real deployment target is chosen?
+Who is responsible for secrets/config once a real deployment target is chosen?
 
 #### 7.1.3 Why this matters at M1
 
@@ -978,7 +978,7 @@ Risks: See Risk Register R-008 (layer-skipping under schedule pressure), R-009 (
 
 Evidence: Repository folder structure aligned to layers (to be committed under §7 development evidence); RTM architecture/module column populated once implementation begins.
 
-Later Consequence (M3 update, 13 October 2026): Layering is retained in the implemented MVC, application services and EF Core adapters. One project relies on dependency review; final conformance and deployment review remain pending. See 5.3.1.
+Later Consequence (M3 update, 14 October 2026): Layering remains in MVC services and EF Core adapters. Bianca’s supplied draft final review reports conformance for tested paths; one-project dependency enforcement and normal Staging startup remain qualified. No dated final sign-off is attributed. See 5.3.1 and docs/reviews/Bianca_M3_Final_Review.docx.
 
 ### 5.3.1 Milestone 3 Architecture Conformance Review
 
@@ -988,6 +988,8 @@ The M3 conformance record compares ADR-M2-01 and ADR-M2-02 with the implemented 
 | --- | --- | --- |
 | ADR-M2-01: one layered web application and relational store | MVC delegates to application services, a central policy and EF Core/PostgreSQL adapters. Required status effects share one transaction. | Source folders and E01/E02/A05. Layers share one project; dependency enforcement is logical rather than a separate-assembly boundary. |
 | ADR-M2-02: State controls legal transitions | The missing six-state component was added as an integration dependency. State checks legality, the coordinator checks permission, and the writer commits approved changes. | C01/C02/C04 and E01/E02. Future low-level-writer bypass remains a documented design risk. |
+
+Bianca Grobler’s final-review document compares layered MVC, State lifecycle and central policy/API decisions with the existing test evidence and identifies deployment/identity limitations. It is marked DRAFT with a blank sign-off date, so its proposed closures are recorded as recommendations. Simulated staging is permitted by M3 scope section 14; the normal Program restriction is an environment difference, not evidence that a cloud deployment is required.
 
 No reopening or new requirement is introduced. The record connects each original decision to an implementation observation and consequence; passing checks establish selected behaviour rather than architectural enforcement in every future route.
 
@@ -1020,27 +1022,27 @@ The separate Category entity provides one controlled source for the seven catego
 
 The initial relationships are:
 
-- One User acting as a requester may submit many ServiceRequests.
+One User acting as a requester may submit many ServiceRequests.
 
-- Each ServiceRequest belongs to one requester.
+Each ServiceRequest belongs to one requester.
 
-- Each ServiceRequest belongs to one Category.
+Each ServiceRequest belongs to one Category.
 
-- One Category may be associated with many ServiceRequests.
+One Category may be associated with many ServiceRequests.
 
-- A ServiceRequest may be assigned to one staff user at a time.
+A ServiceRequest may be assigned to one staff user at a time.
 
-- One staff user may be responsible for multiple ServiceRequests.
+One staff user may be responsible for multiple ServiceRequests.
 
-- One ServiceRequest may contain many RequestNotes.
+One ServiceRequest may contain many RequestNotes.
 
-- Each RequestNote has one author.
+Each RequestNote has one author.
 
-- One ServiceRequest may contain many RequestHistory records.
+One ServiceRequest may contain many RequestHistory records.
 
-- Each RequestHistory record identifies the actor responsible for the change where applicable.
+Each RequestHistory record identifies the actor responsible for the change where applicable.
 
-- One ServiceRequest may contain many RequesterFeedback records.
+One ServiceRequest may contain many RequesterFeedback records.
 
 ServiceRequest owns the lifecycle of its request-specific history, notes and feedback from a domain perspective. User and Category records remain independent reference records because they may be associated with multiple requests.
 
@@ -1054,95 +1056,95 @@ The initial logical schema is:
 
 User
 
-- UserId — Primary Key
+UserId — Primary Key
 
-- Name — Required
+Name — Required
 
-- Email — Required, Unique
+Email — Required, Unique
 
-- PasswordHash — Required
+PasswordHash — Required
 
-- Role — Required
+Role — Required
 
-- IsActive — Required
+IsActive — Required
 
 Category
 
-- CategoryId — Primary Key
+CategoryId — Primary Key
 
-- Name — Required, Unique
+Name — Required, Unique
 
-- IsActive — Required
+IsActive — Required
 
 ServiceRequest
 
-- RequestId — Primary Key
+RequestId — Primary Key
 
-- ReferenceNumber — Required, Unique
+ReferenceNumber — Required, Unique
 
-- RequesterId — Foreign Key → User
+RequesterId — Foreign Key → User
 
-- CategoryId — Foreign Key → Category
+CategoryId — Foreign Key → Category
 
-- Description — Required
+Description — Required
 
-- Location — Required
+Location — Required
 
-- Status — Required
+Status — Required
 
-- Priority — Required, default Normal
+Priority — Required, default Normal
 
-- AssignedStaffId — Nullable Foreign Key → User
+AssignedStaffId — Nullable Foreign Key → User
 
-- DueDate — Nullable
+DueDate — Nullable
 
-- CreatedAt — Required
+CreatedAt — Required
 
-- UpdatedAt — Required
+UpdatedAt — Required
 
 RequestNote
 
-- NoteId — Primary Key
+NoteId — Primary Key
 
-- RequestId — Foreign Key → ServiceRequest
+RequestId — Foreign Key → ServiceRequest
 
-- AuthorId — Foreign Key → User
+AuthorId — Foreign Key → User
 
-- Content — Required
+Content — Required
 
-- IsRequesterVisible — Required
+IsRequesterVisible — Required
 
-- CreatedAt — Required
+CreatedAt — Required
 
 RequestHistory
 
-- HistoryId — Primary Key
+HistoryId — Primary Key
 
-- RequestId — Foreign Key → ServiceRequest
+RequestId — Foreign Key → ServiceRequest
 
-- ActorId — Foreign Key → User
+ActorId — Foreign Key → User
 
-- ChangeType — Required
+ChangeType — Required
 
-- PreviousValue — Nullable
+PreviousValue — Nullable
 
-- NewValue — Nullable
+NewValue — Nullable
 
-- CreatedAt — Required
+CreatedAt — Required
 
 RequesterFeedback
 
-- FeedbackId — Primary Key
+FeedbackId — Primary Key
 
-- RequestId — Foreign Key → ServiceRequest
+RequestId — Foreign Key → ServiceRequest
 
-- EventType — Required
+EventType — Required
 
-- Message — Required
+Message — Required
 
-- CreatedAt — Required
+CreatedAt — Required
 
-- IsRead — Required
+IsRead — Required
 
 This represents the initial M2 schema baseline rather than an immutable final schema. Schema changes discovered during implementation will be introduced through controlled migrations and reviewed against the RTM, ADRs and Risk Register where they affect a baselined decision.
 
@@ -1164,19 +1166,19 @@ Normal is the default priority.
 
 Initial categories:
 
-- Facility Faults
+Facility Faults
 
-- Damaged Equipment
+Damaged Equipment
 
-- Security Concerns
+Security Concerns
 
-- IT Support
+IT Support
 
-- Maintenance
+Maintenance
 
-- Lost Property
+Lost Property
 
-- Other
+Other
 
 Categories will be maintained through the Category reference entity rather than repeated as uncontrolled text throughout the application. Existing requests retain their relationship to their stored category.
 
@@ -1240,17 +1242,17 @@ PostgreSQL is selected as the current persistence technology for CivicConnect, s
 
 The decision is based on the following project-specific factors:
 
-- CivicConnect contains strongly related data including users, requests, categories, notes, feedback and historical records.
+CivicConnect contains strongly related data including users, requests, categories, notes, feedback and historical records.
 
-- NFR-003 requires transactional consistency between request changes and their associated history.
+NFR-003 requires transactional consistency between request changes and their associated history.
 
-- Foreign-key and constraint support aligns with the required ownership and integrity rules.
+Foreign-key and constraint support aligns with the required ownership and integrity rules.
 
-- FR-007, FR-013, FR-014 and FR-015 require filtering, aggregation, reporting and historical queries that fit a relational model.
+FR-007, FR-013, FR-014 and FR-015 require filtering, aggregation, reporting and historical queries that fit a relational model.
 
-- The application is intended to be a shared hosted web system rather than a single-machine application.
+The application is intended to be a shared hosted web system rather than a single-machine application.
 
-- PostgreSQL provides a path from development to hosted relational persistence while retaining a standard relational model.
+PostgreSQL provides a path from development to hosted relational persistence while retaining a standard relational model.
 
 SQL Server remains a technically viable alternative and may offer particularly close integration with a .NET technology stack. It was not selected as the initial direction because CivicConnect should retain flexibility when evaluating free/low-cost database hosting under A-03.
 
@@ -1276,9 +1278,9 @@ This section directly relates to R-016, which tracks the possibility of free-tie
 
 NFR-007 requires recovery with:
 
-- Recovery Point Objective (RPO): no more than 24 hours of lost data
+Recovery Point Objective (RPO): no more than 24 hours of lost data
 
-- Recovery Time Objective (RTO): restoration within four hours
+Recovery Time Objective (RTO): restoration within four hours
 
 The final deployment/database service must provide a backup and recovery approach capable of satisfying these targets.
 
@@ -1308,27 +1310,27 @@ Schema changes will be introduced using version-controlled database migrations r
 
 The initial migration should establish:
 
-- User
+User
 
-- Category
+Category
 
-- ServiceRequest
+ServiceRequest
 
-- RequestNote
+RequestNote
 
-- RequestHistory
+RequestHistory
 
-- RequesterFeedback
+RequesterFeedback
 
-- primary keys
+primary keys
 
-- foreign-key relationships
+foreign-key relationships
 
-- required/nullable constraints
+required/nullable constraints
 
-- unique constraints
+unique constraints
 
-- initial controlled Category data where appropriate
+initial controlled Category data where appropriate
 
 Migration artefacts will be committed to GitHub and reviewed through the team's normal branch and Pull Request process.
 
@@ -1392,17 +1394,17 @@ The simulated test host exercises Staging configuration and HTTPS. Normal Stagin
 
 Supporting Evidence
 
-- src/CivicConnect.Web/Data/EfRequestStatusWriter.cs
+src/CivicConnect.Web/Data/EfRequestStatusWriter.cs
 
-- src/CivicConnect.Web/Data/Entities/
+src/CivicConnect.Web/Data/Entities/
 
-- src/CivicConnect.Web/Migrations/
+src/CivicConnect.Web/Migrations/
 
-- tests/CivicConnect.DatabaseTests/Program.cs
+tests/CivicConnect.DatabaseTests/Program.cs
 
-- .github/workflows/verify.yml
+.github/workflows/verify.yml
 
-- GitHub Actions successful workflow run: View CI evidence
+GitHub Actions successful workflow run: View CI evidence
 
 #### ADR-M2-03: Data & Persistence Strategy
 
@@ -1440,31 +1442,31 @@ The decision is also constrained by the fixed academic schedule, the team's abil
 
 The technology stack must provide:
 
-- a responsive browser-based user interface;
+a responsive browser-based user interface;
 
-- server-side request processing;
+server-side request processing;
 
-- server-side authentication and authorisation;
+server-side authentication and authorisation;
 
-- separation between presentation, business logic and persistence;
+separation between presentation, business logic and persistence;
 
-- relational database access;
+relational database access;
 
-- transaction support;
+transaction support;
 
-- database migration support;
+database migration support;
 
-- automated testing support;
+automated testing support;
 
-- environment-specific configuration and secrets handling;
+environment-specific configuration and secrets handling;
 
-- HTTPS compatibility;
+HTTPS compatibility;
 
-- dependency/version management;
+dependency/version management;
 
-- compatibility with the selected deployment approach; and
+compatibility with the selected deployment approach; and
 
-- a realistic development workflow for the three-person project team.
+a realistic development workflow for the three-person project team.
 
 The stack should remain proportionate to the CivicConnect pilot rather than introducing technologies that increase implementation and deployment complexity without addressing a current requirement.
 
@@ -1525,23 +1527,23 @@ C# with ASP.NET Core is selected for the application/API and business-logic laye
 
 The backend will implement:
 
-- authentication and authorisation;
+authentication and authorisation;
 
-- service-request operations;
+service-request operations;
 
-- assignment;
+assignment;
 
-- request status processing;
+request status processing;
 
-- notes and feedback;
+notes and feedback;
 
-- reporting;
+reporting;
 
-- validation;
+validation;
 
-- transaction coordination; and
+transaction coordination; and
 
-- communication with the Data Access Layer.
+communication with the Data Access Layer.
 
 This maintains the responsibility separation established in ADR-M2-01.
 
@@ -1565,17 +1567,17 @@ EF Core will provide the implementation between the application's data-access la
 
 Its responsibilities will include:
 
-- mapping application entities to relational tables;
+mapping application entities to relational tables;
 
-- querying and saving data;
+querying and saving data;
 
-- managing relationships;
+managing relationships;
 
-- supporting transactions;
+supporting transactions;
 
-- supporting schema migrations; and
+supporting schema migrations; and
 
-- providing the persistence implementation required by the Data Access Layer.
+providing the persistence implementation required by the Data Access Layer.
 
 Business logic should not become dependent on persistence-specific implementation details unnecessarily. The Data Access Layer will therefore preserve the architectural boundary established by ADR-M2-01 and reduce the persistence-coupling risk recorded in R-009.
 
@@ -1599,19 +1601,19 @@ NuGet will be used to manage .NET application dependencies.
 
 The project will record the actual versions of major dependencies once the implementation baseline has been created. These include at minimum:
 
-- .NET runtime/SDK;
+.NET runtime/SDK;
 
-- ASP.NET Core;
+ASP.NET Core;
 
-- Entity Framework Core;
+Entity Framework Core;
 
-- PostgreSQL EF Core provider;
+PostgreSQL EF Core provider;
 
-- PostgreSQL server/service;
+PostgreSQL server/service;
 
-- testing packages; and
+testing packages; and
 
-- authentication-related packages where applicable.
+authentication-related packages where applicable.
 
 Stable supported versions will be preferred over preview or pre-release packages.
 
@@ -1635,21 +1637,21 @@ The technology stack supports, but does not automatically guarantee, CivicConnec
 
 The implementation must specifically configure:
 
-- server-side authorisation;
+server-side authorisation;
 
-- secure authentication;
+secure authentication;
 
-- HTTPS in deployed environments;
+HTTPS in deployed environments;
 
-- safe secret/configuration handling;
+safe secret/configuration handling;
 
-- input validation;
+input validation;
 
-- production-safe error handling;
+production-safe error handling;
 
-- dependency/security updates; and
+dependency/security updates; and
 
-- appropriate logging.
+appropriate logging.
 
 Connection strings, database passwords and other secrets must not be committed to GitHub.
 
@@ -1681,15 +1683,15 @@ Browser → ASP.NET Core application → Business/Data Access → EF Core → Po
 
 A suitable initial spike could:
 
-- start the CivicConnect web application;
+start the CivicConnect web application;
 
-- connect successfully to PostgreSQL;
+connect successfully to PostgreSQL;
 
-- apply the initial migration;
+apply the initial migration;
 
-- create or read a simple controlled Category record; and
+create or read a simple controlled Category record; and
 
-- demonstrate that secrets are obtained from configuration rather than hard-coded into source code.
+demonstrate that secrets are obtained from configuration rather than hard-coded into source code.
 
 | Evidence | M2 Status |
 | --- | --- |
@@ -2263,7 +2265,7 @@ The specific hosting provider remains deliberately deferred until a working depl
 
 The personal run used a Release test host configured as Staging, loopback HTTPS, a temporary certificate, ephemeral identities and a fresh PostgreSQL database. It invokes the application composition but does not execute the normal Program guard. The actual web entry point accepts Development only; this difference bounds the simulated-staging evidence.
 
-No performance/load or backup/restore measurement is recorded at the evidence cutoff. NFR-002 retains its pilot targets and NFR-007 its recovery targets. The rollback baseline is reviewed main revision 216f405ce9d7aae79194db873c699dac5f517265: restore a build of that revision with compatible configuration and preserve the database. The status integration adds no schema migration; compatibility and restoration measurements are not established by a code rollback. Reverting application code alone does not reverse schema or data changes.
+PERF-01 records a short database-read benchmark on 14 October (section 7.3.7). NFR-002 pilot-load acceptance and NFR-007 recovery remain unverified. The rollback baseline is reviewed main 216f405ce9d7aae79194db873c699dac5f517265: restore that build with compatible configuration and preserve the database. Status integration adds no schema migration. A code rollback does not reverse schema/data changes; no timed restore is claimed.
 
 ## 6 Architecture technology and initial design baseline
 
@@ -2344,19 +2346,19 @@ The database integration tests use controlled test records and verify the actual
 
 The PostgreSQL integration tests covered the following areas:
 
-- Database connectivity and request retrieval.
+Database connectivity and request retrieval.
 
-- Correct persistence and visibility classification of request notes.
+Correct persistence and visibility classification of request notes.
 
-- Requester ownership and staff-category access restrictions on the protected read path.
+Requester ownership and staff-category access restrictions on the protected read path.
 
-- Optimistic concurrency and rejection of conflicting updates.
+Optimistic concurrency and rejection of conflicting updates.
 
-- Persistence of request status-history records.
+Persistence of request status-history records.
 
-- Transactional saving of request status, history and requester-visible feedback.
+Transactional saving of request status, history and requester-visible feedback.
 
-- Transaction rollback when a required database operation fails.
+Transaction rollback when a required database operation fails.
 
 #### 7.3.3 Transaction Integrity Verification
 
@@ -2392,6 +2394,24 @@ The broader audit-event model, request-creation idempotency, real account workfl
 
 The successful database tests therefore provide implementation evidence for selected acceptance criteria, rather than proof that all related functional and non-functional requirements are fully satisfied.
 
+#### 7.3.7 Performance and Load Evidence
+
+PERF-01 exercises EfRequestReader because requesters and staff need responsive access to saved request details and status. Michael Ellis (600332) confirmed that the second run, saved in docs/evidence/m3-performance-results.txt, is the intended result. Execution date: 14 October 2026. Environment: local macOS, .NET SDK 8.0.425, EF Core 8 and PostgreSQL 17.
+
+The workload is 200 retrievals of one temporary service request, with at most 10 concurrent operations and a separate EF context per operation. The recorded duration is 0.12 seconds. Setup and cleanup are outside the timed workload; per-operation timings exclude semaphore queue waiting. This is a short database-read benchmark, not an HTTP or sustained pilot-load test.
+
+| Metric | Saved second-run result |
+| --- | --- |
+| Successful / failed reads | 200 / 0 |
+| Average / median response time | 1.62 ms / 0.41 ms |
+| 95th-percentile response time | 8.69 ms |
+| Total workload duration | 0.12 seconds |
+| Throughput | 1,696.16 operations/second |
+
+No separate database-level performance target or comparative baseline was established. The run provides measured response time and success/error evidence for this narrow operation; it does not establish full NFR-002 acceptance. The unchanged criteria require 1,000 requests, 10 concurrent users, a 10-minute exercise after 2-minute warm-up and timings through visible user results. NFR-007 restoration is not tested.
+
+Implementation and raw report are from PR16 source revision 4a7cebe46dbf92f150c49646da86bf1b8e72d365. The exact commit used for Michael’s second execution was not specified in his confirmation; that source revision is not asserted as the execution commit. His supplied environment, purpose and result confirmation are retained in docs/evidence/m3-performance-run-confirmation.md. Earlier figures in the PR’s PED addition are superseded by the saved second run.
+
 ### 7.4 Milestone 3 Risks, Limitations and Technical Debt – Data Persistence
 
 #### 7.4.1 Identified Risks
@@ -2404,7 +2424,7 @@ The persistence risks below are reconciled with the personally executed status w
 | M3-R02 | Concurrent operations may attempt to modify the same request. | Without correct conflict handling, changes could be lost or users could receive unclear errors. | Retain optimistic concurrency protection and introduce appropriate user-facing conflict handling. | Partially mitigated |
 | M3-R03 | Database migrations may behave differently in staging or deployment environments. | Schema changes could fail or interrupt application availability. | Test migrations against a separate staging database and document a recovery procedure. | Open |
 | M3-R04 | Database credentials could be exposed through configuration or source control. | Unauthorised database access and exposure of request information. | Continue using local user secrets and environment variables, with no real credentials committed to GitHub. | Ongoing |
-| M3-R05 | Performance and recovery requirements have not yet been verified. | The system may fail to meet the agreed pilot-load or recovery targets. | No measured load or restoration result is recorded; NFR-002/007 acceptance remains unverified. | Open |
+| M3-R05 | Pilot-load and recovery acceptance remain unverified despite limited PERF-01 evidence. | The system may fail to meet the agreed pilot-load or recovery targets. | PERF-01 measures one-record database reads; NFR-002 pilot targets and NFR-007 restore targets are not established. | Open |
 
 #### 7.4.2 Technical Debt Register
 
@@ -2431,7 +2451,7 @@ The persistence implementation passed 25 personal database checks. The integrate
 
 However, these results do not establish that the complete CivicConnect application is ready for deployment.
 
-The supported status route is integrated with permission and State checks. Performance, restoration and a normal Staging web startup are not established by the recorded run.
+The supported status route is integrated with permission and State checks. The personal correctness run does not measure performance or restoration. PERF-01 separately measures local database reads; normal Staging web startup and pilot/recovery acceptance remain limited.
 
 ### 7.5 Milestone 3 Requirements Traceability – Data Persistence
 
@@ -2526,11 +2546,11 @@ Entity Framework Core migrations were used to introduce and evolve the PostgreSQ
 
 The implementation includes the following migrations:
 
-- InitialCreate – establishes the initial database schema.
+InitialCreate – establishes the initial database schema.
 
-- AddRequestVersion – introduces request version tracking for optimistic concurrency.
+AddRequestVersion – introduces request version tracking for optimistic concurrency.
 
-- AddRequestStatusHistory – introduces persistent status-history records.
+AddRequestStatusHistory – introduces persistent status-history records.
 
 These migrations support repeatable schema creation and controlled database changes.
 
@@ -2592,19 +2612,19 @@ The following record describes implemented component boundaries and observed ver
 
 The integrated workflow performs these steps:
 
-- A user submits a request to change the status of an existing service request.
+A user submits a request to change the status of an existing service request.
 
-- The application identifies the current user and retrieves the relevant request.
+The application identifies the current user and retrieves the relevant request.
 
-- The authorisation component checks whether the user is permitted to perform the action.
+The authorisation component checks whether the user is permitted to perform the action.
 
-- The status-transition component checks whether the requested transition is valid.
+The status-transition component checks whether the requested transition is valid.
 
-- If both checks succeed, the application invokes the persistence writer.
+If both checks succeed, the application invokes the persistence writer.
 
-- The persistence writer saves the updated status, history record and requester-visible feedback within a database transaction.
+The persistence writer saves the updated status, history record and requester-visible feedback within a database transaction.
 
-- The application returns an appropriate success or failure response.
+The application returns an appropriate success or failure response.
 
 The client receives 204 on save, 400 for invalid input/transition, 404 for unavailable or denied resources, 409 for a stale conflict and a safe 500 for an unexpected store failure. Required status/history/public-feedback effects are transactional.
 
@@ -2687,9 +2707,11 @@ Cameron Purdon personally executed the complete verification on 13 October 2026,
 
 A05 forces a required database write failure and verifies no partial status/history/feedback commit. A06 changes category/version after the checked snapshot and confirms stale mutation rejection. The earlier TLS failure was corrected before this run. All final suites exit successfully; no load or restore measurement is implied.
 
+During consolidation, transitive auditing of the test projects identified System.Text.Json 8.0.0 through User Secrets dependencies. DEF-M3-C06 records two High advisories, the controlled update to 8.0.5 in the database/performance projects, successful strict restore audits and repeated correctness checks. Original personal and performance reports retain their original attribution; follow-up verification is indexed in docs/evidence/m3/combined-20261014/summary.md.
+
 ### 7.10 CI and Meaningful Quality Gates
 
-The workflow retains the existing build/database checks and adds M3 cases, SDK analysis and a dependency gate for high/critical advisories or an incomplete scan. Historical run 38218128326 succeeded on f1b11d7f36a8e67570052ddf073879a2c3f35117. No remote workflow run exists for the current local branch at the repository cutoff.
+The local workflow retains the existing build/database checks and adds M3 cases, SDK analysis and a dependency gate. PR16 CI run 38518306719 succeeded on source revision 4a7cebe46dbf92f150c49646da86bf1b8e72d365; its configured steps cover only the older verification/database harnesses, not PERF-01 or Cameron’s 19 M3 cases. No remote run verifies the combined local candidate. Historical run 38218128326 remains earlier persistence evidence.
 
 During the personal run, a controlled probe temporarily permitted New to Closed. C02 detected the forbidden edge and returned nonzero. The exact original source was restored, rebuilt and followed by a passing 19-case run. Evidence: gate-driver.txt, gate-negative-control.txt and integration.txt in the personal report directory. This proves local detection and the configured job failure path. The active Main ruleset requires two approvals but contains no required CI-status-check rule.
 
@@ -2761,6 +2783,12 @@ ConnectionStrings__CivicConnect is consumed by the EF Core configuration. Keep r
 
 #### 8.6 Verified Behaviour and Limitations
 
+Performance reproduction: configure ConnectionStrings__CivicConnect through the environment or the performance project’s User Secrets, use a dedicated disposable database and apply the existing migrations first. PERF-01 creates and deletes a temporary row; it does not initialise the schema. Keep the saved Michael report intact and use a separate filename for a new run.
+
+dotnet run --project tests/CivicConnect.PerformanceTests --configuration Release
+
+Michael’s original macOS recording command was: dotnet run --project tests/CivicConnect.PerformanceTests/CivicConnect.PerformanceTests.csproj --configuration Release | tee docs/evidence/m3-performance-results.txt
+
 Personal execution verifies protected persisted reads, legal and prohibited status changes, feedback bounds, antiforgery, stale conflicts, safe failure, transactional rollback and saved audit effects. System tests E01/E02 span HTTP, application services and PostgreSQL. They use synthetic identities and do not establish a real login, new-request submission/reporting UI, pilot-load performance, restoration, or complete product acceptance. The normal Program accepts Development only; the separate test host uses Staging without that guard.
 
 ## 9 Traceability demonstration
@@ -2813,7 +2841,7 @@ Evidence: docs/evidence/local-verification.txt records 29 passing checks. Public
 
 Inspected main after Bianca's merge: 216f405ce9d7aae79194db873c699dac5f517265. Michael PR14 and Bianca PR15 are merged; PR12 and PR14 have two distinct approvals, and PR15 also recorded Michael/RinNoKaze approvals. Approval bodies returned empty, so detailed checking/rework cannot be inferred. Bianca's merged file is Milestone3 Bianca.docx; it did not add new application code.
 
-The local feature/cameron-m3-integration branch contains separate implementation, test/CI, document-continuation and personal-evidence commits. The tested revision is f774bf851e6b0c8d69cd9b37f6849fb0d853d661; the 18:18-18:19 personal reports preserve its source fingerprints. At the repository cutoff the branch is local, with no corresponding published PR or Actions run.
+The local feature/cameron-m3-integration branch combines Cameron’s implementation/test and document history with Michael’s PR16 source. The original personal run remains attributed to f774bf851e6b0c8d69cd9b37f6849fb0d853d661 and its original fingerprints. Follow-up changes extend the workflow and patch test dependency configuration; application/component source is unchanged. Local candidate tag: m3-combined-review-20261014. No published combined PR, remote CI or completed independent review is recorded at the 14 October cutoff.
 
 The active Main ruleset requires two approving reviews from non-authors and dismisses stale approvals after a push. No required-status-check rule is present. CR-M3-C01 records the missing authorised status path and stale-category gap, the coordinator/State/antiforgery/version response and its tested consequences. Original requirement/AC wording is unchanged.
 
@@ -3285,17 +3313,17 @@ Note: Owner assignments follow the team's M2 work distribution (Bianca: architec
 
 ### 11.1 Integration Risk and Dependency Updates
 
-| Record | M2 update and residual work |
+| Record | Current M3 evidence and residual issue |
 | --- | --- |
-| R-026 / R-027 | Read policy and State responsibilities are separated. No transition route exists. Recheck action authorisation and transition delegation when Bianca integrates writes. |
-| R-028 / R-029 | Cameron's approach has code/test evidence. State remains planned. Simpler alternatives are recorded; source class counts alone do not demonstrate behaviour. |
-| R-034 / R-036 | Safe read errors and UUID validation passed initial checks. Mutation DTO bounds, sanitisation/encoding context and persistence input tests remain pending. |
+| R-026 / R-027 | Cameron’s coordinator separates access policy and State rules. Supported writes delegate centrally; C01/C02 and API cases verify the integrated path. Future writer bypass remains R-046. |
+| R-028 / R-029 | Central authorisation and six-state lifecycle have implementation/test evidence. Simpler alternatives remain recorded; future route coverage is not implied. |
+| R-034 / R-036 | Read errors, UUID validation, feedback bounds and failed-write rollback are tested. Other mutation/encoding contexts are outside the current increment. |
 | R-038 | README and local checks exist. Another teammate must reproduce setup on a clean environment; cross-machine success is not yet evidenced. |
-| R-044 | A small CI workflow is prepared. No remote run exists; provider/tool changes remain open. |
+| R-044 | Michael’s PR16 workflow succeeds for existing verification/database suites. The combined candidate has no remote run; its extended workflow remains local. |
 | D-M2-01 permission source | Michael must define user-to-category permission storage and freshness before real login/DB integration. Trigger: implement authenticated user provisioning. |
-| D-M2-02 runtime baseline | The local target is net8.0; .NET 8 support ends November 2026. Michael must choose serviced versions and evaluate migration before M3. |
-| D-M2-03 writes and integrity | Before exposing writes, establish transactions, versioned claim updates, idempotency and antiforgery; show failed-write/concurrent-claim tests. |
-| D-M2-04 acceptance trace | Completion criterion: demonstrate a persisted authorised change, read and history result before marking the Section 9 durable path complete. |
+| D-M2-02 runtime baseline | The recorded personal SDK is 8.0.425/runtime 8.0.31; both branches target net8.0. Longer-term support/migration remains an operational consideration. |
+| D-M2-03 writes and integrity | Supported status writes have transactions, versions and antiforgery; A05/A06 and E01/E02 record behaviour. Creation/idempotency remains outside the implemented increment. |
+| D-M2-04 acceptance trace | E01 demonstrates persisted authorised change, history and requester read. Full live-account/UI acceptance is not asserted. |
 
 ### 11.2 Milestone 3 Implementation Risk Register
 
@@ -3304,7 +3332,7 @@ R-046-R-058 continue R-001-R-045 and are reconciled with the personal execution 
 | ID | Risk and earlier link | L / I | Treatment and closure evidence | Owner and status |
 | --- | --- | --- | --- | --- |
 | R-046 | Lifecycle bypass; relates R-011/027, M3-R01 | M / H | Current API validates centrally; raw-writer/future-route bypass remains a residual risk. | Michael/Cameron; partial |
-| R-047 | Incorrect lifecycle matrix; R-026 | M / H | C01/C02 pass against the original five-edge lifecycle. | Michael/Bianca; partial |
+| R-047 | Incorrect lifecycle matrix; R-026 | M / H | C01/C02 verify the five-edge lifecycle. Bianca’s draft recommends closure for this tested scope; final sign-off is absent. | Michael/Bianca; partial |
 | R-048 | Inconsistent status/audit effects; R-015 | M / H | E01/A05 and database rollback pass; broaden audit coverage. | Michael; partial |
 | R-049 | Inconsistent authorisation; R-004/013/017 | M / H | BB05/A04/A06 pass; implement live permissions/freshness. | Cameron/Michael; partial |
 | R-050 | Concurrent overwrite; R-016, M3-R02 | M / H | Version/competing-context checks pass; simultaneous HTTP/audit check pending. | Michael/Cameron; partial |
@@ -3314,7 +3342,7 @@ R-046-R-058 continue R-001-R-045 and are reconciled with the personal execution 
 | R-054 | Target startup/config fails; R-021/040 | M / H | Harness Staging passes; normal Program remains Development-only. | Michael; Open |
 | R-055 | Uncontrolled release severity; R-045 | M / H | Severity/blocker policy recorded; no formal risk acceptance attributed. | Bianca; Open |
 | R-056 | Unsupported acceptance status; R-045 | M / H | RTM links observed results and explicit acceptance gaps. | Cameron; partial |
-| R-057 | Pilot performance unverified; R-018/025 | M / M | No measured workload recorded; NFR-002 unverified. | Michael; Open |
+| R-057 | Pilot performance unverified; R-018/025 | M / M | PERF-01 measures local reads (1.62 ms average, 0 failures). The full NFR-002 pilot workload is unverified. | Michael; Open |
 | R-058 | Documents differ from final release; R-012/038 | M / M | Dated checkpoints and source fingerprints identify the recorded code/evidence. | Cameron/Bianca; Open |
 
 M3-R04 continues secrets risk R-005/024: configuration remains outside committed credentials. M3-R05 also covers NFR-007 recovery, which remains unverified. These entries reflect residual uncertainty rather than a claim that every scenario failed.
@@ -3328,7 +3356,7 @@ TD-01-TD-05 retain the architecture/design debt identifiers. Data/deployment ite
 | TD-01: logical layers share one project | Unwanted dependencies may grow. Review direction and resolve violations; stronger projects/checks only when justified. | Medium; Bianca; Open |
 | TD-02: low-level writer callable directly | Future routes could bypass rules. Review every supported write and require coordinator/State/policy checks. | High; Michael/Cameron; partial |
 | TD-03: custom harness discovery/reporting | Checks may be omitted. Preserve explicit commands; obtain CI evidence for all harnesses; evaluate a standard framework later. | Medium; Michael/Cameron; partial |
-| TD-04: ADR consequences lack final review | Future contributors may misread decisions. Review dated consequences against implemented code and effects. | Medium; Bianca; Open |
+| TD-04: ADR consequences lack final review | Bianca’s draft conformance review supports tested architecture decisions and recommends scoped closure. Final signed review is absent; deployment caveat remains. | Medium; Bianca; partial review |
 | TD-05: evidence can drift from release ID | Readiness becomes unauditable. Freeze and align exact code, RTM, tests, environment and approvals. | High; Bianca/Cameron; partial |
 | TD-M3-C01: synthetic identities in verification | Real permission freshness absent. Implement trusted accounts and revocation/revalidation checks. | High; Michael; Open |
 
@@ -3343,8 +3371,9 @@ Critical/High confidentiality, integrity or agreed-core-scope defects block rele
 | DEF-M3-C03: Windows test TLS setup | Medium; corrected test infrastructure | Initial log retained; certificate import fixed; 19-case rerun passes. |
 | DEF-M3-C04: actual web refuses Staging | High; Open | Normal Program rejects Staging; separate test host uses Staging without the guard. |
 | DEF-M3-C05: full-baseline account/submission/assignment/reporting gaps | High; Open | Outside the demonstrated status increment; original RTM acceptance remains incomplete. |
+| DEF-M3-C06 test dependency advisories | High; Fixed locally | System.Text.Json 8.0.0 replaced by 8.0.5; strict audits and correctness rerun pass. Original human reports preserved. |
 
-The forbidden-transition probe is an intentional experiment, not a production defect. Source restoration and the subsequent passing run are recorded. Detailed findings remain in docs/defects.md; missing performance and candidate-specific CI/review evidence affect the release judgement in section 14.
+The forbidden-transition probe is an intentional experiment, not a production defect. Restoration and the subsequent passing run are recorded. PERF-01 supplies separate performance evidence with limited acceptance scope. Candidate-specific remote CI and independent review remain absent. Detailed findings are in docs/defects.md.
 
 ## 12 AI usage record
 
@@ -3390,7 +3419,7 @@ What was changed/rejected: Unsupported implementation claims, unsuitable technol
 | --- | --- | --- |
 | Michael Ellis 600332 | ChatGPT assisted M3 C#/EF Core/PostgreSQL troubleshooting, testing and documentation; recorded 12 October. | His supplied record reports local review/tests and Git commits. Full integration/acceptance remained pending at that checkpoint. |
 | Cameron Purdon 601963 | Codex inspected sources, implemented access/API integration and the missing State dependency, created tests, and consolidated RTM/PED/registers. | Cameron personally executed Release builds, 19 M3 cases, 29 regression checks, 25 DB checks, SDK analysis, dependency scan/gate and restored negative probe on 13 October, 18:18-18:19 SAST. Raw reports and metadata establish the current result. |
-| Bianca Grobler 600537 | No separate M3 tool declaration is recorded in the merged contribution; the historical M2 disclosure is retained. | No new M3 assistance or personal verification is attributed beyond the supplied record. |
+| Bianca Grobler 600537 | Usage of ChatGPT to format the tables  | Made sure to use my own data and read through to ensure AI did not change anything. |
 
 Corrected AI-assisted output includes Windows TLS setup, null-target and stale-category/version coverage, and launcher startup/account assumptions. The current run is Cameron's personal execution. Earlier AI-run evidence is preserved historically. Personal execution does not imply independent teammate review or a complete product acceptance result.
 
@@ -3430,9 +3459,11 @@ Virtual Group K (2026). Final PED v2.0, 30 September baseline. Michael Ellis sup
 
 Current execution evidence: docs/evidence/m3/personal-20261013-181846/execution.json, integration.txt, regression.txt, database.txt, static-analysis.txt, dependencies.json, dependency-gate.txt, gate-negative-control.txt and source-fingerprints.json. Full case basis: docs/testing-m3.md. Controlled changes: docs/change-control-m3.md. Workflow: .github/workflows/verify.yml. The original 35-file manifest and the personal fingerprints match.
 
+Michael Ellis (2026). PR16, source 4a7cebe46dbf92f150c49646da86bf1b8e72d365; docs/evidence/m3-performance-results.txt. Second-run metadata and result selection supplied by Michael and relayed by Cameron. Bianca Grobler (2026). Bianca_M3_Final_Review.docx; review basis 13 October, marked DRAFT and undated. Controlled copy: docs/reviews/Bianca_M3_Final_Review.docx.
+
 ## 14 Release Evidence Summary and Residual Risk
 
-Classification at the evidence cutoff, 13 October 2026: NOT READY for release recommendation. The protected-read/status-management increment is integrated and personally verified. Required performance evidence and current-candidate remote CI/independent reviews are not recorded. Normal web Staging startup and broader baseline acceptance remain limited. This classification records the evidence state, not a claim that every project feature is required to be complete in M3.
+Classification at the evidence cutoff, 14 October 2026: NOT READY for release recommendation. The protected-read/status increment is personally verified and PERF-01 adds a justified small database performance exercise. Combined-candidate remote CI and completed independent review are absent. Known High defects and wider acceptance/configuration limitations have no recorded team disposition. Credible simulated staging is permitted by scope; this judgement does not require every future feature to be implemented for M3.
 
 ### 14.1 Release Evidence Summary
 
@@ -3440,12 +3471,12 @@ Classification at the evidence cutoff, 13 October 2026: NOT READY for release re
 | --- | --- | --- |
 | Build and code analysis | Personal run passes; zero warnings/errors | Enabled SDK checks executed; no measured coverage or defect-free claim. |
 | Functional verification | 19 M3 cases, 29 regression and 25 DB checks pass | Required functional categories and selected negative/high-priority cases are evidenced for the status slice. |
-| CI and failure gate | Historical CI succeeds; personal forbidden-edge probe fails as expected | Current branch has no remote run. Two-review rule is active; CI is not configured as a required merge check. |
-| Dependency security | Personal query reports no vulnerabilities; gate passes | Dated dependency evidence, not a complete security audit. |
+| CI and failure gate | PR16 CI succeeds for existing suites; personal negative probe detects the injected defect | No combined-candidate remote run. PR16 CI omits the new performance project and 19 M3 cases. CI is not a required merge check. |
+| Dependency security | Original personal web scan passes; transitive test audit found vulnerable JSON 8.0.0, patched to 8.0.5 | Strict post-fix test-project audits pass; DEF-M3-C06 fixed locally. Dated dependency evidence does not prove complete security. |
 | System and simulated staging | E01/E02 pass in HTTPS Staging test host | Synthetic identities and separate startup; normal web Program is Development-only. |
-| Performance and reliability | No load or restore measurement recorded | NFR-002/007 remain unverified; rollback approach accounts for schema/configuration. |
+| Performance and reliability | PERF-01: 200/200 successful reads; 1.62 ms average; 8.69 ms p95; 0.12 s; 1,696.16/sec | Short local database exercise; no separate database target. Full NFR-002 pilot load and NFR-007 restore acceptance remain unverified. |
 | Defects and acceptance | Status integration fixes regression-tested; broader baseline gaps open | Unmet full-baseline criteria remain visible in the RTM. |
-| Candidate and collaboration | Identified local evidence candidate; team PR14/15 merged | No independent reviews or remote CI are recorded for the current local increment. |
+| Candidate and collaboration | Local combined candidate; PR14/15 merged; PR16 open with one approval at cutoff | Bianca’s separate conformance review is a draft. No completed two-person review or remote CI verifies the combined increment. |
 
 ### 14.2 Residual Risk Statement
 
@@ -3454,7 +3485,7 @@ Classification at the evidence cutoff, 13 October 2026: NOT READY for release re
 | Live permission freshness | Synthetic protected claims only; resource policy/version checks protect selected scenarios. | Trusted accounts and revocation/revalidation / Michael. |
 | Concurrent timing | Competing contexts and versions tested; simultaneous HTTP/audit orderings not exhausted. | Parallel update/audit scenario / Michael and Cameron. |
 | Environment differences | Local PostgreSQL 18.4 vs CI 17; harness differs from web Program/deployment. | Validate final target configuration and candidate / Michael. |
-| Load and recovery uncertainty | Correctness checks do not measure pilot latency or restoration. | Workload and backup/restore evidence / Michael. |
+| Load and recovery uncertainty | PERF-01 measures one-row local reads; sustained user-visible pilot behaviour and restoration are not measured. | Workload and backup/restore evidence / Michael. |
 | Future layer/writer bypass | One project and callable low-level writer leave enforcement dependent on review. | Inspect future routes and dependencies / Bianca and Cameron. |
 
 The judgement combines successful local verification with material missing evidence and known configuration/acceptance limits. READY and CONDITIONALLY READY are not supported by this recorded candidate. Residual risks remain visible even where selected tests pass; their owners and treatment are recorded in the registers.
@@ -3465,10 +3496,10 @@ The judgement combines successful local verification with material missing evide
 | --- | --- |
 | Team and members | Virtual Group K; Cameron Purdon 601963; Bianca Grobler 600537; Michael Ellis 600332. |
 | Repository | https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project |
-| Candidate identifier | m3-personal-evidence-20261013 (local evidence tag). Personal execution: f774bf851e6b0c8d69cd9b37f6849fb0d853d661; 35 matching source fingerprints. Inspected main: 216f405ce9d7aae79194db873c699dac5f517265. |
+| Candidate identifier | m3-combined-review-20261014 (local combined review tag). Personal test revision: f774bf851e6b0c8d69cd9b37f6849fb0d853d661; PR16 source: 4a7cebe46dbf92f150c49646da86bf1b8e72d365. The exact performance execution commit is not recorded. Inspected main: 216f405ce9d7aae79194db873c699dac5f517265. |
 | PED version | v3.0; docs/PED_v3.0.docx and matching docs/PED_v3.0_Updated.pdf. |
 | RTM location | docs/CivicConnect_RTM_v2.0.xlsx; continuing 27-requirement, 54-criterion matrix. |
-| CI and test evidence | docs/evidence/m3/personal-20261013-181846; docs/testing-m3.md; .github/workflows/verify.yml. Historical CI run 38218128326; no current-branch remote run recorded. |
+| CI and test evidence | docs/evidence/m3/personal-20261013-181846; docs/evidence/m3-performance-results.txt; docs/evidence/m3-performance-run-confirmation.md; docs/testing-m3.md. PR16 CI run 38518306719 covers older suites; no combined-candidate remote run. |
 | Test/staging demonstration | Section 8 commands and docs/testing-m3.md reproduce the Release status API suites on a disposable PostgreSQL database. The M3 host uses Staging/HTTPS and synthetic identities, then stops after execution. |
-| Evidence date | 13 October 2026; personal verification 18:18-18:19 SAST. |
-| Date submitted | Formal submission is not recorded at the 13 October 2026 evidence cutoff. |
+| Evidence date | 14 October 2026 update; Cameron personal verification 13 October, 18:18–18:19 SAST; Michael performance execution 14 October. |
+| Date submitted | Formal submission is not recorded at the 14 October 2026 evidence cutoff. |

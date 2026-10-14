@@ -4,13 +4,10 @@
 | --- | --- |
 | Team and members | Virtual Group K; Cameron Purdon 601963; Bianca Grobler 600537; Michael Ellis 600332. |
 | Repository | https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project |
-| Candidate identifier | `m3-personal-evidence-20261013`, local evidence tag. Personal test revision: `f774bf851e6b0c8d69cd9b37f6849fb0d853d661`; 35 source fingerprints match this candidate. |
-| Inspected upstream | `216f405ce9d7aae79194db873c699dac5f517265`; Michael persistence and Bianca PR15 contribution merged. |
-| PED | v3.0; `docs/PED_v3.0.docx` and matching `docs/PED_v3.0_Updated.pdf`. Markdown is a generated text mirror. |
-| RTM | `docs/CivicConnect_RTM_v2.0.xlsx`; continuing 27 requirements and 54 acceptance criteria, with personal execution attribution. |
-| CI and test evidence | `docs/evidence/m3/personal-20261013-181846`; `docs/testing-m3.md`; `.github/workflows/verify.yml`. Historical CI run 38218128326; no current-branch remote run recorded at cutoff. |
-| Test/staging demonstration | Section 8 and `docs/testing-m3.md` reproduce the Release status API suites on disposable PostgreSQL. E01/E02 use a Staging HTTPS test host with synthetic identities. |
-| Evidence date | 13 October 2026; personal verification 18:18–18:19 SAST. |
-| Date submitted | Formal submission is not recorded at the 13 October 2026 evidence cutoff. |
-
-The compulsory video is a separate submission artefact under the supplied presentation guidelines. The recorded candidate is local, not an approved or published team release.
+| Candidate identifier | m3-combined-review-20261014 (local combined review tag). Personal test revision: f774bf851e6b0c8d69cd9b37f6849fb0d853d661; PR16 source: 4a7cebe46dbf92f150c49646da86bf1b8e72d365. The exact performance execution commit is not recorded. Inspected main: 216f405ce9d7aae79194db873c699dac5f517265. |
+| PED version | v3.0; docs/PED_v3.0.docx and matching docs/PED_v3.0_Updated.pdf. |
+| RTM location | docs/CivicConnect_RTM_v2.0.xlsx; continuing 27-requirement, 54-criterion matrix. |
+| CI and test evidence | docs/evidence/m3/personal-20261013-181846; docs/evidence/m3-performance-results.txt; docs/evidence/m3-performance-run-confirmation.md; docs/testing-m3.md. PR16 CI run 38518306719 covers older suites; no combined-candidate remote run. |
+| Test/staging demonstration | Section 8 commands and docs/testing-m3.md reproduce the Release status API suites on a disposable PostgreSQL database. The M3 host uses Staging/HTTPS and synthetic identities, then stops after execution. |
+| Evidence date | 14 October 2026 update; Cameron personal verification 13 October, 18:18–18:19 SAST; Michael performance execution 14 October. |
+| Date submitted | Formal submission is not recorded at the 14 October 2026 evidence cutoff. |

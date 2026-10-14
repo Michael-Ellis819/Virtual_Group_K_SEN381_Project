@@ -20,3 +20,8 @@ The root file github_workflows_auto-merge-approved-prs.yml is outside .github/wo
 4. Merge only after required reviews/checks. Freeze the final assessed commit/tag and align PED, RTM, environment, evidence and recorded demo with it.
 
 Suggested review checklist: reproduce E01/E02; inspect BB03 and A05 no-write/rollback assertions; verify A06 rejects stale category/version; confirm no new input supplies actor/roles; compare unchanged requirement/AC IDs; confirm honest pending scope; check current CI and staging parity. Review comments and any rework must be real; no example comment should be posted as if it occurred.
+
+
+## 14 October combined-review checkpoint
+
+PR16 remains open on 4a7cebe; one Bianca approval with empty review body. CI run 38518306719 is successful for the existing two suites only. Its source is merged locally with Cameron’s branch and the native PED/RTM consolidated; no GitHub merge/publication/approval is claimed. Local candidate tag: m3-combined-review-20261014. Corrected figures and dependency fix are part of the local candidate, not yet PR16 on GitHub.
