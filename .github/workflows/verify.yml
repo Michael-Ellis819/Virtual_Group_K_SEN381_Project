@@ -62,4 +62,9 @@ jobs:
 
       - name: Run performance tests
         run: dotnet run --project tests/CivicConnect.PerformanceTests --configuration Release --no-build
+        
+      - name: Audit database test dependencies
+        run: dotnet list tests/CivicConnect.DatabaseTests/CivicConnect.DatabaseTests.csproj package --vulnerable --include-transitive
 
+      - name: Audit performance test dependencies
+        run: dotnet list tests/CivicConnect.PerformanceTests/CivicConnect.PerformanceTests.csproj package --vulnerable --include-transitive
