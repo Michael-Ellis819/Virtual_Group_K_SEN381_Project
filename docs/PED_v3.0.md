@@ -2333,6 +2333,98 @@ Outstanding verification includes integration with the authorised status-transit
 
 The successful database tests therefore provide implementation evidence for selected acceptance criteria, rather than proof that all related functional and non-functional requirements are fully satisfied.
 
+
+### 7.3.7 Performance and Load Testing – Michael Ellis (600332)
+
+**Test Date:** 14 October 2026
+
+**Responsible Student:** Michael Ellis (600332)
+
+**Test Environment:** Local macOS development environment using .NET 8 (SDK 8.0.425), Entity Framework Core 8 and PostgreSQL 17.
+
+#### Test Objective
+
+The purpose of this test was to evaluate the performance of the CivicConnect PostgreSQL persistence layer when handling concurrent service request retrieval operations.
+
+The test focused on database response times, throughput and reliability under a controlled workload.
+
+#### Test Implementation
+
+The performance test was implemented in:
+
+`tests/CivicConnect.PerformanceTests/Program.cs`
+
+The test used the existing `EfRequestReader` implementation to retrieve a service request from PostgreSQL.
+
+Each concurrent operation used a separate Entity Framework Core database context to avoid thread-safety issues.
+
+#### Test Configuration
+
+| Configuration | Value |
+|---|---|
+| Total operations | 200 |
+| Maximum concurrent operations | 10 |
+| Operation type | Database service request retrieval |
+| Database | PostgreSQL 17 |
+| Application framework | .NET 8 (SDK 8.0.425) |
+| ORM | Entity Framework Core 8 |
+| Execution environment | Local macOS development machine |
+
+#### Recorded Performance Results
+
+The following results are from the second performance test run, which is preserved in `docs/evidence/m3-performance-results.txt`.
+
+| Performance Metric | Recorded Result |
+|---|---|
+| Total operations | 200 |
+| Successful operations | 200 |
+| Failed operations | 0 |
+| Total execution time | 0.12 seconds |
+| Average response time | 1.62 ms |
+| Median response time | 0.41 ms |
+| 95th-percentile response time | 8.69 ms |
+| Throughput | 1,696.16 operations per second |
+
+#### Test Outcome
+
+All 200 database retrieval operations completed successfully, with zero reported failures.
+
+The average response time was 1.62 milliseconds, while the 95th-percentile response time was 8.69 milliseconds.
+
+The test achieved a throughput of approximately 1,696 operations per second under the configured workload.
+
+These results provide initial evidence that the CivicConnect persistence layer can handle concurrent database read operations in the local development environment.
+
+#### Limitations
+
+The test was conducted in a controlled local environment and used a single temporary service request.
+
+It did not evaluate:
+
+- Full HTTP request processing.
+- Application authentication and authorisation overhead.
+- Performance with large production datasets.
+- Sustained high-volume workloads.
+- Network latency between distributed users and the server.
+- Production infrastructure performance.
+
+No separate database-level performance acceptance target was established for this test.
+
+The results therefore demonstrate local database-read performance only and do not establish production-level performance or full NFR-002 acceptance.
+
+#### Evidence and Traceability
+
+**Implementation:**
+`tests/CivicConnect.PerformanceTests/Program.cs`
+
+**Recorded test output:**
+`docs/evidence/m3-performance-results.txt`
+
+**Related engineering concern:** Database performance, reliability and verification of the PostgreSQL persistence implementation.
+
+**Verification status:** Initial local database-read performance test completed successfully. Further testing is required for full application-level performance acceptance.
+
+
 ## 7.4 Milestone 3 Risks, Limitations and Technical Debt – Data Persistence
 
 ### 7.4.1 Identified Risks

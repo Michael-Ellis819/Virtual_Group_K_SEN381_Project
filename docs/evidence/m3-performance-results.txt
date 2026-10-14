@@ -1,0 +1,11 @@
+CIVICCONNECT PERFORMANCE TEST
+-----------------------------
+Total operations: 200
+Maximum concurrency: 10
+Successful operations: 200
+Failed operations: 0
+Total duration: 0,12 s
+Average response time: 1,62 ms
+Median response time: 0,41 ms
+95th percentile: 8,69 ms
+Throughput: 1696,16 ops/sec
