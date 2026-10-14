@@ -1,44 +1,86 @@
 # AI usage record
 
-Date and student: 30 September 2026, Cameron Purdon 601963.
+Virtual Group K: Michael Ellis 600332 · Cameron Purdon 601963 · Bianca Grobler 600537
 
-Tool: OpenAI Codex.
+Updated 14 October 2026. Each member is responsible for checking, understanding and maintaining the AI-assisted work they accept.
 
-Engineering use: document and repository inspection, drafting Cameron's ADRs and integration documentation, implementing the protected read slice, preparing verification checks, and consolidating the PED and RTM.
+## Milestone 1
 
-Purpose: Complete Cameron's allocated M2 design, integration, traceability, technical documentation and collaboration contribution.
+The following entries continue the AI Research and Verification Record retained in the PED. All three members used ChatGPT.
 
-AI contribution used: Draft prose, code, verification cases and document formatting were reviewed and revised against the CivicConnect requirements and team decisions.
+| Member | Purpose and output used | Human verification and changes |
+| --- | --- | --- |
+| Michael Ellis 600332 | Identify a way to track task responsibility and evidence. The GitHub Issues suggestion was used. | Checked against project requirements. Other tracking suggestions were rejected in favour of clear ownership and traceable evidence. |
+| Cameron Purdon 601963 | Understand the work, break it into activities and improve explanatory structure. Selected information and formatting were used. | Compared with online sources and lecture notes. Wordy or irrelevant material was rejected. |
+| Bianca Grobler 600537 | Create risk-register tables. The table structures were used. | Checked against project requirements. Overly complex or unnecessary tables were rejected. |
 
-Human verification: Cameron built the project with zero warnings and errors and ran all 29 checks successfully. Bianca Grobler and Michael Ellis reviewed the consolidated M2 content. Requirements, acceptance criteria and RTM identifiers were compared with the M1 baseline.
+## Milestone 2
 
-Changes made after review: Incorrect or unclear explanations were corrected. The final records distinguish implemented evidence from planned database, login, State and deployment work.
+Records continued from the PED's AI usage section and the 30 September 2026 baseline.
 
-| Field | Description |
-|---|---|
-| Date | 12 October 2026 |
-| Student Name | Michael Ellis |
-| Student Number | 600332 |
-| AI Tool | ChatGPT (OpenAI) |
-| Purpose | Development support, troubleshooting and documentation assistance for M3 data persistence. |
-| How AI was used | Assisted with C# and Entity Framework Core implementation guidance, PostgreSQL integration, Git troubleshooting, testing approaches and technical documentation. |
-| Human Verification | Implementation was reviewed and tested locally. Database verification checks were executed, and changes were committed through GitHub. |
-| Limitations | AI suggestions required review and testing. Full system integration and acceptance remain pending. |
-| Final Responsibility | Michael Ellis (600332) is responsible for validating and maintaining the submitted contribution. |
+### Michael Ellis 600332
 
-## M3 Cameron entry - 13 October 2026
+- **Tool and purpose:** ChatGPT supported data, persistence, technology-stack and deployment decisions, comparison of alternatives and the structure of Michael's PED contribution.
+- **Output used:** Revised explanations and documentation.
+- **Human verification:** Compared with the M2 brief, approved requirements, Assignment 2 research and agreed team decisions; reviewed the consolidated PED.
+- **Changed or rejected:** Unsupported implementation claims, unsuitable technology suggestions and explanations inconsistent with scope, cost or schedule.
+
+### Cameron Purdon 601963
+
+- **Tool and purpose:** OpenAI Codex supported repository/document inspection, ADRs, design and API integration, the protected read implementation, verification checks and PED/RTM consolidation. The PED also records ChatGPT assistance with research and explanations.
+- **Output used:** Revised prose, C# code, verification cases and document formatting.
+- **Human verification:** Built with zero warnings/errors and ran 29 checks. Compared requirements, acceptance criteria and RTM identifiers with the M1 baseline. Bianca and Michael reviewed the consolidated M2 content.
+- **Changed or rejected:** Incorrect, unclear, wordy and unsupported explanations; implementation claims were separated from work planned at the M2 checkpoint.
+
+### Bianca Grobler 600537
+
+- **Tool and purpose:** ChatGPT supported understanding architecture requirements, organising alternatives, explaining architecture/design patterns and improving her PED contribution.
+- **Output used:** Revised architecture, quality-driver, pattern and baseline documentation.
+- **Human verification:** Compared with the M2 brief, approved requirements, Assignment 2 research and team decisions; reviewed the consolidated PED.
+- **Changed or rejected:** Unsupported claims, overly complicated alternatives and explanations that did not match CivicConnect's scope.
+
+## Milestone 3
+
+### Michael Ellis 600332
 
 | Field | Record |
 | --- | --- |
-| Student / responsibility | Cameron Purdon 601963; responsible for understanding, reviewing and maintaining the submitted contribution. |
-| Tool / purpose | OpenAI Codex; inspect handover/briefs/team work; implement access/API coordination; create tests; evolve RTM/PED and supporting evidence. |
-| Output used | C# implementation, executable cases, workflow additions, Markdown consolidation, RTM evidence and PDF export. |
-| Verification actually performed | Initial Codex execution is retained in evidence/m3. Cameron personally reran Release builds, SDK analysis, the 19 M3 cases, 29 regression checks, 25 database checks, a controlled failing gate with restoration and a dependency query/gate on 13 October 2026, 18:18-18:19 SAST. Current evidence: evidence/m3/personal-20261013-181846; revision f774bf851e6b0c8d69cd9b37f6849fb0d853d661. |
-| Changed/corrected AI output | Initial Windows test TLS setup failed; certificate import corrected. Missing target and stale-category/version verification strengthened. Unsupported full-release claims rejected; NOT READY retained. |
-| Human verification | Cameron's personal execution is recorded in the current run's execution.json and raw reports. No independent peer approval or code-understanding assessment is inferred from the passing run. |
-| Scope limit | AI cannot provide authentic peer approval, team risk acceptance or the required personal camera participation. |
+| Recorded date | 12 October 2026; performance execution evidence dated 14 October. |
+| Tool | ChatGPT (OpenAI). |
+| Purpose and output used | C#/EF Core guidance, PostgreSQL integration, troubleshooting, Git support, testing approaches and technical documentation for persistence. |
+| Human verification | Michael's supplied record reports local review and database checks, followed by controlled Git commits. His separate performance report records 200 successful reads and zero failures; environment/results were confirmed on 14 October. |
+| Review and limitations | AI suggestions required review and testing. Full integration/acceptance was pending at the original 12 October checkpoint. The later performance exercise demonstrates short database-read behaviour, not full NFR-002 acceptance. |
+| Responsibility | Michael remains accountable for validating and maintaining his submitted contribution. |
 
+### Cameron Purdon 601963
 
-## Consolidation 14 October
+| Field | Record |
+| --- | --- |
+| Recorded dates | 13-14 October 2026. |
+| Tool | OpenAI Codex. |
+| Purpose and output used | Inspect the handover, scope and team work; implement access/API coordination and the missing State dependency; create executable cases and CI additions; consolidate the PED, RTM and supporting records. |
+| Human verification | Cameron personally ran Release builds, SDK analysis, 19 M3 cases, 29 regression checks, 25 database checks, a dependency query/gate and a controlled failing gate with source restoration on 13 October, 18:18-18:19 SAST. Revision: f774bf851e6b0c8d69cd9b37f6849fb0d853d661. |
+| Changed or corrected | Windows test-certificate handling, null-target and stale-category/version coverage, unsupported full-release claims, and inconsistent performance figures. A later transitive audit found vulnerable System.Text.Json 8.0.0; affected test projects were patched to 8.0.5. |
+| Later assistance | Codex helped record the user-confirmed 14 October combined review, preserve document formatting, incorporate merged PR16, reconcile evidence, export the PED PDF, restore the preferred README/START_HERE structure, consolidate this register and prepare the lecturer-requested PED/RTM Markdown copies. |
+| Responsibility | Cameron remains accountable for reviewing and understanding the accepted implementation, tests and documentation. |
 
-Codex assisted with merging PR16 locally, preserving supplied Word/RTM formatting, reconciling Michael’s confirmed results, detecting/fixing transitive dependency advisories and checking the combined working copy. Agent follow-up logs are labelled in evidence/m3/combined-20261014; Cameron’s personal run and Michael’s human performance run retain their original attribution. Bianca’s review remains a supplied draft; no AI-created teammate approval or sign-off is recorded.
+### Bianca Grobler 600537
+
+| Field | Record |
+| --- | --- |
+| Source | Bianca's M3 entry in PED Section 12.1. |
+| Tool | ChatGPT (OpenAI). |
+| Purpose and output used | Format tables in her M3 documentation using her own data. |
+| Human verification | Bianca read through the formatted tables to ensure AI had not changed her data. |
+| Responsibility | Bianca remains accountable for the table content and engineering findings. AI formatting is separate from her completed review of the combined work on 14 October. |
+
+## Verification and evidence
+
+Human execution reports retain their original operators and dates. Codex's follow-up checks are identified separately; they are not relabelled as student execution. AI assistance does not provide independent teammate approval, risk acceptance or personal presentation participation.
+
+- [PED](PED_v3.0.docx): retained M1 record, Section 12 M2 entries and Section 12.1 M3 entries.
+- [Cameron's personal verification](evidence/m3/personal-20261013-181846/summary.md) and [execution metadata](evidence/m3/personal-20261013-181846/execution.json).
+- [Michael's performance report](evidence/m3-performance-results.txt) and [run confirmation](evidence/m3-performance-run-confirmation.md).
+- [Codex follow-up verification](evidence/m3/combined-20261014/summary.md): post-fix builds, correctness suites and strict dependency audits.
+- [Bianca's completed conformance review](reviews/Bianca_M3_Final_Review_Updated.docx).
+- [GitHub review/CI evidence](github-evidence.md).

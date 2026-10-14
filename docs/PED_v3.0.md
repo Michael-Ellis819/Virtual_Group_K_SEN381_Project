@@ -1,4 +1,4 @@
-<!-- Generated text mirror; supplied Word formatting is authoritative. Matching PDF: PED_v3.0_Updated.pdf. -->
+<!-- Markdown copy of PED_v3.0.docx. Matching PDF: PED_v3.0_Updated.pdf. -->
 
 # CivicConnect Project Engineering Document
 
@@ -629,25 +629,25 @@ During M4, the team will validate the completed product against the agreed requi
 
 Individual items of work will follow a controlled cycle:
 
-Identify and define the required work.
+- Identify and define the required work.
 
-Record the work as a GitHub Issue.
+- Record the work as a GitHub Issue.
 
-Assign responsibility to a team member.
+- Assign responsibility to a team member.
 
-Develop the change on a separate branch.
+- Develop the change on a separate branch.
 
-Test and verify the change.
+- Test and verify the change.
 
-Submit a Pull Request.
+- Submit a Pull Request.
 
-Obtain meaningful peer reviews and required approvals.
+- Obtain meaningful peer reviews and required approvals.
 
-Address review findings.
+- Address review findings.
 
-Merge the approved change into the protected main branch.
+- Merge the approved change into the protected main branch.
 
-Update relevant documentation, requirements traceability and project evidence.
+- Update relevant documentation, requirements traceability and project evidence.
 
 This approach provides a balance between Agile flexibility and the engineering controls required by the project. Requirements and implementation can evolve when justified, while changes remain traceable and controlled. Risks, defects and important engineering decisions will be recorded and reviewed throughout the project.
 
@@ -659,109 +659,109 @@ The CivicConnect team agrees to work collaboratively and maintain shared respons
 
 ## 1. Communication
 
-Team members will communicate regularly using the team's agreed communication channel.
+- Team members will communicate regularly using the team's agreed communication channel.
 
-Important project decisions will be documented rather than relying only on informal conversations.
+- Important project decisions will be documented rather than relying only on informal conversations.
 
-Team members will communicate as soon as possible if they are unable to complete an assigned task or encounter a significant problem.
+- Team members will communicate as soon as possible if they are unable to complete an assigned task or encounter a significant problem.
 
 ## 2. Meetings
 
-The team will hold regular project meetings to review progress, upcoming work, risks and problems.
+- The team will hold regular project meetings to review progress, upcoming work, risks and problems.
 
-Meeting outcomes and significant decisions will be recorded where appropriate.
+- Meeting outcomes and significant decisions will be recorded where appropriate.
 
-Team members will attend agreed meetings and contribute to discussions.
+- Team members will attend agreed meetings and contribute to discussions.
 
 ## 3. Task Allocation
 
-Engineering work will be represented using GitHub Issues where appropriate.
+- Engineering work will be represented using GitHub Issues where appropriate.
 
-Tasks will be assigned to specific team members to establish accountability.
+- Tasks will be assigned to specific team members to establish accountability.
 
-Work will be divided according to workload and project requirements rather than allowing one member to become responsible for an entire area of the system.
+- Work will be divided according to workload and project requirements rather than allowing one member to become responsible for an entire area of the system.
 
-Team members will keep their GitHub Issues updated as work progresses.
+- Team members will keep their GitHub Issues updated as work progresses.
 
 ## 4. GitHub and Code Changes
 
-Team members will work using branches rather than making substantive changes directly to main.
+- Team members will work using branches rather than making substantive changes directly to main.
 
-Substantive changes will be submitted through Pull Requests.
+- Substantive changes will be submitted through Pull Requests.
 
-Pull Requests will require review by other team members before merging.
+- Pull Requests will require review by other team members before merging.
 
-Reviewers will provide meaningful feedback rather than approving changes without inspection.
+- Reviewers will provide meaningful feedback rather than approving changes without inspection.
 
-The Pull Request author will not count their own approval.
+- The Pull Request author will not count their own approval.
 
-Team members will not commit passwords, API keys, private keys or other sensitive credentials to the repository.
+- Team members will not commit passwords, API keys, private keys or other sensitive credentials to the repository.
 
 ## 5. Quality and Testing
 
-Team members are responsible for testing the work they produce.
+- Team members are responsible for testing the work they produce.
 
-Defects discovered during development will be recorded and addressed appropriately.
+- Defects discovered during development will be recorded and addressed appropriately.
 
-Code will be reviewed before being incorporated into the controlled baseline.
+- Code will be reviewed before being incorporated into the controlled baseline.
 
-The team will not deliberately reduce required testing or security activities simply to meet a deadline.
+- The team will not deliberately reduce required testing or security activities simply to meet a deadline.
 
 ## 6. Documentation and Traceability
 
-Requirements, risks and significant engineering decisions will be documented.
+- Requirements, risks and significant engineering decisions will be documented.
 
-Changes to baseline requirements will follow the project's change-control process.
+- Changes to baseline requirements will follow the project's change-control process.
 
-Team members will maintain evidence of their contributions through GitHub commits Issues, Pull Requests, reviews and relevant documentation.
+- Team members will maintain evidence of their contributions through GitHub commits Issues, Pull Requests, reviews and relevant documentation.
 
-The PED will be maintained as a single integrated engineering document.
+- The PED will be maintained as a single integrated engineering document.
 
 ## 7. AI Usage
 
-AI tools may be used where appropriate to support project activities.
+- AI tools may be used where appropriate to support project activities.
 
-Material AI-assisted contributions will be recorded in the AI Usage Register.
+- Material AI-assisted contributions will be recorded in the AI Usage Register.
 
-AI-generated content and code will be reviewed and verified by the team before being accepted.
+- AI-generated content and code will be reviewed and verified by the team before being accepted.
 
-Team members remain responsible for understanding and being able to explain any AI-assisted work they use.
+- Team members remain responsible for understanding and being able to explain any AI-assisted work they use.
 
 ## 8. Collaboration and Knowledge Sharing
 
-Each team member will remain familiar with the overall CivicConnect system and not only their assigned tasks.
+- Each team member will remain familiar with the overall CivicConnect system and not only their assigned tasks.
 
-Team members will explain important technical or engineering decisions to the rest of the team.
+- Team members will explain important technical or engineering decisions to the rest of the team.
 
-Team members will support one another when difficulties arise.
+- Team members will support one another when difficulties arise.
 
-No team member will intentionally withhold information required for another member to complete their work.
+- No team member will intentionally withhold information required for another member to complete their work.
 
 ## 9. Conflict Resolution
 
-Technical disagreements will be discussed using project requirements, evidence, risks and engineering reasoning.
+- Technical disagreements will be discussed using project requirements, evidence, risks and engineering reasoning.
 
-Where the team cannot immediately agree, alternatives will be considered and the decision will be documented where it represents a significant engineering choice.
+- Where the team cannot immediately agree, alternatives will be considered and the decision will be documented where it represents a significant engineering choice.
 
-Personal disagreements will not be allowed to interfere with project responsibilities.
+- Personal disagreements will not be allowed to interfere with project responsibilities.
 
 ## 10. Accountability
 
 Each team member agrees to:
 
-Complete their assigned work within agreed timeframes.
+- Complete their assigned work within agreed timeframes.
 
-Maintain evidence of their contributions.
+- Maintain evidence of their contributions.
 
-Review other team members' work when requested.
+- Review other team members' work when requested.
 
-Communicate problems early.
+- Communicate problems early.
 
-Participate in project meetings and milestone preparation.
+- Participate in project meetings and milestone preparation.
 
-Understand the overall project sufficiently to defend the team's work.
+- Understand the overall project sufficiently to defend the team's work.
 
-Take responsibility for the quality of their contributions.
+- Take responsibility for the quality of their contributions.
 
 #### Agreement
 
@@ -782,13 +782,13 @@ By adopting this working agreement, all three team members agree to follow the p
 
 #### 7.1.2 Operational questions the team is holding open (not deciding yet)
 
-What free-tier hosting/DB option will be evaluated first, and against what criteria (cost, ease of use, team familiarity)?
+- What free-tier hosting/DB option will be evaluated first, and against what criteria (cost, ease of use, team familiarity)?
 
-What minimum logging is needed to know a request was created/updated, for later accountability evidence?
+- What minimum logging is needed to know a request was created/updated, for later accountability evidence?
 
-What would "the system is degrading" look like for CivicConnect specifically (e.g. requests silently failing to save)?
+- What would "the system is degrading" look like for CivicConnect specifically (e.g. requests silently failing to save)?
 
-Who is responsible for secrets/config once a real deployment target is chosen?
+- Who is responsible for secrets/config once a real deployment target is chosen?
 
 #### 7.1.3 Why this matters at M1
 
@@ -1022,27 +1022,27 @@ The separate Category entity provides one controlled source for the seven catego
 
 The initial relationships are:
 
-One User acting as a requester may submit many ServiceRequests.
+- One User acting as a requester may submit many ServiceRequests.
 
-Each ServiceRequest belongs to one requester.
+- Each ServiceRequest belongs to one requester.
 
-Each ServiceRequest belongs to one Category.
+- Each ServiceRequest belongs to one Category.
 
-One Category may be associated with many ServiceRequests.
+- One Category may be associated with many ServiceRequests.
 
-A ServiceRequest may be assigned to one staff user at a time.
+- A ServiceRequest may be assigned to one staff user at a time.
 
-One staff user may be responsible for multiple ServiceRequests.
+- One staff user may be responsible for multiple ServiceRequests.
 
-One ServiceRequest may contain many RequestNotes.
+- One ServiceRequest may contain many RequestNotes.
 
-Each RequestNote has one author.
+- Each RequestNote has one author.
 
-One ServiceRequest may contain many RequestHistory records.
+- One ServiceRequest may contain many RequestHistory records.
 
-Each RequestHistory record identifies the actor responsible for the change where applicable.
+- Each RequestHistory record identifies the actor responsible for the change where applicable.
 
-One ServiceRequest may contain many RequesterFeedback records.
+- One ServiceRequest may contain many RequesterFeedback records.
 
 ServiceRequest owns the lifecycle of its request-specific history, notes and feedback from a domain perspective. User and Category records remain independent reference records because they may be associated with multiple requests.
 
@@ -1056,95 +1056,95 @@ The initial logical schema is:
 
 User
 
-UserId — Primary Key
+- UserId — Primary Key
 
-Name — Required
+- Name — Required
 
-Email — Required, Unique
+- Email — Required, Unique
 
-PasswordHash — Required
+- PasswordHash — Required
 
-Role — Required
+- Role — Required
 
-IsActive — Required
+- IsActive — Required
 
 Category
 
-CategoryId — Primary Key
+- CategoryId — Primary Key
 
-Name — Required, Unique
+- Name — Required, Unique
 
-IsActive — Required
+- IsActive — Required
 
 ServiceRequest
 
-RequestId — Primary Key
+- RequestId — Primary Key
 
-ReferenceNumber — Required, Unique
+- ReferenceNumber — Required, Unique
 
-RequesterId — Foreign Key → User
+- RequesterId — Foreign Key → User
 
-CategoryId — Foreign Key → Category
+- CategoryId — Foreign Key → Category
 
-Description — Required
+- Description — Required
 
-Location — Required
+- Location — Required
 
-Status — Required
+- Status — Required
 
-Priority — Required, default Normal
+- Priority — Required, default Normal
 
-AssignedStaffId — Nullable Foreign Key → User
+- AssignedStaffId — Nullable Foreign Key → User
 
-DueDate — Nullable
+- DueDate — Nullable
 
-CreatedAt — Required
+- CreatedAt — Required
 
-UpdatedAt — Required
+- UpdatedAt — Required
 
 RequestNote
 
-NoteId — Primary Key
+- NoteId — Primary Key
 
-RequestId — Foreign Key → ServiceRequest
+- RequestId — Foreign Key → ServiceRequest
 
-AuthorId — Foreign Key → User
+- AuthorId — Foreign Key → User
 
-Content — Required
+- Content — Required
 
-IsRequesterVisible — Required
+- IsRequesterVisible — Required
 
-CreatedAt — Required
+- CreatedAt — Required
 
 RequestHistory
 
-HistoryId — Primary Key
+- HistoryId — Primary Key
 
-RequestId — Foreign Key → ServiceRequest
+- RequestId — Foreign Key → ServiceRequest
 
-ActorId — Foreign Key → User
+- ActorId — Foreign Key → User
 
-ChangeType — Required
+- ChangeType — Required
 
-PreviousValue — Nullable
+- PreviousValue — Nullable
 
-NewValue — Nullable
+- NewValue — Nullable
 
-CreatedAt — Required
+- CreatedAt — Required
 
 RequesterFeedback
 
-FeedbackId — Primary Key
+- FeedbackId — Primary Key
 
-RequestId — Foreign Key → ServiceRequest
+- RequestId — Foreign Key → ServiceRequest
 
-EventType — Required
+- EventType — Required
 
-Message — Required
+- Message — Required
 
-CreatedAt — Required
+- CreatedAt — Required
 
-IsRead — Required
+- IsRead — Required
 
 This represents the initial M2 schema baseline rather than an immutable final schema. Schema changes discovered during implementation will be introduced through controlled migrations and reviewed against the RTM, ADRs and Risk Register where they affect a baselined decision.
 
@@ -1166,19 +1166,19 @@ Normal is the default priority.
 
 Initial categories:
 
-Facility Faults
+- Facility Faults
 
-Damaged Equipment
+- Damaged Equipment
 
-Security Concerns
+- Security Concerns
 
-IT Support
+- IT Support
 
-Maintenance
+- Maintenance
 
-Lost Property
+- Lost Property
 
-Other
+- Other
 
 Categories will be maintained through the Category reference entity rather than repeated as uncontrolled text throughout the application. Existing requests retain their relationship to their stored category.
 
@@ -1242,17 +1242,17 @@ PostgreSQL is selected as the current persistence technology for CivicConnect, s
 
 The decision is based on the following project-specific factors:
 
-CivicConnect contains strongly related data including users, requests, categories, notes, feedback and historical records.
+- CivicConnect contains strongly related data including users, requests, categories, notes, feedback and historical records.
 
-NFR-003 requires transactional consistency between request changes and their associated history.
+- NFR-003 requires transactional consistency between request changes and their associated history.
 
-Foreign-key and constraint support aligns with the required ownership and integrity rules.
+- Foreign-key and constraint support aligns with the required ownership and integrity rules.
 
-FR-007, FR-013, FR-014 and FR-015 require filtering, aggregation, reporting and historical queries that fit a relational model.
+- FR-007, FR-013, FR-014 and FR-015 require filtering, aggregation, reporting and historical queries that fit a relational model.
 
-The application is intended to be a shared hosted web system rather than a single-machine application.
+- The application is intended to be a shared hosted web system rather than a single-machine application.
 
-PostgreSQL provides a path from development to hosted relational persistence while retaining a standard relational model.
+- PostgreSQL provides a path from development to hosted relational persistence while retaining a standard relational model.
 
 SQL Server remains a technically viable alternative and may offer particularly close integration with a .NET technology stack. It was not selected as the initial direction because CivicConnect should retain flexibility when evaluating free/low-cost database hosting under A-03.
 
@@ -1278,9 +1278,9 @@ This section directly relates to R-016, which tracks the possibility of free-tie
 
 NFR-007 requires recovery with:
 
-Recovery Point Objective (RPO): no more than 24 hours of lost data
+- Recovery Point Objective (RPO): no more than 24 hours of lost data
 
-Recovery Time Objective (RTO): restoration within four hours
+- Recovery Time Objective (RTO): restoration within four hours
 
 The final deployment/database service must provide a backup and recovery approach capable of satisfying these targets.
 
@@ -1310,27 +1310,27 @@ Schema changes will be introduced using version-controlled database migrations r
 
 The initial migration should establish:
 
-User
+- User
 
-Category
+- Category
 
-ServiceRequest
+- ServiceRequest
 
-RequestNote
+- RequestNote
 
-RequestHistory
+- RequestHistory
 
-RequesterFeedback
+- RequesterFeedback
 
-primary keys
+- primary keys
 
-foreign-key relationships
+- foreign-key relationships
 
-required/nullable constraints
+- required/nullable constraints
 
-unique constraints
+- unique constraints
 
-initial controlled Category data where appropriate
+- initial controlled Category data where appropriate
 
 Migration artefacts will be committed to GitHub and reviewed through the team's normal branch and Pull Request process.
 
@@ -1442,31 +1442,31 @@ The decision is also constrained by the fixed academic schedule, the team's abil
 
 The technology stack must provide:
 
-a responsive browser-based user interface;
+- a responsive browser-based user interface;
 
-server-side request processing;
+- server-side request processing;
 
-server-side authentication and authorisation;
+- server-side authentication and authorisation;
 
-separation between presentation, business logic and persistence;
+- separation between presentation, business logic and persistence;
 
-relational database access;
+- relational database access;
 
-transaction support;
+- transaction support;
 
-database migration support;
+- database migration support;
 
-automated testing support;
+- automated testing support;
 
-environment-specific configuration and secrets handling;
+- environment-specific configuration and secrets handling;
 
-HTTPS compatibility;
+- HTTPS compatibility;
 
-dependency/version management;
+- dependency/version management;
 
-compatibility with the selected deployment approach; and
+- compatibility with the selected deployment approach; and
 
-a realistic development workflow for the three-person project team.
+- a realistic development workflow for the three-person project team.
 
 The stack should remain proportionate to the CivicConnect pilot rather than introducing technologies that increase implementation and deployment complexity without addressing a current requirement.
 
@@ -1527,23 +1527,23 @@ C# with ASP.NET Core is selected for the application/API and business-logic laye
 
 The backend will implement:
 
-authentication and authorisation;
+- authentication and authorisation;
 
-service-request operations;
+- service-request operations;
 
-assignment;
+- assignment;
 
-request status processing;
+- request status processing;
 
-notes and feedback;
+- notes and feedback;
 
-reporting;
+- reporting;
 
-validation;
+- validation;
 
-transaction coordination; and
+- transaction coordination; and
 
-communication with the Data Access Layer.
+- communication with the Data Access Layer.
 
 This maintains the responsibility separation established in ADR-M2-01.
 
@@ -1567,17 +1567,17 @@ EF Core will provide the implementation between the application's data-access la
 
 Its responsibilities will include:
 
-mapping application entities to relational tables;
+- mapping application entities to relational tables;
 
-querying and saving data;
+- querying and saving data;
 
-managing relationships;
+- managing relationships;
 
-supporting transactions;
+- supporting transactions;
 
-supporting schema migrations; and
+- supporting schema migrations; and
 
-providing the persistence implementation required by the Data Access Layer.
+- providing the persistence implementation required by the Data Access Layer.
 
 Business logic should not become dependent on persistence-specific implementation details unnecessarily. The Data Access Layer will therefore preserve the architectural boundary established by ADR-M2-01 and reduce the persistence-coupling risk recorded in R-009.
 
@@ -1601,19 +1601,19 @@ NuGet will be used to manage .NET application dependencies.
 
 The project will record the actual versions of major dependencies once the implementation baseline has been created. These include at minimum:
 
-.NET runtime/SDK;
+- .NET runtime/SDK;
 
-ASP.NET Core;
+- ASP.NET Core;
 
-Entity Framework Core;
+- Entity Framework Core;
 
-PostgreSQL EF Core provider;
+- PostgreSQL EF Core provider;
 
-PostgreSQL server/service;
+- PostgreSQL server/service;
 
-testing packages; and
+- testing packages; and
 
-authentication-related packages where applicable.
+- authentication-related packages where applicable.
 
 Stable supported versions will be preferred over preview or pre-release packages.
 
@@ -1637,21 +1637,21 @@ The technology stack supports, but does not automatically guarantee, CivicConnec
 
 The implementation must specifically configure:
 
-server-side authorisation;
+- server-side authorisation;
 
-secure authentication;
+- secure authentication;
 
-HTTPS in deployed environments;
+- HTTPS in deployed environments;
 
-safe secret/configuration handling;
+- safe secret/configuration handling;
 
-input validation;
+- input validation;
 
-production-safe error handling;
+- production-safe error handling;
 
-dependency/security updates; and
+- dependency/security updates; and
 
-appropriate logging.
+- appropriate logging.
 
 Connection strings, database passwords and other secrets must not be committed to GitHub.
 
@@ -1683,15 +1683,15 @@ Browser → ASP.NET Core application → Business/Data Access → EF Core → Po
 
 A suitable initial spike could:
 
-start the CivicConnect web application;
+- start the CivicConnect web application;
 
-connect successfully to PostgreSQL;
+- connect successfully to PostgreSQL;
 
-apply the initial migration;
+- apply the initial migration;
 
-create or read a simple controlled Category record; and
+- create or read a simple controlled Category record; and
 
-demonstrate that secrets are obtained from configuration rather than hard-coded into source code.
+- demonstrate that secrets are obtained from configuration rather than hard-coded into source code.
 
 | Evidence | M2 Status |
 | --- | --- |
@@ -1810,6 +1810,8 @@ Changes to role, category or ownership rules affect this ADR, DTOs, contract, te
 - Microsoft (n.d.), Resource-based authorization in ASP.NET Core MVC: https://learn.microsoft.com/en-us/aspnet/core/mvc/security/authorization/resource-based (accessed 30 September 2026).
 
 - OWASP Foundation (n.d.), Authorization Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html (accessed 30 September 2026).
+
+![CivicConnect component interaction diagram](media/image1.png)
 
 Figure 1. Cameron's implemented read collaboration. PostgreSQL and State are future integrations; the fixture is not a database.
 
@@ -2729,25 +2731,18 @@ The database suites use a dedicated disposable PostgreSQL database. The M3 fault
 
 Run the following from the repository root with the test database connection configured:
 
+```powershell
 $env:ConnectionStrings__CivicConnect = 'Host=127.0.0.1;Port=55438;'
-
 $env:ConnectionStrings__CivicConnect += 'Database=civicconnect_personal_20261013_181846_test;'
-
 $env:ConnectionStrings__CivicConnect += 'Username=civicconnect_test'
-
 dotnet --info
-
 dotnet build tests/CivicConnect.Verification --configuration Release
-
 dotnet build tests/CivicConnect.DatabaseTests --configuration Release
-
 dotnet build tests/CivicConnect.M3Tests -c Release -p:AnalysisLevel=latest
-
 dotnet run --project tests/CivicConnect.Verification --configuration Release --no-build
-
 dotnet run --project tests/CivicConnect.DatabaseTests --configuration Release --no-build
-
 dotnet run --project tests/CivicConnect.M3Tests --configuration Release --no-build -- --database
+```
 
 These are executable harnesses; dotnet test does not execute them. The recorded results are 29 regression checks, 25 database checks and 19 M3 cases. The M3 harness migrates its database, creates synthetic records, starts a loopback HTTPS host, executes HTTP/component/system cases and removes its test records. Its temporary certificate and authentication tickets are created inside the harness. Run the fault suite serially on its own disposable database.
 
@@ -2757,9 +2752,10 @@ Dependency check: dotnet list src/CivicConnect.Web package --include-transitive 
 
 Set the database connection first, then use PowerShell:
 
+```powershell
 $env:ASPNETCORE_ENVIRONMENT = 'Development'
-
 dotnet run --project src/CivicConnect.Web --configuration Release --no-launch-profile --urls http://127.0.0.1:5080
+```
 
 Open http://127.0.0.1:5080/ for the landing page. Protected request routes return 401 while signed out. The application has no real sign-in flow or test-login endpoint. Use the M3 harness to reproduce authenticated status journeys over HTTPS; the normal HTTP landing page is not proof of authenticated mutation or HTTPS acceptance. Ctrl+C stops the development app. The harness cleans its own records after each run.
 
@@ -2785,7 +2781,9 @@ ConnectionStrings__CivicConnect is consumed by the EF Core configuration. Keep r
 
 Performance reproduction: configure ConnectionStrings__CivicConnect through the environment or the performance project’s User Secrets, use a dedicated disposable database and apply the existing migrations first. PERF-01 creates and deletes a temporary row; it does not initialise the schema. Keep the saved Michael report intact and use a separate filename for a new run.
 
+```powershell
 dotnet run --project tests/CivicConnect.PerformanceTests --configuration Release
+```
 
 Michael’s original macOS recording command was: dotnet run --project tests/CivicConnect.PerformanceTests/CivicConnect.PerformanceTests.csproj --configuration Release | tee docs/evidence/m3-performance-results.txt
 
