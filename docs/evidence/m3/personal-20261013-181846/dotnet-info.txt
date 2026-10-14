@@ -1,0 +1,69 @@
+.NET SDK:
+ Version:           8.0.425
+ Commit:            4a98f641c7
+ Workload version:  8.0.400-manifests.ac071bc2
+ MSBuild version:   17.11.48+02bf66295
+
+Runtime Environment:
+ OS Name:     Windows
+ OS Version:  10.0.26300
+ OS Platform: Windows
+ RID:         win-x64
+ Base Path:   D:\uni\year 3\SEN\tmp\m3\dotnet\sdk\8.0.425\
+
+.NET workloads installed:
+Configured to use loose manifests when installing new manifests.
+ [maui-windows]
+   Installation Source: VS 18.10.12224.181
+   Manifest Version:    8.0.3/8.0.100
+   Manifest Path:       D:\uni\year 3\SEN\tmp\m3\dotnet\sdk-manifests\8.0.100\microsoft.net.sdk.maui\8.0.3\WorkloadManifest.json
+   Install Type:        FileBased
+
+ [maccatalyst]
+   Installation Source: VS 18.10.12224.181
+   Manifest Version:    17.0.8478/8.0.100
+   Manifest Path:       D:\uni\year 3\SEN\tmp\m3\dotnet\sdk-manifests\8.0.100\microsoft.net.sdk.maccatalyst\17.0.8478\WorkloadManifest.json
+   Install Type:        FileBased
+
+ [ios]
+   Installation Source: VS 18.10.12224.181
+   Manifest Version:    17.0.8478/8.0.100
+   Manifest Path:       D:\uni\year 3\SEN\tmp\m3\dotnet\sdk-manifests\8.0.100\microsoft.net.sdk.ios\17.0.8478\WorkloadManifest.json
+   Install Type:        FileBased
+
+ [android]
+   Installation Source: VS 18.10.12224.181
+   Manifest Version:    34.0.43/8.0.100
+   Manifest Path:       D:\uni\year 3\SEN\tmp\m3\dotnet\sdk-manifests\8.0.100\microsoft.net.sdk.android\34.0.43\WorkloadManifest.json
+   Install Type:        FileBased
+
+
+Host:
+  Version:      8.0.31
+  Architecture: x64
+  Commit:       1219a42122
+
+.NET SDKs installed:
+  8.0.425 [D:\uni\year 3\SEN\tmp\m3\dotnet\sdk]
+
+.NET runtimes installed:
+  Microsoft.AspNetCore.App 8.0.31 [D:\uni\year 3\SEN\tmp\m3\dotnet\shared\Microsoft.AspNetCore.App]
+  Microsoft.NETCore.App 8.0.31 [D:\uni\year 3\SEN\tmp\m3\dotnet\shared\Microsoft.NETCore.App]
+  Microsoft.WindowsDesktop.App 8.0.31 [D:\uni\year 3\SEN\tmp\m3\dotnet\shared\Microsoft.WindowsDesktop.App]
+
+Other architectures found:
+  x86   [C:\Program Files (x86)\dotnet]
+    registered at [HKLM\SOFTWARE\dotnet\Setup\InstalledVersions\x86\InstallLocation]
+
+Environment variables:
+  DOTNET_ROOT       [D:\uni\year 3\SEN\tmp\m3\dotnet]
+
+global.json file:
+  D:\uni\year 3\SEN\Milestone 3\CivicConnect\global.json
+
+Learn more:
+  https://aka.ms/dotnet/info
+
+Download .NET:
+  https://aka.ms/dotnet/download
+PROCESS_EXIT_CODE=0

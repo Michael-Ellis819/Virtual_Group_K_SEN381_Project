@@ -1,0 +1,36 @@
+{
+  "input_sha256": "62c7b95ebefb508776ce7d635382de8ac98fcd89f6e4d29caca255e611626567",
+  "output_sha256": "6f71e1bd71c02a15e7aa2d0064fcc9afae3a584f41c272174b94b77972aaf791",
+  "changed_package_parts": [
+    "word/document.xml"
+  ],
+  "changed_body_elements": [
+    6,
+    475,
+    479,
+    1252,
+    1311,
+    1547,
+    1551,
+    1555,
+    1559,
+    1603,
+    1605,
+    1607,
+    1610,
+    1612
+  ],
+  "retained_m1_elements": 407,
+  "review_date": "2026-10-14",
+  "review_baseline": "3760605089cd19e5f44412c5438cb3015984d574",
+  "review_source": "docs/reviews/Bianca_M3_Final_Review_Updated.docx",
+  "latest_pr16_ci_run": 38577509314,
+  "latest_pr16_ci_commit": "7f0417bfe1c41d26a30b773dbbdb620cdf90a139",
+  "combined_ci_evidenced": false,
+  "submission_date_supplied": false,
+  "pdf_pages": 78,
+  "pdf_sha256": "11ecb23ee4245b313fab381422c0650e9771617004a81eabea88a17fabf9d5c3",
+  "review_sha256": "d6c6ea4cf22dc3b360b95b3fd4717f233d9791bd251aa2b206643ef7b202cc5a",
+  "render_engine": "Native Microsoft Word; packaged renderer previously diagnosed as unavailable due to missing soffice",
+  "visual_qa": "All pages inspected; final pages 1\u201376 unchanged from checked pass; detailed changed pages and final ending reviewed."
+}

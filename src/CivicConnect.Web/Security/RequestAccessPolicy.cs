@@ -8,9 +8,14 @@ public sealed record ReadPermission(bool Allowed, bool IncludeInternalNotes)
 public interface IRequestAccessPolicy
 {
     ReadPermission EvaluateRead(ClaimsPrincipal user, RequestSnapshot request);
+    bool CanChangeStatus(ClaimsPrincipal user, RequestSnapshot request);
 }
 public sealed class RequestAccessPolicy : IRequestAccessPolicy
 {
+    public bool CanChangeStatus(ClaimsPrincipal user, RequestSnapshot request)
+        => EvaluateRead(user, request).IncludeInternalNotes &&
+           user.FindFirst(ClaimTypes.NameIdentifier)!.Value.Length <= 100;
+
     public ReadPermission EvaluateRead(ClaimsPrincipal user, RequestSnapshot request)
     {
         // Trusted server claims only. Ambiguous identities fail closed.

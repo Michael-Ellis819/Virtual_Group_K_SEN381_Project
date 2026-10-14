@@ -132,7 +132,7 @@ try
     Check("H13 failure response is not cached", fault.Headers.CacheControl?.NoStore == true);
     using var post = new HttpRequestMessage(HttpMethod.Post, path);
     using var postResponse = await client.SendAsync(post);
-    Check("H14 no write endpoint exists", postResponse.StatusCode != HttpStatusCode.OK && postResponse.StatusCode != HttpStatusCode.Created);
+    Check("H14 bare detail route does not accept writes", postResponse.StatusCode != HttpStatusCode.OK && postResponse.StatusCode != HttpStatusCode.Created);
 }
 finally { await app.StopAsync(); }
 Console.WriteLine($"RESULT {passed} checks passed; 0 failed. In-memory read slice only; no database/login/production acceptance claimed.");

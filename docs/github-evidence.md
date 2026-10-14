@@ -1,24 +1,39 @@
-# GitHub and collaborative engineering evidence
+# GitHub and controlled-review evidence - 13 October 2026
 
-Repository: https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project
+Existing repository: https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project. Current inspected main: `216f405ce9d7aae79194db873c699dac5f517265`, after Bianca PR15 merged. Local feature branch: `feature/cameron-m3-integration`. Implementation/test checkpoint: `fef0469d27fffb1a7b10de0acbd9a3faae703717`. These are authentic new local commits; publication is pending.
 
-Checkpoint: 30 September 2026. Public repository information was inspected read-only; no remote setting, workflow result, commit, issue, pull request or review was invented.
-
-## Observed history
-
-| Item | Observed evidence |
+| Evidence | Observed status / limit |
 | --- | --- |
-| Main | Commit `fef07828d1`; merged final A2 report on 15 September 2026; the tree still contained Assignment 2 material at the checkpoint |
-| Main protection | The public branch response reported `protected=true`; detailed protection settings were not publicly accessible |
-| Cameron M1 | PR #2 added the requirements and RTM; PR #3 refined rules and scope; both were merged on 9 September with approvals from Michael and Bianca |
-| Cameron A2 | PR #8 was merged on 15 September; Michael and Bianca approved it |
-| Bianca M2 | PR #10 was open at the checkpoint; Michael approved that revision and no second independent approval was publicly visible |
-| Michael M2 | PR #11 was open at the checkpoint; Bianca and RinoKaze approved that revision and no requested changes were publicly visible |
-| Final PED review | Bianca Grobler and Michael Ellis reviewed the consolidated M2 PED and accepted it for submission on 30 September 2026 |
-| Remote checks | No GitHub Actions run was visible at the public checkpoint; the submission therefore relies on the recorded local build and verification result |
+| [PR12 Complete Milestone 2 contribution](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/pull/12) | Bianca and Michael approvals present. The handover's unknown second-review state is superseded. |
+| [PR14 persistence implementation](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/pull/14) | Merged in inspected main; approvals by Bianca333-b and RinNoKaze. Review bodies returned empty. |
+| [PR15 my parts](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/pull/15) | Merged on 13 October 2026; Michael and RinNoKaze approvals present. Added Milestone3 Bianca.docx. The Word contribution is incorporated into the continued PED; no application code changed in this merge. |
+| [Actions run 38218128326](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/38218128326) | Successful on f1b11d7f36a8e67570052ddf073879a2c3f35117. Build and both existing harness steps succeeded. This predates Cameron's new code. |
+| Main protection / new checks | [Active Main ruleset](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/rules/22445828) inspected on 13 October: two approvals required and stale approvals dismissed. No required CI-status-check rule is present. No current Cameron branch remote run or open PR was recorded. |
 
-Permanent references: [M1 PR #2](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/pull/2), [M1 PR #3](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/pull/3), [A2 PR #8](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/pull/8), [Bianca M2 PR #10](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/pull/10), [Michael M2 PR #11](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/pull/11), [M1 issue #1](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/issues/1) and [A2 issue #7](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/issues/7).
+The root file github_workflows_auto-merge-approved-prs.yml is outside .github/workflows, so its presence does not establish an active automation. No protection weakening or GitHub merge was performed by Codex. Updated upstream main was incorporated into the local feature branch.
 
-## Repeatable verification decision
+## Publish and review Cameron's contribution
 
-ADR-M2-07 selects a build and the 29-check verification harness for pull requests and pushes to main. The workflow source is `.github/workflows/verify.yml`. A workflow file shows the intended check but is not evidence of a successful remote run. The local result is recorded in `docs/evidence/local-verification.txt`. Risks R-038 and R-044 retain the clean-environment and remote-CI limitations.
+1. Open this checkout/branch in GitHub Desktop. Inspect the implementation, test/CI and documentation commits, then publish the branch to the existing repository and open a PR into main. A prepared title/body is in [pr-description.md](pr-description.md).
+2. Bianca independently checks lifecycle/conformance, invalid transitions and the release/register statements. Michael checks transactional integration, version handling, migrations, CI and the State dependency. Each records what was actually checked and any findings on the PR before approving.
+3. Fix review findings on the feature branch; rerun affected checks. Both non-author approvals and required CI must apply to the current revision. An agent's own review cannot substitute for two independent peers.
+4. Merge only after required reviews/checks. Freeze the final assessed commit/tag and align PED, RTM, environment, evidence and recorded demo with it.
+
+Suggested review checklist: reproduce E01/E02; inspect BB03 and A05 no-write/rollback assertions; verify A06 rejects stale category/version; confirm no new input supplies actor/roles; compare unchanged requirement/AC IDs; confirm honest pending scope; check current CI and staging parity. Review comments and any rework must be real; no example comment should be posted as if it occurred.
+
+
+## 14 October combined-review checkpoint
+
+PR16 remains open on 4a7cebe; one Bianca approval with empty review body. CI run 38518306719 is successful for the existing two suites only. Its source is merged locally with Cameron’s branch and the native PED/RTM consolidated; no GitHub merge/publication/approval is claimed. Local candidate tag: m3-combined-review-20261014. Corrected figures and dependency fix are part of the local candidate, not yet PR16 on GitHub.
+
+
+## Completed teammate review and current CI 14 October
+
+Bianca and Michael reviewed the combined implementation 3760605. Bianca’s completed conformance review is in reviews/Bianca_M3_Final_Review_Updated.docx. PR16 remains open on 7f0417bfe1c41d26a30b773dbbdb620cdf90a139; run 38577509314 succeeds for regression/database, performance and both test dependency audits. Earlier Bianca approval was dismissed after source updates; no new active formal approval was returned at this inspection. Combined M3 remote coverage is not established. These repository facts are distinct from the completed offline review.
+
+
+## PR16 merged and local publication preparation
+
+PR16 was merged on 14 October 2026 at 16:21:59 SAST into main, commit cb588d4b69b447ca72c11c91d795b7ea0daf91f9. The current revision received approvals from Bianca333-b and RinNoKaze at 16:15 and 16:21 SAST; returned review bodies were empty. The completed offline conformance record is separate checking evidence. Scope section 8 expects reviews to show actual checking; the reviewers can record their real checks/findings in the PR discussion.
+
+[Main CI run 38579869423](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/38579869423) passed build/run steps for the legacy verification, database and performance projects, followed by two dependency-report steps. It did not run Cameron's 19 M3 cases. The local feature branch incorporates this merged main, retains the combined suite and strict gates, and preserves the supplied final PED/RTM. No remote run, PR approval or submission is claimed for this newly prepared branch. Earlier checkpoints above are retained as history.

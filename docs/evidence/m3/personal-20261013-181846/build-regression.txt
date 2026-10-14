@@ -1,0 +1,12 @@
+  Determining projects to restore...
+  Restored D:\uni\year 3\SEN\Milestone 3\CivicConnect\src\CivicConnect.Web\CivicConnect.Web.csproj (in 1.29 sec).
+  1 of 2 projects are up-to-date for restore.
+  CivicConnect.Web -> D:\uni\year 3\SEN\Milestone 3\CivicConnect\src\CivicConnect.Web\bin\Release\net8.0\CivicConnect.Web.dll
+  CivicConnect.Verification -> D:\uni\year 3\SEN\Milestone 3\CivicConnect\tests\CivicConnect.Verification\bin\Release\net8.0\CivicConnect.Verification.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.07
+PROCESS_EXIT_CODE=0

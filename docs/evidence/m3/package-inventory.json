@@ -1,0 +1,172 @@
+{
+  "version": 1,
+  "parameters": "--include-transitive",
+  "projects": [
+    {
+      "path": "D:/uni/year 3/SEN/Milestone 3/CivicConnect/src/CivicConnect.Web/CivicConnect.Web.csproj",
+      "frameworks": [
+        {
+          "framework": "net8.0",
+          "topLevelPackages": [
+            {
+              "id": "Microsoft.EntityFrameworkCore.Design",
+              "requestedVersion": "8.0.11",
+              "resolvedVersion": "8.0.11"
+            },
+            {
+              "id": "Npgsql.EntityFrameworkCore.PostgreSQL",
+              "requestedVersion": "8.0.11",
+              "resolvedVersion": "8.0.11"
+            }
+          ],
+          "transitivePackages": [
+            {
+              "id": "Humanizer.Core",
+              "resolvedVersion": "2.14.1"
+            },
+            {
+              "id": "Microsoft.Bcl.AsyncInterfaces",
+              "resolvedVersion": "6.0.0"
+            },
+            {
+              "id": "Microsoft.CodeAnalysis.Analyzers",
+              "resolvedVersion": "3.3.3"
+            },
+            {
+              "id": "Microsoft.CodeAnalysis.Common",
+              "resolvedVersion": "4.5.0"
+            },
+            {
+              "id": "Microsoft.CodeAnalysis.CSharp",
+              "resolvedVersion": "4.5.0"
+            },
+            {
+              "id": "Microsoft.CodeAnalysis.CSharp.Workspaces",
+              "resolvedVersion": "4.5.0"
+            },
+            {
+              "id": "Microsoft.CodeAnalysis.Workspaces.Common",
+              "resolvedVersion": "4.5.0"
+            },
+            {
+              "id": "Microsoft.EntityFrameworkCore",
+              "resolvedVersion": "8.0.11"
+            },
+            {
+              "id": "Microsoft.EntityFrameworkCore.Abstractions",
+              "resolvedVersion": "8.0.11"
+            },
+            {
+              "id": "Microsoft.EntityFrameworkCore.Analyzers",
+              "resolvedVersion": "8.0.11"
+            },
+            {
+              "id": "Microsoft.EntityFrameworkCore.Relational",
+              "resolvedVersion": "8.0.11"
+            },
+            {
+              "id": "Microsoft.Extensions.Caching.Abstractions",
+              "resolvedVersion": "8.0.0"
+            },
+            {
+              "id": "Microsoft.Extensions.Caching.Memory",
+              "resolvedVersion": "8.0.1"
+            },
+            {
+              "id": "Microsoft.Extensions.Configuration.Abstractions",
+              "resolvedVersion": "8.0.0"
+            },
+            {
+              "id": "Microsoft.Extensions.DependencyInjection",
+              "resolvedVersion": "8.0.1"
+            },
+            {
+              "id": "Microsoft.Extensions.DependencyInjection.Abstractions",
+              "resolvedVersion": "8.0.2"
+            },
+            {
+              "id": "Microsoft.Extensions.DependencyModel",
+              "resolvedVersion": "8.0.2"
+            },
+            {
+              "id": "Microsoft.Extensions.Logging",
+              "resolvedVersion": "8.0.1"
+            },
+            {
+              "id": "Microsoft.Extensions.Logging.Abstractions",
+              "resolvedVersion": "8.0.2"
+            },
+            {
+              "id": "Microsoft.Extensions.Options",
+              "resolvedVersion": "8.0.2"
+            },
+            {
+              "id": "Microsoft.Extensions.Primitives",
+              "resolvedVersion": "8.0.0"
+            },
+            {
+              "id": "Mono.TextTemplating",
+              "resolvedVersion": "2.2.1"
+            },
+            {
+              "id": "Npgsql",
+              "resolvedVersion": "8.0.6"
+            },
+            {
+              "id": "System.CodeDom",
+              "resolvedVersion": "4.4.0"
+            },
+            {
+              "id": "System.Collections.Immutable",
+              "resolvedVersion": "6.0.0"
+            },
+            {
+              "id": "System.Composition",
+              "resolvedVersion": "6.0.0"
+            },
+            {
+              "id": "System.Composition.AttributedModel",
+              "resolvedVersion": "6.0.0"
+            },
+            {
+              "id": "System.Composition.Convention",
+              "resolvedVersion": "6.0.0"
+            },
+            {
+              "id": "System.Composition.Hosting",
+              "resolvedVersion": "6.0.0"
+            },
+            {
+              "id": "System.Composition.Runtime",
+              "resolvedVersion": "6.0.0"
+            },
+            {
+              "id": "System.Composition.TypedParts",
+              "resolvedVersion": "6.0.0"
+            },
+            {
+              "id": "System.IO.Pipelines",
+              "resolvedVersion": "6.0.3"
+            },
+            {
+              "id": "System.Reflection.Metadata",
+              "resolvedVersion": "6.0.1"
+            },
+            {
+              "id": "System.Runtime.CompilerServices.Unsafe",
+              "resolvedVersion": "6.0.0"
+            },
+            {
+              "id": "System.Text.Encoding.CodePages",
+              "resolvedVersion": "6.0.0"
+            },
+            {
+              "id": "System.Threading.Channels",
+              "resolvedVersion": "6.0.0"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -13,3 +13,8 @@ This index preserves the M2 decision identifiers used in the reviewed PED v2.0. 
 | ADR-M2-07 | Cameron | Repeatable checks and reviewed integration | ADR-M2-07-collaboration.md; local harness passed; peer review completed; remote CI evidence remains unavailable |
 
 The M1 decision and operational material remains in Part I of the consolidated PED. Implementation limitations and deferred evidence remain recorded against the relevant decisions.
+
+
+## Current M3 implementation update 14 October
+
+The table above preserves the M2 checkpoint. Layered MVC, State lifecycle, PostgreSQL adapter/migrations and central action/API coordination now exist for the tested increment. PERF-01 uses the relational reader. Bianca’s completed 14 October review confirms scoped conformance closure for the reviewed architecture. Deployment qualifications remain separately recorded. Deployment/startup, future-route enforcement and identity freshness remain qualified.
