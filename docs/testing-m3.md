@@ -62,3 +62,8 @@ Performance: Michael's separate PERF-01 exercise is recorded below and was merge
 ## Separate performance exercise PERF-01
 
 Michael’s second run: 200 direct reader operations, maximum concurrency 10; 1.62 ms mean, 8.69 ms p95, 0 failures, 0.12 seconds. Raw evidence and environment confirmation: evidence/m3-performance-results.txt and evidence/m3-performance-run-confirmation.md. No database target; full NFR-002 acceptance remains unverified. The performance project requires a migrated disposable database and uses environment/User Secrets configuration. The original report is retained independently of dependency-fix follow-up checks.
+
+
+## Combined remote verification indexed 15 October 2026
+
+[Main run 38594557024](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/38594557024) passes on 668795a42d8191600e79ff4decad1642bd3e88b0 after PR17 merged on 14 October. It builds and runs all four projects, including the 19 M3 cases, with analysis and dependency checks. This is additional remote evidence; Cameron's 13 October personal execution and Michael's original 14 October performance measurement keep their original attribution and values.

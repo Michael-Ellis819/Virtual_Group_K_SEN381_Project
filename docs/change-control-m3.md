@@ -1,6 +1,6 @@
 # CR-M3-C01 - controlled implementation and impact record
 
-Date: 13 October 2026. Owner: Cameron Purdon. Status: implemented locally; independent team review pending. This is an engineering implementation record, not an invented lecturer/client scope-change request.
+Date: 13 October 2026. Owner: Cameron Purdon. Status: implemented, reviewed by Bianca and Michael on 14 October, merged through PR17 and verified by combined main CI. This is an engineering implementation record, not an invented lecturer/client scope-change request.
 
 | Original decision | Implementation problem | Resulting implementation | Consequence |
 | --- | --- | --- | --- |
@@ -11,9 +11,16 @@ Date: 13 October 2026. Owner: Cameron Purdon. Status: implemented locally; indep
 
 Impact: FR-003/005/010/012/015/016 and NFR-001/003/008/009 gain partial implementation evidence. No requirement ID, wording, priority or acceptance criterion changes. Existing database migrations remain unchanged. GET output remains compatible; the snapshot's version is internal and is not added to the public DTO. Tests, API documentation, ADR consequences, RTM and risk records evolve together.
 
-Validation: six component, five black-box, six API/integration and two system cases passed. Existing 29 verification and 25 database checks passed. A controlled forbidden-transition injection failed C02; the original source was restored. Human review and CI on the new branch remain pending.
+Validation: six component, five black-box, six API/integration and two system cases passed. Existing 29 verification and 25 database checks passed. A controlled forbidden-transition injection failed C02; the original source was restored. PR17 has both teammate approvals and is merged; main CI 38594557024 passes on 668795a.
 
 
 ## CR-M3-C02 Combined performance evidence and dependency audit
 
 14 October 2026: integrate PR16 source/report into Cameron’s existing branch; preserve Michael’s second-run report and correct final PED/RTM figures. Add benchmark/strict transitive-audit CI steps. Fix DEF-M3-C06 using JSON 8.0.5 in database/performance projects. No requirement or acceptance-criterion change, schema migration or new production route. Preserve the human-run evidence and mark new local checks separately.
+
+
+## CR-M3-C03 M3 increment and release decision 15 October 2026
+
+Cameron confirmed that the team agrees with the current M3 increment and will complete unfinished original features during M4 finalisation. The M3 candidate is published implementation 668795a: protected retrieval of existing requests and authorised lifecycle/status updates with transactional history/public feedback, input/access checks, rollback and stale-update handling. Its verification uses controlled HTTPS simulated staging, real PostgreSQL, prepared records and synthetic identities.
+
+Decision: CONDITIONALLY READY for this M3 increment in that environment, supported by PR17 approvals, passing combined CI, functional/system evidence and the separate performance exercise. Normal deployment, real login, submission, assignment, lists/search and reporting remain incomplete. C04 remains open for normal deployment and C05 remains open in original scope. The team plans their finalisation in M4; no M1 requirement, priority or acceptance criterion is removed or rewritten. Real-user/production release and full product acceptance are not approved. Team agreement was confirmed by Cameron on 15 October.

@@ -13,3 +13,8 @@ Evidence: `docs/evidence/local-verification.txt` records 29 passing checks. Publ
 ## M3 later consequence - 13 October 2026
 
 Michael's PR14 is merged and has two distinct approvals. PR12 also has two approvals. GitHub Actions run 38218128326 succeeded for Michael's f1b11d7 revision, including both original harnesses. Cameron's new branch has progressive local implementation/test/docs history, with new harness/static/dependency steps configured. The local forbidden-transition probe failed and passing rerun followed restoration. New-branch publication, two meaningful independent reviews and current-revision remote CI remain pending. Existing approval bodies are empty; detailed checking/rework cannot be inferred. Protection settings must still be inspected by an authorised repository maintainer.
+
+
+## Submission consequence 15 October 2026
+
+PR17 merged the combined implementation at 668795a after approvals from Bianca and Michael on 14 October. [Main run 38594557024](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/38594557024) successfully executes all four projects, including the 19 M3 cases, analysis and dependency checks. Earlier publication/review/CI gaps above describe their historical checkpoints. Required CI merge enforcement remains separate from successful execution. Bianca's completed conformance findings record actual checking; empty approval bodies are not treated as written review explanations.

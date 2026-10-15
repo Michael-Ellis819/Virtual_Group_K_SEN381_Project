@@ -112,7 +112,7 @@ Remaining limitations include real account/permission management, request submis
 
 Cameron personally completed the recorded correctness verification on **13 October 2026**. Michael supplied the separate performance run on **14 October**. Bianca and Michael reviewed the combined work on **14 October**. Original human reports retain their execution dates and operators.
 
-Michael's PR16 is merged at `cb588d4`; [main CI run 38579869423](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/38579869423) passed its regression, database, performance and dependency-report steps. Cameron's 19-case suite and strict combined gates are configured on this feature branch; their remote execution is assessed separately. The recorded release classification is **NOT READY**, with reasons in the release evidence.
+The combined implementation is merged through [PR17](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/pull/17) at `668795a`, with approvals from Bianca and Michael. [Main CI run 38594557024](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/38594557024) passes all four projects, including Cameron's 19-case M3 suite, with analysis and dependency checks. The release summary records **CONDITIONALLY READY for the agreed M3 increment in controlled simulated staging**. The team confirmed this scope on 15 October 2026; unfinished original features remain recorded for M4 finalisation.
 
 Supporting evidence:
 
@@ -125,4 +125,4 @@ Supporting evidence:
 - [Michael's performance report](docs/evidence/m3-performance-results.txt)
 - [Risk register](docs/risk-register.md) and [release evidence](docs/release-evidence.md)
 - [AI usage record](docs/ai-usage.md)
-- [Submission information](docs/submission-information.md) and [presentation guide](docs/presentation-guide.md)
+- [Submission information](docs/submission-information.md)
