@@ -1,0 +1,236 @@
+{
+  "checkedDate": "2026-10-13",
+  "repo": "Michael-Ellis819/Virtual_Group_K_SEN381_Project",
+  "pr12Reviews": {
+    "reviews": [
+      {
+        "id": "PRR_kwDOURIhLM8AAAABQDY20A",
+        "state": "APPROVED",
+        "body": "",
+        "submitted_at": "2026-09-30T21:36:02Z",
+        "author": {
+          "login": "Bianca333-b",
+          "name": "Bianca333-b",
+          "email": null,
+          "avatar_url": "https://avatars.githubusercontent.com/u/142215631?u=10b9117dd8b66008d570ba7781abc65a66fdc10b&v=4",
+          "id": null
+        }
+      },
+      {
+        "id": "PRR_kwDOURIhLM8AAAABQGBi3w",
+        "state": "APPROVED",
+        "body": "",
+        "submitted_at": "2026-10-01T04:35:48Z",
+        "author": {
+          "login": "Michael-Ellis819",
+          "name": "Michael-Ellis819",
+          "email": null,
+          "avatar_url": "https://avatars.githubusercontent.com/u/211099388?u=22f046f08ef251b8de8757465c67172d6172b053&v=4",
+          "id": null
+        }
+      }
+    ]
+  },
+  "pr14Reviews": {
+    "reviews": [
+      {
+        "id": "PRR_kwDOURIhLM8AAAABRxe_bg",
+        "state": "APPROVED",
+        "body": "",
+        "submitted_at": "2026-10-12T07:35:09Z",
+        "author": {
+          "login": "Bianca333-b",
+          "name": "Bianca333-b",
+          "email": null,
+          "avatar_url": "https://avatars.githubusercontent.com/u/142215631?u=10b9117dd8b66008d570ba7781abc65a66fdc10b&v=4",
+          "id": null
+        }
+      },
+      {
+        "id": "PRR_kwDOURIhLM8AAAABRy_xnA",
+        "state": "APPROVED",
+        "body": "",
+        "submitted_at": "2026-10-12T10:10:46Z",
+        "author": {
+          "login": "RinNoKaze",
+          "name": "RinNoKaze",
+          "email": null,
+          "avatar_url": "https://avatars.githubusercontent.com/u/199754486?u=9a154a037c1843ce8ac1297a34b0ef18013743f6&v=4",
+          "id": null
+        }
+      }
+    ]
+  },
+  "pr15": {
+    "url": "https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/pull/15",
+    "number": 15,
+    "state": "open",
+    "merged": false,
+    "mergeable": true,
+    "draft": false,
+    "body": "## Problem and resulting behaviour\n\n## Requirement and decision links\n\nIssue URL:\nRequirement / acceptance IDs:\nADR / PED / RTM changes:\n\n## Verification and limits\n\nCommands and results:\nRemaining gaps:\n\n## Independent review\n\n- [ ] Both non-author teammates reviewed the code and documentation.\n- [ ] Findings were answered, corrections checked and both approvals recorded.\n- [ ] Required checks passed on the current revision.\n- [ ] No credentials, private data, generated build files or fabricated evidence included.\n",
+    "title": "my parts",
+    "base": "main",
+    "base_sha": "62e183b0d610fff0521b2116f6dec15b0319b22d",
+    "head": "Bianca333-b-patch-6",
+    "head_sha": "a5daed8895fbb0ef7d51499923a057880d4c89c1",
+    "head_repo_id": 1360142636,
+    "head_repo_full_name": "Michael-Ellis819/Virtual_Group_K_SEN381_Project",
+    "merge_commit_sha": "b3426e635050fc84c284fceaf1dbdd586289cb08",
+    "user": {
+      "login": "Bianca333-b",
+      "name": "Bianca333-b",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/142215631?v=4",
+      "id": 142215631
+    },
+    "requested_reviewers": null,
+    "requested_team_reviewers": null,
+    "diff": "",
+    "comments": [
+      {
+        "url": "https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/pull/15#pullrequestreview-5493786059",
+        "body": "",
+        "user": {
+          "login": "Michael-Ellis819",
+          "name": "Michael-Ellis819",
+          "email": null,
+          "avatar_url": "https://avatars.githubusercontent.com/u/211099388?u=22f046f08ef251b8de8757465c67172d6172b053&v=4",
+          "id": 211099388
+        },
+        "id": 5493786059,
+        "pull_request_review_id": null,
+        "in_reply_to_id": null,
+        "created_at": "2026-10-12T16:56:31Z",
+        "updated_at": null,
+        "review": "APPROVED",
+        "side": null,
+        "line": null,
+        "start_line": null,
+        "path": null,
+        "body_html": ""
+      },
+      {
+        "url": "https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/pull/15#pullrequestreview-5494860874",
+        "body": "",
+        "user": {
+          "login": "RinNoKaze",
+          "name": "RinNoKaze",
+          "email": null,
+          "avatar_url": "https://avatars.githubusercontent.com/u/199754486?u=9a154a037c1843ce8ac1297a34b0ef18013743f6&v=4",
+          "id": 199754486
+        },
+        "id": 5494860874,
+        "pull_request_review_id": null,
+        "in_reply_to_id": null,
+        "created_at": "2026-10-12T18:54:40Z",
+        "updated_at": null,
+        "review": "APPROVED",
+        "side": null,
+        "line": null,
+        "start_line": null,
+        "path": null,
+        "body_html": ""
+      }
+    ],
+    "created_at": "2026-10-12T16:55:45Z",
+    "updated_at": "2026-10-12T18:54:40Z",
+    "closed_at": null,
+    "merged_at": null,
+    "commits": 1,
+    "changed_files": 1,
+    "additions": 0,
+    "deletions": 0,
+    "display_url": "https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/pull/15",
+    "display_title": "my parts"
+  },
+  "workflowRun": {
+    "id": 38218128326,
+    "commit": "f1b11d7f36a8e67570052ddf073879a2c3f35117",
+    "url": "https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/38218128326",
+    "jobs": [
+      {
+        "id": 114707580956,
+        "name": "civicconnect-build-and-check",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 38218128326,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Initialize containers",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Run actions/setup-dotnet@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Build verification project",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Run existing verification checks",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Build database tests",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7
+          },
+          {
+            "name": "Run database integration tests",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8
+          },
+          {
+            "name": "Post Run actions/setup-dotnet@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 15
+          },
+          {
+            "name": "Stop containers",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 16
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 17
+          }
+        ]
+      }
+    ]
+  }
+}

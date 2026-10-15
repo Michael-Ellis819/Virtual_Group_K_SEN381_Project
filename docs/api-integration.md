@@ -1,3 +1,25 @@
+# Current M3 API contract - 13 October 2026
+
+This section supersedes dated implementation statements in the retained M2 contract below. The API remains inside the same web application; this does not add a public third-party API.
+
+| Route | Input and outcome |
+| --- | --- |
+| GET /requests/{id} | Non-empty UUID. 200 filtered details; 400 invalid UUID; 401 signed out; 404 absent or inaccessible; generic 500 on an unexpected failure. |
+| GET /requests/antiforgery | Authenticated caller obtains a requestToken and antiforgery cookie for a later mutation. |
+| POST /requests/{id}/status | Cookie plus X-CSRF-TOKEN and antiforgery cookie. JSON: expectedStatus, targetStatus, feedback. 204 committed; 400 invalid input/transition or failed antiforgery; 401 signed out; 404 absent or unauthorised; 409 stale status/version; generic 500 on store failure. |
+
+Feedback must contain non-whitespace text and be at most 2,000 .NET string code units, matching a conservative bound for the existing note column. Rejection requires a reason; resolution requires a summary. The mandatory public feedback field supplies those explanations. Identity, role, category and audit actor are derived from the protected server principal, never the body or query.
+
+Only category-authorised active Staff may mutate. Requesters may read their own record; they cannot mutate it. Unknown, inactive or ambiguous identities fail closed. Missing and inaccessible records share a public 404 title. All responses use Cache-Control: no-store. A 409 requires refresh and deliberate retry, not automatic replay.
+
+Lifecycle: New -> Assigned -> In Progress -> Resolved -> Closed; New -> Rejected. Closed and Rejected are terminal. This route does not assign an actual owner; FR-009 remains pending.
+
+RequestStatusService coordinates permission and business rules; StatusTransitionService owns legal edges; EfRequestStatusWriter owns the transaction and version check. Success means status, previous/new status history, actor/time and public feedback committed together. Any required write failure rolls back. Direct non-HTTP service calls receive the same action checks.
+
+Evidence: [test specifications](testing-m3.md) and [execution](evidence/m3/integration.txt). Live credentials, account provisioning/revalidation, requester submission and a browser workflow remain pending. Test tickets do not demonstrate real login. Antiforgery follows the [Microsoft guidance](https://learn.microsoft.com/en-us/aspnet/core/security/anti-request-forgery?view=aspnetcore-8.0).
+
+## Retained M2 contract history
+
 # Initial interface and integration contract
 
 Owner: Cameron. Contract date: 30 September 2026. Decisions: ADR-M2-05 and ADR-M2-06.

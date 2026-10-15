@@ -1,0 +1,13 @@
+{
+  "executor": "Cameron Purdon 601963",
+  "started_at": "2026-10-13T18:18:47.0856643+02:00",
+  "commit": "f774bf851e6b0c8d69cd9b37f6849fb0d853d661",
+  "branch": "feature/cameron-m3-integration",
+  "database": "civicconnect_personal_20261013_181846_test",
+  "database_host": "127.0.0.1:55438",
+  "database_user": "civicconnect_test",
+  "database_authentication": "Trust on an isolated loopback test cluster; no production credentials",
+  "scope": "Status-management API slice with synthetic identities; no real login/submission/reporting UI claim",
+  "result": "Passed local builds, three harnesses, restored negative gate probe and dependency gate",
+  "finished_at": "2026-10-13T18:19:10.9572149+02:00"
+}

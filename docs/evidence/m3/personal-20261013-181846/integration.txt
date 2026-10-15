@@ -1,0 +1,23 @@
+PASS C01 legal lifecycle edges [FR-010 TC-ST-01/03]
+PASS C02 all 31 prohibited edges and unknown state [FR-010 TC-ST-02/05]
+PASS C03 direct requester mutation denied before writing [NFR-001 TC-ST-06]
+PASS C04 invalid transition does not call writer [FR-010 TC-ST-08/10/11]
+PASS C05 optimistic conflict maps to conflict [R-050 TC-ST-14]
+PASS C06 legal operation passes actor, version and feedback [FR-010 TC-ST-07/09]
+ENVIRONMENT Staging; Release test host; HTTPS loopback; PostgreSQL; synthetic identities issued only by test executable.
+ASSEMBLY 1.0.0.0
+PASS BB01 feedback length 1 accepted [BVA API contract FR-010]
+PASS BB02 feedback length 2000 accepted [BVA API contract]
+PASS BB03 feedback length 2001 rejected with no writes [BVA API contract]
+PASS BB04 empty whitespace and unknown target rejected [EP TC-ST-04/05]
+PASS BB05 requester and wrong-category writes denied [EP NFR-001 TC-ST-06]
+PASS A01 missing antiforgery rejected [security contract]
+PASS A02 signed-out mutation denied [FR-016 partial]
+PASS A03 stale expected status returns 409 [R-050]
+PASS A04 missing and inaccessible share 404 title [NFR-001]
+PASS A05 database failure gives safe 500 and rolls back [NFR-003/008 TC-ST-13]
+PASS E01 staff lifecycle to requester read and durable audit [FR-003/005/010/012/015]
+PASS E02 reject with reason; own feedback; no reopening or foreign disclosure [FR-003/005/010]
+PASS A06 changed category/version prevents stale authorised write [R-049/050]
+RESULT 19 cases passed; 0 failed. E01/E02 cover the status-management API slice, not login/submission/reporting UI.
+PROCESS_EXIT_CODE=0

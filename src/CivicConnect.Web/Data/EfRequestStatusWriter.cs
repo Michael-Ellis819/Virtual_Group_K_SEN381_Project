@@ -1,19 +1,25 @@
 
 using CivicConnect.Data.Entities;
+using CivicConnect.Application;
 using Microsoft.EntityFrameworkCore;
 
 namespace CivicConnect.Data;
 
 public sealed class EfRequestStatusWriter(
-    CivicConnectDbContext dbContext)
+    CivicConnectDbContext dbContext) : IRequestStatusWriter
 {
+    public Task SaveAsync(StatusChange change, CancellationToken cancellationToken)
+        => SaveStatusChangeAsync(change.RequestId, change.PreviousStatus, change.NewStatus,
+            change.ActorId, change.Feedback, cancellationToken, change.ExpectedVersion);
+
     public async Task SaveStatusChangeAsync(
         Guid requestId,
         string expectedCurrentStatus,
         string newStatus,
         string changedByUserId,
         string feedback,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default,
+        long? expectedVersion = null)
     {
         if (requestId == Guid.Empty ||
             string.IsNullOrWhiteSpace(expectedCurrentStatus) ||
@@ -40,7 +46,8 @@ public sealed class EfRequestStatusWriter(
                 "Request was not found.");
         }
 
-        if (request.Status != expectedCurrentStatus)
+        if (request.Status != expectedCurrentStatus ||
+            (expectedVersion.HasValue && request.Version != expectedVersion.Value))
         {
             throw new DbUpdateConcurrencyException(
                 "The request status has changed.");

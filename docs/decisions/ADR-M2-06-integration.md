@@ -29,3 +29,7 @@ Version the current contract with its consumer in the same repository. No /v1 bo
 
 ## Sources
 Virtual Group K (2026), Assignment 2 Virtual Group K.docx, Task 1 Problem 1, Task 3 and Task 5. SEN381 Teaching Team (2026), Week 3 Day 3 SO16 APIs and Integration Engineering, sections 3 and 4 and failure/contract guidance. Supplied project material.
+
+## M3 later consequence - 13 October 2026
+
+The explicit coordination decision is retained. RequestsController -> RequestStatusService -> access policy / StatusTransitionService -> IRequestStatusWriter / EfRequestStatusWriter. HTTP contract now includes antiforgery-protected POST status, 204/400/401/404/409/safe 500. Michael's transaction saves status, history and public feedback; A05 verifies rollback, E01/E02 complete the status journeys. Writer receives observed version to reject a changed permission context (A06). No broker or public external API is added. Creation idempotency and real login are unimplemented. Credible simulated Staging is verified; normal application deployment remains unverified. CR-M3-C01 records impact; combined work reviewed by Bianca and Michael on 14 October; PR17 has both approvals, is merged and passes combined main CI 38594557024.

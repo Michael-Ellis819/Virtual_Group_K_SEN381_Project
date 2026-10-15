@@ -34,3 +34,7 @@ Changes to role, category or ownership rules affect this ADR, DTOs, contract, te
 - Virtual Group K (2026), Assignment 2 Virtual Group K.docx, Task 1 Problem 2 and Task 5, supplied main snapshot.
 - Microsoft (n.d.), Resource-based authorization in ASP.NET Core MVC: https://learn.microsoft.com/en-us/aspnet/core/mvc/security/authorization/resource-based (accessed 30 September 2026).
 - OWASP Foundation (n.d.), Authorization Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html (accessed 30 September 2026).
+
+## M3 later consequence - 13 October 2026
+
+The central policy is retained and extended with CanChangeStatus. Active category-authorised Staff may mutate; requester read ownership grants no mutation rights. RequestStatusService applies the action check for direct and HTTP callers. C03/BB05/A06 passed; E01 verifies owner note filtering after writes. Version transfer closes the stale-category gap between read permission and saving. Live account provisioning/freshness is still unverified. Change impact: CR-M3-C01. Owner: Cameron; combined work reviewed by Bianca and Michael on 14 October; PR17 has both approvals, is merged and passes combined main CI 38594557024.

@@ -1,0 +1,27 @@
+PASS: PostgreSQL connection successful.
+PASS: Request retrieved from database.
+PASS: Reference number is correct.
+PASS: Non-existent request returns null.
+PASS: Both request notes retrieved.
+PASS: Requester-visible note is correctly marked.
+PASS: Staff-only note is correctly marked.
+PASS: Request owner can access their request.
+PASS: Requester cannot see internal staff notes.
+PASS: Other requester is denied access.
+PASS: Assigned staff can see internal notes.
+PASS: Staff from another category is denied.
+PASS: Unauthenticated user is denied.
+PASS: Request version increases after update.
+PASS: Conflicting update is rejected.
+PASS: First successful update is preserved.
+PASS: Status history saved to PostgreSQL.
+PASS: Status-history information is correct.
+PASS: Transaction saved request status.
+PASS: Transaction saved status history.
+PASS: Transaction saved requester feedback.
+PASS: Database write failure detected.
+PASS: Request status rolled back.
+PASS: Status history rolled back.
+PASS: Requester feedback rolled back.
+All database integration checks passed.
+PROCESS_EXIT_CODE=0

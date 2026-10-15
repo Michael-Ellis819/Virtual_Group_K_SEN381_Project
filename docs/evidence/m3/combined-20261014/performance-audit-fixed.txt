@@ -1,0 +1,3 @@
+  Determining projects to restore...
+  Restored D:\uni\year 3\SEN\Milestone 3\CivicConnect\src\CivicConnect.Web\CivicConnect.Web.csproj (in 147 ms).
+  Restored D:\uni\year 3\SEN\Milestone 3\CivicConnect\tests\CivicConnect.PerformanceTests\CivicConnect.PerformanceTests.csproj (in 1.13 sec).
