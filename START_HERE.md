@@ -1,6 +1,6 @@
 # CivicConnect Milestone 3 submission
 
-Prepared for SEN381 Virtual Group K on 14 October 2026.
+Prepared for SEN381 Virtual Group K on 15 October 2026.
 
 ## Submission documents
 
@@ -26,10 +26,9 @@ Prepared for SEN381 Virtual Group K on 14 October 2026.
 - [docs/release-evidence.md](docs/release-evidence.md) — release-readiness assessment and residual risks.
 - [docs/ai-usage.md](docs/ai-usage.md) — AI assistance and human verification record.
 - [docs/submission-information.md](docs/submission-information.md) — candidate, repository, evidence and test/staging access information.
-- [docs/presentation-guide.md](docs/presentation-guide.md) — team demonstration and individual defence preparation.
 
 ## Implementation scope
 
 The repository contains protected persisted request-details reads, central authorisation, filtered response data, PostgreSQL migrations, State transition rules and authorised status updates with transactional history/feedback and concurrency checks. The harnesses demonstrate these paths, including two system journeys in credible simulated Staging.
 
-Real sign-in, request submission, owner assignment, lists/search and reporting remain incomplete. Full pilot-load, recovery and production acceptance are not claimed. Michael's merged PR16 is included locally; the combined branch's publication-specific CI and formal approvals remain separate from the completed offline review. The recorded release classification and reasons are in the Release Evidence Summary.
+The team confirmed the M3 protected read/status increment on 15 October 2026. Its release assessment is CONDITIONALLY READY for controlled simulated staging. Real sign-in, request submission, owner assignment, lists/search and reporting remain unfinished original requirements planned for M4 finalisation. Full pilot-load, recovery and production acceptance are not claimed. PR17 has merged with both teammate approvals and successful combined main CI. Submission date: 15 October 2026.

@@ -1,15 +1,24 @@
-# Release Evidence Summary 14 October 2026
+# Release Evidence Summary 15 October 2026
 
-Current recommendation: **NOT READY**, consistent with Bianca’s completed conformance review. The implemented status increment is satisfactory for tested paths, the separate performance exercise is evidenced and both teammates reviewed the combined work. Michael's PR16 is merged; main CI passes on cb588d4. Its coverage is scoped below. Remote CI/formal repository approvals do not cover the reviewed combined implementation, and known High findings have no specific release disposition recorded.
+Current recommendation: **CONDITIONALLY READY for the agreed M3 increment in controlled simulated staging**. On 15 October 2026, Cameron confirmed that all three members agree with the current M3 work and plan to complete the outstanding original features during M4 finalisation. The protected read/status increment has passing verification, a separate performance exercise, simulated staging, completed peer review and successful combined main CI.
 
 | Area | Evidence | Interpretation |
 | --- | --- | --- |
-| Functional verification | Cameron’s 19 M3, 29 regression and 25 database checks; local post-fix rerun | Tested status/read increment; synthetic identity and broader acceptance limits retained |
-| Performance | Michael PERF-01: 200/200 reads, 1.62 ms mean, 8.69 ms p95, 0.12 s, 1696.16/sec | Small justified database exercise; no separate target; full NFR-002 pilot acceptance unverified |
-| CI | [Main run 38579869423](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/38579869423), commit cb588d4b69b447ca72c11c91d795b7ea0daf91f9; earlier PR16 run 38577509314 | Runs older verification/database, performance and both dependency-report steps; does not execute Cameron's 19 M3 cases. The combined workflow adds strict restore/build audit gates |
-| Conformance and peer review | Bianca and Michael reviewed the combined work on 14 October; [completed Bianca review](reviews/Bianca_M3_Final_Review_Updated.docx) | R-047 closed for tested lifecycle; TD-04 closed for reviewed architecture; deployment/identity/future-route caveats remain |
-| Security | JSON 8.0.0 dependency found, patched to 8.0.5; strict post-fix local audits pass | DEF-M3-C06 fixed locally; dated checks do not prove complete security |
-| Staging/system | E01/E02 pass in Release Staging HTTPS test host | Credible simulated staging is permitted; synthetic identities and normal Program startup difference are recorded |
-| Recovery | Simple rollback/recovery approach documented | Full timed restore and NFR-007 acceptance not claimed |
+| Published implementation | `668795a42d8191600e79ff4decad1642bd3e88b0`; [PR17](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/pull/17), merged 14 October at 18:01:52 SAST | The 15 October submission edits change documentation only; application, tests and workflow match this published baseline |
+| Functional verification | Cameron's personal 19 M3 cases, 29 regression checks and 25 database checks; combined remote run | Required case mix, negative paths, EP/BVA and selected high-priority risks are evidenced; broader acceptance remains limited |
+| Performance | Michael PERF-01: 200/200 reads, 0 failures, 1.62 ms mean, 8.69 ms p95, 0.12 s, 1,696.16 operations/sec | Small database-read exercise; no separate database target; full NFR-002 pilot acceptance unverified |
+| CI and gates | [Main run 38594557024](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/38594557024) succeeds on 668795a | All four projects build/run, including the 19 M3 cases, SDK analysis and dependency checks; the personal forbidden-edge probe demonstrates failure detection |
+| Reviews | PR17 approvals from Bianca and Michael on 14 October; [completed conformance review](reviews/Bianca_M3_Final_Review_Updated.docx) | Two non-author approvals and actual combined-work findings are recorded. Returned GitHub review bodies were empty; no additional written review comments are invented |
+| Security | Patched System.Text.Json 8.0.5 in both affected test projects; combined audit checks pass | DEF-M3-C06 fixed in merged code; dated checks do not prove complete security |
+| Simulated staging | E01/E02 pass in a Release HTTPS Staging test host using real PostgreSQL and synthetic identities | Credible simulation is allowed by M3. Normal web Program remains Development-only; real sign-in is unimplemented |
+| Defects and acceptance | C01/C02 fixed, reviewed and merged; C04/C05 retain recorded limitations | C04 normal deployment is outside the accepted M3 simulation. C05 remains open in original scope for M4 finalisation; original RTM statuses are preserved |
+| Recovery | Rollback approach documented | Timed restore and full NFR-007 acceptance are not claimed; M3 does not introduce a mandatory full recovery programme |
 
-Review completion does not substitute for formal GitHub approvals or a remote run on the combined baseline. Residual uncertainty remains in live permissions, shared-project/writer bypass, HTTP/audit orderings, environment differences and pilot-load/restoration acceptance. Known High findings retain their recorded statuses.
+The agreed M3 scope is retrieval of existing requests with ownership/category access checks and authorised staff status changes through the approved lifecycle, including transactional history/public feedback, invalid-input rejection, rollback and stale-update handling. The demonstration uses prepared data, synthetic identities and the separate HTTPS Staging host. This team decision defines the M3 increment; it does not remove original requirements or establish full-product acceptance.
+
+Residual risks include live permission freshness, simultaneous HTTP/audit timing, callable-writer and shared-project boundaries, environment differences and full pilot-load/recovery acceptance. R-047 and TD-04 remain closed only for the tested lifecycle and reviewed architecture. R-053's combined-CI omission is resolved by the successful run; merge-check enforcement remains a separate control.
+
+
+Conditions: retain the controlled simulated environment and identify the demonstrated candidate; do not use this assessment as approval for real-user or production deployment. Real login, new-request submission, owner assignment, lists/search and reporting remain unfinished original requirements planned for M4 finalisation. Full pilot-load/recovery acceptance and residual permission/concurrency risks remain recorded. Any code or environment change needs the relevant checks before reusing this judgement.
+
+Bianca's completed review dated 14 October remains a historical conformance record. This 15 October assessment incorporates the team scope agreement confirmed by Cameron.

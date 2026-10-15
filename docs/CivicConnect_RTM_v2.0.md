@@ -72,7 +72,7 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Issue / PR / code | Planned. Design source PR #10 (architecture) / #11 (data/technology); no application implementation for this row. |
 | Test evidence | Creation and input validation not implemented |
 | Change reference | M2 consolidation 2026-09-30; requirement/AC unchanged; M3 2026-10-13: evidence evolved; requirement/AC unchanged; CR-M3-C01. |
-| Release evidence | Reviewed 14 Oct 2026; baseline 3760605 (local tag). NOT READY; PED Section 14; docs/release-evidence.md. |
+| Release evidence | 15 Oct 2026; 668795a; PR17/CI pass. CONDITIONALLY READY: agreed M3 read/status increment, simulated staging only. PED Section 14. |
 | Implementation status | Planned |
 | ASR / quality driver | Integrity; pilot performance |
 | Architecture / module | Submission service (planned) |
@@ -99,7 +99,7 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Issue / PR / code | Planned. Design source PR #10 (architecture) / #11 (data/technology); no application implementation for this row. |
 | Test evidence | Controlled catalogue and persistent keys not implemented |
 | Change reference | M2 consolidation 2026-09-30; requirement/AC unchanged; M3 2026-10-13: evidence evolved; requirement/AC unchanged; CR-M3-C01. |
-| Release evidence | Reviewed 14 Oct 2026; baseline 3760605 (local tag). NOT READY; PED Section 14; docs/release-evidence.md. |
+| Release evidence | 15 Oct 2026; 668795a; PR17/CI pass. CONDITIONALLY READY: agreed M3 read/status increment, simulated staging only. PED Section 14. |
 | Implementation status | Planned |
 | ASR / quality driver | Integrity |
 | Architecture / module | Category catalogue (planned) |
@@ -123,10 +123,10 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Priority | High |
 | Acceptance IDs | AC-FR-003-1; AC-FR-003-2 |
 | Design reference | ADR-M2-01; ADR-M2-03; ADR-M2-04; ADR-M2-05; ADR-M2-06; docs/decisions/README.md |
-| Issue / PR / code | src/CivicConnect.Web/: RequestQueryService; RequestAccessPolicy; EfRequestReader; RequestStatusService. M2 PR12; M3 PR14; reviewed combined baseline 3760605 (14 Oct 2026). |
+| Issue / PR / code | src/CivicConnect.Web/: RequestQueryService; RequestAccessPolicy; EfRequestReader; RequestStatusService. M2 PR12; M3 PR14; published combined implementation 668795a (PR17). |
 | Test evidence | E01/E02/A04; S01/S03/H04/H05/H07; passed 2026-10-13 where mapped; docs/testing-m3.md. |
-| Change reference | M2 requirement/AC unchanged; CR-M3-C01, 13 Oct 2026. Combined conformance review completed 14 Oct 2026; baseline 3760605. |
-| Release evidence | Reviewed 14 Oct 2026; baseline 3760605 (local tag). NOT READY; PED Section 14; docs/release-evidence.md. |
+| Change reference | M2 requirement/AC unchanged; CR-M3-C01 retained. Bianca/Michael review and PR17 approvals: 14 Oct. Published 668795a; CI verified; docs 15 Oct 2026. |
+| Release evidence | 15 Oct 2026; 668795a; PR17/CI pass. CONDITIONALLY READY: agreed M3 read/status increment, simulated staging only. PED Section 14. |
 | Implementation status | In Development |
 | ASR / quality driver | Access isolation |
 | Architecture / module | RequestsController; RequestQueryService |
@@ -153,7 +153,7 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Issue / PR / code | Planned. Design source PR #10 (architecture) / #11 (data/technology); no application implementation for this row. |
 | Test evidence | List/history query not implemented |
 | Change reference | M2 consolidation 2026-09-30; requirement/AC unchanged; M3 2026-10-13: evidence evolved; requirement/AC unchanged; CR-M3-C01. |
-| Release evidence | Reviewed 14 Oct 2026; baseline 3760605 (local tag). NOT READY; PED Section 14; docs/release-evidence.md. |
+| Release evidence | 15 Oct 2026; 668795a; PR17/CI pass. CONDITIONALLY READY: agreed M3 read/status increment, simulated staging only. PED Section 14. |
 | Implementation status | Planned |
 | ASR / quality driver | Access isolation |
 | Architecture / module | Requester history query (planned) |
@@ -177,10 +177,10 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Priority | Medium |
 | Acceptance IDs | AC-FR-005-1; AC-FR-005-2 |
 | Design reference | ADR-M2-02; ADR-M2-03; ADR-M2-04; ADR-M2-06; docs/decisions/README.md |
-| Issue / PR / code | src/CivicConnect.Web/: RequestStatusService; EfRequestStatusWriter; EfRequestReader. M2 PR12; M3 PR14; reviewed combined baseline 3760605 (14 Oct 2026). |
+| Issue / PR / code | src/CivicConnect.Web/: RequestStatusService; EfRequestStatusWriter; EfRequestReader. M2 PR12; M3 PR14; published combined implementation 668795a (PR17). |
 | Test evidence | E01/E02; passed 2026-10-13 where mapped; docs/testing-m3.md. |
-| Change reference | M2 requirement/AC unchanged; CR-M3-C01, 13 Oct 2026. Combined conformance review completed 14 Oct 2026; baseline 3760605. |
-| Release evidence | Reviewed 14 Oct 2026; baseline 3760605 (local tag). NOT READY; PED Section 14; docs/release-evidence.md. |
+| Change reference | M2 requirement/AC unchanged; CR-M3-C01 retained. Bianca/Michael review and PR17 approvals: 14 Oct. Published 668795a; CI verified; docs 15 Oct 2026. |
+| Release evidence | 15 Oct 2026; 668795a; PR17/CI pass. CONDITIONALLY READY: agreed M3 read/status increment, simulated staging only. PED Section 14. |
 | Implementation status | In Development |
 | ASR / quality driver | Integrity; access isolation |
 | Architecture / module | RequestStatusService; transactional public feedback; authorised feedback projection |
@@ -204,10 +204,10 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Priority | High |
 | Acceptance IDs | AC-FR-006-1; AC-FR-006-2 |
 | Design reference | ADR-M2-03; ADR-M2-04; ADR-M2-05; ADR-M2-06; docs/decisions/README.md |
-| Issue / PR / code | src/CivicConnect.Web/: RequestAccessPolicy; request detail boundary only. M2 PR12; M3 PR14; reviewed combined baseline 3760605 (14 Oct 2026). |
+| Issue / PR / code | src/CivicConnect.Web/: RequestAccessPolicy; request detail boundary only. M2 PR12; M3 PR14; published combined implementation 668795a (PR17). |
 | Test evidence | S05/H09/BB05; passed 2026-10-13 where mapped; docs/testing-m3.md. |
-| Change reference | M2 requirement/AC unchanged; CR-M3-C01, 13 Oct 2026. Combined conformance review completed 14 Oct 2026; baseline 3760605. |
-| Release evidence | Reviewed 14 Oct 2026; baseline 3760605 (local tag). NOT READY; PED Section 14; docs/release-evidence.md. |
+| Change reference | M2 requirement/AC unchanged; CR-M3-C01 retained. Bianca/Michael review and PR17 approvals: 14 Oct. Published 668795a; CI verified; docs 15 Oct 2026. |
+| Release evidence | 15 Oct 2026; 668795a; PR17/CI pass. CONDITIONALLY READY: agreed M3 read/status increment, simulated staging only. PED Section 14. |
 | Implementation status | In Development |
 | ASR / quality driver | Access isolation |
 | Architecture / module | Staff list query (planned) |
@@ -234,7 +234,7 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Issue / PR / code | Planned. Design source PR #10 (architecture) / #11 (data/technology); no application implementation for this row. |
 | Test evidence | No search, sorting or load evidence |
 | Change reference | M2 consolidation 2026-09-30; requirement/AC unchanged; M3 2026-10-13: evidence evolved; requirement/AC unchanged; CR-M3-C01. |
-| Release evidence | Reviewed 14 Oct 2026; baseline 3760605 (local tag). NOT READY; PED Section 14; docs/release-evidence.md. |
+| Release evidence | 15 Oct 2026; 668795a; PR17/CI pass. CONDITIONALLY READY: agreed M3 read/status increment, simulated staging only. PED Section 14. |
 | Implementation status | Planned |
 | ASR / quality driver | Pilot performance; access isolation |
 | Architecture / module | Search/filter query (planned) |
@@ -258,10 +258,10 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Priority | High |
 | Acceptance IDs | AC-FR-008-1; AC-FR-008-2 |
 | Design reference | ADR-M2-01; ADR-M2-03; ADR-M2-04; ADR-M2-05; ADR-M2-06; docs/decisions/README.md |
-| Issue / PR / code | src/CivicConnect.Web/: RequestQueryService; RequestAccessPolicy; EfRequestReader. M2 PR12; M3 PR14; reviewed combined baseline 3760605 (14 Oct 2026). |
+| Issue / PR / code | src/CivicConnect.Web/: RequestQueryService; RequestAccessPolicy; EfRequestReader. M2 PR12; M3 PR14; published combined implementation 668795a (PR17). |
 | Test evidence | S04/S05/H08/H09; database checks; passed 2026-10-13 where mapped; docs/testing-m3.md. |
-| Change reference | M2 requirement/AC unchanged; CR-M3-C01, 13 Oct 2026. Combined conformance review completed 14 Oct 2026; baseline 3760605. |
-| Release evidence | Reviewed 14 Oct 2026; baseline 3760605 (local tag). NOT READY; PED Section 14; docs/release-evidence.md. |
+| Change reference | M2 requirement/AC unchanged; CR-M3-C01 retained. Bianca/Michael review and PR17 approvals: 14 Oct. Published 668795a; CI verified; docs 15 Oct 2026. |
+| Release evidence | 15 Oct 2026; 668795a; PR17/CI pass. CONDITIONALLY READY: agreed M3 read/status increment, simulated staging only. PED Section 14. |
 | Implementation status | In Development |
 | ASR / quality driver | Access isolation |
 | Architecture / module | RequestsController; RequestQueryService |
@@ -288,7 +288,7 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Issue / PR / code | Planned. Design source PR #10 (architecture) / #11 (data/technology); no application implementation for this row. |
 | Test evidence | Database concurrency mechanism and simultaneous-claim test pending |
 | Change reference | M2 consolidation 2026-09-30; requirement/AC unchanged; M3 2026-10-13: evidence evolved; requirement/AC unchanged; CR-M3-C01. |
-| Release evidence | Reviewed 14 Oct 2026; baseline 3760605 (local tag). NOT READY; PED Section 14; docs/release-evidence.md. |
+| Release evidence | 15 Oct 2026; 668795a; PR17/CI pass. CONDITIONALLY READY: agreed M3 read/status increment, simulated staging only. PED Section 14. |
 | Implementation status | Planned |
 | ASR / quality driver | Integrity |
 | Architecture / module | Assignment service (planned) |
@@ -312,10 +312,10 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Priority | High |
 | Acceptance IDs | AC-FR-010-1; AC-FR-010-2 |
 | Design reference | ADR-M2-02; ADR-M2-03; ADR-M2-04; ADR-M2-05; ADR-M2-06; docs/decisions/README.md |
-| Issue / PR / code | src/CivicConnect.Web/: StatusTransitionService; RequestStatusService; EfRequestStatusWriter. M2 PR12; M3 PR14; reviewed combined baseline 3760605 (14 Oct 2026). |
+| Issue / PR / code | src/CivicConnect.Web/: StatusTransitionService; RequestStatusService; EfRequestStatusWriter. M2 PR12; M3 PR14; published combined implementation 668795a (PR17). |
 | Test evidence | C01-C06; BB05; A03/A05/A06; E01/E02; passed 2026-10-13 where mapped; docs/testing-m3.md. |
-| Change reference | M2 requirement/AC unchanged; CR-M3-C01, 13 Oct 2026. Combined conformance review completed 14 Oct 2026; baseline 3760605. |
-| Release evidence | Reviewed 14 Oct 2026; baseline 3760605 (local tag). NOT READY; PED Section 14; docs/release-evidence.md. |
+| Change reference | Original requirement/AC unchanged. CR-M3-C03: team M3 scope confirmed 15 Oct; read/status increment conditionally ready in controlled simulation. PR17 and combined CI complete. |
+| Release evidence | 15 Oct 2026; 668795a; PR17/CI pass. CONDITIONALLY READY: agreed M3 read/status increment, simulated staging only. PED Section 14. |
 | Implementation status | In Development |
 | ASR / quality driver | Integrity; testability |
 | Architecture / module | StatusTransitionService; six State classes; RequestStatusService |
@@ -324,7 +324,7 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | ADR / risk reference | R-011; R-027; R-047 closed for tested lifecycle; TD-04 closed for reviewed architecture (14 Oct 2026). |
 | Current requirement wording | Allow request status changes only through the agreed lifecycle. |
 | Expected / observed result | Legal lifecycle saved with actor/time/history; invalid/unauthorised/stale changes rejected. |
-| Defect or remaining acceptance gap | Peer review/live identity and simultaneous HTTP/audit check pending. See docs/defects.md and technical-debt.md. |
+| Defect or remaining acceptance gap | Synthetic identities; simultaneous HTTP/audit coverage limited. Team accepts controlled M3 simulation; live accounts and full product remain incomplete for M4 finalisation. |
 | M3 execution evidence | docs/testing-m3.md; docs/evidence/m3/personal-20261013-181846/ (integration.txt, regression.txt, database.txt; mapped IDs in column I). |
 | Evidence date / executor | 2026-10-13 18:18-18:19 SAST; Cameron Purdon 601963; f774bf8. |
 
@@ -339,10 +339,10 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Priority | High |
 | Acceptance IDs | AC-FR-011-1; AC-FR-011-2 |
 | Design reference | ADR-M2-03; ADR-M2-04; ADR-M2-05; ADR-M2-06; docs/decisions/README.md |
-| Issue / PR / code | src/CivicConnect.Web/: DTO note filtering; EfRequestStatusWriter public feedback. M2 PR12; M3 PR14; reviewed combined baseline 3760605 (14 Oct 2026). |
+| Issue / PR / code | src/CivicConnect.Web/: DTO note filtering; EfRequestStatusWriter public feedback. M2 PR12; M3 PR14; published combined implementation 668795a (PR17). |
 | Test evidence | S02/H05; BB03/BB04; E01/E02; passed 2026-10-13 where mapped; docs/testing-m3.md. |
-| Change reference | M2 requirement/AC unchanged; CR-M3-C01, 13 Oct 2026. Combined conformance review completed 14 Oct 2026; baseline 3760605. |
-| Release evidence | Reviewed 14 Oct 2026; baseline 3760605 (local tag). NOT READY; PED Section 14; docs/release-evidence.md. |
+| Change reference | M2 requirement/AC unchanged; CR-M3-C01 retained. Bianca/Michael review and PR17 approvals: 14 Oct. Published 668795a; CI verified; docs 15 Oct 2026. |
+| Release evidence | 15 Oct 2026; 668795a; PR17/CI pass. CONDITIONALLY READY: agreed M3 read/status increment, simulated staging only. PED Section 14. |
 | Implementation status | In Development |
 | ASR / quality driver | Access isolation; integrity |
 | Architecture / module | RequestQueryService note projection; transactional status-related public-note writer; general note workflow unimplemented |
@@ -366,10 +366,10 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Priority | High |
 | Acceptance IDs | AC-FR-012-1; AC-FR-012-2 |
 | Design reference | ADR-M2-02; ADR-M2-03; ADR-M2-04; ADR-M2-05; ADR-M2-06; docs/decisions/README.md |
-| Issue / PR / code | src/CivicConnect.Web/: StatusTransitionService; RequestStatusService; status POST. M2 PR12; M3 PR14; reviewed combined baseline 3760605 (14 Oct 2026). |
+| Issue / PR / code | src/CivicConnect.Web/: StatusTransitionService; RequestStatusService; status POST. M2 PR12; M3 PR14; published combined implementation 668795a (PR17). |
 | Test evidence | E01/E02; C01/C02; passed 2026-10-13 where mapped; docs/testing-m3.md. |
-| Change reference | M2 requirement/AC unchanged; CR-M3-C01, 13 Oct 2026. Combined conformance review completed 14 Oct 2026; baseline 3760605. |
-| Release evidence | Reviewed 14 Oct 2026; baseline 3760605 (local tag). NOT READY; PED Section 14; docs/release-evidence.md. |
+| Change reference | M2 requirement/AC unchanged; CR-M3-C01 retained. Bianca/Michael review and PR17 approvals: 14 Oct. Published 668795a; CI verified; docs 15 Oct 2026. |
+| Release evidence | 15 Oct 2026; 668795a; PR17/CI pass. CONDITIONALLY READY: agreed M3 read/status increment, simulated staging only. PED Section 14. |
 | Implementation status | In Development |
 | ASR / quality driver | Integrity; access isolation |
 | Architecture / module | RequestStatusService; State rules for resolution and closure; transactional history/feedback writer |
@@ -396,7 +396,7 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Issue / PR / code | Planned. Design source PR #10 (architecture) / #11 (data/technology); no application implementation for this row. |
 | Test evidence | No report implementation |
 | Change reference | M2 consolidation 2026-09-30; requirement/AC unchanged; M3 2026-10-13: evidence evolved; requirement/AC unchanged; CR-M3-C01. |
-| Release evidence | Reviewed 14 Oct 2026; baseline 3760605 (local tag). NOT READY; PED Section 14; docs/release-evidence.md. |
+| Release evidence | 15 Oct 2026; 668795a; PR17/CI pass. CONDITIONALLY READY: agreed M3 read/status increment, simulated staging only. PED Section 14. |
 | Implementation status | Planned |
 | ASR / quality driver | Pilot performance; access isolation |
 | Architecture / module | Management reporting (planned) |
@@ -423,7 +423,7 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Issue / PR / code | Planned. Design source PR #10 (architecture) / #11 (data/technology); no application implementation for this row. |
 | Test evidence | No grouping report implementation |
 | Change reference | M2 consolidation 2026-09-30; requirement/AC unchanged; M3 2026-10-13: evidence evolved; requirement/AC unchanged; CR-M3-C01. |
-| Release evidence | Reviewed 14 Oct 2026; baseline 3760605 (local tag). NOT READY; PED Section 14; docs/release-evidence.md. |
+| Release evidence | 15 Oct 2026; 668795a; PR17/CI pass. CONDITIONALLY READY: agreed M3 read/status increment, simulated staging only. PED Section 14. |
 | Implementation status | Planned |
 | ASR / quality driver | Pilot performance; access isolation |
 | Architecture / module | Management category/status report (planned) |
@@ -447,10 +447,10 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Priority | High |
 | Acceptance IDs | AC-FR-015-1; AC-FR-015-2 |
 | Design reference | ADR-M2-03; ADR-M2-04; ADR-M2-05; ADR-M2-06; docs/decisions/README.md |
-| Issue / PR / code | src/CivicConnect.Web/: RequestStatusHistoryEntity; EfRequestStatusWriter. M2 PR12; M3 PR14; reviewed combined baseline 3760605 (14 Oct 2026). |
+| Issue / PR / code | src/CivicConnect.Web/: RequestStatusHistoryEntity; EfRequestStatusWriter. M2 PR12; M3 PR14; published combined implementation 668795a (PR17). |
 | Test evidence | E01; database checks; passed 2026-10-13 where mapped; docs/testing-m3.md. |
-| Change reference | M2 requirement/AC unchanged; CR-M3-C01, 13 Oct 2026. Combined conformance review completed 14 Oct 2026; baseline 3760605. |
-| Release evidence | Reviewed 14 Oct 2026; baseline 3760605 (local tag). NOT READY; PED Section 14; docs/release-evidence.md. |
+| Change reference | M2 requirement/AC unchanged; CR-M3-C01 retained. Bianca/Michael review and PR17 approvals: 14 Oct. Published 668795a; CI verified; docs 15 Oct 2026. |
+| Release evidence | 15 Oct 2026; 668795a; PR17/CI pass. CONDITIONALLY READY: agreed M3 read/status increment, simulated staging only. PED Section 14. |
 | Implementation status | In Development |
 | ASR / quality driver | Integrity; access isolation |
 | Architecture / module | Accountability reporting (planned) |
@@ -474,10 +474,10 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Priority | High |
 | Acceptance IDs | AC-FR-016-1; AC-FR-016-2 |
 | Design reference | ADR-M2-01; ADR-M2-03; ADR-M2-04; ADR-M2-05; ADR-M2-06; docs/decisions/README.md |
-| Issue / PR / code | src/CivicConnect.Web/: Cookie authentication; central action/read policy. M2 PR12; M3 PR14; reviewed combined baseline 3760605 (14 Oct 2026). |
+| Issue / PR / code | src/CivicConnect.Web/: Cookie authentication; central action/read policy. M2 PR12; M3 PR14; published combined implementation 668795a (PR17). |
 | Test evidence | A02/BB05; S07-S12/H02/H03; passed 2026-10-13 where mapped; docs/testing-m3.md. |
-| Change reference | M2 requirement/AC unchanged; CR-M3-C01, 13 Oct 2026. Combined conformance review completed 14 Oct 2026; baseline 3760605. |
-| Release evidence | Reviewed 14 Oct 2026; baseline 3760605 (local tag). NOT READY; PED Section 14; docs/release-evidence.md. |
+| Change reference | M2 requirement/AC unchanged; CR-M3-C01 retained. Bianca/Michael review and PR17 approvals: 14 Oct. Published 668795a; CI verified; docs 15 Oct 2026. |
+| Release evidence | 15 Oct 2026; 668795a; PR17/CI pass. CONDITIONALLY READY: agreed M3 read/status increment, simulated staging only. PED Section 14. |
 | Implementation status | In Development |
 | ASR / quality driver | Access isolation |
 | Architecture / module | Framework cookie gate and RequestAccessPolicy |
@@ -504,7 +504,7 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Issue / PR / code | Planned. Design source PR #10 (architecture) / #11 (data/technology); no application implementation for this row. |
 | Test evidence | No priority mutation implementation |
 | Change reference | M2 consolidation 2026-09-30; requirement/AC unchanged; M3 2026-10-13: evidence evolved; requirement/AC unchanged; CR-M3-C01. |
-| Release evidence | Reviewed 14 Oct 2026; baseline 3760605 (local tag). NOT READY; PED Section 14; docs/release-evidence.md. |
+| Release evidence | 15 Oct 2026; 668795a; PR17/CI pass. CONDITIONALLY READY: agreed M3 read/status increment, simulated staging only. PED Section 14. |
 | Implementation status | Planned |
 | ASR / quality driver | Integrity; access isolation |
 | Architecture / module | Priority update service (planned) |
@@ -531,7 +531,7 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Issue / PR / code | Planned. Design source PR #10 (architecture) / #11 (data/technology); no application implementation for this row. |
 | Test evidence | No due-date/overdue implementation |
 | Change reference | M2 consolidation 2026-09-30; requirement/AC unchanged; M3 2026-10-13: evidence evolved; requirement/AC unchanged; CR-M3-C01. |
-| Release evidence | Reviewed 14 Oct 2026; baseline 3760605 (local tag). NOT READY; PED Section 14; docs/release-evidence.md. |
+| Release evidence | 15 Oct 2026; 668795a; PR17/CI pass. CONDITIONALLY READY: agreed M3 read/status increment, simulated staging only. PED Section 14. |
 | Implementation status | Planned |
 | ASR / quality driver | Integrity; pilot performance |
 | Architecture / module | Due-date service and overdue query (planned) |
@@ -555,10 +555,10 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Priority | High |
 | Acceptance IDs | AC-NFR-001-1; AC-NFR-001-2 |
 | Design reference | ADR-M2-01; ADR-M2-03; ADR-M2-04; ADR-M2-05; ADR-M2-06; docs/decisions/README.md |
-| Issue / PR / code | src/CivicConnect.Web/: RequestAccessPolicy; filtered DTO; versioned status command. M2 PR12; M3 PR14; reviewed combined baseline 3760605 (14 Oct 2026). |
+| Issue / PR / code | src/CivicConnect.Web/: RequestAccessPolicy; filtered DTO; versioned status command. M2 PR12; M3 PR14; published combined implementation 668795a (PR17). |
 | Test evidence | C03/BB05/A04/A06/E01/E02; S02-S12; passed 2026-10-13 where mapped; docs/testing-m3.md. |
-| Change reference | M2 requirement/AC unchanged; CR-M3-C01, 13 Oct 2026. Combined conformance review completed 14 Oct 2026; baseline 3760605. |
-| Release evidence | Reviewed 14 Oct 2026; baseline 3760605 (local tag). NOT READY; PED Section 14; docs/release-evidence.md. |
+| Change reference | M2 requirement/AC unchanged; CR-M3-C01 retained. Bianca/Michael review and PR17 approvals: 14 Oct. Published 668795a; CI verified; docs 15 Oct 2026. |
+| Release evidence | 15 Oct 2026; 668795a; PR17/CI pass. CONDITIONALLY READY: agreed M3 read/status increment, simulated staging only. PED Section 14. |
 | Implementation status | In Development |
 | ASR / quality driver | Access isolation |
 | Architecture / module | RequestAccessPolicy and DTO projection |
@@ -582,10 +582,10 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Priority | Medium |
 | Acceptance IDs | AC-NFR-002-1; AC-NFR-002-2 |
 | Design reference | ADR-M2-01; ADR-M2-03; ADR-M2-04; docs/decisions/README.md |
-| Issue / PR / code | PR16: original source 4a7cebe; current head 7f0417b. tests/CivicConnect.PerformanceTests/Program.cs; EfRequestReader/PostgreSQL. Reviewed combined baseline 3760605. |
+| Issue / PR / code | tests/CivicConnect.PerformanceTests/Program.cs; EfRequestReader/PostgreSQL. PR16 performance merged into combined published implementation 668795a through PR17. |
 | Test evidence | PERF-01: 200 reads, max 10 concurrent; 200 successes, 0 errors; 1.62 ms mean, 0.41 ms median, 8.69 ms p95; 0.12 s; 1696.16 ops/sec. |
-| Change reference | M2 acceptance criteria unchanged. PERF-01 second run confirmed 14 Oct 2026; completed combined review and PR16 CI linked. Full pilot acceptance unverified. |
-| Release evidence | Reviewed 14 Oct 2026; baseline 3760605 (local tag). NOT READY; PED Section 14; docs/release-evidence.md. |
+| Change reference | M2 acceptance criteria unchanged. Original PERF-01 second run confirmed 14 Oct; combined main CI passes on 668795a. Full pilot acceptance remains unverified. |
+| Release evidence | 15 Oct 2026; 668795a; PR17/CI pass. CONDITIONALLY READY: agreed M3 read/status increment, simulated staging only. PED Section 14. |
 | Implementation status | In Development |
 | ASR / quality driver | Pilot performance |
 | Architecture / module | EfRequestReader; EF Core/PostgreSQL; separate concurrent-read benchmark |
@@ -595,7 +595,7 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Current requirement wording | Complete at least 95% of submissions, status views, staff searches and management summaries within 3 seconds at pilot load, with at most 1% failures. |
 | Expected / observed result | No separate database-level target. Observed: 200/200 reads succeed; 1.62 ms mean, 8.69 ms p95. Full user-visible pilot acceptance not established. |
 | Defect or remaining acceptance gap | AC-NFR-002-1/2 unchanged: 1000 requests, 10 users, 10 minutes after 2-minute warm-up; user-visible timings/cold start untested. Exact execution commit not recorded. |
-| M3 execution evidence | PERF-01: docs/evidence/m3-performance-results.txt and m3-performance-run-confirmation.md; execution SHA unconfirmed. PR16 CI, head 7f0417b: https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/38577509314 (performance and dependency audits; not the combined M3 suite). |
+| M3 execution evidence | PERF-01: docs/evidence/m3-performance-results.txt and m3-performance-run-confirmation.md; original execution SHA unconfirmed. Combined main CI on 668795a: https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/38594557024 (all four projects; separate from original human benchmark). |
 | Evidence date / executor | 14 October 2026; Michael Ellis 600332; macOS; SDK 8.0.425; EF Core 8; PostgreSQL 17. Second run confirmed through Cameron. |
 
 ### NFR-003 — Data integrity on save
@@ -609,10 +609,10 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Priority | High |
 | Acceptance IDs | AC-NFR-003-1; AC-NFR-003-2 |
 | Design reference | ADR-M2-02; ADR-M2-03; ADR-M2-04; ADR-M2-06; docs/decisions/README.md |
-| Issue / PR / code | src/CivicConnect.Web/: EF transaction; concurrency version; status coordinator. M2 PR12; M3 PR14; reviewed combined baseline 3760605 (14 Oct 2026). |
+| Issue / PR / code | src/CivicConnect.Web/: EF transaction; concurrency version; status coordinator. M2 PR12; M3 PR14; published combined implementation 668795a (PR17). |
 | Test evidence | A05/A06; E01; database checks; passed 2026-10-13 where mapped; docs/testing-m3.md. |
-| Change reference | M2 requirement/AC unchanged; CR-M3-C01, 13 Oct 2026. Combined conformance review completed 14 Oct 2026; baseline 3760605. |
-| Release evidence | Reviewed 14 Oct 2026; baseline 3760605 (local tag). NOT READY; PED Section 14; docs/release-evidence.md. |
+| Change reference | M2 requirement/AC unchanged; CR-M3-C01 retained. Bianca/Michael review and PR17 approvals: 14 Oct. Published 668795a; CI verified; docs 15 Oct 2026. |
+| Release evidence | 15 Oct 2026; 668795a; PR17/CI pass. CONDITIONALLY READY: agreed M3 read/status increment, simulated staging only. PED Section 14. |
 | Implementation status | In Development |
 | ASR / quality driver | Integrity |
 | Architecture / module | RequestStatusService; EfRequestStatusWriter; transaction and optimistic concurrency |
@@ -639,7 +639,7 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Issue / PR / code | Planned. Design source PR #10 (architecture) / #11 (data/technology); no application implementation for this row. |
 | Test evidence | No representative participant evaluation |
 | Change reference | M2 consolidation 2026-09-30; requirement/AC unchanged; M3 2026-10-13: evidence evolved; requirement/AC unchanged; CR-M3-C01. |
-| Release evidence | Reviewed 14 Oct 2026; baseline 3760605 (local tag). NOT READY; PED Section 14; docs/release-evidence.md. |
+| Release evidence | 15 Oct 2026; 668795a; PR17/CI pass. CONDITIONALLY READY: agreed M3 read/status increment, simulated staging only. PED Section 14. |
 | Implementation status | Planned |
 | ASR / quality driver | Usability supports pilot scope |
 | Architecture / module | Future requester UI |
@@ -666,7 +666,7 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Issue / PR / code | Planned. Design source PR #10 (architecture) / #11 (data/technology); no application implementation for this row. |
 | Test evidence | Landing exists; viewport/keyboard/core-route acceptance pending |
 | Change reference | M2 consolidation 2026-09-30; requirement/AC unchanged; M3 2026-10-13: evidence evolved; requirement/AC unchanged; CR-M3-C01. |
-| Release evidence | Reviewed 14 Oct 2026; baseline 3760605 (local tag). NOT READY; PED Section 14; docs/release-evidence.md. |
+| Release evidence | 15 Oct 2026; 668795a; PR17/CI pass. CONDITIONALLY READY: agreed M3 read/status increment, simulated staging only. PED Section 14. |
 | Implementation status | Planned |
 | ASR / quality driver | Accessibility/responsive presentation |
 | Architecture / module | Razor landing; future functional views |
@@ -690,10 +690,10 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Priority | High |
 | Acceptance IDs | AC-NFR-006-1; AC-NFR-006-2 |
 | Design reference | ADR-M2-01; ADR-M2-03; ADR-M2-04; ADR-M2-06; docs/decisions/README.md |
-| Issue / PR / code | src/CivicConnect.Web/: Secure cookies; temporary HTTPS test host. M2 PR12; M3 PR14; reviewed combined baseline 3760605 (14 Oct 2026). |
+| Issue / PR / code | src/CivicConnect.Web/: Secure cookies; temporary HTTPS test host. M2 PR12; M3 PR14; published combined implementation 668795a (PR17). |
 | Test evidence | M3 suite ran over HTTPS; passed 2026-10-13 where mapped; docs/testing-m3.md. |
-| Change reference | M2 requirement/AC unchanged; CR-M3-C01, 13 Oct 2026. Combined conformance review completed 14 Oct 2026; baseline 3760605. |
-| Release evidence | Reviewed 14 Oct 2026; baseline 3760605 (local tag). NOT READY; PED Section 14; docs/release-evidence.md. |
+| Change reference | M2 requirement/AC unchanged; CR-M3-C01 retained. Bianca/Michael review and PR17 approvals: 14 Oct. Published 668795a; CI verified; docs 15 Oct 2026. |
+| Release evidence | 15 Oct 2026; 668795a; PR17/CI pass. CONDITIONALLY READY: agreed M3 read/status increment, simulated staging only. PED Section 14. |
 | Implementation status | In Development |
 | ASR / quality driver | Secure deployment constraint |
 | Architecture / module | Future HTTPS host and cookie deployment |
@@ -720,7 +720,7 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Issue / PR / code | Planned. Design source PR #10 (architecture) / #11 (data/technology); no application implementation for this row. |
 | Test evidence | RPO/RTO targets retained; no restore evidence |
 | Change reference | M2 consolidation 2026-09-30; requirement/AC unchanged; M3 2026-10-13: evidence evolved; requirement/AC unchanged; CR-M3-C01. |
-| Release evidence | Reviewed 14 Oct 2026; baseline 3760605 (local tag). NOT READY; PED Section 14; docs/release-evidence.md. |
+| Release evidence | 15 Oct 2026; 668795a; PR17/CI pass. CONDITIONALLY READY: agreed M3 read/status increment, simulated staging only. PED Section 14. |
 | Implementation status | Planned |
 | ASR / quality driver | Recovery constraint |
 | Architecture / module | Future backup/restore process |
@@ -744,10 +744,10 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Priority | High |
 | Acceptance IDs | AC-NFR-008-1; AC-NFR-008-2 |
 | Design reference | ADR-M2-01; ADR-M2-04; ADR-M2-05; ADR-M2-06; docs/decisions/README.md |
-| Issue / PR / code | src/CivicConnect.Web/: Generic HTTP exception boundary. M2 PR12; M3 PR14; reviewed combined baseline 3760605 (14 Oct 2026). |
+| Issue / PR / code | src/CivicConnect.Web/: Generic HTTP exception boundary. M2 PR12; M3 PR14; published combined implementation 668795a (PR17). |
 | Test evidence | A05; H12/H13; passed 2026-10-13 where mapped; docs/testing-m3.md. |
-| Change reference | M2 requirement/AC unchanged; CR-M3-C01, 13 Oct 2026. Combined conformance review completed 14 Oct 2026; baseline 3760605. |
-| Release evidence | Reviewed 14 Oct 2026; baseline 3760605 (local tag). NOT READY; PED Section 14; docs/release-evidence.md. |
+| Change reference | M2 requirement/AC unchanged; CR-M3-C01 retained. Bianca/Michael review and PR17 approvals: 14 Oct. Published 668795a; CI verified; docs 15 Oct 2026. |
+| Release evidence | 15 Oct 2026; 668795a; PR17/CI pass. CONDITIONALLY READY: agreed M3 read/status increment, simulated staging only. PED Section 14. |
 | Implementation status | In Development |
 | ASR / quality driver | Privacy and failure behaviour |
 | Architecture / module | Safe error middleware; no private payload logging |
@@ -771,20 +771,20 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Priority | High |
 | Acceptance IDs | AC-NFR-009-1; AC-NFR-009-2 |
 | Design reference | ADR-M2-01; ADR-M2-04; ADR-M2-05; ADR-M2-06; ADR-M2-07; docs/decisions/README.md |
-| Issue / PR / code | src/CivicConnect.Web/: Injected reader/policy/writer; isolated executable suites. M2 PR12; M3 PR14; reviewed combined baseline 3760605 (14 Oct 2026). |
+| Issue / PR / code | src/CivicConnect.Web/: Injected reader/policy/writer; isolated executable suites. M2 PR12; M3 PR14; published combined implementation 668795a (PR17). |
 | Test evidence | C01-C06; BB01-BB05; A01-A06; E01/E02; passed 2026-10-13 where mapped; docs/testing-m3.md. |
-| Change reference | M2 requirement/AC unchanged; CR-M3-C01, 13 Oct 2026. Combined conformance review completed 14 Oct 2026; baseline 3760605. |
-| Release evidence | Reviewed 14 Oct 2026; baseline 3760605 (local tag). NOT READY; PED Section 14; docs/release-evidence.md. |
+| Change reference | M2 requirement/AC unchanged; CR-M3-C01 retained. Bianca/Michael review and PR17 approvals: 14 Oct. Published 668795a; CI verified; docs 15 Oct 2026. |
+| Release evidence | 15 Oct 2026; 668795a; PR17/CI pass. CONDITIONALLY READY: agreed M3 read/status increment, simulated staging only. PED Section 14. |
 | Implementation status | In Development |
 | ASR / quality driver | Testability |
 | Architecture / module | Injected reader/policy; verification executable |
 | Data / persistence impact | Synthetic data with controlled store fault |
 | Technology decision | ADR-M2-04: ASP.NET Core MVC/Razor; EF Core/Npgsql 8.0.11; PostgreSQL adapters/migrations implemented by Michael (PR14). |
-| ADR / risk reference | R-009; R-038; R-047 closed for tested lifecycle; R-053 open (combined CI coverage). |
+| ADR / risk reference | R-009; R-038; R-047 closed for tested lifecycle; R-053 closed for current combined CI coverage (run 38594557024). |
 | Current requirement wording | Allow core request rules to be tested with controlled data in a separate test environment. |
 | Expected / observed result | Repeatable core access/status cases; negative control fails forbidden transition. |
-| Defect or remaining acceptance gap | Submission/assignment/reporting rules remain unimplemented. See docs/defects.md and technical-debt.md. |
-| M3 execution evidence | Personal run: docs/evidence/m3/personal-20261013-181846/; mapped IDs in I28. PR16 CI: https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/38577509314 (legacy/database/performance and dependency audits). Cameron's 19 M3 cases verified locally; combined remote run not evidenced. |
+| Defect or remaining acceptance gap | Submission/assignment/reporting and real login remain original requirements planned for M4 finalisation; current evidence covers the agreed M3 read/status increment. |
+| M3 execution evidence | Personal run: docs/evidence/m3/personal-20261013-181846/; IDs in I28. Combined main CI: https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/38594557024 on 668795a; regression/database/M3/performance, analysis and dependency checks pass. |
 | Evidence date / executor | 2026-10-13 18:18-18:19 SAST; Cameron Purdon 601963; f774bf8. |
 
 ## RTM sheet notes
@@ -792,8 +792,8 @@ Each requirement below retains all 22 RTM fields. The fields are shown verticall
 | Field | Record |
 | --- | --- |
 | Source key | PED = supplied PED1, sections 1.2 and 2.1–2.2. MB = SEN381 CivicConnect Master Project Brief, sections 3 and 11. |
-| RTM format | M1/M2 requirements and acceptance criteria retained. M3 implementation/test evidence and completed combined review (14 Oct 2026) added. Review: docs/reviews/Bianca_M3_Final_Review_Updated.docx; baseline 3760605, local tag m3-combined-review-20261014. |
-| Status | Planned = no working implementation. In Development = partial evidence; full acceptance unverified. Combined work reviewed by Bianca and Michael on 14 Oct 2026. Formal repository approvals/combined CI are assessed separately in PED Section 14. |
+| RTM format | Original requirements/ACs retained. Published 668795a; PR17 approvals and main CI 38594557024 pass. Cameron confirmed team M3 read/status scope on 15 Oct 2026. CONDITIONALLY READY for controlled simulated staging; CR-M3-C03 and PED Section 14. |
+| Status | Planned = no working implementation. In Development = partial evidence; full acceptance unverified. Team plans unfinished original features for M4 finalisation; no requirements removed. M3 conditional readiness applies only to the agreed increment and simulation. |
 | Maintenance | Keep requirement IDs stable. Update affected acceptance criteria and trace links when a change is approved. Add actual evidence links as work progresses. |
 | Source PR 10 | https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/pull/10 |
 | Source PR 11 | https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/pull/11 |
@@ -806,4 +806,3 @@ For each requirement row `r` (rows 2–28), the workbook uses:
 
 - Priority: `=INDEX(Requirements!$C$2:$C$28,MATCH(Ar,Requirements!$A$2:$A$28,0))`
 - Current requirement wording: `=INDEX(Requirements!$B$2:$B$28,MATCH(Ar,Requirements!$A$2:$A$28,0))`
-
