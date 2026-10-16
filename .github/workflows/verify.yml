@@ -56,3 +56,10 @@ jobs:
         env:
           ConnectionStrings__CivicConnect: "Host=localhost;Port=5432;Database=civicconnect_test;Username=postgres;Password=testpassword"
         run: dotnet run --project tests/CivicConnect.DatabaseTests --configuration Release --no-build
+
+      - name: Scan repository for secrets
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}:/repo" \
+            ghcr.io/gitleaks/gitleaks:latest \
+            git --no-banner --redact --exit-code 1 /repo
