@@ -1,0 +1,6 @@
+PASS C01 legal lifecycle edges [FR-010 TC-ST-01/03]
+Unhandled exception. System.InvalidOperationException: FAIL C02 all 31 prohibited edges and unknown state [FR-010 TC-ST-02/05]
+   at Program.<>c__DisplayClass0_0.<<Main>$>g__Check|0(String id, Boolean ok) in D:\uni\year 3\SEN\Milestone 3\CivicConnect\tests\CivicConnect.M3Tests\Program.cs:line 28
+   at Program.<Main>$(String[] args)
+   at Program.<Main>(String[] args)
+NEGATIVE CONTROL: deliberately allowed New -> Closed; suite exit code -532462766.

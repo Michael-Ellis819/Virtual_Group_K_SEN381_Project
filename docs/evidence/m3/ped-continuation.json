@@ -1,0 +1,63 @@
+{
+  "reference_sha256": "95e02f8cb977557aabd8a97fbce3c91534b933128652071b3d81df3f795524a1",
+  "output_sha256": "1f102e6663f07bd198e47206e6f245a488d04f436f2051ac9777946a21cc909c",
+  "edited_parts": [
+    "word/document.xml",
+    "word/_rels/document.xml.rels",
+    "word/header1.xml",
+    "word/footer1.xml",
+    "word/settings.xml",
+    "word/numbering.xml",
+    "docProps/core.xml"
+  ],
+  "immutable_M1_elements": 407,
+  "Michael_imports": [
+    "5.4.14",
+    "7.2-7.7"
+  ],
+  "new_numbering_ids": {
+    "39": "39",
+    "40": "40",
+    "41": "41",
+    "42": "42",
+    "43": "43",
+    "44": "44"
+  },
+  "M3_source_relationships": {
+    "rId8": "rIdM31",
+    "rId10": "rIdM31",
+    "rId11": "rIdM33",
+    "rId12": "rIdM31"
+  },
+  "removed_current_technical_doc_elements": 35,
+  "authors_review_pending": true,
+  "date": "2026-10-13",
+  "render_engine": "Microsoft Word native PDF export; packaged renderer unavailable because bundled soffice was absent",
+  "pdf_pages": 77,
+  "pdf_file": "docs/PED_v3.0_Continued.pdf",
+  "pdf_sha256": "4caca224b6181f37b203af19afedbfcdc95b4bd72733f5659494824a1650cf59",
+  "code_files_verified": 35,
+  "code_unchanged": true,
+  "page_locator_checked": {
+    "5.3.1": 21,
+    "5.4.14": 28,
+    "5.6.1": 36,
+    "5.6.2": 38,
+    "5.7.2": 41,
+    "7.2": 49,
+    "7.7": 56,
+    "7.8.1": 57,
+    "7.8.2": 58,
+    "7.9": 59,
+    "9.1": 61,
+    "10.2": 63,
+    "11.2": 71,
+    "11.3": 72,
+    "12.1": 74,
+    "14": 75,
+    "15": 76
+  },
+  "current_upstream": "216f405ce9d7aae79194db873c699dac5f517265",
+  "local_review_tag": "m3-ped-continuation-20261013",
+  "final_review_and_submission_pending": true
+}
