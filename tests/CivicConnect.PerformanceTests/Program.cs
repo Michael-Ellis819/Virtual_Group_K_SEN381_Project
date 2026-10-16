@@ -19,8 +19,9 @@ var options = new DbContextOptionsBuilder<CivicConnectDbContext>()
     .UseNpgsql(connectionString)
     .Options;
 
-const int totalOperations = 200;
+const int totalOperations = 1000;
 const int concurrentUsers = 10;
+const int testDurationMinutes = 10;
 
 var requestId = Guid.NewGuid();
 var referenceNumber = $"CC-PERF-{Guid.NewGuid():N}";
@@ -47,6 +48,21 @@ await using (var setupDb = new CivicConnectDbContext(options))
 
 try
 {
+    Console.WriteLine("Starting 2-minute warm-up...");
+
+    var warmupTimer = Stopwatch.StartNew();
+
+    while (warmupTimer.Elapsed < TimeSpan.FromMinutes(2))
+    {
+        await using var warmupDb = new CivicConnectDbContext(options);
+        var warmupReader = new EfRequestReader(warmupDb);
+
+        await warmupReader.FindAsync(requestId, CancellationToken.None);
+
+        await Task.Delay(100);
+    }
+
+    Console.WriteLine("Warm-up complete. Starting measured test.");
     var durations = new double[totalOperations];
     var failures = 0;
 
@@ -56,6 +72,16 @@ try
     var tasks = Enumerable.Range(0, totalOperations)
         .Select(async index =>
         {
+            var scheduledTime = TimeSpan.FromTicks(
+                TimeSpan.FromMinutes(testDurationMinutes).Ticks * index / totalOperations);
+
+            var delay = scheduledTime - overallTimer.Elapsed;
+
+            if (delay > TimeSpan.Zero)
+            {
+                await Task.Delay(delay);
+            }
+
             await semaphore.WaitAsync();
 
             try
@@ -90,6 +116,15 @@ try
         });
 
     await Task.WhenAll(tasks);
+
+    var remainingTime =
+        TimeSpan.FromMinutes(testDurationMinutes) - overallTimer.Elapsed;
+
+    if (remainingTime > TimeSpan.Zero)
+    {
+        await Task.Delay(remainingTime);
+    }
+
     overallTimer.Stop();
 
     var sorted = durations.Where(x => x > 0)
