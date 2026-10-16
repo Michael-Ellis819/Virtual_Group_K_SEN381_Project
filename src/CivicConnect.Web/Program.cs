@@ -20,14 +20,36 @@ app.MapGet("/health", () => Results.Ok(new
     status = "Healthy"
 })).AllowAnonymous();
 
-// Database health endpoint - checks PostgreSQL connectivity.
-app.MapGet("/health/database", async (CivicConnectDbContext db) =>
-{
-    var connected = await db.Database.CanConnectAsync();
 
-    return connected
-        ? Results.Ok(new { status = "Healthy" })
-        : Results.StatusCode(503);
+
+// Database health endpoint - checks PostgreSQL connectivity.
+app.MapGet("/health/database", async (
+    CivicConnectDbContext db,
+    ILoggerFactory loggerFactory) =>
+{
+    var logger = loggerFactory.CreateLogger("CivicConnect.Observability");
+
+    try
+    {
+        var connected = await db.Database.CanConnectAsync();
+
+        if (!connected)
+        {
+            logger.LogError("PostgreSQL health check failed.");
+            return Results.StatusCode(503);
+        }
+
+        return Results.Ok(new { status = "Healthy" });
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(
+            "PostgreSQL health check failed. Exception type: {ExceptionType}",
+            ex.GetType().Name);
+
+        return Results.StatusCode(503);
+    }
 }).AllowAnonymous();
+
 
 app.Run();
