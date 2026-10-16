@@ -65,7 +65,7 @@ jobs:
           docker run --rm \
             -v "${{ github.workspace }}:/repo" \
             ghcr.io/gitleaks/gitleaks:latest \
-            git --no-banner --redact --exit-code 1 /repo
+            git --no-banner --verbose --redact --exit-code 1 /repo
 
       - name: Build M3 tests and run SDK code analysis
         run: dotnet build tests/CivicConnect.M3Tests --configuration Release -p:AnalysisLevel=latest -p:EnforceCodeStyleInBuild=true -p:NuGetAuditMode=all
