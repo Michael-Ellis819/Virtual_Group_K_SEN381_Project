@@ -94,7 +94,7 @@ public static class Composition
 
                 await Results.Problem(
                     statusCode: 500,
-                    title: "The request could not be completed."
+                    title: FailedAction(context.Request.Path)
                 ).ExecuteAsync(context);
             }
         });
@@ -137,5 +137,19 @@ public static class Composition
         app.UseAuthorization();
         app.MapControllers();
         return app;
+    }
+
+    private static string FailedAction(PathString path)
+    {
+        var value = path.Value ?? "";
+        if (value.StartsWith("/account/sign-in", StringComparison.Ordinal)) return "Sign-in could not be completed.";
+        if (value == "/portal/requests/new") return "Your request could not be submitted.";
+        if (value.EndsWith("/assign", StringComparison.Ordinal)) return "Assignment could not be saved.";
+        if (value.EndsWith("/notes", StringComparison.Ordinal)) return "Your note could not be saved.";
+        if (value.EndsWith("/schedule", StringComparison.Ordinal)) return "Priority and due date could not be saved.";
+        if (value.EndsWith("/status", StringComparison.Ordinal)) return "The status update could not be saved.";
+        if (value == "/portal/management") return "The service overview could not be loaded.";
+        if (value == "/portal/requests") return "The request list could not be loaded.";
+        return "Request details could not be loaded.";
     }
 }

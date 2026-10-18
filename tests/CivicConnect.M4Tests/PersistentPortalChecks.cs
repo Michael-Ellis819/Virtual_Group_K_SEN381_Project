@@ -147,7 +147,7 @@ internal static class PersistentPortalChecks
             {
                 using var failed = await Form(requester, "/portal/requests/new", new(fields) { ["Description"] = "Forced submission fault" });
                 await using var db = new CivicConnectDbContext(options);
-                Check("P04a failed submission rolls back request/history/feedback [NFR-003]", failed.StatusCode == HttpStatusCode.InternalServerError && !await db.ServiceRequests.AnyAsync(r => r.RequesterId == prefix + "requester") && !await db.RequestStatusHistory.AnyAsync(h => h.ChangedByUserId == prefix + "requester") && !await db.RequestNotes.AnyAsync(n => n.AuthorId == prefix + "requester"));
+                Check("P04a failed submission rolls back request/history/feedback [NFR-003]", failed.StatusCode == HttpStatusCode.InternalServerError && (await failed.Content.ReadAsStringAsync()).Contains("Your request could not be submitted") && !await db.ServiceRequests.AnyAsync(r => r.RequesterId == prefix + "requester") && !await db.RequestStatusHistory.AnyAsync(h => h.ChangedByUserId == prefix + "requester") && !await db.RequestNotes.AnyAsync(n => n.AuthorId == prefix + "requester"));
             }
             finally
             {
@@ -195,7 +195,7 @@ internal static class PersistentPortalChecks
             {
                 using var failed = await Form(staff, path + "/assign", new() { ["ExpectedVersion"] = saved.Version.ToString(), ["OwnerId"] = prefix + "staff" }, path);
                 await using var db = new CivicConnectDbContext(options);
-                Check("P11a failed assignment leaves previous owner/status/history/feedback [NFR-003]", failed.StatusCode == HttpStatusCode.InternalServerError && (await Saved(id)).OwnerId is null && (await Saved(id)).Status == "New" && !await db.RequestStatusHistory.AnyAsync(h => h.RequestId == id && h.NewStatus == "Assigned") && !await db.RequestNotes.AnyAsync(n => n.RequestId == id && n.Content == "Request assigned."));
+                Check("P11a failed assignment leaves previous owner/status/history/feedback [NFR-003]", failed.StatusCode == HttpStatusCode.InternalServerError && (await failed.Content.ReadAsStringAsync()).Contains("Assignment could not be saved") && (await Saved(id)).OwnerId is null && (await Saved(id)).Status == "New" && !await db.RequestStatusHistory.AnyAsync(h => h.RequestId == id && h.NewStatus == "Assigned") && !await db.RequestNotes.AnyAsync(n => n.RequestId == id && n.Content == "Request assigned."));
             }
             finally
             {
@@ -271,7 +271,7 @@ internal static class PersistentPortalChecks
                 using var fault = await Form(staff, path + "/status", new() { ["ExpectedStatus"] = "Assigned", ["TargetStatus"] = "In Progress", ["Feedback"] = "DUMMY-SECRET-PORTAL" }, path);
                 var body = await fault.Content.ReadAsStringAsync();
                 await using var db = new CivicConnectDbContext(options);
-                Check("P23 failed status transaction rolls back with safe response/logs [NFR-003/008]", fault.StatusCode == HttpStatusCode.InternalServerError && (await Saved(id)).Status == "Assigned" && !await db.RequestNotes.AnyAsync(n => n.RequestId == id && n.Content == "DUMMY-SECRET-PORTAL") && !body.Contains("portal_final_fault") && !body.Contains("DUMMY-SECRET-PORTAL") && !logs.Text.Contains("DUMMY-SECRET-PORTAL") && !logs.Text.Contains("PRIVATE-PORTAL-MARKER"));
+                Check("P23 failed status transaction rolls back with safe response/logs [NFR-003/008]", fault.StatusCode == HttpStatusCode.InternalServerError && body.Contains("The status update could not be saved") && (await Saved(id)).Status == "Assigned" && !await db.RequestNotes.AnyAsync(n => n.RequestId == id && n.Content == "DUMMY-SECRET-PORTAL") && !body.Contains("portal_final_fault") && !body.Contains("DUMMY-SECRET-PORTAL") && !logs.Text.Contains("DUMMY-SECRET-PORTAL") && !logs.Text.Contains("PRIVATE-PORTAL-MARKER"));
             }
             finally
             {
