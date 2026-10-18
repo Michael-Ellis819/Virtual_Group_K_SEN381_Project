@@ -91,7 +91,7 @@ The original risk descriptions use the earlier baseline wording. R-020 is carrie
 | R-051 | Shared-project architectural boundaries remain debt. |
 | R-052/053 | Existing and persistent harnesses are explicitly invoked in CI. Actual runs and required merge enforcement remain separate evidence. |
 | R-054 | Controlled Staging is supported. Public hosting, trusted TLS and production operating configuration remain open. |
-| R-055/056/058 | M3 conditional readiness remains scoped; final AC scores, source and release state are explicit. Final teammate approval and submission are pending. |
+| R-055/056/058 | M3 conditional readiness remains scoped; final AC scores, source and release state are explicit. The team confirmed its review and submission agreement on 18 October. Formal GitHub approvals remain separate. |
 | R-057 | Full NFR-002 pilot workload remains Not delivered. The database-read exercise is retained within its narrower boundary. |
 
 M3-R01 maps to the now integrated policy/lifecycle/persistence paths. M3-R02 maps to the tested versioned claims and rollback. M3-R03 remains qualified by hosted migration/rollback gaps. M3-R04 continues secrets control. M3-R05 separates the local recovery pass from the unexecuted full performance target.

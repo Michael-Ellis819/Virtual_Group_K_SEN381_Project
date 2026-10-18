@@ -60,3 +60,9 @@ The revised assessed identifier is `m4-final-20261018-r2`. The earlier `m4-final
 ## M4 AI usage clarification — 18 October 2026
 
 The assessed identifier is `m4-final-20261018-r3`. Cameron supplied his personal code, application, document and build checks; Michael supplied his M4 ChatGPT statement; Bianca confirmed ChatGPT and Claude Code use and personal testing of her work. The AI register and PED now include those accounts. This documentation revision leaves runtime code, recorded automated results and acceptance scores unchanged. The earlier release tags remain available.
+
+## Final team review and submission agreement 18 October 2026
+
+Cameron Purdon, Michael Ellis and Bianca Grobler reviewed the combined final product, PED and RTM and agreed on a group call to submit on 18 October 2026. Cameron confirmed this agreement.
+
+The final submission date is 18 October 2026. The assessed version is `m4-final-20261018-r6`. PR22 was still a draft and the GitHub reviews endpoint returned no submitted reviews when checked. The call agreement records the team’s review; it does not replace GitHub approval entries. CI results for the assessed revision are available from PR22’s Checks tab.

@@ -6,7 +6,7 @@ Virtual Group K · SEN381 · 18 October 2026
 | --- | --- |
 | Final PED | [PDF](docs/PED_v4.0_Final.pdf), [editable Word](docs/PED_v4.0.docx), [Markdown](docs/PED_v4.0.md) |
 | Continuing RTM | [Workbook](docs/CivicConnect_RTM_v2.0.xlsx), [Markdown](docs/CivicConnect_RTM_v2.0.md) |
-| Assessed version and access | [Submission information](docs/submission-information.md) |
+| Assessed version and access | [Submission information](docs/submission-information.md); PED section 26 |
 | Verification and limitations | [Final evidence](docs/evidence/m4-final-20261018/summary.md), [release decision](docs/release-evidence.md) |
 | Continuing registers | [Risks](docs/risk-register.md), [defects](docs/defects.md), [debt](docs/technical-debt.md), [decisions](docs/decisions/README.md), [AI use](docs/ai-usage.md) |
 

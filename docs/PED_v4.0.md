@@ -3516,7 +3516,7 @@ CivicConnect now combines requester, staff and management journeys in one ASP.NE
 | Item | Final record |
 | --- | --- |
 | Repository | https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project |
-| Assessed identifier | m4-final-20261018-r5; exact tagged revision is recorded with submission information. Tested code: 625e4e99882150f79ad3e00bae327b14e63e5d9c. |
+| Assessed identifier | m4-final-20261018-r6; exact tagged revision is recorded with submission information. Tested code: 625e4e99882150f79ad3e00bae327b14e63e5d9c. |
 | Integrated inputs | Michael’s M4 branch through 5a17e07; main 51c4f9a and Bianca’s supplied ZIP; Cameron’s existing presentation and final corrections. The existing interfaces, PED and RTM were retained. |
 | Environment | Staging through a controlled local simulation. Real PostgreSQL adapters and password hashes; synthetic accounts/data. No hosted public production environment exists. |
 | Verification | 73 read/rule, 43 database, 19 M3, 30 UI/contract and 36 persistent HTTPS checks pass locally: 201 checks. Local timed restore passes. Operator and raw evidence: docs/evidence/m4-final-20261018. |
@@ -3588,7 +3588,7 @@ The existing risk register now includes final status and mitigation effectivenes
 | ADR-M2-02 State lifecycle | One six-state matrix drives the legacy adapter and portal. The persistence boundary now rechecks legality and assignment records ownership atomically. State classes add structure beyond a simple transition table. | Retain the single legality service and validated change; acknowledge the maintenance overhead and enforce every new write path. |
 | ADR-M2-03 and ADR-M2-04 persistence and stack | EF migrations extended the original relational model with accounts, owner/priority/due date, dated notes and scheduling audit. Transaction, duplicate-key and restore checks work across the integrated application. Hosted operation remains unverified. | Retain the stack and transaction boundary; review supported runtime versions and hosting/security before production. |
 | ADR-M2-05 central authorisation | Record ownership and staff categories are reused by API and portal. Stored account role, category, active state and stamp are rechecked for sessions. Query scoping precedes filters and totals. | Retain server-side policy and session freshness. UI visibility alone remains insufficient. |
-| ADR-M2-07 verification and reviewed integration | Explicit harness invocation caught sort-name, unsafe logging, incomplete audit and ownerless-assignment problems. New persistent scenarios test integration rather than fixtures alone. Final changes still require review by two teammates. | Retain meaningful negative checks and current-revision review; standard test reporting remains debt. |
+| ADR-M2-07 verification and reviewed integration | Explicit harness invocation caught sort-name, unsafe logging, incomplete audit and ownerless-assignment problems. New persistent scenarios test integration rather than fixtures alone. Team review confirmed on 18 October; GitHub approvals are separate. | Retain meaningful negative checks and current-revision review; standard test reporting remains debt. |
 | Technology selection before construction | The selected C#/Razor/EF/PostgreSQL stack was retained. Early selection provided consistency, but did not itself prove integration or hosted readiness. .NET 8 support ends 10 November 2026. | Retain evidence-based stack selection with an explicit support review date; a baselined decision still requires implementation evidence. |
 
 
@@ -3642,3 +3642,20 @@ Primary controlled records: docs/CivicConnect_RTM_v2.0.xlsx and Markdown copy; d
 SEN381 Final Project scope, Milestone 4, sections 1–11 and 15–17; SEN381 Master Project Brief section 21. Supplied course documents determine the closure and evaluation requirements.
 
 Microsoft (2026), .NET and .NET Core support policy, https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core. GitHub (2026), Choosing the runner for a job, https://docs.github.com/en/actions/how-tos/write-workflows/choose-where-workflows-run/choose-the-runner-for-a-job. Accessed 18 October 2026.
+
+## 26 M4 Final Submission Information
+
+| Field | Final submission record |
+| --- | --- |
+| Team | Virtual Group K |
+| Team members | Cameron Purdon 601963; Bianca Grobler 600537; Michael Ellis 600332 |
+| GitHub repository | https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project |
+| Final release identifier | m4-final-20261018-r6 on feature/cameron-m4-finalisation. This tag identifies the exact assessed repository revision. |
+| PED version | v4.0 Final; 18 October 2026. Primary document: docs/PED_v4.0_Final.pdf; editable source: docs/PED_v4.0.docx. |
+| Final RTM | docs/CivicConnect_RTM_v2.0.xlsx; matching Markdown: docs/CivicConnect_RTM_v2.0.md. Original 27 requirements and 54 criteria retained. |
+| CI and test evidence | docs/evidence/m4-final-20261018/summary.md; 201 passing checks. Code CI: https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/39145430277 (tested runtime code 625e4e9). Final revision: https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/pull/22/checks. |
+| Final environment | Controlled local staging; NO-GO for public production. Section 22 records the reasons and work required before go-live. |
+| Product access and demonstration | Local preview: http://127.0.0.1:5089 on the demonstration computer while running. Demo account details are held separately by the team. No public hosted URL is available. README records reproducible local setup. |
+| Team review and agreement | Cameron, Michael and Bianca reviewed the combined final product, PED and RTM and agreed on a group call to submit on 18 October 2026; confirmed by Cameron. |
+| Formal GitHub reviews | PR22 is a draft with no submitted GitHub review entries at the final check. Team agreement on the call is recorded separately from formal PR approval. |
+| Date submitted | 18 October 2026, confirmed by Cameron. |

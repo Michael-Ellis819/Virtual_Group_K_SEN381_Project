@@ -43,4 +43,4 @@ The AR01 optional-parameter false positive and its passing correction are retain
 | DEF-M4-C04 | Fixed: manager sign-in landed on the requester/staff-only list | Persistent sign-in assertion now requires `/portal/management` |
 | Preparatory session interference | Shared in-app cookies could invalidate an older sign-in form’s antiforgery token; authentication remained protected | Browser checks stopped and participant session handed back. This preparation incident is not a participant usability result |
 
-Participant results are recorded in the usability report. Final team review and Moodle submission are pending. The RTM and release decision list the remaining acceptance limitations.
+Participant results are recorded in the usability report. The team reviewed the combined work and agreed on a call to submit on 18 October 2026. Formal GitHub approvals are recorded separately. The RTM and release decision list the remaining acceptance limitations.

@@ -1,6 +1,6 @@
 {
   "source_sha256": "b3ef47754416b2bca4a2a253eff295f9016073847347f460c23cebb26b59e27f",
-  "output_sha256": "d4e57877db952b12347255076819669dacb3ae494c51c7b92eec819f4617609b",
+  "output_sha256": "7e45aced869136700f0da47a31d10ccf4edd3f02e0381bc3372b383b12bf178c",
   "changed_package_parts": [
     "word/document.xml",
     "word/header1.xml",
@@ -8,6 +8,6 @@
     "word/settings.xml"
   ],
   "retained_body_blocks": 1614,
-  "added_body_blocks": 38,
+  "added_body_blocks": 41,
   "status": "M4 final closure; historical body preserved"
 }
