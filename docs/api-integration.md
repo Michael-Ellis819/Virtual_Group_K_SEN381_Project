@@ -1,83 +1,25 @@
-# Current M3 API contract - 13 October 2026
+# CivicConnect application interfaces
 
-This section supersedes dated implementation statements in the retained M2 contract below. The API remains inside the same web application; this does not add a public third-party API.
+Current M4 code uses MVC forms and the retained JSON details/status endpoints in one application. Controllers obtain identity from the protected server session. Stored account activation, role, category grants and security stamp are rechecked on each authenticated request.
 
-| Route | Input and outcome |
+| Route | Access and behaviour |
 | --- | --- |
-| GET /requests/{id} | Non-empty UUID. 200 filtered details; 400 invalid UUID; 401 signed out; 404 absent or inaccessible; generic 500 on an unexpected failure. |
-| GET /requests/antiforgery | Authenticated caller obtains a requestToken and antiforgery cookie for a later mutation. |
-| POST /requests/{id}/status | Cookie plus X-CSRF-TOKEN and antiforgery cookie. JSON: expectedStatus, targetStatus, feedback. 204 committed; 400 invalid input/transition or failed antiforgery; 401 signed out; 404 absent or unauthorised; 409 stale status/version; generic 500 on store failure. |
+| GET/POST /account/sign-in | Enabled stored account and password hash verification. No client-selected role. Forms use antiforgery |
+| POST /account/sign-out | Ends the session; antiforgery required |
+| GET /portal/requests | Requesters see their own records; staff see permitted categories. Search/filter/sort is applied after database permission scope |
+| GET/POST /portal/requests/new | Requester submission; agreed category, 2,000-character description and 250-character location bounds; actor/key uniqueness and atomic history/feedback |
+| GET /portal/requests/{id} | Filtered details. Missing and inaccessible records share 404. Requesters receive public notes/status history |
+| POST .../assign | Staff assignment/claim; eligible active stored owner, expected version and atomic owner/status/history/feedback |
+| POST .../status | Staff lifecycle action with required feedback; first assignment uses the separate ownership command |
+| POST .../notes | Appends author/time and public/internal visibility; earlier entries remain |
+| POST .../schedule | Controlled priority and nullable UTC due date with version check and scheduling audit |
+| GET /portal/management | Management-only saved counts and matching reference/category/status rows |
+| GET /requests/{id} | Retained protected JSON details projection |
+| GET /requests/antiforgery | Antiforgery token for authenticated JSON callers |
+| POST /requests/{id}/status | Retained JSON status update with antiforgery, central permission and expected status/version. Ownerless assignment is rejected |
 
-Feedback must contain non-whitespace text and be at most 2,000 .NET string code units, matching a conservative bound for the existing note column. Rejection requires a reason; resolution requires a summary. The mandatory public feedback field supplies those explanations. Identity, role, category and audit actor are derived from the protected server principal, never the body or query.
+All form mutations validate antiforgery. A stale form/session token is rejected rather than replayed; after signing out or switching account, a fresh page is required. Conflicting versions return 409. Internal exception messages and payloads are excluded from responses; action-specific 500 titles identify the failed operation. Custom logs retain only exception type and aggregate degradation signals. Responses use Cache-Control: no-store.
 
-Only category-authorised active Staff may mutate. Requesters may read their own record; they cannot mutate it. Unknown, inactive or ambiguous identities fail closed. Missing and inaccessible records share a public 404 title. All responses use Cache-Control: no-store. A 409 requires refresh and deliberate retry, not automatic replay.
+IPortalAccounts and IPortalRequestStore have registered EF implementations. IRequestReader and IRequestStatusWriter retain the established read/status boundaries. The writer checks lifecycle legality, while the assignment writer also checks acting and owning stored accounts. Application append-only history does not prevent a privileged database administrator changing tables.
 
-Lifecycle: New -> Assigned -> In Progress -> Resolved -> Closed; New -> Rejected. Closed and Rejected are terminal. This route does not assign an actual owner; FR-009 remains pending.
-
-RequestStatusService coordinates permission and business rules; StatusTransitionService owns legal edges; EfRequestStatusWriter owns the transaction and version check. Success means status, previous/new status history, actor/time and public feedback committed together. Any required write failure rolls back. Direct non-HTTP service calls receive the same action checks.
-
-Evidence: [test specifications](testing-m3.md) and [execution](evidence/m3/integration.txt). Live credentials, account provisioning/revalidation, requester submission and a browser workflow remain pending. Test tickets do not demonstrate real login. Antiforgery follows the [Microsoft guidance](https://learn.microsoft.com/en-us/aspnet/core/security/anti-request-forgery?view=aspnetcore-8.0).
-
-## Retained M2 contract history
-
-# Initial interface and integration contract
-
-Owner: Cameron. Contract date: 30 September 2026. Decisions: ADR-M2-05 and ADR-M2-06.
-
-## Established HTTP boundary
-
-GET `/requests/{id}` returns JSON from the same ASP.NET Core application. `{id}` is a non-empty UUID. There is no request body and no write action. Unknown query parameters are ignored and cannot override the authenticated subject. Signed-out requests are rejected before controller validation. GET `/` is a public Razor development landing page.
-
-Success fields are `requestId`, `referenceNumber`, `categoryId`, `description`, `location`, `status`, `updatedAt` and `notes` (array of strings). Times use DateTimeOffset JSON representation. The fixture category identifier is the string `IT Support`; it is not a final database key design. Map Michael's Category primary key through the adapter when that schema is implemented, and update the contract/test fixtures together if the public identifier changes.
-
-Example owner response for the synthetic request:
-
-```json
-{
-  "requestId": "11111111-1111-1111-1111-111111111111",
-  "referenceNumber": "CC-DEMO-001",
-  "categoryId": "IT Support",
-  "description": "Demo network fault",
-  "location": "Demo lab",
-  "status": "New",
-  "updatedAt": "2026-09-30T08:00:00+00:00",
-  "notes": ["Request received."]
-}
-```
-
-The actual fields contain strings, not executable markup. A future Razor details view must keep normal HTML encoding. This slice has no free-text write endpoint or database query; it does not establish SQL injection or stored-XSS acceptance.
-
-## Authentication and authorisation
-
-Cookie authentication validates the framework-protected ticket. The server-issued principal requires one identity and exactly one `NameIdentifier`, one role and `active=true`. Staff need a category claim matching the record. These trusted claims must eventually come from server-owned user/permission data. Clients must never choose their role, active state or categories. Login, revocation, inactive-user refresh and account provisioning remain unimplemented. Short-lived/revalidated tickets are required before real access can rely on mutable permissions.
-
-| Caller | Detail permission | Notes |
-| --- | --- | --- |
-| Signed out or invalid cookie | 401 | No record returned |
-| Active Requester, own record | 200 | Public notes only |
-| Requester, another owner's record | 404 | No record returned |
-| Active Staff, permitted category | 200 | Public and internal notes |
-| Staff outside category | 404 | No record returned |
-| Management, unknown/inactive/ambiguous user | 404 after authentication | Detail access denied; reporting is a separate future operation |
-
-The application service repeats resource checks for non-HTTP callers. Response DTOs exclude requester ID and raw visibility metadata. Missing and inaccessible records share a 404 title; this reduces obvious enumeration but does not prove constant response timing.
-
-## Errors and failure handling
-
-| Result | HTTP behaviour | Retry or consequence |
-| --- | --- | --- |
-| Malformed/empty UUID, authenticated caller | 400 ProblemDetails, explicit UUID error | Correct input |
-| Unauthenticated/invalid ticket | 401, no redirect or response body promised | Obtain a valid session after login exists |
-| Absent or inaccessible resource | 404 ProblemDetails, `Request not found.` | Do not disclose which condition occurred |
-| Unexpected store/service failure | 500 ProblemDetails, generic title, no exception message | No automatic application retry; read can be retried deliberately |
-| Client cancellation | Cancellation forwarded to reader | Stop work; no completed HTTP response is promised |
-
-ProblemDetails may include framework metadata such as `type`, `status` and `traceId`; consumers must not depend on exact trace values. Responses set Cache-Control: no-store. The slice intentionally records no private payload or exception detail in custom logs. Production observability remains to be designed. TLS is required for real authentication; the current loopback checks do not validate NFR-006.
-
-## Internal contracts and future work
-
-`RequestQueryService.ReadAsync(principal, id, cancellationToken)` returns a filtered DTO or null for invalid/denied/missing reads; storage faults propagate to the safe HTTP boundary. `IRequestReader.FindAsync` returns a snapshot/null and observes cancellation. `IRequestAccessPolicy.EvaluateRead` returns read permission and whether internal notes may be included.
-
-The reader implementation is currently synthetic. No cross-process module integration, network DB call, POST/PUT/PATCH route, event broker, notification delivery or public API is implemented. Future list queries must constrain the query by permission before pagination/counting; filtering only a detail DTO is insufficient for FR-006/FR-007.
-
-Before write routes are built: decide DTO bounds, category key mapping, permission freshness, antiforgery for cookie-authenticated mutations, idempotency keys, transaction ownership and optimistic concurrency. Return validation/conflict errors only once those operations exist. Read access never permits assignment/status writes. ADR-M2-06 specifies the required orchestration and transaction direction without inventing endpoints.
+See the continuing RTM and final verification reports for acceptance evidence and limits. A controlled local host and generated test certificate do not establish production deployment security.

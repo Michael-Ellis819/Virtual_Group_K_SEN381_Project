@@ -1,0 +1,13 @@
+{
+  "source_sha256": "b3ef47754416b2bca4a2a253eff295f9016073847347f460c23cebb26b59e27f",
+  "output_sha256": "4f84ada6beb6414db20586aa95bb2fcdd70cdd307ad87d1f50806ba1ab81548c",
+  "changed_package_parts": [
+    "word/document.xml",
+    "word/header1.xml",
+    "word/footer1.xml",
+    "word/settings.xml"
+  ],
+  "retained_body_blocks": 1614,
+  "added_body_blocks": 32,
+  "status": "Draft; final team baseline and acceptance pending"
+}

@@ -1,0 +1,10 @@
+@model SubmissionInput
+@{ ViewData["Title"] = "Submit a request"; }
+<h1>Submit a request</h1><p>Describe the issue and where it happened. Avoid including passwords or other sensitive information.</p>
+<form class="panel narrow" action="/portal/requests/new" method="post">
+@Html.AntiForgeryToken()<div asp-validation-summary="All" class="errors" role="alert" tabindex="0"></div>
+<input asp-for="SubmissionKey" type="hidden">
+<div class="field"><label asp-for="Category">Category</label><select asp-for="Category" required><option value="">Choose a category</option>@foreach (var category in PortalOptions.Categories) { <option value="@category">@category</option> }</select><span asp-validation-for="Category"></span></div>
+<div class="field"><label asp-for="Description">Description</label><textarea asp-for="Description" required maxlength="2000" aria-describedby="description-help"></textarea><small id="description-help">Up to 2,000 characters.</small><span asp-validation-for="Description"></span></div>
+<div class="field"><label asp-for="Location">Location</label><input asp-for="Location" required maxlength="250" aria-describedby="location-help"><small id="location-help">For example, the building and room number. Up to 250 characters.</small><span asp-validation-for="Location"></span></div>
+<div class="actions"><button type="submit">Submit request</button><a href="/portal/requests">Back to requests</a></div></form>

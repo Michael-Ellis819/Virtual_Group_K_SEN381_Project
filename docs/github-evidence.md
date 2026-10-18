@@ -29,16 +29,6 @@ Existing repository: https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_
 
 The root file github_workflows_auto-merge-approved-prs.yml is outside .github/workflows, so its presence does not establish an active automation. No protection weakening or GitHub merge was performed by Codex. Updated upstream main was incorporated into the local feature branch.
 
-## Historical publication and review checklist
-
-1. Open this checkout/branch in GitHub Desktop. Inspect the implementation, test/CI and documentation commits, then publish the branch to the existing repository and open a PR into main.
-2. Bianca independently checks lifecycle/conformance, invalid transitions and the release/register statements. Michael checks transactional integration, version handling, migrations, CI and the State dependency. Each records what was actually checked and any findings on the PR before approving.
-3. Fix review findings on the feature branch; rerun affected checks. Both non-author approvals and required CI must apply to the current revision. An agent's own review cannot substitute for two independent peers.
-4. Merge only after required reviews/checks. Freeze the final assessed commit/tag and align PED, RTM, environment, evidence and recorded demo with it.
-
-Suggested review checklist: reproduce E01/E02; inspect BB03 and A05 no-write/rollback assertions; verify A06 rejects stale category/version; confirm no new input supplies actor/roles; compare unchanged requirement/AC IDs; confirm honest pending scope; check current CI and staging parity. Review comments and any rework must be real; no example comment should be posted as if it occurred.
-
-
 ## 14 October combined-review checkpoint
 
 PR16 remains open on 4a7cebe; one Bianca approval with empty review body. CI run 38518306719 is successful for the existing two suites only. Its source is merged locally with Cameron’s branch and the native PED/RTM consolidated; no GitHub merge/publication/approval is claimed. Local candidate tag: m3-combined-review-20261014. Corrected figures and dependency fix are part of the local candidate, not yet PR16 on GitHub.
@@ -54,3 +44,25 @@ Bianca and Michael reviewed the combined implementation 3760605. Bianca’s comp
 PR16 was merged on 14 October 2026 at 16:21:59 SAST into main, commit cb588d4b69b447ca72c11c91d795b7ea0daf91f9. The current revision received approvals from Bianca333-b and Cameron at 16:15 and 16:21 SAST; returned review bodies were empty. The completed offline conformance record is separate checking evidence. Scope section 8 expects reviews to show actual checking; the reviewers can record their real checks/findings in the PR discussion.
 
 [Main CI run 38579869423](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/38579869423) passed build/run steps for the legacy verification, database and performance projects, followed by two dependency-report steps. It did not run Cameron's 19 M3 cases. The local feature branch incorporates this merged main, retains the combined suite and strict gates, and preserves the supplied final PED/RTM. No remote run, PR approval or submission is claimed for this newly prepared branch. Earlier checkpoints above are retained as history.
+
+## M4 final closure 18 October 2026
+
+Michael’s latest branch input was `5a17e07` (accounts, request operations and scheduling/audit). Main `51c4f9a` merged PR21, which uploaded Bianca’s ZIP; the ZIP was inspected and selectively reconciled rather than overwriting the current source/PED. A backup branch retained the pre-finalisation revision. Original M3 local edits remain separate and preserved.
+
+The tested code is `625e4e99882150f79ad3e00bae327b14e63e5d9c` on `feature/cameron-m4-finalisation`. Push/CI, any later document commit, final tag and PR status are recorded against their actual observed identifiers. A green run is not substituted for two independent current peer reviews. Personal instructions are excluded from the submitted tree; their removal does not rewrite Git history.
+
+Final code CI: [run 39145430277](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/39145430277) completed successfully on `625e4e99882150f79ad3e00bae327b14e63e5d9c`, including static analysis, secrets/dependency gates and the persistent HTTPS suite. The paced read exercise is separate from full NFR-002 acceptance.
+
+## Documentation wording revision — 18 October 2026
+
+The revised assessed identifier is `m4-final-20261018-r2`. The earlier `m4-final-20261018` tag remains available. This revision simplifies wording in the project records and updates the matching PED copies; runtime code, test outcomes and RTM scores are unchanged. Both [push CI 39147263763](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/39147263763) and [PR CI 39147446534](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/39147446534) passed on the preceding documentation revision, 11964ab. Final reviews remain pending on PR22.
+
+## M4 AI usage clarification — 18 October 2026
+
+The assessed identifier is `m4-final-20261018-r3`. Cameron supplied his personal code, application, document and build checks; Michael supplied his M4 ChatGPT statement; Bianca confirmed ChatGPT and Claude Code use and personal testing of her work. The AI register and PED now include those accounts. This documentation revision leaves runtime code, recorded automated results and acceptance scores unchanged. The earlier release tags remain available.
+
+## Final team review and submission agreement 18 October 2026
+
+Cameron Purdon, Michael Ellis and Bianca Grobler reviewed the combined final product, PED and RTM and agreed on a group call to submit on 18 October 2026. Cameron confirmed this agreement.
+
+The final submission date is 18 October 2026. The assessed version is `m4-final-20261018-r6`. PR22 was still a draft and the GitHub reviews endpoint returned no submitted reviews when checked. The call agreement records the team’s review; it does not replace GitHub approval entries. CI results for the assessed revision are available from PR22’s Checks tab.

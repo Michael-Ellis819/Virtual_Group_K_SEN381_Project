@@ -18,3 +18,13 @@ Michael's PR14 is merged and has two distinct approvals. PR12 also has two appro
 ## Submission consequence 15 October 2026
 
 PR17 merged the combined implementation at 668795a after approvals from Bianca and Michael on 14 October. [Main run 38594557024](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/38594557024) successfully executes all four projects, including the 19 M3 cases, analysis and dependency checks. Earlier publication/review/CI gaps above describe their historical checkpoints. Required CI merge enforcement remains separate from successful execution. Bianca's completed conformance findings record actual checking; empty approval bodies are not treated as written review explanations.
+
+## M4 observed consequence 18 October 2026
+
+The existing harness now includes Bianca's 44 rule checks, and a fifth executable supplies 30 UI/contract checks. The workflow calls it explicitly; all four correctness suites pass locally after the presentation change. The misplaced merge workflow is now under .github/workflows and enables auto-merge only after two current non-author approvals and verified enforced branch protections. Remote execution, actual reviews and protection visibility remain evidence requirements; moving a file does not prove them.
+
+## M4 final closure 18 October 2026
+
+The final product connects stored accounts and permissions, record-scoped PostgreSQL queries, real MVC forms and transactional commands. Lifecycle legality remains in Bianca’s rules; authorisation decides who may act. Assignment saves one eligible owner with its status/history/feedback, while generic status routes cannot create ownerless assignment. The persistence boundary now rechecks legality, reducing the earlier writer-bypass debt.
+
+Repeated local checks cover the persistent journey, races, injected rollback, safe errors and revocation. The custom harness remains an explicit CI responsibility. Hosted TLS and the full pilot performance measurements remain outstanding. Final teammate reviews must also be recorded before merge.

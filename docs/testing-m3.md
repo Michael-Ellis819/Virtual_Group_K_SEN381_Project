@@ -67,3 +67,21 @@ Michael’s second run: 200 direct reader operations, maximum concurrency 10; 1.
 ## Combined remote verification indexed 15 October 2026
 
 [Main run 38594557024](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/38594557024) passes on 668795a42d8191600e79ff4decad1642bd3e88b0 after PR17 merged on 14 October. It builds and runs all four projects, including the 19 M3 cases, with analysis and dependency checks. This is additional remote evidence; Cameron's 13 October personal execution and Michael's original 14 October performance measurement keep their original attribution and values.
+
+## M4 integration checkpoint 18 October 2026
+
+The isolated M4 candidate combines PR20 with Bianca's State classes, ownership/summary rules and 44 checks. The existing status coordinator now uses her lifecycle matrix while retaining its action permission, feedback, antiforgery and transaction contracts. Codex executed 73 verification checks, 25 database checks and 19 M3 cases successfully on a new disposable database. Codex ran these checks; the results cover the tested integration paths. See [integration summary](evidence/m4-integration-20261018/summary.md) for the source inputs, raw reports, initial sandbox restriction and remaining gaps. The historical M3 results and conditional-readiness decision remain unchanged.
+
+## M4 presentation and finalisation checks 18 October 2026
+
+Cameron's new `CivicConnect.M4Tests` executable exercises the real MVC/form pipeline with synthetic test-only account/request adapters. Thirty checks cover sign-in and role spoofing, submission EP/BVA, inclusive date bounds, access denial, assignment-rule orchestration, internal notes/encoding, stale writes, UTC binding, management counts and the submit → assign → progress → resolve → close contract journey. The normal product still needs real adapters. Deployed E2E and NFR acceptance remained unverified at this checkpoint.
+
+Run `dotnet run --project tests/CivicConnect.M4Tests --configuration Release`. CI now calls this harness as well as the previous projects. After these changes, 73 existing/rule checks, 25 database checks, 19 M3 cases and all 30 UI/contract checks passed locally. [M4 summary and limitations](evidence/m4-cameron-20261018/summary.md) index the raw reports. Re-run the affected journeys against the actual final persistence/deployment before accepting the shared product.
+
+## M4 final closure 18 October 2026
+
+The final integration adds real PostgreSQL account and portal adapters. The existing suites pass 73/43/19/30 checks; the persistent HTTPS suite passes 36. [Final reports](evidence/m4-final-20261018/summary.md) identify the execution source and limitations.
+
+`dotnet run --project tests/CivicConnect.M4Tests --configuration Release -- --database` requires an explicit disposable connection whose database name ends in `_test`. It uses actual MVC forms, password hashes, policies, migrations and storage. A generated pinned certificate and synthetic fixture accounts isolate the exercise. It covers submission/assignment/status rollback, two competing HTTP claims, durable key reuse, notes/history, real filters and numeric priority ordering, application restart and revocation.
+
+The legacy API no longer accepts ownerless New → Assigned changes. M3 feedback-boundary cases use New → Rejected, and its E01 regression begins at Assigned. The complete first-assignment journey is exercised by the persistent suite. This is a deliberate integrity correction, not a removed requirement. The local timed restore recovered matching request, ownership, note and audit data. Participant usability, full pilot performance and deployed certificate evidence remain separate acceptance decisions.

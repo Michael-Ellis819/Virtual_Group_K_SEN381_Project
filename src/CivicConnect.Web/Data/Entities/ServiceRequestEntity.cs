@@ -20,6 +20,16 @@ public sealed class ServiceRequestEntity
 
     // Used to detect competing updates to the same request.
     public long Version { get; set; } = 1;
+    
+    public DateTimeOffset CreatedAt { get; set; }
+
+    public string Priority { get; set; } = "Normal";
+
+    public string? OwnerId { get; set; }
+
+    public DateTimeOffset? DueAt { get; set; }
+
+    public Guid? SubmissionKey { get; set; }
 
     public List<RequestNoteEntity> Notes { get; set; } = new();
 }

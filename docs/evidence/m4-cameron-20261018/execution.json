@@ -1,0 +1,30 @@
+{
+  "executor": "OpenAI Codex",
+  "date": "2026-10-18",
+  "scope": "Local integrated candidate, automated verification; stakeholder acceptance assessed separately",
+  "source": "Cameron presentation and contract candidate after integration checkpoint 2cfadb6; uncommitted source fingerprinted separately",
+  "database": "civicconnect_m4_20261018_122355_test",
+  "dependency_audit": "Disabled for cached restore; not a fresh security audit",
+  "results": [
+    {
+      "project": "CivicConnect.Verification",
+      "exit_code": 0,
+      "report": "run-CivicConnect.Verification.txt"
+    },
+    {
+      "project": "CivicConnect.DatabaseTests",
+      "exit_code": 0,
+      "report": "run-CivicConnect.DatabaseTests.txt"
+    },
+    {
+      "project": "CivicConnect.M3Tests",
+      "exit_code": 0,
+      "report": "run-CivicConnect.M3Tests.txt"
+    },
+    {
+      "project": "CivicConnect.M4Tests",
+      "exit_code": 0,
+      "report": "run-CivicConnect.M4Tests.txt"
+    }
+  ]
+}

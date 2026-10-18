@@ -1,3 +1,5 @@
+> Current final assessment: 48.5/54 = 89.8%, dated 18 October 2026. Earlier dated tables retain history; the final outcome table is at the end. No baseline criteria were removed.
+
 # CivicConnect Requirements Traceability Matrix
 
 Virtual Group K · Milestone 3
@@ -806,3 +808,77 @@ For each requirement row `r` (rows 2–28), the workbook uses:
 
 - Priority: `=INDEX(Requirements!$C$2:$C$28,MATCH(Ar,Requirements!$A$2:$A$28,0))`
 - Current requirement wording: `=INDEX(Requirements!$B$2:$B$28,MATCH(Ar,Requirements!$A$2:$A$28,0))`
+
+
+## M4 checkpoint 18 October 2026
+
+The earlier tables above retain M3 history. New columns W–AE in the same RTM sheet record this provisional assessment. Final group integration and acceptance remain pending. No original requirement or AC was removed.
+
+Scope Completion: 25.5/54 = 47.2% (13 Met, 25 Partially Met, 16 Not Met). Target: 80%. The live workbook derives values from the two AC outcome fields and exposes incomplete inputs.
+
+| Requirement | Original priority | Implementation | AC1 | AC2 | Points | Checkpoint disposition | Remaining gap |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| FR-001 | High | PARTIALLY IMPLEMENTED | Not Met | Partially Met | 0.5 | Not delivered | Valid submissions cannot yet be saved by the normal product. |
+| FR-002 | High | PARTIALLY IMPLEMENTED | Partially Met | Partially Met | 1.0 | Not delivered | Catalogue persistence and retention must be verified with Michael’s adapter. |
+| FR-003 | High | IMPLEMENTED | Met | Met | 2 | Verified | Real account adapter is still absent; this trace covers controlled read/status behaviour. |
+| FR-004 | Medium | PARTIALLY IMPLEMENTED | Not Met | Not Met | 0 | Not delivered | Persistent requester list and empty/history cases await integration. |
+| FR-005 | Medium | PARTIALLY IMPLEMENTED | Partially Met | Met | 1.5 | Not delivered | Dated feedback for every required event is not yet available in the product. |
+| FR-006 | High | PARTIALLY IMPLEMENTED | Not Met | Met | 1 | Not delivered | The authorised persisted collection query is not implemented by this contribution. |
+| FR-007 | Medium | PARTIALLY IMPLEMENTED | Not Met | Not Met | 0 | Not delivered | Actual matching, combined query results and priority/date ordering require the real data adapter. |
+| FR-008 | High | PARTIALLY IMPLEMENTED | Partially Met | Partially Met | 1.0 | Not delivered | Requester/owner/priority/due-date metadata is absent from current persistence. |
+| FR-009 | High | PARTIALLY IMPLEMENTED | Partially Met | Partially Met | 1.0 | Not delivered | Atomic persisted ownership, audit and simultaneous claims remain unverified. |
+| FR-010 | High | IMPLEMENTED | Met | Met | 2 | Verified | Writer bypass remains debt; added entry points and final adapters require another integration run. |
+| FR-011 | High | PARTIALLY IMPLEMENTED | Partially Met | Partially Met | 1.0 | Not delivered | General notes need persisted author/time and correction history. |
+| FR-012 | High | IMPLEMENTED | Met | Met | 2 | Verified | Real-account portal acceptance remains separate from the verified status API. |
+| FR-013 | Medium | PARTIALLY IMPLEMENTED | Partially Met | Partially Met | 1.0 | Not delivered | Saved management data and refresh against persistent changes await integration. |
+| FR-014 | Medium | PARTIALLY IMPLEMENTED | Not Met | Not Met | 0 | Not delivered | The persisted management overview and individual matching request presentation remain incomplete. |
+| FR-015 | High | PARTIALLY IMPLEMENTED | Partially Met | Partially Met | 1.0 | Not delivered | Creation/ownership/priority/due-date/note audit, restart and immutability coverage remain incomplete. |
+| FR-016 | High | PARTIALLY IMPLEMENTED | Not Met | Met | 1 | Not delivered | There is no registered real account adapter or verified enabled-account credential store. |
+| FR-017 | Medium | PARTIALLY IMPLEMENTED | Not Met | Partially Met | 0.5 | Not delivered | Default and updated priorities must be persisted and used by real sorting/filtering. |
+| FR-018 | Medium | PARTIALLY IMPLEMENTED | Not Met | Partially Met | 0.5 | Not delivered | Saved due-date audit and actual overdue records await Michael’s adapter. |
+| NFR-001 | High | IMPLEMENTED | Met | Met | 2 | Verified | Confidence is limited to tested surfaces; review every new adapter/query before final acceptance. |
+| NFR-002 | Medium | PARTIALLY IMPLEMENTED | Not Met | Not Met | 0 | Not delivered | Four separate user-visible operations, specified dataset/load, failures and cold start remain unverified. |
+| NFR-003 | High | PARTIALLY IMPLEMENTED | Partially Met | Partially Met | 1.0 | Not delivered | Durable idempotency, assignment atomicity and full restart acceptance remain open. |
+| NFR-004 | Medium | NOT IMPLEMENTED | Not Met | Not Met | 0 | Not delivered | Five-participant task/time/error records are required; synthetic UI checks are not usability acceptance. |
+| NFR-005 | Medium | PARTIALLY IMPLEMENTED | Not Met | Partially Met | 0.5 | Not delivered | 360/1366 Chrome-and-Edge matrix and complete keyboard/error journey remain unverified. |
+| NFR-006 | High | PARTIALLY IMPLEMENTED | Partially Met | Partially Met | 1.0 | Not delivered | Final deployed certificate, sign-in/protected browser pages and mixed-content checks remain unverified. |
+| NFR-007 | Medium | PARTIALLY IMPLEMENTED | Partially Met | Partially Met | 1.0 | Not delivered | Backup age, timed restoration, RPO/RTO and consistent owner/history recovery are not established. |
+| NFR-008 | High | PARTIALLY IMPLEMENTED | Partially Met | Partially Met | 1.0 | Not delivered | A complete dummy-secret/private-content log audit remains outstanding. |
+| NFR-009 | High | IMPLEMENTED | Met | Met | 2 | Verified | Testability does not imply that the corresponding persistent product journeys are delivered. |
+
+“Verified” means both criteria are evidenced for the current controlled scope, not whole-product or final-release acceptance. Incomplete original commitments remain Not delivered; none was relabelled Deferred. Detailed evidence and limitations are in workbook columns AC/AD and docs/evidence/m4-cameron-20261018/summary.md.
+
+
+## M4 final closure 18 October 2026
+
+Code: 625e4e99882150f79ad3e00bae327b14e63e5d9c. Release identifier: m4-final-20261018-r6. Outcomes: 46 Met, 5 Partially Met, 3 Not Met. Final percentage derives from the existing workbook formulas in RTM!X41; target 80%. Production is a no-go despite the functional scope result.
+
+| Requirement | Priority | Implementation | AC1 | AC2 | Points | Disposition | Evidence and limitation |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| FR-001 | High | IMPLEMENTED | Met | Met | 2 | Verified | P03–P06 exercise real submission, validation, reference/date/New/default priority, failed-write rollback and durable repeated submission. docs/evidence/m4-final-20261018/summary.md Controlled synthetic records; no attachments or external notifications are in the baseline. |
+| FR-002 | High | IMPLEMENTED | Met | Met | 2 | Verified | P03/P05 save an agreed category and reject unlisted values; saved category is read back through the real reader. docs/evidence/m4-final-20261018/summary.md The seven-category catalogue is controlled in PortalOptions; a separate administrative category editor was not committed. |
+| FR-003 | High | IMPLEMENTED | Met | Met | 2 | Verified | P07/P24/P26 verify saved own status/date after updates and direct foreign denial; M3 E01/E02 remain regression evidence. docs/evidence/m4-final-20261018/summary.md Controlled accounts and local staging; no public production access is claimed. |
+| FR-004 | Medium | IMPLEMENTED | Met | Met | 2 | Verified | P08/P26 show own saved reference/category/date/status, completed requests and foreign exclusion; UI checks cover the empty message. docs/evidence/m4-final-20261018/summary.md Lists are unpaginated at the pilot scale. |
+| FR-005 | Medium | PARTIALLY IMPLEMENTED | Partially Met | Met | 1.5 | Not delivered | P05/P12/P15/P24/P26 verify dated saved creation/assignment/status feedback and private-note exclusion. docs/evidence/m4-final-20261018/summary.md Status is shown in current details and dated status history. General public notes are not stored with their own separate status snapshot, so AC1 remains partial. |
+| FR-006 | High | IMPLEMENTED | Met | Met | 2 | Verified | P07/P08 use real authorised/category-scoped queries and deny direct wrong-category detail access. docs/evidence/m4-final-20261018/summary.md Checks cover the supplied role/category dataset rather than an exhaustive penetration test. |
+| FR-007 | Medium | IMPLEMENTED | Met | Met | 2 | Verified | P19/P20/P20a exercise combined authorised matching, exact UTC boundaries and Low/Normal/High sorting in both directions; clear/no-match rendering is covered by the UI suite. docs/evidence/m4-final-20261018/summary.md No pagination or ranked full-text search is provided. |
+| FR-008 | High | IMPLEMENTED | Met | Met | 2 | Verified | P07/P09 and the saved browser journey show all required detail fields, creation date, missing owner/due labels and access denial. docs/evidence/m4-final-20261018/summary.md Requesters receive a restricted projection; account IDs identify staff in the controlled demonstration. |
+| FR-009 | High | IMPLEMENTED | Met | Met | 2 | Verified | P10/P10a/P11/P11a/P12 verify owner eligibility, actor/time, ownerless API rejection, rollback and two simultaneous HTTP claims yielding one saved owner. docs/evidence/m4-final-20261018/summary.md Concurrency was checked for the controlled two-claim race, not a production load profile. |
+| FR-010 | High | IMPLEMENTED | Met | Met | 2 | Verified | LC matrix, M3 C01/C02, P10b/P22/P24/P25 verify legal status/history writes and invalid, terminal and unauthorised rejection. docs/evidence/m4-final-20261018/summary.md One source project still permits privileged code to reach EF directly; supported HTTP paths and writer boundaries are guarded. |
+| FR-011 | High | IMPLEMENTED | Met | Met | 2 | Verified | P13/P14/P15 persist author/time and visibility, reject blank notes and append corrections while retaining earlier entries. docs/evidence/m4-final-20261018/summary.md Corrections are appended; there is no destructive note-edit endpoint. |
+| FR-012 | High | IMPLEMENTED | Met | Met | 2 | Verified | P24/P25 and M3 E01/E02 verify required feedback/resolution summary, actor/time and legal authorised closure. docs/evidence/m4-final-20261018/summary.md No automatic closure or reopening was committed. |
+| FR-013 | Medium | IMPLEMENTED | Met | Met | 2 | Verified | SM01–SM12 and P21/P27 verify lifecycle/overdue calculations, saved changes, zero counts and requester reporting denial. docs/evidence/m4-final-20261018/summary.md Summary reads are unpaginated and the full pilot response-time criterion remains separate. |
+| FR-014 | Medium | IMPLEMENTED | Met | Met | 2 | Verified | P21/P27 and the management UI checks verify saved matching references, category/status selection, clear selections and zero-match feedback. docs/evidence/m4-final-20261018/summary.md Management sees request reference/category/status rather than requester private details. |
+| FR-015 | High | IMPLEMENTED | Met | Met | 2 | Verified | P18/P28 and recovery.json verify creation, ownership, status, scheduling and note audit with actor/time, restart survival and exact restore. Ordinary users have no audit-edit endpoint. docs/evidence/m4-final-20261018/summary.md Database administrators can alter tables; application append-only behaviour is not tamper-proof external archival. |
+| FR-016 | High | IMPLEMENTED | Met | Met | 2 | Verified | P01/P02/P29 use real password hashes, server-owned roles and stored-account revocation; UI/M3 cases deny signed-out and ambiguous principals. docs/evidence/m4-final-20261018/summary.md No public self-registration, password reset, MFA or login rate limiting is delivered; these remain production security limitations. |
+| FR-017 | Medium | IMPLEMENTED | Met | Met | 2 | Verified | P05/P16/P17/P20 verify default Normal, saved changes, filtering, numeric priority sorting and invalid/requester denial. docs/evidence/m4-final-20261018/summary.md Priority is one of Low, Normal or High; no custom priority editor is provided. |
+| FR-018 | Medium | IMPLEMENTED | Met | Met | 2 | Verified | P16/P17/P18/P21 verify valid UTC due dates, audit, malformed-date rejection and overdue rules; SM checks cover null and terminal dates. docs/evidence/m4-final-20261018/summary.md Forms state UTC explicitly; user-local timezone preferences are not provided. |
+| NFR-001 | High | IMPLEMENTED | Met | Met | 2 | Verified | Read, API, UI and persistent role/ownership/category cases pass without an unauthorised disclosure or mutation in the tested set. docs/evidence/m4-final-20261018/summary.md This is the defined access-test set, not an external penetration assessment. |
+| NFR-002 | Medium | NOT IMPLEMENTED | Not Met | Not Met | 0 | Not delivered | Michael’s existing paced database-read measurement remains available; correctness journeys now exercise all real portal adapters. docs/evidence/m4-final-20261018/summary.md The specified 10-user, 1,000-request, four-operation browser workload, separate visible-result timings and cold start were not executed. Not delivered. |
+| NFR-003 | High | IMPLEMENTED | Met | Met | 2 | Verified | P04a/P06/P11a/P12/P23/P28 and the database suite verify submission/assignment/status rollback, competing claims, durable idempotency and application restart. docs/evidence/m4-final-20261018/summary.md Controlled local PostgreSQL; infrastructure failover was not tested. |
+| NFR-004 | Medium | PARTIALLY IMPLEMENTED | Not Met | Met | 1 | Not delivered | Cameron observed all five participants following the same task: 3/5 reported completion within 300 seconds without coaching. Times, errors and coaching recorded. docs/evidence/m4-final-20261018/usability.md Four-of-five uncoached threshold failed. P2/P3 chose a different category; strict task-conforming uncoached completion is 2/5. Small local convenience sample. |
+| NFR-005 | Medium | PARTIALLY IMPLEMENTED | Partially Met | Partially Met | 1.0 | Not delivered | Chrome sign-in layouts at 360/1366 show no horizontal overflow. Keyboard sign-in, category selection, text entry, visible focus and submission were exercised in the in-app browser. docs/evidence/m4-final-20261018/summary.md The complete Chrome/Edge screen matrix and keyboard validation-error journey are not yet evidenced. |
+| NFR-006 | High | PARTIALLY IMPLEMENTED | Partially Met | Partially Met | 1.0 | Not delivered | Persistent tests use HTTPS with a pinned generated certificate; normal application cookies and antiforgery cookies require HTTPS. Michael’s redirect evidence is retained. docs/evidence/m4-final-20261018/summary.md No public host or browser-trusted deployed certificate exists. The isolated participant preview uses loopback HTTP with synthetic accounts; it does not satisfy deployed HTTPS acceptance. |
+| NFR-007 | Medium | IMPLEMENTED | Met | Met | 2 | Verified | recovery.json records a fresh backup, 0.917-second conservative age and 0.676-second restore/verification. Request, eligible owner, five status-history rows, six notes and scheduling audit match exactly. docs/evidence/m4-final-20261018/summary.md Small synthetic local dataset and manual backup. Automatic scheduling, off-site retention and hosted disaster recovery are not established. |
+| NFR-008 | High | IMPLEMENTED | Met | Met | 2 | Verified | P23 and existing safe-error cases check dummy-secret/private-content non-disclosure; P04a/P11a/P23 verify action-specific failure titles. Custom logs record exception type only. docs/evidence/m4-final-20261018/summary.md Sensitive-data logging must remain disabled when deploying or changing providers. |
+| NFR-009 | High | IMPLEMENTED | Met | Met | 2 | Verified | Pure lifecycle/ownership/summary checks, fixture UI checks and repeatable real-adapter scenarios run independently of production data; illegal transitions and injected faults are detected. docs/evidence/m4-final-20261018/summary.md Custom executable harnesses require explicit CI invocation rather than standard test discovery. |

@@ -4,8 +4,11 @@ using CivicConnect.Security;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using CivicConnect.Data.Entities;
+using Microsoft.AspNetCore.Identity;
 namespace CivicConnect;
 using System.Diagnostics;
+
 public static class Composition
 {
     public static IServiceCollection AddCivicConnect(
@@ -20,6 +23,22 @@ public static class Composition
             o.Cookie.SameSite = SameSiteMode.Lax;
             o.Events.OnRedirectToLogin = c => { c.Response.StatusCode = 401; return Task.CompletedTask; };
             o.Events.OnRedirectToAccessDenied = c => { c.Response.StatusCode = 403; return Task.CompletedTask; };
+            o.Events.OnValidatePrincipal = async c =>
+            {
+                // Browser sessions issued by AccountController are checked against live account data.
+                var stamp = c.Principal?.FindFirst("portal-stamp")?.Value;
+
+                if (string.IsNullOrWhiteSpace(stamp))
+                {
+                    c.RejectPrincipal();
+                    return;
+                }
+                var actor = c.Principal is null ? null : PortalActor.From(c.Principal);
+                var accounts = c.HttpContext.RequestServices.GetServices<IPortalAccounts>().SingleOrDefault();
+                var account = actor is null || accounts is null ? null : await accounts.FindAsync(actor.Id, c.HttpContext.RequestAborted);
+                if (account is null || !account.IsActive || account.Id != actor!.Id || account.SecurityStamp != stamp || account.Role != actor.Role ||
+                    !account.Categories.ToHashSet(StringComparer.Ordinal).SetEquals(actor.Categories)) c.RejectPrincipal();
+            };
         });
         services.AddAuthorization(o => o.FallbackPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build());
         services.AddAntiforgery(o =>
@@ -31,8 +50,18 @@ public static class Composition
         services.AddScoped<IRequestReader, EfRequestReader>();
         services.AddScoped<RequestQueryService>();
         services.AddSingleton<StatusTransitionService>();
-        services.AddScoped<IRequestStatusWriter, EfRequestStatusWriter>();
+        services.AddSingleton<Lifecycle.IStatusTransitionService, Lifecycle.StatusTransitionService>();
+        services.AddSingleton<Lifecycle.IOwnershipRule, Lifecycle.OwnershipRule>();
+        services.AddSingleton<Lifecycle.IServiceActivitySummaryCalculator, Lifecycle.ServiceActivitySummaryCalculator>();
+        services.AddScoped<EfRequestStatusWriter>();
+        services.AddScoped<IRequestStatusWriter>(
+            sp => sp.GetRequiredService<EfRequestStatusWriter>());
         services.AddScoped<RequestStatusService>();
+        services.AddScoped<IPasswordHasher<PortalAccountEntity>,
+            PasswordHasher<PortalAccountEntity>>();
+
+        services.AddScoped<IPortalAccounts, EfPortalAccounts>();
+        services.AddScoped<IPortalRequestStore, EfPortalRequestStore>();
         var connectionString =
             configuration.GetConnectionString("CivicConnect")
             ?? throw new InvalidOperationException(
@@ -51,13 +80,12 @@ public static class Composition
             catch (OperationCanceledException) when (context.RequestAborted.IsCancellationRequested) { }
             catch (Exception ex)
             {
+                
                 var logger = context.RequestServices
                     .GetRequiredService<ILoggerFactory>()
                     .CreateLogger("CivicConnect.Observability");
 
-                logger.LogError(
-                    "Unhandled application exception. Type: {ExceptionType}",
-                    ex.GetType().Name);
+                logger.LogError("Unhandled application exception. Type: {ExceptionType}", ex.GetType().Name);
 
                 if (context.Response.HasStarted) throw;
 
@@ -66,7 +94,7 @@ public static class Composition
 
                 await Results.Problem(
                     statusCode: 500,
-                    title: "The request could not be completed."
+                    title: FailedAction(context.Request.Path)
                 ).ExecuteAsync(context);
             }
         });
@@ -109,5 +137,19 @@ public static class Composition
         app.UseAuthorization();
         app.MapControllers();
         return app;
+    }
+
+    private static string FailedAction(PathString path)
+    {
+        var value = path.Value ?? "";
+        if (value.StartsWith("/account/sign-in", StringComparison.Ordinal)) return "Sign-in could not be completed.";
+        if (value == "/portal/requests/new") return "Your request could not be submitted.";
+        if (value.EndsWith("/assign", StringComparison.Ordinal)) return "Assignment could not be saved.";
+        if (value.EndsWith("/notes", StringComparison.Ordinal)) return "Your note could not be saved.";
+        if (value.EndsWith("/schedule", StringComparison.Ordinal)) return "Priority and due date could not be saved.";
+        if (value.EndsWith("/status", StringComparison.Ordinal)) return "The status update could not be saved.";
+        if (value == "/portal/management") return "The service overview could not be loaded.";
+        if (value == "/portal/requests") return "The request list could not be loaded.";
+        return "Request details could not be loaded.";
     }
 }

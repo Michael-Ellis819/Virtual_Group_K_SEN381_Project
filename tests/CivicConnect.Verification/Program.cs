@@ -17,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 int passed = 0;
 void Check(string id, bool condition)
@@ -27,7 +28,7 @@ void Check(string id, bool condition)
 }
 ClaimsPrincipal User(string role = "Requester", string id = "requester-1", string active = "true", string category = "IT Support")
     => new(new ClaimsIdentity(new[] { new Claim(ClaimTypes.NameIdentifier, id),
-        new Claim(ClaimTypes.Role, role), new Claim("active", active), new Claim("category", category) }, "test-ticket"));
+        new Claim(ClaimTypes.Role, role), new Claim("active", active), new Claim("category", category), new Claim("portal-stamp", "verification-stamp") }, "test-ticket"));
 
 var reader = new DevelopmentRequestReader();
 var policy = new RequestAccessPolicy();
@@ -80,6 +81,8 @@ builder.Services.AddCivicConnect(
         })
         .Build());
 builder.Services.AddDataProtection().UseEphemeralDataProtectionProvider();
+builder.Services.RemoveAll<IPortalAccounts>();
+builder.Services.AddSingleton<IPortalAccounts, VerificationAccounts>();
 builder.Services.AddSingleton<IRequestReader, FaultInjectingReader>();
 await using var app = builder.Build();
 app.UseCivicConnect();
@@ -135,7 +138,11 @@ try
     Check("H14 bare detail route does not accept writes", postResponse.StatusCode != HttpStatusCode.OK && postResponse.StatusCode != HttpStatusCode.Created);
 }
 finally { await app.StopAsync(); }
-Console.WriteLine($"RESULT {passed} checks passed; 0 failed. In-memory read slice only; no database/login/production acceptance claimed.");
+var sourceRoot = new DirectoryInfo(AppContext.BaseDirectory);
+while (sourceRoot is not null && !Directory.Exists(Path.Combine(sourceRoot.FullName, "src", "CivicConnect.Web")))
+    sourceRoot = sourceRoot.Parent;
+LifecycleChecks.Run(Check, sourceRoot?.FullName);
+Console.WriteLine($"RESULT {passed} checks passed; 0 failed. Read and business-rule checks; no full-product acceptance claimed.");
 
 sealed class FaultInjectingReader : IRequestReader
 {
@@ -143,4 +150,43 @@ sealed class FaultInjectingReader : IRequestReader
     public Task<RequestSnapshot?> FindAsync(Guid id, CancellationToken cancellationToken)
         => id == Guid.Parse("ffffffff-ffff-ffff-ffff-ffffffffffff")
             ? throw new InvalidOperationException("sensitive-store-marker") : inner.FindAsync(id, cancellationToken);
+}
+
+sealed class VerificationAccounts : IPortalAccounts
+{
+    public Task<SignInResult> AuthenticateAsync(
+        string username,
+        string password,
+        CancellationToken cancellationToken)
+    {
+        return Task.FromResult(
+            new SignInResult(SignInOutcome.InvalidCredentials));
+    }
+
+    public Task<PortalAccount?> FindAsync(
+        string id,
+        CancellationToken cancellationToken)
+    {
+        PortalAccount? account = id switch
+        {
+            "requester-1" or "requester-2" =>
+                new PortalAccount(
+                    id, "Test requester", "Requester", true,
+                    new[] { "IT Support" }, "verification-stamp"),
+
+            "staff-1" =>
+                new PortalAccount(
+                    id, "Test staff", "Staff", true,
+                    new[] { "IT Support" }, "verification-stamp"),
+
+            "staff-2" =>
+                new PortalAccount(
+                    id, "Other staff", "Staff", true,
+                    new[] { "Maintenance" }, "verification-stamp"),
+
+            _ => null
+        };
+
+        return Task.FromResult(account);
+    }
 }

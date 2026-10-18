@@ -61,11 +61,11 @@ Solution-wide searches were performed for:
 - `HttpPatch`
 - `HttpDelete`
 
-No matches were found during the searches.
+The current integrated M3 baseline contains `POST /requests/{id}/status`, protected by `[ValidateAntiForgeryToken]`, and an authenticated token endpoint. `Composition.cs` registers antiforgery with the `X-CSRF-TOKEN` header and a Secure cookie. The earlier no-match observation did not describe this integrated baseline.
 
 This does not establish that CSRF protection is unnecessary or that every possible state-changing endpoint has been identified.
 
-CSRF protection must be reassessed when authenticated request submission, assignment and status-update functionality is integrated.
+Retain the existing status protection and reassess coverage when request submission, assignment or other mutation endpoints are added. Existing M3 cases cover missing-token rejection; this does not establish protection for future routes.
 
 ## 6. Limitations
 

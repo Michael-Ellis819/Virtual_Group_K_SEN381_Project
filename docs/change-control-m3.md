@@ -1,6 +1,6 @@
 # CR-M3-C01 - controlled implementation and impact record
 
-Date: 13 October 2026. Owner: Cameron Purdon. Status: implemented, reviewed by Bianca and Michael on 14 October, merged through PR17 and verified by combined main CI. This is an engineering implementation record, not an invented lecturer/client scope-change request.
+Date: 13 October 2026. Owner: Cameron Purdon. Status: implemented, reviewed by Bianca and Michael on 14 October, merged through PR17 and verified by combined main CI. This records an implementation change; the agreed scope was unchanged.
 
 | Original decision | Implementation problem | Resulting implementation | Consequence |
 | --- | --- | --- | --- |
@@ -24,3 +24,9 @@ Validation: six component, five black-box, six API/integration and two system ca
 Cameron confirmed that the team agrees with the current M3 increment and will complete unfinished original features during M4 finalisation. The M3 candidate is published implementation 668795a: protected retrieval of existing requests and authorised lifecycle/status updates with transactional history/public feedback, input/access checks, rollback and stale-update handling. Its verification uses controlled HTTPS simulated staging, real PostgreSQL, prepared records and synthetic identities.
 
 Decision: CONDITIONALLY READY for this M3 increment in that environment, supported by PR17 approvals, passing combined CI, functional/system evidence and the separate performance exercise. Normal deployment, real login, submission, assignment, lists/search and reporting remain incomplete. C04 remains open for normal deployment and C05 remains open in original scope. The team plans their finalisation in M4; no M1 requirement, priority or acceptance criterion is removed or rewritten. Real-user/production release and full product acceptance are not approved. Team agreement was confirmed by Cameron on 15 October.
+
+## M4 final closure 18 October 2026
+
+The M4 integration completes original FR-001–FR-018 rather than adding optional scope. The baseline remains 27 requirements/54 acceptance criteria. No approved removal or deferral of an uncompleted original commitment has been supplied. Existing future/out-of-scope items remain as originally classified. Incomplete NFR acceptance is recorded as Not delivered, with its stakeholder and release consequence.
+
+Integrity correction: first assignment must use the atomic ownership command. The status-only JSON endpoint now rejects New → Assigned without ownership. The lifecycle edge remains supported through assignment; its original commitment was not removed.

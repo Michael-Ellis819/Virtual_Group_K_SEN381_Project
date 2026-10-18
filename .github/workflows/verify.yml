@@ -7,6 +7,7 @@ on:
     branches:
       - main
       - feature/m4-security-operations
+      - feature/cameron-m4-finalisation
       - feature/m3-data-persistence
       - feature/cameron-m3-integration
   pull_request:
@@ -75,6 +76,15 @@ jobs:
 
       - name: Build performance project and audit dependencies
         run: dotnet build tests/CivicConnect.PerformanceTests --configuration Release -p:NuGetAudit=true -p:NuGetAuditMode=all -p:TreatWarningsAsErrors=true
+
+      - name: Build M4 presentation and contract checks
+        run: dotnet build tests/CivicConnect.M4Tests --configuration Release -p:NuGetAuditMode=all
+
+      - name: Run M4 black-box UI and synthetic contract journey
+        run: dotnet run --project tests/CivicConnect.M4Tests --configuration Release --no-build
+
+      - name: Run persistent HTTPS portal journey and failure checks
+        run: dotnet run --project tests/CivicConnect.M4Tests --configuration Release --no-build -- --database
 
       - name: Run separate database-read performance exercise
         run: dotnet run --project tests/CivicConnect.PerformanceTests --configuration Release --no-build

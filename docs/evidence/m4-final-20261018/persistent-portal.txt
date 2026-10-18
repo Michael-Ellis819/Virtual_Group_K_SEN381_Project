@@ -1,0 +1,37 @@
+PASS P01 invalid real credentials grant no session [FR-016]
+PASS P02 client role field cannot grant management [FR-016/NFR-001]
+PASS P03 invalid submission saves nothing [FR-001/002]
+PASS P04 real submission requires antiforgery
+PASS P04a failed submission rolls back request/history/feedback [NFR-003]
+PASS P05 submission persists reference/category/date/New/default priority [FR-001/002/017]
+PASS P06 repeat submission is durable and changed key reuse conflicts [NFR-003]
+PASS P07 direct foreign requester/category access denied [FR-003/006/008]
+PASS P08 lists include own/permitted and exclude others [FR-004/006]
+PASS P09 staff detail includes original fields and missing-value labels [FR-008]
+PASS P10 status-only assignment rejected without a write [FR-009/010]
+PASS P10a legacy JSON API also rejects ownerless assignment
+PASS P10b persistence boundary rejects a direct illegal lifecycle write [R-011]
+PASS P11 ineligible stored owner rejected [FR-009]
+PASS P11a failed assignment leaves previous owner/status/history/feedback [NFR-003]
+PASS P12 simultaneous HTTP claims save exactly one owner/history/feedback [FR-009/NFR-003]
+PASS P13 internal note persists [FR-011]
+PASS P14 public correction appends; blank note rejected [FR-011]
+PASS P15 public feedback/history persists without internal note disclosure [FR-005/011/015]
+PASS P16 priority/due update saves UTC audit [FR-017/018]
+PASS P17 stale/invalid/unauthorised scheduling rejected [FR-017/018]
+PASS P18 staff audit projects priority/due/note/ownership events [FR-015]
+PASS P19 combined authorised search and inclusive same-day bounds [FR-007]
+PASS P20 both numeric priority sort directions on a mixed dataset [FR-007/017]
+PASS P20a real query includes both exact UTC date boundaries [FR-007]
+PASS P21 management reads saved selected requests and overdue count [FR-013/014/018]
+PASS P22 empty feedback rejected without status change [FR-010]
+PASS P23 failed status transaction rolls back with safe response/logs [NFR-003/008]
+PASS P24 Assigned to In Progress persists
+PASS P24 In Progress to Resolved persists
+PASS P24 Resolved to Closed persists
+PASS P25 terminal request cannot reopen [FR-010/012]
+PASS P26 requester reads saved completion and completed history/list [FR-003/004/005]
+PASS P27 refreshed management reflects saved terminal status and zero selections [FR-013/014]
+PASS P28 request, notes and history survive application restart [FR-015/NFR-003]
+PASS P29 disabling a stored account invalidates its session [FR-016]
+RESULT 36 persistent HTTPS portal checks passed; 0 failed. Real PostgreSQL adapters and password verification; generated fixture accounts and pinned test certificate. Not participant usability or public production deployment.

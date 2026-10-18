@@ -15,13 +15,48 @@ public sealed class CivicConnectDbContext : DbContext
     public DbSet<ServiceRequestEntity> ServiceRequests =>
         Set<ServiceRequestEntity>();
 
+    public DbSet<RequestScheduleAuditEntity> RequestScheduleAudits
+        => Set<RequestScheduleAuditEntity>();
+
     public DbSet<RequestNoteEntity> RequestNotes =>
         Set<RequestNoteEntity>();
     public DbSet<RequestStatusHistoryEntity> RequestStatusHistory =>
         Set<RequestStatusHistoryEntity>();
 
+    public DbSet<PortalAccountEntity> PortalAccounts =>
+        Set<PortalAccountEntity>();
+
+    public DbSet<PortalAccountCategoryEntity> PortalAccountCategories =>
+        Set<PortalAccountCategoryEntity>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<PortalAccountEntity>(entity =>
+        {
+            entity.HasKey(a => a.Id);
+
+            entity.Property(a => a.Id).HasMaxLength(100);
+            entity.Property(a => a.Username).HasMaxLength(100).IsRequired();
+            entity.Property(a => a.DisplayName).HasMaxLength(150).IsRequired();
+            entity.Property(a => a.PasswordHash).IsRequired();
+            entity.Property(a => a.Role).HasMaxLength(30).IsRequired();
+            entity.Property(a => a.SecurityStamp).HasMaxLength(100).IsRequired();
+
+            entity.HasIndex(a => a.Username).IsUnique();
+        });
+
+        modelBuilder.Entity<PortalAccountCategoryEntity>(entity =>
+        {
+            entity.HasKey(c => new { c.AccountId, c.CategoryId });
+
+            entity.Property(c => c.AccountId).HasMaxLength(100);
+            entity.Property(c => c.CategoryId).HasMaxLength(100);
+
+            entity.HasOne(c => c.Account)
+                .WithMany(a => a.Categories)
+                .HasForeignKey(c => c.AccountId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
         modelBuilder.Entity<ServiceRequestEntity>(entity =>
         {
             entity.HasKey(r => r.RequestId);
@@ -55,12 +90,31 @@ public sealed class CivicConnectDbContext : DbContext
 
             entity.Property(r => r.UpdatedAt)
                 .IsRequired();
-            
+
             // Detect when another operation has updated this request.
             entity.Property(r => r.Version)
                 .IsRequired()
                 .IsConcurrencyToken()
                 .HasDefaultValue(1L);
+
+            entity.Property(r => r.CreatedAt)
+                .IsRequired();
+
+            entity.Property(r => r.Priority)
+                .HasMaxLength(20)
+                .IsRequired()
+                .HasDefaultValue("Normal");
+
+            entity.Property(r => r.OwnerId)
+                .HasMaxLength(100);
+
+            entity.Property(r => r.DueAt);
+
+            entity.Property(r => r.SubmissionKey);
+
+            entity.HasIndex(r => new { r.RequesterId, r.SubmissionKey })
+                .IsUnique()
+                .HasFilter("\"SubmissionKey\" IS NOT NULL");
 
             entity.HasMany(r => r.Notes)
                 .WithOne(n => n.ServiceRequest)
@@ -78,9 +132,16 @@ public sealed class CivicConnectDbContext : DbContext
 
             entity.Property(n => n.IsRequesterVisible)
                 .IsRequired();
+
+            entity.Property(n => n.AuthorId)
+                .HasMaxLength(100)
+                .IsRequired();
+
+            entity.Property(n => n.CreatedAt)
+                .IsRequired();
         });
-        
-        
+
+
         modelBuilder.Entity<RequestStatusHistoryEntity>(entity =>
         {
             entity.HasKey(h => h.HistoryId);
@@ -112,10 +173,37 @@ public sealed class CivicConnectDbContext : DbContext
             });
         });
 
+        modelBuilder.Entity<RequestScheduleAuditEntity>(entity =>
+        {
+            entity.ToTable("RequestScheduleAudits");
+
+            entity.HasKey(a => a.AuditId);
+
+            entity.Property(a => a.ChangedByUserId)
+                .HasMaxLength(100)
+                .IsRequired();
+
+            entity.Property(a => a.PreviousPriority)
+                .HasMaxLength(20)
+                .IsRequired();
+
+            entity.Property(a => a.NewPriority)
+                .HasMaxLength(20)
+                .IsRequired();
+
+            entity.HasOne(a => a.ServiceRequest)
+                .WithMany()
+                .HasForeignKey(a => a.RequestId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasIndex(a => a.RequestId);
+        });
+
     }
-    
+
     public override int SaveChanges()
     {
+        UpdateAccountSecurityStamps();
         IncrementRequestVersions();
         return base.SaveChanges();
     }
@@ -123,10 +211,56 @@ public sealed class CivicConnectDbContext : DbContext
     public override Task<int> SaveChangesAsync(
         CancellationToken cancellationToken = default)
     {
+        UpdateAccountSecurityStamps();
         IncrementRequestVersions();
         return base.SaveChangesAsync(cancellationToken);
     }
 
+    private void UpdateAccountSecurityStamps()
+    {
+        ChangeTracker.DetectChanges();
+
+        var accountIds = new HashSet<string>();
+
+        foreach (var entry in ChangeTracker.Entries<PortalAccountEntity>()
+                     .Where(e => e.State == EntityState.Modified))
+        {
+            if (entry.Property(a => a.PasswordHash).IsModified ||
+                entry.Property(a => a.Role).IsModified ||
+                entry.Property(a => a.IsActive).IsModified)
+            {
+                accountIds.Add(entry.Entity.Id);
+            }
+        }
+
+        foreach (var entry in ChangeTracker.Entries<PortalAccountCategoryEntity>()
+                     .Where(e => e.State == EntityState.Added ||
+                                 e.State == EntityState.Deleted))
+        {
+            accountIds.Add(entry.Entity.AccountId);
+        }
+
+        foreach (var accountId in accountIds)
+        {
+            var accountEntry = ChangeTracker.Entries<PortalAccountEntity>()
+                .FirstOrDefault(e => e.Entity.Id == accountId);
+
+            if (accountEntry is not null)
+            {
+                accountEntry.Entity.SecurityStamp = Guid.NewGuid().ToString("N");
+            }
+            else
+            {
+                var account = PortalAccounts.Find(accountId);
+
+                if (account is not null)
+                {
+                    account.SecurityStamp = Guid.NewGuid().ToString("N");
+                }
+            }
+        }
+    }
+    
     private void IncrementRequestVersions()
     {
         foreach (var entry in ChangeTracker

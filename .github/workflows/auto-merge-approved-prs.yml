@@ -1,0 +1,40 @@
+name: Enable auto-merge after protected review
+on:
+  pull_request_review:
+    types: [submitted]
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  enable-auto-merge:
+    if: github.event.review.state == 'approved'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const {owner, repo} = context.repo;
+            const number = context.payload.pull_request.number;
+            const {data: pr} = await github.rest.pulls.get({owner, repo, pull_number: number});
+            if (pr.state !== 'open' || pr.draft || pr.base.ref !== 'main' || pr.head.repo?.full_name !== `${owner}/${repo}`) return;
+            // Enabling auto-merge is safe only when main itself enforces the policy.
+            let protection;
+            try { ({data: protection} = await github.rest.repos.getBranchProtection({owner, repo, branch: 'main'})); }
+            catch { core.notice('Protection could not be verified. Manual reviewed merge is required.'); return; }
+            const reviewsPolicy = protection.required_pull_request_reviews;
+            const checksPolicy = protection.required_status_checks;
+            if (!protection.enforce_admins?.enabled || !reviewsPolicy?.dismiss_stale_reviews ||
+                reviewsPolicy.required_approving_review_count < 2 || !checksPolicy?.strict ||
+                !(checksPolicy.contexts?.length || checksPolicy.checks?.length)) {
+              core.notice('Two reviews, stale-review dismissal and strict checks must be enforced on main. Manual merge remains required.'); return;
+            }
+            const reviews = await github.paginate(github.rest.pulls.listReviews, {owner, repo, pull_number: number, per_page: 100});
+            const latest = new Map();
+            for (const review of reviews) {
+              if (review.user && ['APPROVED', 'CHANGES_REQUESTED', 'DISMISSED'].includes(review.state)) latest.set(review.user.login, review);
+            }
+            const current = [...latest.values()].filter(r => r.state === 'APPROVED' && r.commit_id === pr.head.sha && r.user.login !== pr.user.login);
+            if (current.length < 2) { core.notice('Waiting for two independent approvals on this revision.'); return; }
+            const {data: head} = await github.rest.pulls.get({owner, repo, pull_number: number});
+            if (head.head.sha !== pr.head.sha) { core.notice('Revision changed during review check.'); return; }
+            await github.graphql(`mutation($id: ID!) { enablePullRequestAutoMerge(input: {pullRequestId: $id, mergeMethod: SQUASH}) { pullRequest { number } } }`, {id: pr.node_id});

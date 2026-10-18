@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-if (!builder.Environment.IsDevelopment())
+if (!builder.Environment.IsDevelopment() && !builder.Environment.IsStaging())
     throw new InvalidOperationException(
-        "This slice requires Development. Integrate persistent storage and identity provisioning before deployment.");
+        "This release is limited to Development or controlled Staging. Production release has not been approved.");
 
 builder.Services.AddCivicConnect(builder.Configuration);
 

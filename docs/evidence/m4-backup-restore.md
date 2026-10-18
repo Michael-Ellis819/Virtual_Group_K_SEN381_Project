@@ -165,3 +165,9 @@ The restored database contained all four expected tables, and the record counts 
 This provides supporting implementation evidence for **NFR-007 — Database Backup and Recovery** in Milestone 4.
 
 Further verification would be required before claiming production recovery readiness.
+
+## Final Windows recovery exercise — 18 October 2026
+
+A fresh custom-format PostgreSQL backup of the controlled fixture database was restored into a separate disposable database. A before/after snapshot compared the same request, active eligible staff owner, five status-history rows, six notes and one scheduling-audit row. The snapshots matched. Conservative backup age was 0.917 seconds; restore plus consistency verification was 0.676 seconds, meeting the recorded 24-hour RPO and four-hour RTO for this small dataset. The original database was retained. See m4-final-20261018/recovery.json.
+
+Repeat with a disposable database: capture the selected request and associated owner/history/notes/scheduling rows; take `pg_dump --format=custom`; create a separate empty target; restore using `pg_restore --exit-on-error`; query the identical row projection and compare; record actual timestamps and outcomes. Credentials and dump contents remain outside Git. This exercise demonstrates a local recovery procedure, not automatic schedules, off-site backups, production-size recovery or hosted rollback.

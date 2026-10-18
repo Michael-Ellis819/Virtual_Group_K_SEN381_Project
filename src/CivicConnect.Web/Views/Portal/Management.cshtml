@@ -1,0 +1,11 @@
+@model ManagementPage
+@{ ViewData["Title"] = "Service overview"; }
+<h1>Service overview</h1><form class="panel" method="get" action="/portal/management"><div class="grid"><div class="field"><label for="category">Category</label><select name="category" id="category"><option value="">All categories</option>@foreach (var category in PortalOptions.Categories) { <option value="@category" selected="@(Model.Category == category)">@category</option> }</select></div><div class="field"><label for="status">Status</label><select name="status" id="status"><option value="">All statuses</option>@foreach (var status in PortalOptions.Statuses) { <option value="@status" selected="@(Model.Status == status)">@status</option> }</select></div></div><div class="actions"><button type="submit">Refresh overview</button><a href="/portal/management">Clear selections</a></div></form>
+@if (!Model.Available) { <p class="notice" role="status">The service overview is temporarily unavailable. Please try again later.</p> }
+else {
+<div class="grid counts" aria-label="Request counts"><div class="panel">Open<strong>@Model.Summary.Open</strong></div><div class="panel">Overdue<strong>@Model.Summary.Overdue</strong></div><div class="panel">Resolved<strong>@Model.Summary.Resolved</strong></div><div class="panel">Closed<strong>@Model.Summary.Closed</strong></div></div>
+<p class="muted">Open means New, Assigned or In Progress. Overdue requests are open and past their due time. Requests without a due date are not overdue. Counts include the current selections.</p>
+<h2>Requests by category and status</h2><ul class="requests">@foreach (var group in Model.Requests.GroupBy(r => new { r.Category, r.Status }).OrderBy(g => g.Key.Category).ThenBy(g => g.Key.Status)) { <li class="panel">@group.Key.Category · @group.Key.Status: <strong>@group.Count()</strong></li> }</ul>
+<h2>Matching requests</h2><ul class="requests">@foreach (var request in Model.Requests.Where(r => r.Reference is not null).OrderBy(r => r.Reference)) { <li class="panel">@request.Reference · @request.Category · @request.Status</li> }</ul>
+@if (Model.Requests.Count == 0) { <p>No requests match these selections. All counts are zero.</p> }
+}

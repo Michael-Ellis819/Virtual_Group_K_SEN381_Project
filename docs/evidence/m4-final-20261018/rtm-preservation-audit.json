@@ -1,0 +1,11 @@
+{
+  "original_m3_dirty_files_byte_identical": true,
+  "rtm_history_values_styles_unchanged": true,
+  "sheets": [
+    "RTM",
+    "Requirements"
+  ],
+  "freeze_panes_merged_ranges_unchanged": true,
+  "formula_mutation_check": "Passed in artifact-tool builder",
+  "final_percentage": 0.8981481481481481
+}
