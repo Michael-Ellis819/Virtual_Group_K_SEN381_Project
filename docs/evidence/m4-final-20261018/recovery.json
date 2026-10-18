@@ -1,0 +1,23 @@
+{
+  "executor": "OpenAI Codex",
+  "environment": "Windows, PostgreSQL 18.4, loopback disposable fixture databases",
+  "source_database": "civicconnect_usability_20261018_test",
+  "restored_database": "civicconnect_restore_20261018_182320_test",
+  "backup_started_utc": "2026-10-18T16:23:20.1375652+00:00",
+  "backup_completed_utc": "2026-10-18T16:23:21.0549337+00:00",
+  "restore_started_utc": "2026-10-18T16:23:21.0549498+00:00",
+  "restore_completed_utc": "2026-10-18T16:23:21.7307914+00:00",
+  "conservative_backup_age_seconds": 0.917,
+  "restore_and_verification_seconds": 0.676,
+  "backup_bytes": 16640,
+  "rpo_target_hours": 24,
+  "rto_target_hours": 4,
+  "recovered_status": "Closed",
+  "eligible_owner_recovered": true,
+  "status_history_rows": 5,
+  "note_rows": 6,
+  "schedule_audit_rows": 1,
+  "exact_record_snapshot_match": true,
+  "result": "PASS",
+  "limits": "Small synthetic local dataset and freshly created manual backup. Does not establish an automated backup schedule, off-site retention, hosted outage recovery or production approval."
+}

@@ -42,3 +42,9 @@ The central policy is retained and extended with CanChangeStatus. Active categor
 ## M4 observed consequence 18 October 2026
 
 The portal reuses the central record policy for details and staff writes. Actor parsing rejects ambiguous/unknown/inactive principals, and browser sessions re-read server-owned account state and security stamps when the account adapter is connected. UI checks verify role-injection denial, category denial and disabled-session rejection using test-only accounts. The real account store and permission-scoped collection queries remain integration dependencies; these results are not production identity acceptance.
+
+## M4 final closure 18 October 2026
+
+The final product connects stored accounts and permissions, record-scoped PostgreSQL queries, real MVC forms and transactional commands. Lifecycle legality remains in Bianca’s rules; authorisation decides who may act. Assignment saves one eligible owner with its status/history/feedback, while generic status routes cannot create ownerless assignment. The persistence boundary now rechecks legality, reducing the earlier writer-bypass debt.
+
+Repeated local checks cover the persistent journey, races, injected rollback, safe errors and revocation. The custom harness remains an explicit CI responsibility. Staging evidence and production readiness remain separate: hosted TLS, full pilot operation timings and genuine final peer approvals cannot be inferred from a successful local run.

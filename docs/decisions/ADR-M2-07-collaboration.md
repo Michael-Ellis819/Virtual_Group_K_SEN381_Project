@@ -22,3 +22,9 @@ PR17 merged the combined implementation at 668795a after approvals from Bianca a
 ## M4 observed consequence 18 October 2026
 
 The existing harness now includes Bianca's 44 rule checks, and a fifth executable supplies 30 UI/contract checks. The workflow calls it explicitly; all four correctness suites pass locally after the presentation change. The misplaced merge workflow is now under .github/workflows and enables auto-merge only after two current non-author approvals and verified enforced branch protections. Remote execution, actual reviews and protection visibility remain evidence requirements; moving a file does not prove them.
+
+## M4 final closure 18 October 2026
+
+The final product connects stored accounts and permissions, record-scoped PostgreSQL queries, real MVC forms and transactional commands. Lifecycle legality remains in Bianca’s rules; authorisation decides who may act. Assignment saves one eligible owner with its status/history/feedback, while generic status routes cannot create ownerless assignment. The persistence boundary now rechecks legality, reducing the earlier writer-bypass debt.
+
+Repeated local checks cover the persistent journey, races, injected rollback, safe errors and revocation. The custom harness remains an explicit CI responsibility. Staging evidence and production readiness remain separate: hosted TLS, full pilot operation timings and genuine final peer approvals cannot be inferred from a successful local run.

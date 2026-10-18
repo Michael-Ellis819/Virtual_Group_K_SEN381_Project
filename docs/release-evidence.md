@@ -30,3 +30,13 @@ Current recommendation: **NO-GO for real-user production release**, pending trus
 Cameron's screens/controllers and synthetic contract journey are prepared. Local checks pass: 73 read/rule checks, 25 database checks, 19 M3 cases and 30 UI/contract cases. Missing adapters return unavailable responses. The normal startup guard remains unchanged. PR20's successful remote run supports its own revision; it is not remote verification of these additional changes.
 
 Before the final decision: identify the shared commit/tag/environment, connect and reverify the actual persistent journey, confirm important M3 issue outcomes, and update RTM/PED/registers. A staging no-go must name the remaining security/integrity/operational concern and remediation. M3 remains CONDITIONALLY READY only for its agreed controlled increment.
+
+## M4 final closure 18 October 2026
+
+Assessed project state: **staging, through a controlled local simulation**. Recommendation: **NO-GO for public production**. This is a technical conclusion from the recorded evidence, not a new team risk-acceptance signature.
+
+Real stored accounts, submission, scoped lists/search, ownership, notes, schedule audit, lifecycle and management views now form one integrated product. Code baseline `625e4e99882150f79ad3e00bae327b14e63e5d9c`; release identifier `m4-final-20261018` will identify the frozen assessed repository version. Existing M3 CONDITIONALLY READY remains limited to its agreed protected read/status increment.
+
+The persistent suite passes 36 checks and the local restore meets its recorded RPO/RTO targets. Public production remains blocked by the absence of a hosted TLS/certificate and protected operating configuration, the unexecuted full NFR-002 user-visible workload, unproven production recovery/rollback and remaining identity hardening. Deadline pressure is not treated as evidence that these risks are safe. No hosting account/environment is available, confirmed by Cameron on 18 October.
+
+The participant fixture host uses synthetic accounts over loopback HTTP for usability only. HTTPS tests use a pinned generated certificate. Temporary test access is not a public deployment URL. Student review, two genuine current non-author approvals and actual Moodle submission remain distinct human evidence; they are not fabricated here.

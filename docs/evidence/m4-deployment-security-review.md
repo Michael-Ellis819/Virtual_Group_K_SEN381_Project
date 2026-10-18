@@ -258,3 +258,9 @@ However, production Data Protection key encryption, production secret management
 **Overall Assessment: NO-GO for production deployment at the time of this review.**
 
 The Development-only startup restriction should remain until the outstanding requirements have been implemented and verified.
+
+## Final integration update — 18 October 2026
+
+The earlier assessment above retains its review context. Stored password hashes, server-owned roles/category grants, active/stamp session checks and real portal adapters are now integrated. The persistent HTTPS suite passes 36 checks, including bad credentials, unauthorised access, antiforgery, competing claims, rollback, safe errors and revoked sessions; remote CI run 39145430277 passed on 625e4e9. This replaces the earlier statement that authentication integration and end-to-end authorisation were entirely outstanding.
+
+Controlled Development/Staging startup is now permitted; Production remains blocked. Local generated/pinned certificates and the loopback participant preview do not establish deployed trusted TLS, production key encryption/secret operations or a hosted rollback. Login rate limiting, independent security assessment and production monitoring remain limitations. Public production remains NO-GO; no security owner acceptance is invented.

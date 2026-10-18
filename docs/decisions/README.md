@@ -23,3 +23,9 @@ The table above preserves the M2 checkpoint. Layered MVC, State lifecycle, Postg
 ## Final M3 evidence 15 October 2026
 
 The M2 decision table above records the original baseline. Persistence, State, policy and API coordination now have integrated implementation evidence. PR17 merged at 668795a with Bianca and Michael approvals. [Main CI](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/38594557024) passes all four projects. The completed conformance review and PED Section 14 retain the actual deployment, identity and acceptance limitations.
+
+## M4 final closure 18 October 2026
+
+The final product connects stored accounts and permissions, record-scoped PostgreSQL queries, real MVC forms and transactional commands. Lifecycle legality remains in Bianca’s rules; authorisation decides who may act. Assignment saves one eligible owner with its status/history/feedback, while generic status routes cannot create ownerless assignment. The persistence boundary now rechecks legality, reducing the earlier writer-bypass debt.
+
+Repeated local checks cover the persistent journey, races, injected rollback, safe errors and revocation. The custom harness remains an explicit CI responsibility. Staging evidence and production readiness remain separate: hosted TLS, full pilot operation timings and genuine final peer approvals cannot be inferred from a successful local run.

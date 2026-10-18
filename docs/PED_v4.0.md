@@ -1,6 +1,6 @@
-# CivicConnect PED v4.0 integration draft
+# CivicConnect PED v4.0 Final
 
-18 October 2026. Final team baseline and acceptance pending. The retained M1–M3 record follows; Part III contains the current M4 checkpoint.
+18 October 2026. Part III closes the original project. The following retained M1–M3 content records its earlier milestone context.
 
 <!-- Markdown copy of PED_v3.0.docx. Matching PDF: PED_v3.0_Updated.pdf. -->
 
@@ -3507,135 +3507,138 @@ Conditions: use the controlled HTTPS Staging host, disposable data and synthetic
 | Date submitted | 16 October 2026 |
 
 
-## Part III Milestone 4 integration and closure
+## Part III Milestone 4 final project closure
 
-## 16 Current product and evidence baseline
+## 16 Final product and assessed version
 
-This is a dated integration draft while Michael and Bianca continue their assigned work. Cameron’s controllers, Razor pages, black-box checks and traceability updates are prepared. The normal product has no registered account or portal request adapter, so dependent actions return unavailable responses. An isolated test adapter is not delivered persistence.
+CivicConnect now combines requester, staff and management journeys in one ASP.NET Core application. Requesters sign in, submit a controlled-category request and read saved progress and public updates. Authorised staff search their permitted requests, assign or claim one eligible owner, append notes, set priority and due date, and progress through resolution and closure. Management reads saved counts and matching request references. EF Core/PostgreSQL saves the required transactional effects and rejects stale changes.
 
-| Item | Checkpoint |
+| Item | Final record |
 | --- | --- |
 | Repository | https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project |
-| Source inputs | Main 20fdf39; Michael PR20 head f5253d2; Bianca_M4_changes ZIP; local integration 2cfadb6. |
-| Cameron branch | feature/cameron-m4-finalisation; exact subsequent review commit is recorded in the repository. |
-| Verification | 73 read/business-rule checks, 25 database checks, 19 M3 cases and 30 M4 UI/contract cases. Agent runs; raw reports in docs/evidence/m4-cameron-20261018. |
-| Integration contract | docs/portal-integration.md; proposed IPortalAccounts and IPortalRequestStore adapters. Team agreement and real implementations pending. |
-| Final assessed commit/tag | Not yet selected. Freeze after shared integration, relevant reruns and review. |
-| Release position | M3 conditional readiness remains historical and limited to its agreed increment. No full-product or production approval is claimed. |
+| Assessed identifier | m4-final-20261018; exact tagged revision is recorded with submission information. Tested code: 625e4e99882150f79ad3e00bae327b14e63e5d9c. |
+| Integrated inputs | Michael’s M4 branch through 5a17e07; main 51c4f9a and Bianca’s supplied ZIP; Cameron’s existing presentation and final corrections. The stale ZIP did not replace the current composition, PED or RTM. |
+| Environment | Staging through a controlled local simulation. Real PostgreSQL adapters and password hashes; synthetic accounts/data. No hosted public production environment exists. |
+| Verification | 73 read/rule, 43 database, 19 M3, 30 UI/contract and 36 persistent HTTPS checks pass locally: 201 checks. Local timed restore passes. Operator and raw evidence: docs/evidence/m4-final-20261018. |
+| Historical M3 decision | CONDITIONALLY READY for the agreed protected read/status increment in controlled simulated staging. This is retained as a dated milestone decision, not full-product completion. |
 
 
 
-## 17 Original scope and acceptance checkpoint
+## 17 Original scope and final acceptance outcome
 
-The approved baseline retains 27 requirements and 54 acceptance criteria. No approved removal has been supplied. Current evidence supports 25.5 points: 13 Met, 25 Partially Met and 16 Not Met. The provisional Scope Completion Percentage is 25.5 ÷ 54 × 100 = 47.2%. This is below the 80% target and must be reassessed after the shared candidate is complete.
+The baseline remains 27 requirements and 54 acceptance criteria. No approved baseline removal is recorded. Met scores 1, Partially Met 0.5 and Not Met 0. The final recorded evidence supports 48.5/54 × 100 = 89.8%: 46 Met, 5 Partially Met and 3 Not Met. The 80% target is a scope control; it does not override unresolved critical security or deployment concerns. Test counts are not acceptance scores.
 
-Met = 1, Partially Met = 0.5 and Not Met = 0. Partial credit reflects a demonstrated clause or implemented business rule with its remaining gap stated. Synthetic account/store behaviour is not credited as delivered persistence, login, collection queries or search. Test totals are not acceptance-criterion totals. “Verified” below means both listed criteria are evidenced at this checkpoint; it does not accept the whole product.
-
-| Requirement and original priority | Implementation | AC1 / AC2 | Remaining consequence |
+| Requirement and priority | Implementation | AC1 and AC2 | Limitation or acceptance consequence |
 | --- | --- | --- | --- |
-| FR-001 High | PARTIALLY IMPLEMENTED | Not Met / Partially Met | Valid submissions cannot yet be saved by the normal product. |
-| FR-002 High | PARTIALLY IMPLEMENTED | Partially Met / Partially Met | Catalogue persistence and retention must be verified with Michael’s adapter. |
-| FR-003 High | IMPLEMENTED | Met / Met | Real account adapter is still absent; this trace covers controlled read/status behaviour. |
-| FR-004 Medium | PARTIALLY IMPLEMENTED | Not Met / Not Met | Persistent requester list and empty/history cases await integration. |
-| FR-005 Medium | PARTIALLY IMPLEMENTED | Partially Met / Met | Dated feedback for every required event is not yet available in the product. |
-| FR-006 High | PARTIALLY IMPLEMENTED | Not Met / Met | The authorised persisted collection query is not implemented by this contribution. |
-| FR-007 Medium | PARTIALLY IMPLEMENTED | Not Met / Not Met | Actual matching, combined query results and priority/date ordering require the real data adapter. |
-| FR-008 High | PARTIALLY IMPLEMENTED | Partially Met / Partially Met | Requester/owner/priority/due-date metadata is absent from current persistence. |
-| FR-009 High | PARTIALLY IMPLEMENTED | Partially Met / Partially Met | Atomic persisted ownership, audit and simultaneous claims remain unverified. |
-| FR-010 High | IMPLEMENTED | Met / Met | Writer bypass remains debt; added entry points and final adapters require another integration run. |
-| FR-011 High | PARTIALLY IMPLEMENTED | Partially Met / Partially Met | General notes need persisted author/time and correction history. |
-| FR-012 High | IMPLEMENTED | Met / Met | Real-account portal acceptance remains separate from the verified status API. |
-| FR-013 Medium | PARTIALLY IMPLEMENTED | Partially Met / Partially Met | Saved management data and refresh against persistent changes await integration. |
-| FR-014 Medium | PARTIALLY IMPLEMENTED | Not Met / Not Met | The persisted management overview and individual matching request presentation remain incomplete. |
-| FR-015 High | PARTIALLY IMPLEMENTED | Partially Met / Partially Met | Creation/ownership/priority/due-date/note audit, restart and immutability coverage remain incomplete. |
-| FR-016 High | PARTIALLY IMPLEMENTED | Not Met / Met | There is no registered real account adapter or verified enabled-account credential store. |
-| FR-017 Medium | PARTIALLY IMPLEMENTED | Not Met / Partially Met | Default and updated priorities must be persisted and used by real sorting/filtering. |
-| FR-018 Medium | PARTIALLY IMPLEMENTED | Not Met / Partially Met | Saved due-date audit and actual overdue records await Michael’s adapter. |
-| NFR-001 High | IMPLEMENTED | Met / Met | Confidence is limited to tested surfaces; review every new adapter/query before final acceptance. |
-| NFR-002 Medium | PARTIALLY IMPLEMENTED | Not Met / Not Met | Four separate user-visible operations, specified dataset/load, failures and cold start remain unverified. |
-| NFR-003 High | PARTIALLY IMPLEMENTED | Partially Met / Partially Met | Durable idempotency, assignment atomicity and full restart acceptance remain open. |
-| NFR-004 Medium | NOT IMPLEMENTED | Not Met / Not Met | Five-participant task/time/error records are required; synthetic UI checks are not usability acceptance. |
-| NFR-005 Medium | PARTIALLY IMPLEMENTED | Not Met / Partially Met | 360/1366 Chrome-and-Edge matrix and complete keyboard/error journey remain unverified. |
-| NFR-006 High | PARTIALLY IMPLEMENTED | Partially Met / Partially Met | Final deployed certificate, sign-in/protected browser pages and mixed-content checks remain unverified. |
-| NFR-007 Medium | PARTIALLY IMPLEMENTED | Partially Met / Partially Met | Backup age, timed restoration, RPO/RTO and consistent owner/history recovery are not established. |
-| NFR-008 High | PARTIALLY IMPLEMENTED | Partially Met / Partially Met | A complete dummy-secret/private-content log audit remains outstanding. |
-| NFR-009 High | IMPLEMENTED | Met / Met | Testability does not imply that the corresponding persistent product journeys are delivered. |
+| FR-001 High | IMPLEMENTED | Met / Met | Controlled synthetic records; no attachments or external notifications are in the baseline. |
+| FR-002 High | IMPLEMENTED | Met / Met | The seven-category catalogue is controlled in PortalOptions; a separate administrative category editor was not committed. |
+| FR-003 High | IMPLEMENTED | Met / Met | Controlled accounts and local staging; no public production access is claimed. |
+| FR-004 Medium | IMPLEMENTED | Met / Met | Lists are unpaginated at the pilot scale. |
+| FR-005 Medium | PARTIALLY IMPLEMENTED | Partially Met / Met | Status is shown in current details and dated status history. General public notes are not stored with their own separate status snapshot, so AC1 remains partial. |
+| FR-006 High | IMPLEMENTED | Met / Met | Checks cover the supplied role/category dataset rather than an exhaustive penetration test. |
+| FR-007 Medium | IMPLEMENTED | Met / Met | No pagination or ranked full-text search is provided. |
+| FR-008 High | IMPLEMENTED | Met / Met | Requesters receive a restricted projection; account IDs identify staff in the controlled demonstration. |
+| FR-009 High | IMPLEMENTED | Met / Met | Concurrency was checked for the controlled two-claim race, not a production load profile. |
+| FR-010 High | IMPLEMENTED | Met / Met | One source project still permits privileged code to reach EF directly; supported HTTP paths and writer boundaries are guarded. |
+| FR-011 High | IMPLEMENTED | Met / Met | Corrections are appended; there is no destructive note-edit endpoint. |
+| FR-012 High | IMPLEMENTED | Met / Met | No automatic closure or reopening was committed. |
+| FR-013 Medium | IMPLEMENTED | Met / Met | Summary reads are unpaginated and the full pilot response-time criterion remains separate. |
+| FR-014 Medium | IMPLEMENTED | Met / Met | Management sees request reference/category/status rather than requester private details. |
+| FR-015 High | IMPLEMENTED | Met / Met | Database administrators can alter tables; application append-only behaviour is not tamper-proof external archival. |
+| FR-016 High | IMPLEMENTED | Met / Met | No public self-registration, password reset, MFA or login rate limiting is delivered; these remain production security limitations. |
+| FR-017 Medium | IMPLEMENTED | Met / Met | Priority is one of Low, Normal or High; no custom priority editor is provided. |
+| FR-018 Medium | IMPLEMENTED | Met / Met | Forms state UTC explicitly; user-local timezone preferences are not provided. |
+| NFR-001 High | IMPLEMENTED | Met / Met | This is the defined access-test set, not an external penetration assessment. |
+| NFR-002 Medium | NOT IMPLEMENTED | Not Met / Not Met | The specified 10-user, 1,000-request, four-operation browser workload, separate visible-result timings and cold start were not executed. Not delivered. |
+| NFR-003 High | IMPLEMENTED | Met / Met | Controlled local PostgreSQL; infrastructure failover was not tested. |
+| NFR-004 Medium | PARTIALLY IMPLEMENTED | Not Met / Met | Four-of-five uncoached threshold failed. P2/P3 chose a different category; strict task-conforming uncoached completion is 2/5. Small local convenience sample. |
+| NFR-005 Medium | PARTIALLY IMPLEMENTED | Partially Met / Partially Met | The complete Chrome/Edge screen matrix and keyboard validation-error journey are not yet evidenced. |
+| NFR-006 High | PARTIALLY IMPLEMENTED | Partially Met / Partially Met | No public host or browser-trusted deployed certificate exists. The isolated participant preview uses loopback HTTP with synthetic accounts; it does not satisfy deployed HTTPS acceptance. |
+| NFR-007 Medium | IMPLEMENTED | Met / Met | Small synthetic local dataset and manual backup. Automatic scheduling, off-site retention and hosted disaster recovery are not established. |
+| NFR-008 High | IMPLEMENTED | Met / Met | Sensitive-data logging must remain disabled when deploying or changing providers. |
+| NFR-009 High | IMPLEMENTED | Met / Met | Custom executable harnesses require explicit CI invocation rather than standard test discovery. |
 
 
 
-The full requirement wording, design links, earlier evidence and current calculations remain in docs/CivicConnect_RTM_v2.0.xlsx and its Markdown copy. Original High-priority gaps include real credential login, durable submission/categories, staff collection access, ownership and complete audit. These are unfinished commitments, not approved cuts. Deferred attachments, automatic escalation, public APIs, AI categorisation and multilingual support remain outside the committed baseline; original exclusions are retained in Part I.
+The continuing RTM retains the Requirements and RTM sheets, original identifiers, criteria, trace fields and earlier evidence. Columns W–AE record the final implementation, outcomes, formula-derived values, evidence and limitations. X41 calculates the scope percentage from the unchanged denominator. Verified means both listed criteria are supported by the recorded technical evidence; it does not invent stakeholder sign-off. Failed original commitments are not relabelled Deferred. Original future/out-of-scope items remain outside the denominator.
 
-## 18 Finalisation of M3 issues and registers
+The main remaining scope consequences are the missing full NFR-002 pilot workload, incomplete browser/accessibility matrix and the absence of a trusted deployed HTTPS environment. NFR-004 depends on actual participant records, not agent runs. The public security omission prevents production approval even where the functional scope score exceeds its target.
 
-| Existing item | Current evidence and status |
+## 18 M3 issues defects risks and technical debt
+
+| Existing item | Final disposition and evidence |
 | --- | --- |
-| DEF-M3-C01/C02 | The authorised status coordinator and stale-category/version fixes remain in place. Relevant M3 API/database cases pass after presentation integration. |
-| DEF-M3-C03/C06 | Historical TLS setup and dependency corrections are retained. Current builds pass; fresh audit/CI evidence is recorded separately, without replacing earlier reports. |
-| DEF-M3-C04; R-054 | Open. Program still rejects non-Development startup. A controlled test host does not establish normal staging deployment. |
-| DEF-M3-C05; R-048/049/052 | Open. Presentation and rule work exists, but shared account/request adapters and complete original journeys remain unfinished. |
-| TD-01/02/03; R-011 | Retained. One project gives logical boundaries; the low-level writer remains callable. Custom harness execution is explicit in CI; standard test discovery remains debt. |
-| R-057; NFR-002/007 | PR20 adds scoped database-read and basic restore evidence. Full pilot operation timings and original RPO/RTO acceptance remain open. |
-| R-058; final alignment | Partial mitigation. This draft and the continuing RTM identify evidence boundaries. Final source, reviews, CI, environment and submission information must still be aligned. |
+| DEF-M3-C01/C02 | Authorised persistence and stale category/version safeguards remain integrated. API/database and persistent role/concurrency cases pass. |
+| DEF-M3-C04/C05 | Controlled Staging is now permitted and real original journeys are integrated. Public production and unresolved NFR acceptance remain limitations rather than being described as missing presentation/storage. |
+| R-011; TD-02 | Reduced. Ownerless assignment is rejected by the legacy API and the low-level writer rechecks lifecycle legality. A dedicated atomic assignment validates stored acting/owning accounts. Shared-project direct EF access remains a privileged-code risk. |
+| R-014/015/017; TD-M3-02/03 | Audit covers creation, ownership, status, scheduling and notes; stored visibility remains private where required. Two concurrent HTTP claims save one owner; actor/key uniqueness prevents duplicate submissions. Restart/restore cases pass. |
+| R-018; TD-M3-04 | A timed local restore recovers identical request, eligible owner, history, notes and scheduling data. Automated backup schedules, off-site retention, hosted rollback and production recovery remain unproven. |
+| R-020/033/043/057 | Framework support review, trusted deployed HTTPS, credible operating-cost/effort records and full pilot performance remain carried forward. Support has not yet expired at submission. |
+| R-007/056/058 | Stale AI findings and provisional scores were checked against the integrated source. Final per-criterion outcomes, source and limits are explicit; student review, peer approvals and submission are never inferred from agent checks. |
 
 
 
-The controlled Risk, Defect, Technical Debt and AI Usage registers are continued in their existing files. Bianca’s final risk dispositions and mitigation-effectiveness judgements remain her contribution; stale ZIP statements about missing M3 integration, absent defects or no HTTPS/performance evidence were not imported as current findings.
+The existing risk register now includes final status and mitigation effectiveness for R-001–R-045 plus M3 extensions. Descriptions, owners and priorities retain their original baseline. A passing controlled test reduces a risk without proving production-scale effectiveness. Existing defect, technical-debt, decision and AI registers are continued in place; the raw ZIP and private handover material are excluded from the assessed tree.
 
-## 19 Decision consequences
+## 19 Significant decision consequences
 
-| Decision | Observed consequence and remaining limit |
-| --- | --- |
-| ADR-M2-01 layered single application | Controllers can reuse the established services without moving persistence into views. Optional data interfaces expose missing integration explicitly. Shared-project boundaries still depend on review. |
-| ADR-M2-02 State lifecycle | The M3 edge adapter now delegates to Bianca’s State matrix, avoiding two lifecycle definitions. Ownership and summary rules are separately testable. The approved-change type is not yet the writer’s exclusive input. |
-| ADR-M2-03/04 persistence and stack | EF Core/PostgreSQL migrations and transactional status writes remain compatible with the ASP.NET Core/Razor presentation. Missing schema/account adapters limit delivery. Michael must confirm his final operational/version and cost conclusions. |
-| ADR-M2-05 central authorisation | The existing record policy is reused for portal details and staff mutations. Browser sessions recheck server-owned account state when an adapter exists. List queries must enforce permission before filtering/counting inside the adapter. |
-| ADR-M2-06 explicit coordination | Status, history and feedback remain required transactional effects. New assignment/note/schedule contracts require the same atomic/versioned discipline; a successful UI test does not prove that database implementation. |
-| ADR-M2-07 checks and reviewed integration | The real executable harness is called from CI and now includes presentation checks. The misplaced merge workflow was moved with protection/two-current-approval guards. The changed workflow and branch still need actual remote execution/review. |
-| Choosing technology before construction | The selected stack was retained and its read/status path is verified. Early stack choice did not supply the missing joining code or operational readiness; future choices should include an early end-to-end spike. |
+| Decision | Observed outcome and consequence | Conclusion |
+| --- | --- | --- |
+| ADR-M2-01 layered application | Controllers reuse the established query/status services while EF adapters own storage. Michael’s adapters connected to the presentation without moving database queries into views. One shared assembly still permits boundary violations. | Retain the proportional single application; strengthen boundaries only where maintenance warrants it. |
+| ADR-M2-02 State lifecycle | One six-state matrix drives the legacy adapter and portal. The persistence boundary now rechecks legality and assignment records ownership atomically. State classes add structure beyond a simple transition table. | Retain the single legality service and validated change; acknowledge the maintenance overhead and enforce every new write path. |
+| ADR-M2-03 and ADR-M2-04 persistence and stack | EF migrations extended the original relational model with accounts, owner/priority/due date, dated notes and scheduling audit. Transaction, duplicate-key and restore checks work across the integrated application. Hosted operation remains unverified. | Retain the stack and transaction boundary; review supported runtime versions and hosting/security before production. |
+| ADR-M2-05 central authorisation | Record ownership and staff categories are reused by API and portal. Stored account role, category, active state and stamp are rechecked for sessions. Query scoping precedes filters and totals. | Retain server-side policy and session freshness. UI visibility alone remains insufficient. |
+| ADR-M2-07 verification and reviewed integration | Explicit harness invocation caught sort-name, unsafe logging, incomplete audit and ownerless-assignment problems. New persistent scenarios test integration rather than fixtures alone. A green run cannot supply two genuine non-author reviews. | Retain meaningful negative checks and current-revision review; standard test reporting remains debt. |
+| Technology selection before construction | The selected C#/Razor/EF/PostgreSQL stack was retained. Early selection provided consistency, but did not itself prove integration or hosted readiness. .NET 8 support ends 10 November 2026. | Retain evidence-based stack selection with an explicit support review date; a baselined decision still requires implementation evidence. |
 
 
+
+ADR-M2-06 is realised through explicit application coordination and database transactions for required effects. Status, audit and feedback are not optional asynchronous notifications. Neither Cameron nor this consolidation invents personal reflection or risk-acceptance statements on behalf of another member; the consequences above are observable repository outcomes.
 
 ## 20 Success evaluation
 
-| Master brief dimension | Evidence and conclusion | Limitation |
+| Dimension from the Master Brief | Evidence based outcome | Limitation |
 | --- | --- | --- |
-| Stakeholder value | Protected progress/status handling and a usable presentation structure address part of requester/staff needs. | No complete normal-product requester-to-staff journey or participant acceptance yet. |
-| Scope | Baseline and 54-criterion checkpoint retained; 47.2% provisional completion. | Below target; unfinished High-priority commitments require explicit final outcomes. |
-| Schedule | M3 record states 16 October; M4 deadline confirmed as end of 18 October. | Planned/actual task and effort logs are not supplied; numerical variance is not inferred from commits. |
-| Cost/resources | Single application and existing verification environment retain the low-cost direction. | No actual-spend record or current platform-pricing input supplied; zero spend is not claimed. |
-| Quality | Correctness suites, negative cases, EP/BVA and version/rollback evidence provide confidence in tested paths. | Synthetic contract journey, partial UI matrix and incomplete performance/recovery acceptance remain. |
-| Security | Record policy, antiforgery, encoded output, server-owned roles and scoped PR20 security evidence exist. | Real account adapter, deployed keys/certificates and complete log-content audit remain unverified. |
-| Risk | Integration and evidence drift are visible in the continuing registers. | Final risk acceptance and effectiveness conclusions require Bianca/team review. |
-| Deployment / operations | PR20 adds health/logging and local HTTPS/basic restore evidence. | Normal staging/production, timed recovery and the final go-live decision are not established. |
-| Maintainability / evolution | Existing service interfaces and one lifecycle matrix support later adapter integration. | Custom harness/source scan and callable writer remain debt; interface agreement is pending. |
+| Stakeholder value | An integrated requester-to-staff lifecycle and management view now address the original service-request problem. | Synthetic data and controlled access do not establish adoption or production benefit. |
+| Scope | The unchanged original criteria yield 89.8%; each omission retains its consequence. | The percentage does not remove the critical deployed-security and performance gaps. |
+| Schedule | Late integration was completed during 18 October finalisation; dated commits show the sequence. | Actual submission and quantitative variance cannot be inferred without the planned/actual team schedule. |
+| Cost and resources | Existing local tooling, PostgreSQL and a standard GitHub CI runner support the demonstrated build. No hosted environment was provisioned. | No complete effort/spend ledger or selected post-pilot hosting plan exists; no invented total is reported. |
+| Quality | Repeatable tests cover valid and invalid paths, concurrency, rollback, persistence and safe errors; a timed restore passes. Five observed usability sessions are recorded. | Only three of five finished without coaching; full pilot performance and browser matrix remain incomplete. |
+| Security | Stored password hashes, server-owned permissions, session revalidation, antiforgery and private projections are integrated. | Public TLS/key operations, login hardening and independent security testing remain limits. |
+| Risk | Original risk identities are retained with final dispositions and mitigation effectiveness. | Several hosting, pricing and resource controls remain unexercised rather than falsely closed. |
+| Deployment and operations | The product is reproducible in controlled local staging and CI; local data recovery is timed and consistent. | No public production host, trusted deployed certificate or hosted rollback evidence exists. |
+| Maintainability and evolution | Layered responsibilities, one lifecycle matrix, traceability and existing registers support handover. | Shared-assembly boundaries, custom test discovery and imminent framework support review remain work. |
 
 
 
-## 21 Deployment decision and final acceptance
+## 21 Schedule cost and resource evaluation
 
-The evidence currently supports NO-GO for real-user production release. Missing trusted account integration, unavailable core writes and the normal startup restriction prevent a useful operational release. This is a checkpoint recommendation, not a fabricated team acceptance decision. At finalisation the team must declare production, credible simulated production or staging under a justified no-go decision, identify its exact candidate and demonstrate the evidence appropriate to that state.
+Repository evidence shows M2’s 30 September baseline, M3’s agreed 15 October controlled increment, Michael’s 18 October account/request/scheduling commits and the combined M4 corrections. The observed constraint was late convergence of separately implemented components into user journeys. The record does not establish individual hours, productivity or the cause of delay, so these are not inferred from commit counts.
 
-Existing M3 controlled simulation remains valid only for its specified paths. The M4 UI host uses synthetic in-memory adapters and cannot establish persistent end-to-end or production acceptance. NFR-004 participant results, the NFR-005 browser/viewport matrix, the NFR-002 full operation workload and NFR-007 timing targets remain incomplete unless authentic later evidence is added. M4 introduces no new test quota or compulsory infrastructure programme.
+The original free-tier assumption reduced the need for purchased infrastructure during this controlled finalisation, but is not an actual-spend ledger. Cameron confirms no existing hosting account or deployed environment. GitHub documents that standard hosted runners are free for public repositories; the workflow uses ubuntu-latest. Computer, network, time and any earlier spending were not costed. A credible paid operating forecast requires a selected host/database, retention/load assumptions and dated prices; none is presented as if verified. R-006 and R-043 therefore remain open. Bianca’s blank effort/cost workbook is not submitted as a completed evaluation.
 
-## 22 Project conclusion and next priorities
+## 22 Deployment and go live decision
 
-CivicConnect has delivered a verified protected read/status foundation with relational persistence, transactional history/feedback and meaningful failure checks. M4 now adds Cameron’s browser presentation and tests, combined with Bianca’s pure rules and Michael’s published operations evidence. The shared product still lacks key adapters, so the full original commitment is not delivered at this checkpoint.
+Final declared state: staging through a controlled local simulation. Decision: NO-GO for public production. The specific concerns are the absent hosted certificate and protected operating configuration, incomplete full user-visible pilot performance, and unproven hosted recovery/rollback. The local participant preview uses HTTP only on loopback and temporary synthetic accounts; it is usability evidence, not an exception permitting real credentials over public HTTP. HTTPS checks use a generated certificate pinned by the test client.
 
-The strongest observed decisions are central authorisation and explicit coordination of required effects. They made presentation reuse possible while preserving record boundaries and atomic status writes. The main delivery constraint is the late integration of components into complete user journeys. The conclusion is based on visible integration gaps; individual effort or causes are not inferred without team logs.
+Before public go-live, establish a trusted hosted HTTPS environment and protected keys/secrets, finish the original operation-level performance workload, exercise the hosting migration/rollback/recovery process, and resolve material security/review findings. These are known acceptance and operating gaps, not a claim that missing work is automatically an engineering precaution. The M4 scope permits an honest evidence-based staging/no-go conclusion; it does not require a new infrastructure programme at closure.
 
-Next priorities are to agree and connect the real account/request interfaces, complete the schema and audit dependencies, rerun the actual staging journey and relevant regression checks, and then freeze the shared source. Update acceptance scores, registers and deployment judgement from those results. Effort/pricing records, genuine reviews and each student’s personal understanding remain separate evidence requirements.
+## 23 Validation and contribution evidence
 
-## 23 Submission preparation and individual defence
+Cameron observed five participants receiving the same written IT Support/Library Wi-Fi task on 18 October 2026. All reported submission and finding status within five minutes: P1 138 seconds, P2 83, P3 185, P4 27 and P5 112. The observer reported no errors; P3 and P5 needed coaching. Only three of five completed without coaching, below the required four: AC-NFR-004-1 is Not Met. P2 selected Facility Faults because they associated the issue with the facility; P3 chose Other because Wi-Fi was not an option. Strict category-conforming uncoached completion is two of five. The same task and recorded completion/time/error/coaching observations satisfy AC2. These are user-supplied observations, not agent-timed sessions. The small convenience sample and category discoverability remain limitations. Full anonymous records: docs/evidence/m4-final-20261018/usability.md.
 
-| Required item | Current state |
-| --- | --- |
-| PED v4.0 | This continuing integration draft preserves earlier milestones. Promote to Final only after the final group status and evidence are checked. |
-| Final RTM | Existing docs/CivicConnect_RTM_v2.0.xlsx; same two sheets and prior formulas/history retained. New M4 columns record checkpoint outcomes and calculations. |
-| Repository and final release | Same GitHub repository. Final shared commit/tag/release and required access details remain to be recorded; the current working branch is not represented as the assessed final release. |
-| Submission date | Due by end of 18 October 2026. Actual Moodle submission has not been established. |
-| Live demonstration | Demonstrate the identified combined candidate and selected original requirement-to-evidence traces. Date/time of defence not supplied. Private running-order notes remain outside GitHub. |
-| AI accountability | Existing docs/ai-usage.md records Codex assistance and distinguishes agent execution from Cameron’s historical personal run. New human verification is not invented. |
+Michael’s commits supply real account hashing, EF portal operations, transactional assignment, security stamps and scheduling audit. Bianca’s supplied work supplies the State/ownership/summary rules, 44 checks and closure drafts. Cameron’s finalisation supplies the presentation, black-box/persistent journey checks, integration corrections, traceability and consolidated records. Git history and the AI register distinguish implementation inputs, agent execution and human review; contribution volume is not used to invent effort hours or independent approval.
 
+## 24 AI usage and project conclusion
 
+The continuing AI Usage Register records ChatGPT/Codex by their original milestone contexts. Bianca’s supplied M4 register explicitly reports Claude/Claude Code assistance with lifecycle code, checks and closure drafts, while its human-verification fields were incomplete. Codex assisted this final integration, verification and consolidation. Stale missing-route/writer claims, a proposed 33.3% score, unsupported causal statements and blank financial scaffolds were rejected. No AI execution is relabelled as personal student testing, participant observation or teammate approval.
 
-Each member should explain their contribution, one original requirement/AC-to-final-evidence trace, a consequential decision, quality limits and the project outcome. Cameron can trace FR-003/010 through the central policy/coordinator and M3 reports, then explain the new UI boundary and why the synthetic submit-to-close check does not yet accept the persistent product.
+The project delivered a coherent implementation of the central original request lifecycle, with stored identity, permission boundaries, transactional changes, audit and management reporting. Its strongest demonstrated decisions were central authorisation, one legality service and explicit transaction ownership. The main weakness was late integration and incomplete operating/acceptance evidence. The final assessment distinguishes delivered functionality from public release readiness and retains every original unmet criterion. A future team should finish the specific deployment, pilot measurement and maintenance gaps before expanding optional scope.
+
+## 25 Evidence and references
+
+Primary controlled records: docs/CivicConnect_RTM_v2.0.xlsx and Markdown copy; docs/evidence/m4-final-20261018/summary.md and recovery.json; docs/testing-m3.md; docs/risk-register.md; docs/defects.md; docs/technical-debt.md; docs/decisions/README.md; docs/ai-usage.md; docs/github-evidence.md; docs/submission-information.md. Earlier milestone reports, raw failures and approvals retain their original dates and scope.
+
+SEN381 Final Project scope, Milestone 4, sections 1–11 and 15–17; SEN381 Master Project Brief section 21. Supplied course documents determine the closure and evaluation requirements.
+
+Microsoft (2026), .NET and .NET Core support policy, https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core. GitHub (2026), Choosing the runner for a job, https://docs.github.com/en/actions/how-tos/write-workflows/choose-where-workflows-run/choose-the-runner-for-a-job. Accessed 18 October 2026.

@@ -1,0 +1,8 @@
+  CivicConnect.Web -> D:\uni\year 3\SEN\tmp\m4-final\build\bin\CivicConnect.Web\release\CivicConnect.Web.dll
+  CivicConnect.M4Tests -> D:\uni\year 3\SEN\tmp\m4-final\build\bin\CivicConnect.M4Tests\release\CivicConnect.M4Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:24.02

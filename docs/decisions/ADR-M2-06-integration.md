@@ -37,3 +37,9 @@ The explicit coordination decision is retained. RequestsController -> RequestSta
 ## M4 observed consequence 18 October 2026
 
 The browser status form calls the same authorised coordinator and transactional writer as the established API. Assignment calls Bianca's ownership and State rules before a versioned store command; notes and schedules have explicit visibility/version inputs. This preserves separation of HTTP concerns and required data effects. Proposed portal adapters remain unbound, so atomic ownership, idempotency and complete audit must still be established by the shared persistence integration.
+
+## M4 final closure 18 October 2026
+
+The final product connects stored accounts and permissions, record-scoped PostgreSQL queries, real MVC forms and transactional commands. Lifecycle legality remains in Bianca’s rules; authorisation decides who may act. Assignment saves one eligible owner with its status/history/feedback, while generic status routes cannot create ownerless assignment. The persistence boundary now rechecks legality, reducing the earlier writer-bypass debt.
+
+Repeated local checks cover the persistent journey, races, injected rollback, safe errors and revocation. The custom harness remains an explicit CI responsibility. Staging evidence and production readiness remain separate: hosted TLS, full pilot operation timings and genuine final peer approvals cannot be inferred from a successful local run.

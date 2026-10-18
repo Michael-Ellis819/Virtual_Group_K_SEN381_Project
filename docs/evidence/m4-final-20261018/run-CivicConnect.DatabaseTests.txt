@@ -1,0 +1,44 @@
+PASS: PostgreSQL connection successful.
+PASS: Request retrieved from database.
+PASS: Reference number is correct.
+PASS: Non-existent request returns null.
+PASS: Both request notes retrieved.
+PASS: Requester-visible note is correctly marked.
+PASS: Staff-only note is correctly marked.
+PASS: Request owner can access their request.
+PASS: Requester cannot see internal staff notes.
+PASS: Other requester is denied access.
+PASS: Assigned staff can see internal notes.
+PASS: Staff from another category is denied.
+PASS: Unauthenticated user is denied.
+PASS: Request version increases after update.
+PASS: Conflicting update is rejected.
+PASS: First successful update is preserved.
+PASS: Status history saved to PostgreSQL.
+PASS: Status-history information is correct.
+PASS: Transaction saved request status.
+PASS: Transaction saved status history.
+PASS: Transaction saved requester feedback.
+PASS: Database write failure detected.
+PASS: Request status rolled back.
+PASS: Status history rolled back.
+PASS: Requester feedback rolled back.
+PASS: Temporary assignment staff account created.
+PASS: Account role changes update security stamp.
+PASS: Category permission changes update security stamp.
+PASS: Category permission removal updates security stamp.
+PASS: Temporary assignment request created.
+PASS: Assignment transition validated.
+PASS: Unauthorised assignment rejected.
+PASS: Transactional assignment rejects unknown actor.
+PASS: Transactional assignment rejects revoked permission.
+PASS: PostgreSQL assignment saved.
+PASS: Assignment owner and status persisted.
+PASS: Assignment history persisted.
+PASS: Assignment feedback persisted.
+PASS: Stale assignment rejected.
+PASS: PostgreSQL scheduling audit persisted.
+PASS: Stale scheduling update rejected without audit.
+PASS: Concurrent submissions created one request.
+PASS: Changed payload with reused key rejected.
+All database integration checks passed.
