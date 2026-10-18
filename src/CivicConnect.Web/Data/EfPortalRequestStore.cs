@@ -333,7 +333,8 @@ public sealed class EfPortalRequestStore : IPortalRequestStore
             owner.Id,
             expectedVersion,
             change,
-            cancellationToken);
+            cancellationToken,
+            actor.Id);
 
         return new PortalWriteResult(
             PortalWriteOutcome.Saved,

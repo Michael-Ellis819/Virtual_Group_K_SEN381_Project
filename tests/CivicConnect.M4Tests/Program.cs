@@ -31,7 +31,9 @@ var certificateRequest = new CertificateRequest("CN=localhost", rsa, HashAlgorit
 using var transient = certificateRequest.CreateSelfSigned(DateTimeOffset.UtcNow.AddMinutes(-1), DateTimeOffset.UtcNow.AddHours(2));
 using var certificate = new X509Certificate2(transient.Export(X509ContentType.Pfx), "", X509KeyStorageFlags.UserKeySet | X509KeyStorageFlags.Exportable);
 
-async Task<WebApplication> Start(bool adapters)
+async Task<WebApplication> Start(
+    bool adapters,
+    bool includeAccounts = true)
 {
     var builder = WebApplication.CreateBuilder(new WebApplicationOptions { ApplicationName = typeof(Composition).Assembly.FullName, EnvironmentName = "Staging" });
     builder.Logging.ClearProviders();
@@ -42,10 +44,13 @@ async Task<WebApplication> Start(bool adapters)
     builder.Services.AddSingleton<IRequestStatusWriter>(fixture);
     builder.Services.RemoveAll<IPortalAccounts>();
     builder.Services.RemoveAll<IPortalRequestStore>();
+    if (includeAccounts)
+    {
+        builder.Services.AddSingleton<IPortalAccounts>(fixture);
+    }
 
     if (adapters)
     {
-        builder.Services.AddSingleton<IPortalAccounts>(fixture);
         builder.Services.AddSingleton<IPortalRequestStore>(fixture);
     }
     if (preview)
@@ -154,23 +159,62 @@ try
     fixture.RequesterActive = false;
     using var revoked = await requester.GetAsync("/portal/requests");
     Check("UI18 disabled browser account loses access on next request", revoked.StatusCode == HttpStatusCode.Unauthorized);
+    // Restore the synthetic requester for the remaining tests.
+    fixture.RequesterActive = true;
+    // UI19: Verify that sign-in fails safely without an account adapter.
+    await using var noAccounts = await Start(false, false);
+    using var noAccountsClient = Client(noAccounts);
+
+    using var unavailableLogin = await Form(
+        noAccountsClient,
+        "/account/sign-in",
+        new()
+        {
+            ["Username"] = "requester",
+            ["Password"] = "synthetic-contract-password"
+        },
+        "/account/sign-in");
+
+    Check(
+        "UI19 missing real account adapter returns 503 and issues no session",
+        unavailableLogin.StatusCode == HttpStatusCode.ServiceUnavailable &&
+        !unavailableLogin.Headers.Contains("Set-Cookie"));
     await using var unbound = await Start(false);
+    // Allow valid authentication while leaving the request-store adapter unavailable.
     using var unavailable = Client(unbound);
-    using var unavailableLogin = await Form(unavailable, "/account/sign-in", new() { ["Username"] = "requester", ["Password"] = "synthetic-contract-password" }, "/account/sign-in");
-    Check("UI19 missing real account adapter returns 503 and issues no session", unavailableLogin.StatusCode == HttpStatusCode.ServiceUnavailable && !unavailableLogin.Headers.Contains("Set-Cookie"));
     // Minting is confined to this executable to inspect unavailable protected pages without a real account adapter.
     var cookieOptions = unbound.Services.GetRequiredService<IOptionsMonitor<CookieAuthenticationOptions>>().Get(CookieAuthenticationDefaults.AuthenticationScheme);
-    string SyntheticCookie(string role) => cookieOptions.Cookie.Name + "=" + cookieOptions.TicketDataFormat.Protect(new AuthenticationTicket(
-        new ClaimsPrincipal(new ClaimsIdentity([new Claim(ClaimTypes.NameIdentifier, "synthetic-1"), new Claim(ClaimTypes.Role, role), new Claim("active", "true")], "fixture")),
-        new AuthenticationProperties(), CookieAuthenticationDefaults.AuthenticationScheme));
+    string SyntheticCookie(string role) =>
+        cookieOptions.Cookie.Name + "=" +
+        cookieOptions.TicketDataFormat.Protect(
+            new AuthenticationTicket(
+                new ClaimsPrincipal(
+                    new ClaimsIdentity(
+                        [
+                            new Claim(
+                                ClaimTypes.NameIdentifier,
+                                role == "Management" ? "manager-1" : "requester-1"),
+                            new Claim(ClaimTypes.Role, role),
+                            new Claim("active", "true"),
+                            new Claim("portal-stamp", "fixture-v1")
+                        ],
+                        "fixture")),
+                new AuthenticationProperties(),
+                CookieAuthenticationDefaults.AuthenticationScheme));
     using var missingStoreList = new HttpRequestMessage(HttpMethod.Get, "/portal/requests");
     missingStoreList.Headers.Add("Cookie", SyntheticCookie("Requester"));
     using var unavailableList = await unavailable.SendAsync(missingStoreList);
-    Check("UI20 missing request store returns unavailable, not an empty accepted list", unavailableList.StatusCode == HttpStatusCode.ServiceUnavailable && (await unavailableList.Content.ReadAsStringAsync()).Contains("temporarily unavailable"));
+    Check("UI20 missing request store returns unavailable, not an empty accepted list",
+        unavailableList.StatusCode == HttpStatusCode.ServiceUnavailable &&
+        (await unavailableList.Content.ReadAsStringAsync())
+        .Contains("temporarily unavailable"));
     using var missingStoreOverview = new HttpRequestMessage(HttpMethod.Get, "/portal/management");
     missingStoreOverview.Headers.Add("Cookie", SyntheticCookie("Management"));
     using var unavailableOverview = await unavailable.SendAsync(missingStoreOverview);
-    Check("UI21 missing reporting store does not display false zero counts", unavailableOverview.StatusCode == HttpStatusCode.ServiceUnavailable && !(await unavailableOverview.Content.ReadAsStringAsync()).Contains("Open<strong>0</strong>"));
+    Check("UI21 missing reporting store does not display false zero counts",
+        unavailableOverview.StatusCode == HttpStatusCode.ServiceUnavailable &&
+        !(await unavailableOverview.Content.ReadAsStringAsync())
+            .Contains("Open<strong>0</strong>"));
     await unbound.StopAsync();
     Console.WriteLine($"RESULT {passed} UI/contract cases passed; 0 failed. Synthetic in-memory adapters only; no persistence, real-user usability or deployed E2E acceptance claimed.");
 }

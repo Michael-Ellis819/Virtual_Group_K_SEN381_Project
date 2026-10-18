@@ -203,6 +203,7 @@ public sealed class CivicConnectDbContext : DbContext
 
     public override int SaveChanges()
     {
+        UpdateAccountSecurityStamps();
         IncrementRequestVersions();
         return base.SaveChanges();
     }
@@ -210,10 +211,56 @@ public sealed class CivicConnectDbContext : DbContext
     public override Task<int> SaveChangesAsync(
         CancellationToken cancellationToken = default)
     {
+        UpdateAccountSecurityStamps();
         IncrementRequestVersions();
         return base.SaveChangesAsync(cancellationToken);
     }
 
+    private void UpdateAccountSecurityStamps()
+    {
+        ChangeTracker.DetectChanges();
+
+        var accountIds = new HashSet<string>();
+
+        foreach (var entry in ChangeTracker.Entries<PortalAccountEntity>()
+                     .Where(e => e.State == EntityState.Modified))
+        {
+            if (entry.Property(a => a.PasswordHash).IsModified ||
+                entry.Property(a => a.Role).IsModified ||
+                entry.Property(a => a.IsActive).IsModified)
+            {
+                accountIds.Add(entry.Entity.Id);
+            }
+        }
+
+        foreach (var entry in ChangeTracker.Entries<PortalAccountCategoryEntity>()
+                     .Where(e => e.State == EntityState.Added ||
+                                 e.State == EntityState.Deleted))
+        {
+            accountIds.Add(entry.Entity.AccountId);
+        }
+
+        foreach (var accountId in accountIds)
+        {
+            var accountEntry = ChangeTracker.Entries<PortalAccountEntity>()
+                .FirstOrDefault(e => e.Entity.Id == accountId);
+
+            if (accountEntry is not null)
+            {
+                accountEntry.Entity.SecurityStamp = Guid.NewGuid().ToString("N");
+            }
+            else
+            {
+                var account = PortalAccounts.Find(accountId);
+
+                if (account is not null)
+                {
+                    account.SecurityStamp = Guid.NewGuid().ToString("N");
+                }
+            }
+        }
+    }
+    
     private void IncrementRequestVersions()
     {
         foreach (var entry in ChangeTracker

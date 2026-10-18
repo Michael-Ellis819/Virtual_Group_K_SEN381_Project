@@ -2,11 +2,13 @@
 using CivicConnect.Data.Entities;
 using CivicConnect.Application;
 using Microsoft.EntityFrameworkCore;
+using CivicConnect.Lifecycle;
 
 namespace CivicConnect.Data;
 
 public sealed class EfRequestStatusWriter(
-    CivicConnectDbContext dbContext) : IRequestStatusWriter
+    CivicConnectDbContext dbContext,
+    Lifecycle.IOwnershipRule ownershipRule) : IRequestStatusWriter
 {
     public Task SaveAsync(StatusChange change, CancellationToken cancellationToken)
         => SaveStatusChangeAsync(change.RequestId, change.PreviousStatus, change.NewStatus,
@@ -87,7 +89,8 @@ public sealed class EfRequestStatusWriter(
         string ownerId,
         long expectedVersion,
         Lifecycle.ValidatedStatusChange change,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken,
+        string actorId)
     {
         if (requestId == Guid.Empty ||
             string.IsNullOrWhiteSpace(ownerId) ||
@@ -114,6 +117,54 @@ public sealed class EfRequestStatusWriter(
         {
             throw new DbUpdateConcurrencyException(
                 "The request has changed or is already assigned.");
+        }
+        
+        if (actorId != change.ActorId)
+        {
+            throw new DbUpdateConcurrencyException(
+                "The assignment actor does not match the approved change.");
+        }
+
+        var actor = await dbContext.PortalAccounts
+            .AsNoTracking()
+            .Include(a => a.Categories)
+            .SingleOrDefaultAsync(a => a.Id == actorId, cancellationToken);
+
+        if (actor is null ||
+            !actor.IsActive ||
+            actor.Role != "Staff" ||
+            !actor.Categories.Any(c => c.CategoryId == request.CategoryId))
+        {
+            throw new DbUpdateConcurrencyException(
+                "The acting staff member is no longer authorised.");
+        }
+
+        var owner = await dbContext.PortalAccounts
+            .AsNoTracking()
+            .Include(a => a.Categories)
+            .SingleOrDefaultAsync(a => a.Id == ownerId, cancellationToken);
+
+        if (owner is null)
+        {
+            throw new DbUpdateConcurrencyException(
+                "The proposed owner no longer exists.");
+        }
+
+        var decision = ownershipRule.Evaluate(
+            new Lifecycle.OwnerCandidate(
+                owner.Id,
+                owner.Role,
+                owner.IsActive,
+                owner.Categories.Select(c => c.CategoryId).ToArray()),
+            new Lifecycle.AssignmentTarget(
+                request.Status,
+                request.CategoryId,
+                request.OwnerId));
+
+        if (!decision.ShouldAssign)
+        {
+            throw new DbUpdateConcurrencyException(
+                "The proposed owner is no longer eligible.");
         }
 
         var now = DateTimeOffset.UtcNow;

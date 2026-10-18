@@ -301,7 +301,7 @@ try
     await using var writerContext =
         new CivicConnectDbContext(options);
 
-    var writer = new EfRequestStatusWriter(writerContext);
+    var writer = new EfRequestStatusWriter(writerContext, new OwnershipRule());
 
     await writer.SaveStatusChangeAsync(
         requestId,
@@ -361,7 +361,7 @@ try
         new CivicConnectDbContext(options);
 
     var rollbackWriter =
-        new EfRequestStatusWriter(rollbackContext);
+        new EfRequestStatusWriter(rollbackContext, new OwnershipRule());
 
     var historyCountBefore =
         await rollbackContext.RequestStatusHistory
@@ -463,6 +463,70 @@ try
     await dbContext.SaveChangesAsync();
 
     Console.WriteLine("PASS: Temporary assignment staff account created.");
+    
+    // Verify that changing an account's role updates its security stamp.
+    var originalSecurityStamp = assignmentStaff.SecurityStamp;
+
+    assignmentStaff.Role = "Management";
+    await dbContext.SaveChangesAsync();
+
+    if (assignmentStaff.SecurityStamp == originalSecurityStamp)
+    {
+        throw new Exception(
+            "FAIL: Security stamp did not change after role update.");
+    }
+
+// Restore the staff role for the assignment tests.
+    var updatedSecurityStamp = assignmentStaff.SecurityStamp;
+
+    assignmentStaff.Role = "Staff";
+    await dbContext.SaveChangesAsync();
+
+    if (assignmentStaff.SecurityStamp == updatedSecurityStamp)
+    {
+        throw new Exception(
+            "FAIL: Security stamp did not change when role was restored.");
+    }
+
+    Console.WriteLine("PASS: Account role changes update security stamp.");
+    
+    // Verify that adding a category permission updates the security stamp.
+    var stampBeforeCategoryChange = assignmentStaff.SecurityStamp;
+
+    dbContext.PortalAccountCategories.Add(
+        new PortalAccountCategoryEntity
+        {
+            AccountId = assignmentStaffId!,
+            CategoryId = "Security Stamp Test"
+        });
+
+    await dbContext.SaveChangesAsync();
+
+    if (assignmentStaff.SecurityStamp == stampBeforeCategoryChange)
+    {
+        throw new Exception(
+            "FAIL: Security stamp did not change after category permission was added.");
+    }
+
+    Console.WriteLine("PASS: Category permission changes update security stamp.");
+    
+    var stampBeforeCategoryRemoval = assignmentStaff.SecurityStamp;
+
+    var testCategory = await dbContext.PortalAccountCategories
+        .SingleAsync(c =>
+            c.AccountId == assignmentStaffId &&
+            c.CategoryId == "Security Stamp Test");
+
+    dbContext.PortalAccountCategories.Remove(testCategory);
+    await dbContext.SaveChangesAsync();
+
+    if (assignmentStaff.SecurityStamp == stampBeforeCategoryRemoval)
+    {
+        throw new Exception(
+            "FAIL: Security stamp did not change after category permission was removed.");
+    }
+
+    Console.WriteLine("PASS: Category permission removal updates security stamp.");
 
     // Create a separate request for the assignment integration test.
     assignmentRequestId = Guid.NewGuid();
@@ -507,13 +571,137 @@ try
     var assignmentStore = new EfPortalRequestStore(
         dbContext,
         new OwnershipRule(),
-        new EfRequestStatusWriter(dbContext));
+        new EfRequestStatusWriter(dbContext, new OwnershipRule()));
 
     var staffActor = new PortalActor(
         assignmentStaffId!,
         "Staff",
         new[] { "IT Support" });
 
+    // An actor without permission for this category must not assign the request.
+    var unauthorisedActor = new PortalActor(
+        assignmentStaffId!,
+        "Staff",
+        new[] { "Road Maintenance" });
+
+    var unauthorisedResult = await assignmentStore.AssignAsync(
+        unauthorisedActor,
+        assignmentRequestId!.Value,
+        assignmentStaffId!,
+        1,
+        transitionResult.Change,
+        CancellationToken.None);
+
+    if (unauthorisedResult.Outcome == PortalWriteOutcome.Saved)
+    {
+        throw new Exception(
+            "FAIL: Unauthorised staff member assigned the request.");
+    }
+
+    Console.WriteLine("PASS: Unauthorised assignment rejected.");
+    
+    // The transactional writer must independently reject an unknown actor.
+    var transactionRejected = false;
+
+    try
+    {
+        await new EfRequestStatusWriter(
+            dbContext,
+            new OwnershipRule()).SaveAssignmentAsync(
+            assignmentRequestId!.Value,
+            assignmentStaffId!,
+            1,
+            transitionResult.Change,
+            CancellationToken.None,
+            "unknown-staff-account");
+    }
+    catch (DbUpdateConcurrencyException)
+    {
+        transactionRejected = true;
+    }
+
+    if (!transactionRejected)
+    {
+        throw new Exception(
+            "FAIL: Transactional writer accepted an unauthorised actor.");
+    }
+
+    dbContext.ChangeTracker.Clear();
+
+    var requestAfterRejection = await dbContext.ServiceRequests
+        .AsNoTracking()
+        .SingleAsync(r => r.RequestId == assignmentRequestId!.Value);
+
+    if (requestAfterRejection.Status != "New" ||
+        requestAfterRejection.OwnerId is not null)
+    {
+        throw new Exception(
+            "FAIL: Rejected assignment modified the request.");
+    }
+
+    Console.WriteLine("PASS: Transactional assignment rejects unknown actor.");
+    
+    // Revoke the temporary staff member's category permission.
+    await dbContext.PortalAccountCategories
+        .Where(c => c.AccountId == assignmentStaffId &&
+                    c.CategoryId == "IT Support")
+        .ExecuteDeleteAsync();
+
+    dbContext.ChangeTracker.Clear();
+
+    var revokedPermissionRejected = false;
+
+    try
+    {
+        await new EfRequestStatusWriter(
+            dbContext,
+            new OwnershipRule()).SaveAssignmentAsync(
+            assignmentRequestId!.Value,
+            assignmentStaffId!,
+            1,
+            transitionResult.Change,
+            CancellationToken.None,
+            assignmentStaffId!);
+    }
+    catch (DbUpdateConcurrencyException)
+    {
+        revokedPermissionRejected = true;
+    }
+    finally
+    {
+        // Restore the permission for the remaining integration tests.
+        dbContext.ChangeTracker.Clear();
+
+        dbContext.PortalAccountCategories.Add(
+            new PortalAccountCategoryEntity
+            {
+                AccountId = assignmentStaffId!,
+                CategoryId = "IT Support"
+            });
+
+        await dbContext.SaveChangesAsync();
+        dbContext.ChangeTracker.Clear();
+    }
+
+    if (!revokedPermissionRejected)
+    {
+        throw new Exception(
+            "FAIL: Assignment succeeded after staff permission was revoked.");
+    }
+
+    var requestAfterRevocation = await dbContext.ServiceRequests
+        .AsNoTracking()
+        .SingleAsync(r => r.RequestId == assignmentRequestId!.Value);
+
+    if (requestAfterRevocation.Status != "New" ||
+        requestAfterRevocation.OwnerId is not null)
+    {
+        throw new Exception(
+            "FAIL: Revoked-permission assignment modified the request.");
+    }
+
+    Console.WriteLine("PASS: Transactional assignment rejects revoked permission.");
+    
     var assignmentResult = await assignmentStore.AssignAsync(
         staffActor,
         assignmentRequestId!.Value,
@@ -679,6 +867,101 @@ try
     }
 
     Console.WriteLine("PASS: Stale scheduling update rejected without audit.");
+    
+    // Verify concurrent submissions with the same key are idempotent.
+var concurrentKey = Guid.NewGuid();
+var concurrentActor = new PortalActor(
+    $"concurrent-test-{Guid.NewGuid():N}",
+    "Requester",
+    Array.Empty<string>());
+
+var concurrentSubmission = new PortalSubmission(
+    "IT Support",
+    "Concurrent submission integration test",
+    "Computer Lab",
+    concurrentKey);
+
+try
+{
+    await using var contextA = new CivicConnectDbContext(options);
+    await using var contextB = new CivicConnectDbContext(options);
+
+    var storeA = new EfPortalRequestStore(
+        contextA,
+        new OwnershipRule(),
+        new EfRequestStatusWriter(contextA, new OwnershipRule()));
+
+    var storeB = new EfPortalRequestStore(
+        contextB,
+        new OwnershipRule(),
+        new EfRequestStatusWriter(contextB, new OwnershipRule()));
+
+    var results = await Task.WhenAll(
+        storeA.SubmitAsync(
+            concurrentActor, concurrentSubmission, CancellationToken.None),
+        storeB.SubmitAsync(
+            concurrentActor, concurrentSubmission, CancellationToken.None));
+
+    await using var concurrentVerificationContext = new CivicConnectDbContext(options);
+
+    var savedRequests = await concurrentVerificationContext.ServiceRequests
+        .AsNoTracking()
+        .Where(r => r.RequesterId == concurrentActor.Id &&
+                    r.SubmissionKey == concurrentKey)
+        .Select(r => r.RequestId)
+        .ToListAsync();
+
+    if (savedRequests.Count != 1 ||
+        results.Any(r =>
+            r.Outcome != PortalWriteOutcome.Saved ||
+            r.RequestId != savedRequests[0]))
+    {
+        throw new Exception(
+            "FAIL: Concurrent submissions did not resolve to one request.");
+    }
+
+    Console.WriteLine("PASS: Concurrent submissions created one request.");
+    
+    var changedSubmission = concurrentSubmission with
+    {
+        Description = "Different description using the same key"
+    };
+
+    var changedResult = await storeA.SubmitAsync(
+        concurrentActor,
+        changedSubmission,
+        CancellationToken.None);
+
+    if (changedResult.Outcome != PortalWriteOutcome.Conflict)
+    {
+        throw new Exception(
+            "FAIL: Reusing a submission key with different details was accepted.");
+    }
+
+    Console.WriteLine("PASS: Changed payload with reused key rejected.");
+}
+finally
+{
+    await using var cleanupContext = new CivicConnectDbContext(options);
+
+    var concurrentRequestIds = await cleanupContext.ServiceRequests
+        .Where(r => r.RequesterId == concurrentActor.Id &&
+                    r.SubmissionKey == concurrentKey)
+        .Select(r => r.RequestId)
+        .ToListAsync();
+
+    await cleanupContext.RequestNotes
+        .Where(n => concurrentRequestIds.Contains(n.RequestId))
+        .ExecuteDeleteAsync();
+
+    await cleanupContext.RequestStatusHistory
+        .Where(h => concurrentRequestIds.Contains(h.RequestId))
+        .ExecuteDeleteAsync();
+
+    await cleanupContext.ServiceRequests
+        .Where(r => concurrentRequestIds.Contains(r.RequestId))
+        .ExecuteDeleteAsync();
+}
 
     Console.WriteLine("All database integration checks passed.");
 }

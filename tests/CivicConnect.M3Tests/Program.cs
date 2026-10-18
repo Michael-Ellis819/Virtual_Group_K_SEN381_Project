@@ -21,6 +21,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 int passed = 0;
 void Check(string id, bool ok)
@@ -28,10 +29,18 @@ void Check(string id, bool ok)
     if (!ok) throw new InvalidOperationException("FAIL " + id);
     Console.WriteLine("PASS " + id); passed++;
 }
-ClaimsPrincipal User(string role = "Staff", string id = "staff-1", string category = "IT Support")
-    => new(new ClaimsIdentity(new[] { new Claim(ClaimTypes.NameIdentifier, id),
-        new Claim(ClaimTypes.Role, role), new Claim("active", "true"),
-        new Claim("category", category) }, "m3-test-ticket"));
+ClaimsPrincipal User(
+    string role = "Staff",
+    string id = "staff-1",
+    string category = "IT Support")
+    => new(new ClaimsIdentity(new[]
+    {
+        new Claim(ClaimTypes.NameIdentifier, id),
+        new Claim(ClaimTypes.Role, role),
+        new Claim("active", "true"),
+        new Claim("category", category),
+        new Claim("portal-stamp", "m3-verification-stamp")
+    }, "m3-test-ticket"));
 var states = new StatusTransitionService();
 string[] names = ["New", "Assigned", "In Progress", "Resolved", "Closed", "Rejected"];
 var allowed = new HashSet<(string, string)>
@@ -78,6 +87,8 @@ var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 builder.Logging.ClearProviders();
 builder.Configuration["ConnectionStrings:CivicConnect"] = connection;
 builder.Services.AddCivicConnect(builder.Configuration);
+builder.Services.RemoveAll<IPortalAccounts>();
+builder.Services.AddSingleton<IPortalAccounts, M3VerificationAccounts>();
 builder.Services.AddDataProtection().UseEphemeralDataProtectionProvider();
 builder.WebHost.ConfigureKestrel(server => server.Listen(IPAddress.Loopback, 0, listen => listen.UseHttps(certificate)));
 await using var app = builder.Build();
@@ -107,6 +118,16 @@ async Task<HttpResponseMessage> Post(Guid id, string expected, string? target, s
         using var tokenMessage = new HttpRequestMessage(HttpMethod.Get, "/requests/antiforgery");
         tokenMessage.Headers.Add("Cookie", cookie);
         using var response = await client.SendAsync(tokenMessage);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            Console.WriteLine(
+                $"DEBUG antiforgery response: {(int)response.StatusCode} {response.StatusCode}");
+
+            Console.WriteLine(
+                await response.Content.ReadAsStringAsync());
+        }
+
         response.EnsureSuccessStatusCode();
         token = (await response.Content.ReadFromJsonAsync<JsonElement>()).GetProperty("requestToken").GetString();
         cookie += "; " + response.Headers.GetValues("Set-Cookie").Single().Split(';')[0];
@@ -164,7 +185,9 @@ try
             spaces.StatusCode == HttpStatusCode.BadRequest && unknown.StatusCode == HttpStatusCode.BadRequest &&
             missingTarget.StatusCode == HttpStatusCode.BadRequest && await Unchanged(id));
     using (var response = await Post(id, "New", "Assigned", "Reason", owner))
-    using (var otherCategory = await Post(id, "New", "Assigned", "Reason", User(category: "Maintenance")))
+    using (var otherCategory = await Post(
+               id, "New", "Assigned", "Reason",
+               User("Staff", "staff-2", "Maintenance")))
         Check("BB05 requester and wrong-category writes denied [EP NFR-001 TC-ST-06]", response.StatusCode == HttpStatusCode.NotFound &&
             otherCategory.StatusCode == HttpStatusCode.NotFound && await Unchanged(id));
     using (var response = await Post(id, "New", "Assigned", "Reason", staff, false))
@@ -237,7 +260,7 @@ try
     bool staleVersionDenied = false;
     await using (var writerDb = new CivicConnectDbContext(options))
     {
-        try { await new EfRequestStatusWriter(writerDb).SaveAsync(new(id, "New", "Assigned", "staff-1", "Stale", 1), CancellationToken.None); }
+        try { await new EfRequestStatusWriter(writerDb, new CivicConnect.Lifecycle.OwnershipRule()).SaveAsync(new(id, "New", "Assigned", "staff-1", "Stale", 1), CancellationToken.None); }
         catch (DbUpdateConcurrencyException) { staleVersionDenied = true; }
     }
     await using (var verify = new CivicConnectDbContext(options))
@@ -264,5 +287,44 @@ sealed class SpyStore : IRequestReader, IRequestStatusWriter
     {
         if (Conflict) throw new DbUpdateConcurrencyException("Test conflict");
         Last = change; Writes++; return Task.CompletedTask;
+    }
+    
+    
+}
+
+sealed class M3VerificationAccounts : IPortalAccounts
+{
+    public Task<SignInResult> AuthenticateAsync(
+        string username,
+        string password,
+        CancellationToken cancellationToken)
+        => Task.FromResult(new SignInResult(SignInOutcome.InvalidCredentials));
+
+    public Task<PortalAccount?> FindAsync(
+        string id,
+        CancellationToken cancellationToken)
+    {
+        PortalAccount? account = id switch
+        {
+            "staff-1" => new PortalAccount(
+                id, "M3 Test Staff", "Staff", true,
+                new[] { "IT Support" }, "m3-verification-stamp"),
+
+            "requester-1" => new PortalAccount(
+                id, "M3 Test Requester", "Requester", true,
+                new[] { "IT Support" }, "m3-verification-stamp"),
+
+            "requester-2" => new PortalAccount(
+                id, "M3 Test Requester 2", "Requester", true,
+                new[] { "IT Support" }, "m3-verification-stamp"),
+
+            "staff-2" => new PortalAccount(
+                id, "M3 Other Staff", "Staff", true,
+                new[] { "Maintenance" }, "m3-verification-stamp"),
+
+            _ => null
+        };
+
+        return Task.FromResult(account);
     }
 }
