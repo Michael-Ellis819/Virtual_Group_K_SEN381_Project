@@ -84,3 +84,7 @@ Human execution reports retain their original operators and dates. Codex's follo
 - [Codex follow-up verification](evidence/m3/combined-20261014/summary.md): post-fix builds, correctness suites and strict dependency audits.
 - [Bianca's completed conformance review](reviews/Bianca_M3_Final_Review_Updated.docx).
 - [GitHub review/CI evidence](github-evidence.md).
+
+## Milestone 4 integration checkpoint 18 October 2026
+
+OpenAI Codex inspected the supplied handover, M4 brief, repository, PED, RTM, Bianca's ZIP and Michael's PR20. It backed up the five pending M3 documentation edits and prepared a separate M4 branch, preserving the original checkout. It reconciled overlapping lifecycle implementations, retained the established status/antiforgery wiring, corrected the stale CSRF observation and executed the combined 73-check harness, 25 database checks and 19 M3 cases. [Execution evidence](evidence/m4-integration-20261018/summary.md) identifies these as agent runs. Unsupported completion percentages, stale missing-integration claims and the older replacement PED were not adopted. This entry records assistance and technical verification; student review, personal execution and acceptance of this candidate are not claimed.

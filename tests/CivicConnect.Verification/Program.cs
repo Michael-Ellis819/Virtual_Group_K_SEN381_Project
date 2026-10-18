@@ -135,7 +135,11 @@ try
     Check("H14 bare detail route does not accept writes", postResponse.StatusCode != HttpStatusCode.OK && postResponse.StatusCode != HttpStatusCode.Created);
 }
 finally { await app.StopAsync(); }
-Console.WriteLine($"RESULT {passed} checks passed; 0 failed. In-memory read slice only; no database/login/production acceptance claimed.");
+var sourceRoot = new DirectoryInfo(AppContext.BaseDirectory);
+while (sourceRoot is not null && !Directory.Exists(Path.Combine(sourceRoot.FullName, "src", "CivicConnect.Web")))
+    sourceRoot = sourceRoot.Parent;
+LifecycleChecks.Run(Check, sourceRoot?.FullName);
+Console.WriteLine($"RESULT {passed} checks passed; 0 failed. Read and business-rule checks; no full-product acceptance claimed.");
 
 sealed class FaultInjectingReader : IRequestReader
 {

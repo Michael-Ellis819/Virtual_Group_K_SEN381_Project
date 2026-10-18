@@ -1,0 +1,74 @@
+PASS S01 owner reads status and timestamp [FR-003]
+PASS S02 requester sees public notes only [NFR-001 FR-011 partial]
+PASS S03 another requester denied [AC-FR-003-2]
+PASS S04 staff category grant includes internal notes [FR-008]
+PASS S05 staff outside category denied [FR-008]
+PASS S06 management detail access denied [NFR-001]
+PASS S07 anonymous direct service caller denied [FR-016]
+PASS S08 inactive identity denied [NFR-001]
+PASS S09 unknown role denied [NFR-001]
+PASS S10 missing user ID denied
+PASS S11 ambiguous roles denied
+PASS S12 mixed identities denied
+PASS S13 missing record denied
+PASS S14 empty ID denied
+PASS S15 read cancellation propagated
+PASS H01 Razor landing route renders
+PASS H02 signed-out request returns 401 without redirect
+PASS H03 tampered cookie returns 401
+PASS H04 owner receives JSON status [FR-003]
+PASS H05 private fields absent from serialised response
+PASS H06 protected response is not cached
+PASS H07 missing and forbidden share status and title
+PASS H08 category-authorised staff get private notes
+PASS H09 unauthorised category returns 404
+PASS H10 malformed and empty IDs return 400
+PASS H11 caller cannot elevate via query parameters
+PASS H12 store failure returns safe 500 [NFR-008 partial]
+PASS H13 failure response is not cached
+PASS H14 bare detail route does not accept writes
+PASS LC01 exactly the five agreed transitions are allowed, all 36 pairs checked [FR-010 AC-FR-010-1]
+PASS LC02 allowed change carries previous status, new status and actor [AC-FR-010-1]
+PASS LC03 skipping a step is rejected without a change object [AC-FR-010-2]
+PASS LC04 backward move is rejected
+PASS LC05 closed and rejected are terminal: no exit to any status
+PASS LC06 reopening a closed request is rejected (reopen excluded by ADR-M2-02)
+PASS LC07 staying in the same status is not a transition
+PASS LC08 rejecting a request that is no longer New is rejected
+PASS LC09 unknown, blank, null and wrong-case statuses fail closed
+PASS LC10 missing actor is rejected so history can always name who acted [FR-015]
+PASS LC11 resolving needs a resolution summary [AC-FR-012-1]
+PASS LC12 rejecting needs a reason [AC-FR-005-1]
+PASS LC13 closing a resolved request needs no reason but is legal [AC-FR-012-2]
+PASS LC14 assigning without an owner is rejected [FR-009]
+PASS LC15 feedback and actor are trimmed in the validated change
+PASS LC16 an illegal pair is reported as illegal before any reason check
+PASS LC17 next-status listing matches the lifecycle and is empty for unknown or terminal
+PASS LC18 six states exist; only New, Assigned and In Progress are open [M1 rule]
+PASS LC19 evaluating twice gives the same answer and changes nothing
+PASS LC20 null request is a programming error, not a silent pass
+PASS OW01 active staff with the category can own an unowned New request [AC-FR-009-1]
+PASS OW02 staff without the request's category are rejected [AC-FR-009-2]
+PASS OW03 inactive staff are rejected [AC-FR-009-2]
+PASS OW04 requesters, management and unknown roles can never own
+PASS OW05 a second person cannot take an owned request, so never two owners [AC-FR-009-2]
+PASS OW06 the current owner claiming again is a harmless no-op
+PASS OW07 closed, rejected and resolved requests cannot gain an owner
+PASS OW08 blank candidate, blank category and unknown status are invalid input
+PASS OW09 category match is exact: a different case is not eligible
+PASS OW10 a staff member with several categories is eligible for any of them
+PASS OW11 an Assigned decision leads to a legal New to Assigned transition
+PASS SM01 known dataset gives the hand-calculated counts [AC-FR-013-1]
+PASS SM02 every request is accounted for: open + resolved + closed + rejected = total
+PASS SM03 open means New, Assigned or In Progress only [M1 rule]
+PASS SM04 a request without a due date is never overdue [M1 rule, AC-FR-018-2]
+PASS SM05 due exactly now is not overdue; one second earlier is
+PASS SM06 resolved, closed and rejected requests past due are not overdue
+PASS SM07 empty data returns zero counts, not an error [AC-FR-013-2]
+PASS SM08 overdue never exceeds open
+PASS SM09 a newly saved request shows on refresh [AC-FR-013-2]
+PASS SM10 the same data at a later time makes more requests overdue
+PASS SM11 an unrecognised status is rejected instead of miscounted
+PASS SM12 null item list is a programming error
+PASS AR01 no code outside the lifecycle namespace assigns a status except the persistence writer [R-011]
+RESULT 73 checks passed; 0 failed. Read and business-rule checks; no full-product acceptance claimed.

@@ -1,0 +1,13 @@
+
+[[allowlists]]
+description = "Allow SHA-256 fingerprints in generated M3 evidence JSON files only"
+condition = "AND"
+paths = [
+  '''^docs/evidence/m3/combined-20261014/source-fingerprints\.json$''',
+  '''^docs/evidence/m3/combined-document-audit\.json$''',
+  '''^docs/evidence/m3/personal-20261013-181846/source-fingerprints\.json$''',
+  '''^docs/evidence/m3/source-manifest\.json$'''
+]
+regexes = [
+  '''(?i)\b[0-9a-f]{64}\b'''
+]

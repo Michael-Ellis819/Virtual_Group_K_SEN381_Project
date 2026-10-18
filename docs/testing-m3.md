@@ -67,3 +67,7 @@ Michael’s second run: 200 direct reader operations, maximum concurrency 10; 1.
 ## Combined remote verification indexed 15 October 2026
 
 [Main run 38594557024](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/38594557024) passes on 668795a42d8191600e79ff4decad1642bd3e88b0 after PR17 merged on 14 October. It builds and runs all four projects, including the 19 M3 cases, with analysis and dependency checks. This is additional remote evidence; Cameron's 13 October personal execution and Michael's original 14 October performance measurement keep their original attribution and values.
+
+## M4 integration checkpoint 18 October 2026
+
+The isolated M4 candidate combines PR20 with Bianca's State classes, ownership/summary rules and 44 checks. The existing status coordinator now uses her lifecycle matrix while retaining its action permission, feedback, antiforgery and transaction contracts. Codex executed 73 verification checks, 25 database checks and 19 M3 cases successfully on a new disposable database. These are agent results, not student execution or complete product acceptance. See [integration summary](evidence/m4-integration-20261018/summary.md) for the source inputs, raw reports, initial sandbox restriction and remaining gaps. The historical M3 results and conditional-readiness decision remain unchanged.
