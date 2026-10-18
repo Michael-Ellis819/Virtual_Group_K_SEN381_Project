@@ -3516,7 +3516,7 @@ CivicConnect now combines requester, staff and management journeys in one ASP.NE
 | Item | Final record |
 | --- | --- |
 | Repository | https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project |
-| Assessed identifier | m4-final-20261018-r3; exact tagged revision is recorded with submission information. Tested code: 625e4e99882150f79ad3e00bae327b14e63e5d9c. |
+| Assessed identifier | m4-final-20261018-r4; exact tagged revision is recorded with submission information. Tested code: 625e4e99882150f79ad3e00bae327b14e63e5d9c. |
 | Integrated inputs | Michael’s M4 branch through 5a17e07; main 51c4f9a and Bianca’s supplied ZIP; Cameron’s existing presentation and final corrections. The existing interfaces, PED and RTM were retained. |
 | Environment | Staging through a controlled local simulation. Real PostgreSQL adapters and password hashes; synthetic accounts/data. No hosted public production environment exists. |
 | Verification | 73 read/rule, 43 database, 19 M3, 30 UI/contract and 36 persistent HTTPS checks pass locally: 201 checks. Local timed restore passes. Operator and raw evidence: docs/evidence/m4-final-20261018. |

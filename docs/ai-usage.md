@@ -128,9 +128,3 @@ Michael supplied the following account through Cameron on 18 October 2026.
 | How assistance was used | Bianca reports using ChatGPT to format tables and tidy the writing. Her supplied register records Claude Code assistance with lifecycle, ownership and summary code, 44 checks, and initial document drafts. |
 | Human verification | Bianca confirmed through Cameron that she personally tested all her M4 work. |
 | Responsibility | Bianca remains responsible for checking and understanding her contribution. |
-
-The previous M2/M3 entries retain their original tools and dates. The PED’s ChatGPT planning label and the implementation register’s Codex label describe their recorded contexts; the original attribution and verification records are retained. The project retains its AI disclosure. Personal handover material and the original contribution archive are stored separately.
-
-Corrections during verification included the real priority-sort mismatch, management landing route, incomplete audit projection, unsafe exception logging and ownerless assignment. The preparatory shared-browser session was separated from participants after a stale sign-in token issue. Human accountability remains with the students for the implementation, evidence and individual defence.
-
-At Cameron’s request, Codex simplified the final documentation wording and updated the matching Word/PDF copies. Test attribution, participant results, acceptance scores and earlier project history were retained.
