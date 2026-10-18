@@ -2,6 +2,7 @@ using CivicConnect.Application;
 using CivicConnect.Data.Entities;
 using CivicConnect.Lifecycle;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 
 namespace CivicConnect.Data;
 
@@ -230,9 +231,40 @@ public sealed class EfPortalRequestStore : IPortalRequestStore
         CreatedAt = now
     });
 
-    await _db.SaveChangesAsync(cancellationToken);
+    try
+    {
+        await _db.SaveChangesAsync(cancellationToken);
 
-    return new PortalWriteResult(PortalWriteOutcome.Saved, requestId);
+        return new PortalWriteResult(
+            PortalWriteOutcome.Saved, requestId);
+    }
+    catch (DbUpdateException ex)
+        when (ex.InnerException is PostgresException pg &&
+              pg.SqlState == PostgresErrorCodes.UniqueViolation &&
+              pg.ConstraintName == "IX_ServiceRequests_RequesterId_SubmissionKey")
+    {
+        _db.ChangeTracker.Clear();
+
+        var duplicate = await _db.ServiceRequests
+            .AsNoTracking()
+            .FirstOrDefaultAsync(r =>
+                    r.RequesterId == actor.Id &&
+                    r.SubmissionKey == submission.SubmissionKey,
+                cancellationToken);
+
+        if (duplicate is null)
+            throw;
+
+        bool samePayload =
+            duplicate.CategoryId == submission.Category &&
+            duplicate.Description == submission.Description &&
+            duplicate.Location == submission.Location;
+
+        return samePayload
+            ? new PortalWriteResult(
+                PortalWriteOutcome.Saved, duplicate.RequestId)
+            : new PortalWriteResult(PortalWriteOutcome.Conflict);
+    }
 }
     
     public async Task<PortalWriteResult> AssignAsync(
@@ -424,10 +456,29 @@ public sealed class EfPortalRequestStore : IPortalRequestStore
             return new PortalWriteResult(PortalWriteOutcome.Conflict);
 
         var now = DateTimeOffset.UtcNow;
+        var newDueAt = dueAt?.ToUniversalTime();
+
+        var previousPriority = request.Priority;
+        var previousDueAt = request.DueAt;
 
         request.Priority = priority;
-        request.DueAt = dueAt?.ToUniversalTime();
+        request.DueAt = newDueAt;
         request.UpdatedAt = now;
+
+        if (previousPriority != priority || previousDueAt != newDueAt)
+        {
+            _db.RequestScheduleAudits.Add(new RequestScheduleAuditEntity
+            {
+                AuditId = Guid.NewGuid(),
+                RequestId = requestId,
+                ChangedByUserId = actor.Id,
+                ChangedAt = now,
+                PreviousPriority = previousPriority,
+                NewPriority = priority,
+                PreviousDueAt = previousDueAt,
+                NewDueAt = newDueAt
+            });
+        }
 
         // Ensure the request version changes even if the values are unchanged.
         _db.Entry(request).Property(r => r.UpdatedAt).IsModified = true;

@@ -20,6 +20,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var passed = 0;
 void Check(string id, bool condition) { if (!condition) throw new InvalidOperationException("FAIL " + id); Console.WriteLine("PASS " + id); passed++; }
@@ -39,7 +40,14 @@ async Task<WebApplication> Start(bool adapters)
     builder.Services.AddDataProtection().UseEphemeralDataProtectionProvider();
     builder.Services.AddSingleton<IRequestReader>(fixture);
     builder.Services.AddSingleton<IRequestStatusWriter>(fixture);
-    if (adapters) { builder.Services.AddSingleton<IPortalAccounts>(fixture); builder.Services.AddSingleton<IPortalRequestStore>(fixture); }
+    builder.Services.RemoveAll<IPortalAccounts>();
+    builder.Services.RemoveAll<IPortalRequestStore>();
+
+    if (adapters)
+    {
+        builder.Services.AddSingleton<IPortalAccounts>(fixture);
+        builder.Services.AddSingleton<IPortalRequestStore>(fixture);
+    }
     if (preview)
     {
         builder.WebHost.UseUrls("http://127.0.0.1:5089");

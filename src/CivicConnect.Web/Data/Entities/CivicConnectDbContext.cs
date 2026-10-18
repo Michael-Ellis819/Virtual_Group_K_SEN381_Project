@@ -15,11 +15,14 @@ public sealed class CivicConnectDbContext : DbContext
     public DbSet<ServiceRequestEntity> ServiceRequests =>
         Set<ServiceRequestEntity>();
 
+    public DbSet<RequestScheduleAuditEntity> RequestScheduleAudits
+        => Set<RequestScheduleAuditEntity>();
+
     public DbSet<RequestNoteEntity> RequestNotes =>
         Set<RequestNoteEntity>();
     public DbSet<RequestStatusHistoryEntity> RequestStatusHistory =>
         Set<RequestStatusHistoryEntity>();
-    
+
     public DbSet<PortalAccountEntity> PortalAccounts =>
         Set<PortalAccountEntity>();
 
@@ -87,13 +90,13 @@ public sealed class CivicConnectDbContext : DbContext
 
             entity.Property(r => r.UpdatedAt)
                 .IsRequired();
-            
+
             // Detect when another operation has updated this request.
             entity.Property(r => r.Version)
                 .IsRequired()
                 .IsConcurrencyToken()
                 .HasDefaultValue(1L);
-            
+
             entity.Property(r => r.CreatedAt)
                 .IsRequired();
 
@@ -129,7 +132,7 @@ public sealed class CivicConnectDbContext : DbContext
 
             entity.Property(n => n.IsRequesterVisible)
                 .IsRequired();
-            
+
             entity.Property(n => n.AuthorId)
                 .HasMaxLength(100)
                 .IsRequired();
@@ -137,8 +140,8 @@ public sealed class CivicConnectDbContext : DbContext
             entity.Property(n => n.CreatedAt)
                 .IsRequired();
         });
-        
-        
+
+
         modelBuilder.Entity<RequestStatusHistoryEntity>(entity =>
         {
             entity.HasKey(h => h.HistoryId);
@@ -170,8 +173,34 @@ public sealed class CivicConnectDbContext : DbContext
             });
         });
 
+        modelBuilder.Entity<RequestScheduleAuditEntity>(entity =>
+        {
+            entity.ToTable("RequestScheduleAudits");
+
+            entity.HasKey(a => a.AuditId);
+
+            entity.Property(a => a.ChangedByUserId)
+                .HasMaxLength(100)
+                .IsRequired();
+
+            entity.Property(a => a.PreviousPriority)
+                .HasMaxLength(20)
+                .IsRequired();
+
+            entity.Property(a => a.NewPriority)
+                .HasMaxLength(20)
+                .IsRequired();
+
+            entity.HasOne(a => a.ServiceRequest)
+                .WithMany()
+                .HasForeignKey(a => a.RequestId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasIndex(a => a.RequestId);
+        });
+
     }
-    
+
     public override int SaveChanges()
     {
         IncrementRequestVersions();

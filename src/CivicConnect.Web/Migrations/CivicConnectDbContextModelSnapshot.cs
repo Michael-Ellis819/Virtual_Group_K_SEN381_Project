@@ -110,6 +110,46 @@ namespace CivicConnect.Web.Migrations
                     b.ToTable("RequestNotes");
                 });
 
+            modelBuilder.Entity("CivicConnect.Data.Entities.RequestScheduleAuditEntity", b =>
+                {
+                    b.Property<Guid>("AuditId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset>("ChangedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("ChangedByUserId")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<DateTimeOffset?>("NewDueAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("NewPriority")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<DateTimeOffset?>("PreviousDueAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("PreviousPriority")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<Guid>("RequestId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("AuditId");
+
+                    b.HasIndex("RequestId");
+
+                    b.ToTable("RequestScheduleAudits", (string)null);
+                });
+
             modelBuilder.Entity("CivicConnect.Data.Entities.RequestStatusHistoryEntity", b =>
                 {
                     b.Property<Guid>("HistoryId")
@@ -236,6 +276,17 @@ namespace CivicConnect.Web.Migrations
                 {
                     b.HasOne("CivicConnect.Data.Entities.ServiceRequestEntity", "ServiceRequest")
                         .WithMany("Notes")
+                        .HasForeignKey("RequestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ServiceRequest");
+                });
+
+            modelBuilder.Entity("CivicConnect.Data.Entities.RequestScheduleAuditEntity", b =>
+                {
+                    b.HasOne("CivicConnect.Data.Entities.ServiceRequestEntity", "ServiceRequest")
+                        .WithMany()
                         .HasForeignKey("RequestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

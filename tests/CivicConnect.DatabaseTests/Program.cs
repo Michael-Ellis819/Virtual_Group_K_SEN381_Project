@@ -190,8 +190,8 @@ try
             "FAIL: Unauthenticated user accessed the request.");
 
     Console.WriteLine("PASS: Unauthenticated user is denied.");
-    
-    
+
+
     // TEST: Two database contexts attempt to update the same request.
     await using var firstContext = new CivicConnectDbContext(options);
     await using var secondContext = new CivicConnectDbContext(options);
@@ -254,7 +254,7 @@ try
 
     Console.WriteLine("PASS: First successful update is preserved.");
 
-    
+
     // TEST: Save and retrieve a status-history record.
     var historyId = Guid.NewGuid();
 
@@ -297,7 +297,7 @@ try
 
     Console.WriteLine("PASS: Status-history information is correct.");
 
-    
+
     await using var writerContext =
         new CivicConnectDbContext(options);
 
@@ -355,7 +355,7 @@ try
 
     Console.WriteLine("PASS: Transaction saved requester feedback.");
 
-    
+
     // TEST: A failed transaction must roll back every change.
     await using var rollbackContext =
         new CivicConnectDbContext(options);
@@ -437,7 +437,7 @@ try
     }
 
     Console.WriteLine("PASS: Requester feedback rolled back.");
-    
+
     // Temporary staff account for the portal assignment integration test.
     assignmentStaffId = $"test-staff-{Guid.NewGuid():N}";
 
@@ -463,7 +463,7 @@ try
     await dbContext.SaveChangesAsync();
 
     Console.WriteLine("PASS: Temporary assignment staff account created.");
-    
+
     // Create a separate request for the assignment integration test.
     assignmentRequestId = Guid.NewGuid();
 
@@ -485,7 +485,7 @@ try
     await dbContext.SaveChangesAsync();
 
     Console.WriteLine("PASS: Temporary assignment request created.");
-    
+
     // Validate the New -> Assigned transition using the real lifecycle service.
     var transitionResult = new CivicConnect.Lifecycle.StatusTransitionService().Evaluate(
         new TransitionRequest(
@@ -502,7 +502,7 @@ try
     }
 
     Console.WriteLine("PASS: Assignment transition validated.");
-    
+
     // Execute the real PostgreSQL-backed assignment operation.
     var assignmentStore = new EfPortalRequestStore(
         dbContext,
@@ -529,7 +529,7 @@ try
     }
 
     Console.WriteLine("PASS: PostgreSQL assignment saved.");
-    
+
     // Verify the owner and status persisted in PostgreSQL.
     dbContext.ChangeTracker.Clear();
 
@@ -579,7 +579,7 @@ try
     }
 
     Console.WriteLine("PASS: Assignment feedback persisted.");
-    
+
     // A stale version must not overwrite the successful assignment.
     var staleAssignmentResult = await assignmentStore.AssignAsync(
         staffActor,
@@ -596,7 +596,90 @@ try
     }
 
     Console.WriteLine("PASS: Stale assignment rejected.");
-    
+
+    // Verify that scheduling changes create a durable audit record.
+    dbContext.ChangeTracker.Clear();
+
+    var beforeSchedule = await dbContext.ServiceRequests
+        .AsNoTracking()
+        .SingleAsync(r => r.RequestId == assignmentRequestId!.Value);
+
+    var scheduleDueAt = new DateTimeOffset(
+        2026, 10, 25, 14, 30, 0, TimeSpan.Zero);
+
+    var scheduleResult = await assignmentStore.SetScheduleAsync(
+        staffActor,
+        assignmentRequestId!.Value,
+        "High",
+        scheduleDueAt,
+        beforeSchedule.Version,
+        CancellationToken.None);
+
+    if (scheduleResult.Outcome != PortalWriteOutcome.Saved)
+    {
+        throw new Exception(
+            $"FAIL: Scheduling update was not saved: {scheduleResult.Outcome}");
+    }
+
+    dbContext.ChangeTracker.Clear();
+
+    var savedSchedule = await dbContext.ServiceRequests
+        .AsNoTracking()
+        .SingleAsync(r => r.RequestId == assignmentRequestId!.Value);
+
+    var scheduleAudit = await dbContext.RequestScheduleAudits
+        .AsNoTracking()
+        .SingleOrDefaultAsync(a =>
+            a.RequestId == assignmentRequestId!.Value);
+
+    if (savedSchedule.Priority != "High" ||
+        savedSchedule.DueAt != scheduleDueAt ||
+        scheduleAudit is null ||
+        scheduleAudit.ChangedByUserId != assignmentStaffId ||
+        scheduleAudit.PreviousPriority != "Normal" ||
+        scheduleAudit.NewPriority != "High" ||
+        scheduleAudit.PreviousDueAt is not null ||
+        scheduleAudit.NewDueAt != scheduleDueAt ||
+        scheduleAudit.ChangedAt == default)
+    {
+        throw new Exception(
+            "FAIL: Scheduling changes or audit details were not persisted.");
+    }
+
+    Console.WriteLine("PASS: PostgreSQL scheduling audit persisted.");
+
+    // A stale scheduling update must not create another audit record.
+    var auditCountBefore = await dbContext.RequestScheduleAudits
+        .CountAsync(a => a.RequestId == assignmentRequestId!.Value);
+
+    var staleScheduleResult = await assignmentStore.SetScheduleAsync(
+        staffActor,
+        assignmentRequestId!.Value,
+        "Low",
+        null,
+        beforeSchedule.Version,
+        CancellationToken.None);
+
+    dbContext.ChangeTracker.Clear();
+
+    var auditCountAfter = await dbContext.RequestScheduleAudits
+        .CountAsync(a => a.RequestId == assignmentRequestId!.Value);
+
+    var scheduleAfterStale = await dbContext.ServiceRequests
+        .AsNoTracking()
+        .SingleAsync(r => r.RequestId == assignmentRequestId!.Value);
+
+    if (staleScheduleResult.Outcome != PortalWriteOutcome.Conflict ||
+        auditCountAfter != auditCountBefore ||
+        scheduleAfterStale.Priority != "High" ||
+        scheduleAfterStale.DueAt != scheduleDueAt)
+    {
+        throw new Exception(
+            "FAIL: Stale scheduling update modified data or created an audit record.");
+    }
+
+    Console.WriteLine("PASS: Stale scheduling update rejected without audit.");
+
     Console.WriteLine("All database integration checks passed.");
 }
 finally
@@ -609,16 +692,20 @@ finally
     await dbContext.ServiceRequests
         .Where(r => r.RequestId == requestId)
         .ExecuteDeleteAsync();
-    
+
     if (assignmentStaffId is not null)
     {
         await dbContext.PortalAccounts
             .Where(a => a.Id == assignmentStaffId)
             .ExecuteDeleteAsync();
     }
-    
+
     if (assignmentRequestId is Guid testRequestId)
     {
+        await dbContext.RequestScheduleAudits
+            .Where(a => a.RequestId == testRequestId)
+            .ExecuteDeleteAsync();
+
         await dbContext.RequestNotes
             .Where(n => n.RequestId == testRequestId)
             .ExecuteDeleteAsync();
@@ -630,7 +717,7 @@ finally
         await dbContext.ServiceRequests
             .Where(r => r.RequestId == testRequestId)
             .ExecuteDeleteAsync();
-    }   
+    }
 }
 
 static ClaimsPrincipal CreateUser(
