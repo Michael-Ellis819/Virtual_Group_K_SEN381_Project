@@ -442,3 +442,7 @@ FodyWeavers.xsd
 **/DataProtection-Keys/
 *.pfx
 *.key
+
+# M4 - Local configuration and database backups
+**/appsettings.Development.json
+*.dump

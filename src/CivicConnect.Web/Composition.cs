@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 namespace CivicConnect;
+using System.Diagnostics;
 public static class Composition
 {
     public static IServiceCollection AddCivicConnect(
@@ -48,14 +49,62 @@ public static class Composition
             context.Response.Headers.CacheControl = "no-store";
             try { await next(context); }
             catch (OperationCanceledException) when (context.RequestAborted.IsCancellationRequested) { }
-            catch (Exception)
+            catch (Exception ex)
             {
+                var logger = context.RequestServices
+                    .GetRequiredService<ILoggerFactory>()
+                    .CreateLogger("CivicConnect.Observability");
+
+                logger.LogError(
+                    "Unhandled application exception. Type: {ExceptionType}",
+                    ex.GetType().Name);
+
                 if (context.Response.HasStarted) throw;
+
                 context.Response.Clear();
                 context.Response.Headers.CacheControl = "no-store";
-                await Results.Problem(statusCode: 500, title: "The request could not be completed.").ExecuteAsync(context);
+
+                await Results.Problem(
+                    statusCode: 500,
+                    title: "The request could not be completed."
+                ).ExecuteAsync(context);
             }
         });
+        
+        // M4 observability: monitor HTTP failures and slow requests.
+        app.Use(async (context, next) =>
+        {
+            var stopwatch = Stopwatch.StartNew();
+
+            try
+            {
+                await next(context);
+            }
+            finally
+            {
+                stopwatch.Stop();
+
+                var logger = context.RequestServices
+                    .GetRequiredService<ILoggerFactory>()
+                    .CreateLogger("CivicConnect.Observability");
+
+                if (context.Response.StatusCode >= 500)
+                {
+                    logger.LogError(
+                        "HTTP server error. Status: {StatusCode}",
+                        context.Response.StatusCode);
+                }
+
+                if (stopwatch.ElapsedMilliseconds > 1000)
+                {
+                    logger.LogWarning(
+                        "Slow HTTP request. Duration: {DurationMs}ms",
+                        stopwatch.ElapsedMilliseconds);
+                }
+            }
+        });
+        
+        app.UseHttpsRedirection();
         app.UseAuthentication();
         app.UseAuthorization();
         app.MapControllers();

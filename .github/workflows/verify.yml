@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - main
+      - feature/m4-security-operations
       - feature/m3-data-persistence
       - feature/cameron-m3-integration
   pull_request:
@@ -58,6 +59,14 @@ jobs:
           ConnectionStrings__CivicConnect: "Host=localhost;Port=5432;Database=civicconnect_test;Username=postgres;Password=testpassword"
         run: dotnet run --project tests/CivicConnect.DatabaseTests --configuration Release --no-build
 
+
+      - name: Scan repository for secrets
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}:/repo" \
+            ghcr.io/gitleaks/gitleaks:latest \
+            git --config /repo/.gitleaks.toml --no-banner --verbose --redact --exit-code 1 /repo
+
       - name: Build M3 tests and run SDK code analysis
         run: dotnet build tests/CivicConnect.M3Tests --configuration Release -p:AnalysisLevel=latest -p:EnforceCodeStyleInBuild=true -p:NuGetAuditMode=all
 
@@ -74,3 +83,4 @@ jobs:
         run: |
           dotnet list src/CivicConnect.Web package --include-transitive --vulnerable --format json > dependency-report.json
           python3 tools/check_dependencies.py dependency-report.json
+
