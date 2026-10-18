@@ -851,7 +851,7 @@ Scope Completion: 25.5/54 = 47.2% (13 Met, 25 Partially Met, 16 Not Met). Target
 
 ## M4 final closure 18 October 2026
 
-Code: 625e4e99882150f79ad3e00bae327b14e63e5d9c. Release identifier: m4-final-20261018-r2. Outcomes: 46 Met, 5 Partially Met, 3 Not Met. Final percentage derives from the existing workbook formulas in RTM!X41; target 80%. Production is a no-go despite the functional scope result.
+Code: 625e4e99882150f79ad3e00bae327b14e63e5d9c. Release identifier: m4-final-20261018-r3. Outcomes: 46 Met, 5 Partially Met, 3 Not Met. Final percentage derives from the existing workbook formulas in RTM!X41; target 80%. Production is a no-go despite the functional scope result.
 
 | Requirement | Priority | Implementation | AC1 | AC2 | Points | Disposition | Evidence and limitation |
 | --- | --- | --- | --- | --- | --- | --- | --- |

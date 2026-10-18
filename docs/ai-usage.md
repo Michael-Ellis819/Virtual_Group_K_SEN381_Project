@@ -97,9 +97,37 @@ Rejected/corrected: replacing current composition/PED with older supplied files;
 
 ## M4 final closure 18 October 2026
 
-OpenAI Codex fetched Michael’s account/request/scheduling commits and main’s Bianca ZIP, preserved earlier work, and reconciled the stale contribution against the current product. It authored final presentation/query/audit/integrity/error corrections and the persistent HTTPS verification suite, ran local checks/restore, and consolidated the existing PED, RTM and registers. Codex ran the automated checks and recovery exercise. Cameron observed the five participant sessions; the reports distinguish these activities from teammate review.
+### Cameron Purdon M4 AI usage
 
-Bianca’s supplied M4 register explicitly reports Claude/Claude Code assistance in lifecycle code, 44 checks, closure documents and a schedule/cost workbook. Its human-verification and changed/rejected fields were incomplete. The supplied register is the source of that attribution. Earlier draft scores and implementation claims were checked against the current code; incomplete financial fields were left unfilled.
+| Field | Record |
+| --- | --- |
+| Tools | ChatGPT and OpenAI Codex |
+| Purpose | Guidance, troubleshooting, rough drafts and consolidation of the team’s M4 work |
+| How assistance was used | Help with understanding requirements and interfaces, diagnosing integration problems, preparing initial drafts and bringing the existing PED, RTM and registers together. Codex also assisted with portal implementation, test code and automated verification. |
+| Human verification | Cameron confirmed on 18 October that he reviewed all the code, worked through the application, read and inspected the PED and RTM several times, and ran builds himself several times. He also observed all five usability sessions and recorded completion, timings, errors and coaching. The automated execution reports retain their original operators. |
+| Changes following checks | Priority sorting, the management landing page, history/audit information, safe error messages and assignment rules were corrected during integration. Earlier completion estimates were replaced with the final RTM results. |
+| Responsibility | Cameron remains responsible for checking and understanding the work he submits and for explaining his contribution during the defence. Final teammate review is recorded separately. |
+
+### Michael Ellis M4 AI usage
+
+Michael supplied the following account through Cameron on 18 October 2026.
+
+| Field | Record |
+| --- | --- |
+| Tool | ChatGPT (OpenAI) |
+| Purpose | Assistance with error handling, debugging and troubleshooting during M4 implementation |
+| How assistance was used | Identifying possible causes of errors, explaining exception messages and suggesting solutions for authentication, database connectivity and testing issues |
+| Human verification | Michael reports that he reviewed, implemented and tested all suggested changes using JetBrains Rider, .NET build commands and automated tests. |
+| Outcome | Improved error handling and resolved implementation issues, with Michael retaining responsibility for the final code. |
+
+### Bianca Grobler M4 AI usage
+
+| Field | Record |
+| --- | --- |
+| Tools | ChatGPT and Claude Code; both confirmed through Cameron on 18 October 2026 |
+| How assistance was used | Bianca reports using ChatGPT to format tables and tidy the writing. Her supplied register records Claude Code assistance with lifecycle, ownership and summary code, 44 checks, and initial document drafts. |
+| Human verification | Bianca confirmed through Cameron that she personally tested all her M4 work. |
+| Responsibility | Bianca remains responsible for checking and understanding her contribution. |
 
 The previous M2/M3 entries retain their original tools and dates. The PED’s ChatGPT planning label and the implementation register’s Codex label describe their recorded contexts; the original attribution and verification records are retained. The project retains its AI disclosure. Personal handover material and the original contribution archive are stored separately.
 

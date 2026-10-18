@@ -3516,7 +3516,7 @@ CivicConnect now combines requester, staff and management journeys in one ASP.NE
 | Item | Final record |
 | --- | --- |
 | Repository | https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project |
-| Assessed identifier | m4-final-20261018-r2; exact tagged revision is recorded with submission information. Tested code: 625e4e99882150f79ad3e00bae327b14e63e5d9c. |
+| Assessed identifier | m4-final-20261018-r3; exact tagged revision is recorded with submission information. Tested code: 625e4e99882150f79ad3e00bae327b14e63e5d9c. |
 | Integrated inputs | Michael’s M4 branch through 5a17e07; main 51c4f9a and Bianca’s supplied ZIP; Cameron’s existing presentation and final corrections. The existing interfaces, PED and RTM were retained. |
 | Environment | Staging through a controlled local simulation. Real PostgreSQL adapters and password hashes; synthetic accounts/data. No hosted public production environment exists. |
 | Verification | 73 read/rule, 43 database, 19 M3, 30 UI/contract and 36 persistent HTTPS checks pass locally: 201 checks. Local timed restore passes. Operator and raw evidence: docs/evidence/m4-final-20261018. |
@@ -3631,7 +3631,7 @@ Michael’s commits supply real account hashing, EF portal operations, transacti
 
 ## 24 AI usage and project conclusion
 
-The continuing AI Usage Register records ChatGPT/Codex by their original milestone contexts. Bianca’s supplied M4 register explicitly reports Claude/Claude Code assistance with lifecycle code, checks and closure drafts, while its human-verification fields were incomplete. Codex assisted this final integration, verification and consolidation. Earlier draft claims about missing routes and the proposed 33.3% score were corrected against the integrated source. Automated checks, Cameron’s participant observations and teammate reviews are identified separately.
+Cameron used ChatGPT and Codex for guidance, troubleshooting, rough drafts and consolidation of the PED, RTM and registers. Codex also assisted with implementation and tests. Cameron confirmed that he reviewed the code, worked through the application, inspected the PED and RTM several times, ran builds himself and observed the five usability sessions. Michael reports using ChatGPT for error handling, debugging and troubleshooting; he reviewed, implemented and tested suggested changes in Rider, through .NET builds and automated tests. Bianca used ChatGPT for tables and wording and Claude Code for technical work and drafts. Bianca confirmed that she personally tested all her M4 work. The continuing AI Usage Register retains the earlier records and distinguishes human verification from automated execution.
 
 The project delivered a coherent implementation of the central original request lifecycle, with stored identity, permission boundaries, transactional changes, audit and management reporting. Its strongest demonstrated decisions were central authorisation, one legality service and explicit transaction ownership. The main weakness was late integration and incomplete operating/acceptance evidence. The final assessment distinguishes delivered functionality from public release readiness and retains every original unmet criterion. A future team should finish the specific deployment, pilot measurement and maintenance gaps before expanding optional scope.
 

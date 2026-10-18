@@ -66,3 +66,7 @@ Final code CI: [run 39145430277](https://github.com/Michael-Ellis819/Virtual_Gro
 ## Documentation wording revision — 18 October 2026
 
 The revised assessed identifier is `m4-final-20261018-r2`. The earlier `m4-final-20261018` tag remains available. This revision simplifies wording in the project records and updates the matching PED copies; runtime code, test outcomes and RTM scores are unchanged. Both [push CI 39147263763](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/39147263763) and [PR CI 39147446534](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/39147446534) passed on the preceding documentation revision, 11964ab. Final reviews remain pending on PR22.
+
+## M4 AI usage clarification — 18 October 2026
+
+The assessed identifier is `m4-final-20261018-r3`. Cameron supplied his personal code, application, document and build checks; Michael supplied his M4 ChatGPT statement; Bianca confirmed ChatGPT and Claude Code use and personal testing of her work. The AI register and PED now include those accounts. This documentation revision leaves runtime code, recorded automated results and acceptance scores unchanged. The earlier release tags remain available.

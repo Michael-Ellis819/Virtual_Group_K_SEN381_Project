@@ -35,7 +35,7 @@ Before the final decision: identify the shared commit/tag/environment, connect a
 
 Assessed project state: **staging, through a controlled local simulation**. Recommendation: **NO-GO for public production**. This is a technical conclusion from the recorded evidence, not a new team risk-acceptance signature.
 
-Real stored accounts, submission, scoped lists/search, ownership, notes, schedule audit, lifecycle and management views now form one integrated product. Code baseline `625e4e99882150f79ad3e00bae327b14e63e5d9c`; release identifier `m4-final-20261018-r2` identifies the assessed repository version. Existing M3 CONDITIONALLY READY remains limited to its agreed protected read/status increment.
+Real stored accounts, submission, scoped lists/search, ownership, notes, schedule audit, lifecycle and management views now form one integrated product. Code baseline `625e4e99882150f79ad3e00bae327b14e63e5d9c`; release identifier `m4-final-20261018-r3` identifies the assessed repository version. Existing M3 CONDITIONALLY READY remains limited to its agreed protected read/status increment.
 
 The persistent suite passes 36 checks and the local restore meets its recorded RPO/RTO targets. Public production remains blocked by the absence of a hosted TLS/certificate and protected operating configuration, the unexecuted full NFR-002 user-visible workload, unproven production recovery/rollback and remaining identity hardening. Deadline pressure is not treated as evidence that these risks are safe. No hosting account/environment is available, confirmed by Cameron on 18 October.
 
