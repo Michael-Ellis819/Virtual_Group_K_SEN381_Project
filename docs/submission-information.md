@@ -4,7 +4,7 @@
 | --- | --- |
 | Team | Virtual Group K; Cameron Purdon 601963; Bianca Grobler 600537; Michael Ellis 600332 |
 | Repository | https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project |
-| Assessed version | Tag `m4-final-20261018` on `feature/cameron-m4-finalisation`; resolve the tag for the exact frozen repository commit. The package information records that hash. |
+| Assessed version | Tag `m4-final-20261018-r2` on `feature/cameron-m4-finalisation`; resolve the tag for the exact frozen repository commit. The package information records that hash. The earlier tag `m4-final-20261018` is retained as the pre-edit version. |
 | Tested runtime code | `625e4e99882150f79ad3e00bae327b14e63e5d9c`; subsequent finalisation edits are documentation/evidence only. |
 | Primary PED | `docs/PED_v4.0_Final.pdf`; editable `docs/PED_v4.0.docx`; matching Markdown source. M1–M3 history and the earlier M4 checkpoint are retained with dates. |
 | Continuing RTM | `docs/CivicConnect_RTM_v2.0.xlsx` and Markdown copy. Original 27 requirements/54 criteria: 48.5/54 = 89.8%; 46 Met, 5 Partially Met, 3 Not Met. |

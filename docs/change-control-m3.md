@@ -1,6 +1,6 @@
 # CR-M3-C01 - controlled implementation and impact record
 
-Date: 13 October 2026. Owner: Cameron Purdon. Status: implemented, reviewed by Bianca and Michael on 14 October, merged through PR17 and verified by combined main CI. This is an engineering implementation record, not an invented lecturer/client scope-change request.
+Date: 13 October 2026. Owner: Cameron Purdon. Status: implemented, reviewed by Bianca and Michael on 14 October, merged through PR17 and verified by combined main CI. This records an implementation change; the agreed scope was unchanged.
 
 | Original decision | Implementation problem | Resulting implementation | Consequence |
 | --- | --- | --- | --- |

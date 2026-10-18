@@ -1,7 +1,7 @@
 {
   "executor": "OpenAI Codex",
   "date": "2026-10-18",
-  "scope": "Local integrated candidate, agent execution; not human acceptance",
+  "scope": "Local integrated candidate, automated verification; stakeholder acceptance assessed separately",
   "source": "M3 baseline plus PR20 f5253d2 and integrated Bianca lifecycle checks; uncommitted candidate",
   "database": "civicconnect_m4_20261018_114326_test",
   "dependency_audit": "Disabled for cached restore; not a fresh security audit",

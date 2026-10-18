@@ -33,7 +33,7 @@ The root file github_workflows_auto-merge-approved-prs.yml is outside .github/wo
 
 1. Open this checkout/branch in GitHub Desktop. Inspect the implementation, test/CI and documentation commits, then publish the branch to the existing repository and open a PR into main.
 2. Bianca independently checks lifecycle/conformance, invalid transitions and the release/register statements. Michael checks transactional integration, version handling, migrations, CI and the State dependency. Each records what was actually checked and any findings on the PR before approving.
-3. Fix review findings on the feature branch; rerun affected checks. Both non-author approvals and required CI must apply to the current revision. An agent's own review cannot substitute for two independent peers.
+3. Fix review findings on the feature branch; rerun affected checks. Both non-author approvals and required CI must apply to the current revision. Two independent teammates must review the changes.
 4. Merge only after required reviews/checks. Freeze the final assessed commit/tag and align PED, RTM, environment, evidence and recorded demo with it.
 
 Suggested review checklist: reproduce E01/E02; inspect BB03 and A05 no-write/rollback assertions; verify A06 rejects stale category/version; confirm no new input supplies actor/roles; compare unchanged requirement/AC IDs; confirm honest pending scope; check current CI and staging parity. Review comments and any rework must be real; no example comment should be posted as if it occurred.
@@ -62,3 +62,7 @@ Michael’s latest branch input was `5a17e07` (accounts, request operations and 
 The tested code is `625e4e99882150f79ad3e00bae327b14e63e5d9c` on `feature/cameron-m4-finalisation`. Push/CI, any later document commit, final tag and PR status are recorded against their actual observed identifiers. A green run is not substituted for two independent current peer reviews. Personal instructions are excluded from the submitted tree; their removal does not rewrite Git history.
 
 Final code CI: [run 39145430277](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/39145430277) completed successfully on `625e4e99882150f79ad3e00bae327b14e63e5d9c`, including static analysis, secrets/dependency gates and the persistent HTTPS suite. The paced read exercise is separate from full NFR-002 acceptance.
+
+## Documentation wording revision — 18 October 2026
+
+The revised assessed identifier is `m4-final-20261018-r2`. The earlier `m4-final-20261018` tag remains available. This revision simplifies wording in the project records and updates the matching PED copies; runtime code, test outcomes and RTM scores are unchanged. Both [push CI 39147263763](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/39147263763) and [PR CI 39147446534](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/39147446534) passed on the preceding documentation revision, 11964ab. Final reviews remain pending on PR22.

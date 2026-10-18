@@ -2,7 +2,7 @@
 
 Observer: Cameron Purdon, confirmed directly by the user. All five received the same written task: sign in with the allocated account, submit the Library Wi-Fi issue under IT Support and identify its saved reference/status within five minutes, without coaching. The task and separate participant accounts were prepared before execution. The sessions used the controlled loopback preview and synthetic accounts, not a public deployment.
 
-The observer supplied completion, elapsed time, errors and coaching; the agent did not witness or time participants. Pasted request records show New status and submission times from 16:30–16:43 UTC (18:30–18:43 SAST). These are saved-event times, not independently measured session start/end times. Participants are anonymised; the sample was a convenience sample with mixed digital experience.
+Cameron supplied the completion results, elapsed times, errors and coaching observations. Pasted request records show New status and submission times from 16:30–16:43 UTC (18:30–18:43 SAST). These are saved-event times, not independently measured session start/end times. Participants are anonymised; the sample was a convenience sample with mixed digital experience.
 
 | Participant | Background | Submitted / found status | Seconds | Observer-reported errors | Coaching | Category saved |
 | --- | --- | --- | ---: | ---: | --- | --- |
@@ -16,7 +16,7 @@ All five reported completion within 300 seconds; mean 109 seconds, median 112 se
 
 P2 and P3 also selected categories other than the instructed IT Support. Cameron confirmed these were the participants’ choices under the same instructions. P2 associated the issue with the facility; P3 did not see Wi-Fi among the category options and selected Other. The observer reported no errors; the category deviations are retained separately rather than silently changing the observations. Strict task-conforming completion without coaching is therefore only P1 and P4: 2/5 (40%). The threshold fails under either interpretation.
 
-**AC-NFR-004-2 is Met**: the same task, five observations, completion/time/error/coaching measures and an identified observer are recorded. Meeting the recording criterion does not imply meeting the usability target. Category discoverability and the need for assistance remain limitations; no new attempt or improved result is invented. Future work should clarify category wording/help and repeat the original task with fresh participants.
+**AC-NFR-004-2 is Met**: the same task, five observations, completion/time/error/coaching measures and an identified observer are recorded. Meeting the recording criterion does not imply meeting the usability target. Category discoverability and the need for assistance remain limitations. No repeat usability study was carried out. Future work should clarify category wording/help and repeat the original task with fresh participants.
 
 The requester path used during the sessions matches the final source. The preview process was started before the final manager landing/error-message corrections; those separate changes were verified by the persistent suite and remote CI. This usability observation does not establish production, security, performance or full browser acceptance.
 

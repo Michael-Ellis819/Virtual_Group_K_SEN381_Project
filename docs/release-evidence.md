@@ -8,7 +8,7 @@ Current recommendation: **CONDITIONALLY READY for the agreed M3 increment in con
 | Functional verification | Cameron's personal 19 M3 cases, 29 regression checks and 25 database checks; combined remote run | Required case mix, negative paths, EP/BVA and selected high-priority risks are evidenced; broader acceptance remains limited |
 | Performance | Michael PERF-01: 200/200 reads, 0 failures, 1.62 ms mean, 8.69 ms p95, 0.12 s, 1,696.16 operations/sec | Small database-read exercise; no separate database target; full NFR-002 pilot acceptance unverified |
 | CI and gates | [Main run 38594557024](https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_Project/actions/runs/38594557024) succeeds on 668795a | All four projects build/run, including the 19 M3 cases, SDK analysis and dependency checks; the personal forbidden-edge probe demonstrates failure detection |
-| Reviews | PR17 approvals from Bianca and Michael on 14 October; [completed conformance review](reviews/Bianca_M3_Final_Review_Updated.docx) | Two non-author approvals and actual combined-work findings are recorded. Returned GitHub review bodies were empty; no additional written review comments are invented |
+| Reviews | PR17 approvals from Bianca and Michael on 14 October; [completed conformance review](reviews/Bianca_M3_Final_Review_Updated.docx) | Two non-author approvals and actual combined-work findings are recorded. Returned GitHub review bodies were empty; no additional written review comments were available |
 | Security | Patched System.Text.Json 8.0.5 in both affected test projects; combined audit checks pass | DEF-M3-C06 fixed in merged code; dated checks do not prove complete security |
 | Simulated staging | E01/E02 pass in a Release HTTPS Staging test host using real PostgreSQL and synthetic identities | Credible simulation is allowed by M3. Normal web Program remains Development-only; real sign-in is unimplemented |
 | Defects and acceptance | C01/C02 fixed, reviewed and merged; C04/C05 retain recorded limitations | C04 normal deployment is outside the accepted M3 simulation. C05 remains open in original scope for M4 finalisation; original RTM statuses are preserved |
@@ -25,7 +25,7 @@ Bianca's completed review dated 14 October remains a historical conformance reco
 
 ## M4 checkpoint 18 October 2026
 
-Current recommendation: **NO-GO for real-user production release**, pending trusted account/request adapters, complete original journeys and normal deployment verification. This is a checkpoint recommendation; no team go-live acceptance is invented.
+Current recommendation: **NO-GO for real-user production release**, pending trusted account/request adapters, complete original journeys and normal deployment verification. This is a checkpoint recommendation; team go-live approval remained outstanding at that checkpoint.
 
 Cameron's screens/controllers and synthetic contract journey are prepared. Local checks pass: 73 read/rule checks, 25 database checks, 19 M3 cases and 30 UI/contract cases. Missing adapters return unavailable responses. The normal startup guard remains unchanged. PR20's successful remote run supports its own revision; it is not remote verification of these additional changes.
 
@@ -35,8 +35,8 @@ Before the final decision: identify the shared commit/tag/environment, connect a
 
 Assessed project state: **staging, through a controlled local simulation**. Recommendation: **NO-GO for public production**. This is a technical conclusion from the recorded evidence, not a new team risk-acceptance signature.
 
-Real stored accounts, submission, scoped lists/search, ownership, notes, schedule audit, lifecycle and management views now form one integrated product. Code baseline `625e4e99882150f79ad3e00bae327b14e63e5d9c`; release identifier `m4-final-20261018` will identify the frozen assessed repository version. Existing M3 CONDITIONALLY READY remains limited to its agreed protected read/status increment.
+Real stored accounts, submission, scoped lists/search, ownership, notes, schedule audit, lifecycle and management views now form one integrated product. Code baseline `625e4e99882150f79ad3e00bae327b14e63e5d9c`; release identifier `m4-final-20261018-r2` identifies the assessed repository version. Existing M3 CONDITIONALLY READY remains limited to its agreed protected read/status increment.
 
 The persistent suite passes 36 checks and the local restore meets its recorded RPO/RTO targets. Public production remains blocked by the absence of a hosted TLS/certificate and protected operating configuration, the unexecuted full NFR-002 user-visible workload, unproven production recovery/rollback and remaining identity hardening. Deadline pressure is not treated as evidence that these risks are safe. No hosting account/environment is available, confirmed by Cameron on 18 October.
 
-The participant fixture host uses synthetic accounts over loopback HTTP for usability only. HTTPS tests use a pinned generated certificate. Temporary test access is not a public deployment URL. Student review, two genuine current non-author approvals and actual Moodle submission remain distinct human evidence; they are not fabricated here.
+The participant fixture host uses synthetic accounts over loopback HTTP for usability only. HTTPS tests use a pinned generated certificate. Temporary test access is not a public deployment URL. Student review, two genuine current non-author approvals and actual Moodle submission remain distinct human evidence; they must be recorded separately.

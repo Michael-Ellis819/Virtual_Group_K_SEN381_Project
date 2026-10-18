@@ -1,6 +1,6 @@
 # M4 integration verification 18 October 2026
 
-Operator: OpenAI Codex. These are agent-executed checks, not Cameron's personal execution or stakeholder acceptance.
+Operator: OpenAI Codex. Codex ran these automated checks. Cameron's personal checks and stakeholder acceptance are recorded separately.
 
 The isolated candidate starts from main `20fdf39f2f1769e0cb1abcd81fc2fbad4e4c8b28`, applies Michael's PR20 head `f5253d216f3c8f25c1b5e3e58cf473f9cf20a0ba`, and reconciles Bianca's supplied lifecycle source and checks. The five pending M3 documentation edits are preserved. The original M3 checkout is unchanged.
 

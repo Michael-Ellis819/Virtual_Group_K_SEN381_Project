@@ -1,7 +1,7 @@
 {
   "executor": "OpenAI Codex",
   "date": "2026-10-18",
-  "scope": "Local integrated candidate, agent execution; not human acceptance",
+  "scope": "Local integrated candidate, automated verification; stakeholder acceptance assessed separately",
   "source": "Cameron presentation and contract candidate after integration checkpoint 2cfadb6; uncommitted source fingerprinted separately",
   "database": "civicconnect_m4_20261018_122355_test",
   "dependency_audit": "Disabled for cached restore; not a fresh security audit",

@@ -2,7 +2,7 @@
 
 18 October 2026. No complete timesheet, expenditure ledger or selected hosted platform was supplied. Quantitative labour cost, budget variance, planned-versus-actual task variance and return on investment therefore cannot be calculated credibly. Missing records are an evaluation limitation, not evidence of zero effort or zero cost.
 
-The demonstrated product uses the existing local computer, .NET/PostgreSQL tooling and a public GitHub repository/standard CI runner. No hosted environment/account was provisioned, confirmed by Cameron. GitHub documents free standard hosted runners for public repositories; this does not measure actual team labour, connectivity or equipment costs. No currency conversion or invented platform price is used.
+The demonstrated product uses the existing local computer, .NET/PostgreSQL tooling and a public GitHub repository/standard CI runner. No hosted environment/account was provisioned, confirmed by Cameron. GitHub documents free standard hosted runners for public repositories; this does not measure actual team labour, connectivity or equipment costs. Actual operating costs were not recorded.
 
 The milestone deadline was end of 18 October. Git history shows real adapter/account integration and final application/document consolidation on that date. Final integration happened late, leaving limited time for independent review, hosted preparation and repeat participant evaluation. Original planned hours and task dates were not supplied, so a numerical schedule variance is not defensible. Actual Moodle submission time remains separately recorded by the student.
 

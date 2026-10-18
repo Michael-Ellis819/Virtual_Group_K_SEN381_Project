@@ -1,6 +1,6 @@
 # Cameron M4 verification 18 October 2026
 
-Operator: OpenAI Codex. All new executions below are agent checks, not student execution or stakeholder acceptance.
+Operator: OpenAI Codex. Codex ran the automated checks below. Student checks and stakeholder acceptance are recorded separately.
 
 | Check | Result | Evidence boundary |
 | --- | --- | --- |
@@ -13,7 +13,7 @@ Operator: OpenAI Codex. All new executions below are agent checks, not student e
 
 The first expanded verification run failed AR01 because its text scan treated an optional record parameter `Status = null` as a mutation. The filter parameters were made explicit without weakening the guard; the subsequent 73-check run passed. `architecture-scan-first-run.txt` preserves the original failure.
 
-The synthetic store and account fixtures are compiled only into `tests/CivicConnect.M4Tests`. They are not registered in the normal product. A successful contract journey does not establish real sign-in, durable creation/idempotency, simultaneous claims, complete PostgreSQL audit, deployed E2E, participant usability or pilot performance. Missing adapters produce 503 responses; management does not show invented zero counts.
+The synthetic store and account fixtures are compiled only into `tests/CivicConnect.M4Tests`. They are not registered in the normal product. A successful contract journey does not establish real sign-in, durable creation/idempotency, simultaneous claims, complete PostgreSQL audit, deployed E2E, participant usability or pilot performance. Missing adapters produce 503 responses; management reports an unavailable service instead of displaying zero counts.
 
 The current RTM checkpoint awards 25.5/54 points (47.2%): 13 Met, 25 Partially Met and 16 Not Met. Each criterion has an explicit outcome/value and remaining gap. This is provisional evidence assessment while teammates continue; the 80% target is not met. No original commitments were removed or relabelled as approved deferrals.
 

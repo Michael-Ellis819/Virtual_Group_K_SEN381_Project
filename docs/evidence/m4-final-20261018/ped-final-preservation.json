@@ -1,6 +1,6 @@
 {
   "source_sha256": "b3ef47754416b2bca4a2a253eff295f9016073847347f460c23cebb26b59e27f",
-  "output_sha256": "050f3a9b9ec237ad3e0140151ecd62e252885feb2e1733fc073bb281892289f8",
+  "output_sha256": "74f4dfa95635c0ee49aab0570b7c1f40bf0779c39840304ac65ed784948f29da",
   "changed_package_parts": [
     "word/document.xml",
     "word/header1.xml",

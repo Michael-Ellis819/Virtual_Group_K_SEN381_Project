@@ -47,4 +47,4 @@ The portal reuses the central record policy for details and staff writes. Actor 
 
 The final product connects stored accounts and permissions, record-scoped PostgreSQL queries, real MVC forms and transactional commands. Lifecycle legality remains in Bianca’s rules; authorisation decides who may act. Assignment saves one eligible owner with its status/history/feedback, while generic status routes cannot create ownerless assignment. The persistence boundary now rechecks legality, reducing the earlier writer-bypass debt.
 
-Repeated local checks cover the persistent journey, races, injected rollback, safe errors and revocation. The custom harness remains an explicit CI responsibility. Staging evidence and production readiness remain separate: hosted TLS, full pilot operation timings and genuine final peer approvals cannot be inferred from a successful local run.
+Repeated local checks cover the persistent journey, races, injected rollback, safe errors and revocation. The custom harness remains an explicit CI responsibility. Hosted TLS and the full pilot performance measurements remain outstanding. Final teammate reviews must also be recorded before merge.

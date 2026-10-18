@@ -8,7 +8,7 @@ Updated 15 October 2026 following PR17 merge, two teammate approvals and success
 | DEF-M3-C02 | High: stale category permission could survive status-only comparison. | Fixed, personally verified, reviewed and merged in PR17; combined main CI passes. | Carry checked version and reject changed record; Cameron/Michael review. | NFR-001, R-050; A06. |
 | DEF-M3-C03 | Medium test infrastructure: Windows TLS failed before HTTP cases. | Corrected. | Reimport temporary certificate for Schannel; Cameron. Original failure log retained. | integration-first-run.txt; final integration.txt passes 19. |
 | DEF-M3-C04 | High limitation for normal deployment: Program refuses Staging. | Open for normal deployment; verified M3 simulation accepted by the team on 15 October. | Use the separate HTTPS Staging host and disposable data for M3; Michael owns operational deployment finalisation. | R-054; E01/E02 pass in the permitted simulation. |
-| DEF-M3-C05 | High original-scope gap: login, submission, owner assignment, lists/search and reporting incomplete. | Open in original scope; planned M4 finalisation. | Team confirmed the protected read/status increment as M3 scope on 15 October. Remaining features retain original requirements and acceptance criteria; team implementation owners remain responsible. | Existing FR/NFR rows remain partial/planned; no acceptance is invented. |
+| DEF-M3-C05 | High original-scope gap: login, submission, owner assignment, lists/search and reporting incomplete. | Open in original scope; planned M4 finalisation. | Team confirmed the protected read/status increment as M3 scope on 15 October. Remaining features retain original requirements and acceptance criteria; team implementation owners remain responsible. | Existing FR/NFR rows remain partial/planned; acceptance remained pending at that checkpoint. |
 
 The failed gate probe is a deliberate verification experiment, not a product defect. PERF-01 is evidenced; combined main CI and two PR17 approvals are complete. Full pilot-load/recovery acceptance remains limited. Original TLS failure and passing rerun are retained.
 
@@ -28,14 +28,14 @@ The AR01 optional-parameter false positive and its passing correction are retain
 | Finding | Final disposition | Evidence |
 | --- | --- | --- |
 | DEF-M3-C01/C02 | Fixed and rerun after integration | Existing M3 regressions and P07/P10a/P12/P29 |
-| DEF-M3-C04 | Normal controlled Staging startup guard corrected; public deployment remains a limitation | Program permits Development/Staging and refuses unapproved Production; no hosted environment is claimed |
+| DEF-M3-C04 | Normal controlled Staging startup guard corrected; public deployment remains a limitation | Program permits Development/Staging and refuses unapproved Production; there is no hosted environment |
 | DEF-M3-C05 | Original presentation/storage journeys now integrated; outstanding NFR acceptance remains explicit | Persistent HTTPS suite and continuing RTM |
 | DEF-M4-01/02 from Bianca’s snapshot | Superseded and corrected in current README | Configuration, real adapters and current counts replace the older snapshot’s claims |
 | DEF-M4-03 | Writer wiring existed in M3; its residual illegal-status/ownerless-assignment paths are now guarded | P10/P10a/P10b and lifecycle matrix |
 | DEF-M4-04/05 | Internal notes and author/time persistence delivered | P13–P15; RequestNoteEntity; restored notes |
 | DEF-M4-06/07 | Reader note ordering and one timestamp per status transaction corrected | Ordered reader; writer uses one `now`; persistence/browser audit |
 | DEF-M4-08 | Build warnings are blocking in the relevant CI steps | Current workflow; actual run recorded separately |
-| DEF-M4-09 | Historical AI tool labels retained with their milestone provenance; M4 assistance explicitly added | Existing AI Usage Register; no personal review is invented |
+| DEF-M4-09 | Historical AI tool labels retained with their milestone provenance; M4 assistance explicitly added | Existing AI Usage Register; personal review is recorded separately |
 | DEF-M4-10 | Root workflow moved and guarded; no one-review merge is enabled | Current workflow checks two current approvals and enforced protection; otherwise manual merge |
 | DEF-M4-C01 | Fixed: priority sort names differed between form and query | P20 uses three priorities in both directions |
 | DEF-M4-C02 | Fixed: saved scheduling/note audit and public status history were not projected | P15/P18; staff/requester browser views |
@@ -43,4 +43,4 @@ The AR01 optional-parameter false positive and its passing correction are retain
 | DEF-M4-C04 | Fixed: manager sign-in landed on the requester/staff-only list | Persistent sign-in assertion now requires `/portal/management` |
 | Preparatory session interference | Shared in-app cookies could invalidate an older sign-in form’s antiforgery token; authentication remained protected | Browser checks stopped and participant session handed back. This preparation incident is not a participant usability result |
 
-No participant result, team approval or final upload is inferred from these agent checks. Open acceptance limitations are carried in the RTM and release decision.
+Participant results are recorded in the usability report. Final team review and Moodle submission are pending. The RTM and release decision list the remaining acceptance limitations.

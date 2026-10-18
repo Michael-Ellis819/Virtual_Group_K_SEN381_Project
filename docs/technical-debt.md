@@ -46,6 +46,6 @@ Evolution priority: connect original user journeys, verify integrity and permiss
 | TD-M3-03 | Repaid for tested key reuse and races. Actor/key uniqueness is durable; matching payloads return the saved request and changed reuse conflicts. |
 | TD-M3-C01 | Repaid for stored identities and live stamp/role/category/active checks. Rate limiting, password reset and production key protection remain security work. |
 | TD-M3-04 | Partial. Controlled Staging is supported and a timed local restore passes. Public hosting, trusted certificate, scheduled off-site backups and a hosted rollback exercise are not delivered. |
-| TD-05 | Requires final-version discipline. The assessed release identifier and code CI must match submission information; no unobserved approval or upload is inferred. |
+| TD-05 | Requires final-version discipline. The assessed release identifier and code CI must match submission information; final review and submission must be recorded against that version. |
 
 Evolution priorities are the original performance and deployed-security gaps, support-lifecycle review, a hosting/operating-cost baseline and then proportionate maintenance improvements. No optional feature takes precedence over these gaps.
