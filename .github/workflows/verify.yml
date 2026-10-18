@@ -7,6 +7,7 @@ on:
     branches:
       - main
       - feature/m4-security-operations
+      - feature/cameron-m4-finalisation
       - feature/m3-data-persistence
       - feature/cameron-m3-integration
   pull_request:
