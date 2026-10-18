@@ -22,6 +22,11 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
+if (args.Contains("--database") || args.Contains("--usability-preview"))
+{
+    await PersistentPortalChecks.RunAsync(args.Contains("--usability-preview"));
+    return;
+}
 var passed = 0;
 void Check(string id, bool condition) { if (!condition) throw new InvalidOperationException("FAIL " + id); Console.WriteLine("PASS " + id); passed++; }
 var preview = args.Contains("--preview");

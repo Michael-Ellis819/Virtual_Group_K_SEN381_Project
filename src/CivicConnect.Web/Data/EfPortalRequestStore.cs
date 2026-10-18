@@ -69,10 +69,13 @@ public sealed class EfPortalRequestStore : IPortalRequestStore
         query = filter.Sort switch
         {
             "date-asc" => query.OrderBy(r => r.CreatedAt),
-            "priority" => query.OrderByDescending(r =>
+            "priority-desc" => query.OrderByDescending(r =>
                 r.Priority == "High" ? 3 :
-                r.Priority == "Normal" ? 2 : 1),
-            _ => query.OrderByDescending(r => r.CreatedAt)
+                r.Priority == "Normal" ? 2 : 1).ThenByDescending(r => r.CreatedAt).ThenBy(r => r.RequestId),
+            "priority-asc" => query.OrderBy(r =>
+                r.Priority == "High" ? 3 :
+                r.Priority == "Normal" ? 2 : 1).ThenBy(r => r.CreatedAt).ThenBy(r => r.RequestId),
+            _ => query.OrderByDescending(r => r.CreatedAt).ThenBy(r => r.RequestId)
         };
 
         return await query
@@ -142,8 +145,20 @@ public sealed class EfPortalRequestStore : IPortalRequestStore
             .Select(h => new PortalHistory(
                 h.PreviousStatus + " → " + h.NewStatus,
                 h.ChangedByUserId,
-                h.ChangedAt))
+                h.ChangedAt,
+                true))
             .ToListAsync(cancellationToken);
+
+        if (actor.Role == "Staff")
+        {
+            var schedules = await _db.RequestScheduleAudits.AsNoTracking()
+                .Where(a => a.RequestId == requestId).ToListAsync(cancellationToken);
+            history.AddRange(schedules.Select(a => new PortalHistory(
+                $"Priority {a.PreviousPriority} → {a.NewPriority}; due {FormatDue(a.PreviousDueAt)} → {FormatDue(a.NewDueAt)}",
+                a.ChangedByUserId, a.ChangedAt)));
+            history.AddRange(notes.Select(n => new PortalHistory(
+                n.IsPublic ? "Public update added" : "Internal note added", n.Author, n.At)));
+        }
 
         return new PortalMetadata(
             request.RequesterId,
@@ -151,8 +166,12 @@ public sealed class EfPortalRequestStore : IPortalRequestStore
             request.OwnerId,
             request.DueAt,
             notes,
-            history);
+            history.OrderBy(h => h.At).ToArray(),
+            request.CreatedAt);
     }
+
+    private static string FormatDue(DateTimeOffset? value) =>
+        value?.UtcDateTime.ToString("yyyy-MM-dd HH:mm 'UTC'") ?? "none";
     
     public async Task<PortalWriteResult> SubmitAsync(
     PortalActor actor,
@@ -422,7 +441,9 @@ public sealed class EfPortalRequestStore : IPortalRequestStore
             .Select(r => new PortalActivity(
                 r.CategoryId,
                 r.Status,
-                r.DueAt))
+                r.DueAt,
+                r.RequestId,
+                r.ReferenceNumber))
             .ToListAsync(cancellationToken);
     }
     

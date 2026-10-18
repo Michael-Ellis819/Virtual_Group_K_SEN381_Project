@@ -24,8 +24,7 @@ public sealed record PortalAccount(string Id, string DisplayName, string Role, b
 public enum SignInOutcome { Authenticated, InvalidCredentials, Unavailable }
 public sealed record SignInResult(SignInOutcome Outcome, PortalAccount? Account = null);
 
-// Michael's account adapter must validate hashed credentials and server-owned permissions.
-// No application/demo account store is supplied by the presentation layer.
+// Account implementations validate hashed credentials and server-owned permissions.
 public interface IPortalAccounts
 {
     Task<SignInResult> AuthenticateAsync(string username, string password, CancellationToken cancellationToken);
@@ -37,15 +36,15 @@ public sealed record PortalFilter(string? Search, string? Status, string? Catego
 public sealed record PortalRow(Guid Id, string Reference, string Category, DateTimeOffset CreatedAt,
     string Status, string Priority, string? OwnerId, DateTimeOffset? DueAt);
 public sealed record PortalMetadata(string? Requester, string Priority, string? OwnerId, DateTimeOffset? DueAt,
-    IReadOnlyList<PortalNote> Notes, IReadOnlyList<PortalHistory> History);
+    IReadOnlyList<PortalNote> Notes, IReadOnlyList<PortalHistory> History, DateTimeOffset? CreatedAt = null);
 public sealed record PortalNote(string Content, string Author, DateTimeOffset At, bool IsPublic);
-public sealed record PortalHistory(string Action, string Actor, DateTimeOffset At);
-public sealed record PortalActivity(string Category, string Status, DateTimeOffset? DueAt);
+public sealed record PortalHistory(string Action, string Actor, DateTimeOffset At, bool IsPublic = false);
+public sealed record PortalActivity(string Category, string Status, DateTimeOffset? DueAt,
+    Guid? Id = null, string? Reference = null);
 public enum PortalWriteOutcome { Saved, Conflict, Invalid, NotFound, Unavailable }
 public sealed record PortalWriteResult(PortalWriteOutcome Outcome, Guid? RequestId = null);
 public sealed record PortalSubmission(string Category, string Description, string Location, Guid SubmissionKey);
 
-// Integration contract proposed by Cameron on 18 October. Team adapter agreement is pending.
 // All methods must independently enforce actor permissions. Queries scope BEFORE filtering/counting.
 // Writes atomically save request, audit and feedback; expectedVersion guards claims and other edits.
 public interface IPortalRequestStore

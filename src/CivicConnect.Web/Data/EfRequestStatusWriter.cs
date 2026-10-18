@@ -55,8 +55,13 @@ public sealed class EfRequestStatusWriter(
                 "The request status has changed.");
         }
 
-        request.Status = newStatus;
-        request.UpdatedAt = DateTimeOffset.UtcNow;
+        var decision = new CivicConnect.Lifecycle.StatusTransitionService().Evaluate(
+            new(expectedCurrentStatus, newStatus, changedByUserId, feedback, request.OwnerId));
+        if (!decision.Allowed || newStatus == "Assigned")
+            throw new ArgumentException("Use an allowed transition; first ownership requires the assignment command.");
+        var now = DateTimeOffset.UtcNow;
+        request.Status = decision.Change!.NewStatus;
+        request.UpdatedAt = now;
 
         dbContext.RequestStatusHistory.Add(
             new RequestStatusHistoryEntity
@@ -66,7 +71,7 @@ public sealed class EfRequestStatusWriter(
                 PreviousStatus = expectedCurrentStatus,
                 NewStatus = newStatus,
                 ChangedByUserId = changedByUserId,
-                ChangedAt = DateTimeOffset.UtcNow
+                ChangedAt = now
             });
 
         dbContext.RequestNotes.Add(
@@ -77,7 +82,7 @@ public sealed class EfRequestStatusWriter(
                 Content = feedback,
                 IsRequesterVisible = true,
                 AuthorId = changedByUserId,
-                CreatedAt = DateTimeOffset.UtcNow
+                CreatedAt = now
             });
 
         await dbContext.SaveChangesAsync(cancellationToken);

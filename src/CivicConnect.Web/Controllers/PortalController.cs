@@ -64,7 +64,7 @@ public sealed class PortalController(IRequestReader reader, RequestQueryService 
         {
             Requester = null,
             Notes = metadata.Notes.Where(n => n.IsPublic).ToArray(),
-            History = [] // A separate reviewed public history projection is required before exposing audit entries.
+            History = metadata.History.Where(h => h.IsPublic).ToArray()
         };
         return View(new DetailPage(request, metadata, snapshot.Version, access.CanChangeStatus(User, snapshot),
             transitions.AllowedNextStatuses(snapshot.Status).Where(s => s != "Assigned").ToArray(), Store is not null));

@@ -26,7 +26,6 @@ public static class Composition
             o.Events.OnValidatePrincipal = async c =>
             {
                 // Browser sessions issued by AccountController are checked against live account data.
-                // Legacy synthetic test tickets carry no portal stamp and remain confined to harnesses.
                 var stamp = c.Principal?.FindFirst("portal-stamp")?.Value;
 
                 if (string.IsNullOrWhiteSpace(stamp))
@@ -34,7 +33,6 @@ public static class Composition
                     c.RejectPrincipal();
                     return;
                 }
-                if (stamp is null) return;
                 var actor = c.Principal is null ? null : PortalActor.From(c.Principal);
                 var accounts = c.HttpContext.RequestServices.GetServices<IPortalAccounts>().SingleOrDefault();
                 var account = actor is null || accounts is null ? null : await accounts.FindAsync(actor.Id, c.HttpContext.RequestAborted);
@@ -87,9 +85,7 @@ public static class Composition
                     .GetRequiredService<ILoggerFactory>()
                     .CreateLogger("CivicConnect.Observability");
 
-                logger.LogError(
-    ex,
-    "Unhandled application exception");
+                logger.LogError("Unhandled application exception. Type: {ExceptionType}", ex.GetType().Name);
 
                 if (context.Response.HasStarted) throw;
 

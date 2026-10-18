@@ -39,7 +39,8 @@ public sealed class AccountController(IEnumerable<IPortalAccounts> adapters) : C
         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
             new ClaimsPrincipal(new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme)),
             new AuthenticationProperties { IsPersistent = false, AllowRefresh = false, ExpiresUtc = DateTimeOffset.UtcNow.AddHours(1) });
-        return Url.IsLocalUrl(input.ReturnUrl) ? LocalRedirect(input.ReturnUrl!) : Redirect("/portal/requests");
+        return Url.IsLocalUrl(input.ReturnUrl) ? LocalRedirect(input.ReturnUrl!) :
+            Redirect(account.Role == "Management" ? "/portal/management" : "/portal/requests");
     }
 
     [HttpPost("sign-out"), ValidateAntiForgeryToken]

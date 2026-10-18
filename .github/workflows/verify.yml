@@ -83,6 +83,9 @@ jobs:
       - name: Run M4 black-box UI and synthetic contract journey
         run: dotnet run --project tests/CivicConnect.M4Tests --configuration Release --no-build
 
+      - name: Run persistent HTTPS portal journey and failure checks
+        run: dotnet run --project tests/CivicConnect.M4Tests --configuration Release --no-build -- --database
+
       - name: Run separate database-read performance exercise
         run: dotnet run --project tests/CivicConnect.PerformanceTests --configuration Release --no-build
 

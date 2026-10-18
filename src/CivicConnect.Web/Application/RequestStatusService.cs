@@ -31,6 +31,8 @@ public sealed class RequestStatusService(IRequestReader reader, IRequestAccessPo
             string.IsNullOrWhiteSpace(expectedStatus) || string.IsNullOrWhiteSpace(targetStatus))
             return StatusChangeResult.Invalid;
         if (request.Status != expectedStatus) return StatusChangeResult.Conflict;
+        // First ownership must be saved atomically by the assignment command.
+        if (targetStatus == "Assigned") return StatusChangeResult.Invalid;
         if (!transitions.IsAllowed(request.Status, targetStatus)) return StatusChangeResult.Invalid;
         try
         {

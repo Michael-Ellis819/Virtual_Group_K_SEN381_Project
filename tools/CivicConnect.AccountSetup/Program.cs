@@ -1,4 +1,4 @@
-﻿using CivicConnect.Data;
+using CivicConnect.Data;
 using CivicConnect.Data.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 
 var configuration = new ConfigurationBuilder()
     .AddUserSecrets<Program>()
+    .AddEnvironmentVariables()
     .Build();
 
 var connectionString = configuration.GetConnectionString("CivicConnect")
@@ -17,6 +18,16 @@ var username = Console.ReadLine()?.Trim() ?? "";
 Console.Write("Display name: ");
 var displayName = Console.ReadLine()?.Trim() ?? "";
 
+Console.Write("Role (Requester, Staff or Management): ");
+var role = Console.ReadLine()?.Trim() ?? "";
+var categories = Array.Empty<string>();
+if (role == "Staff")
+{
+    Console.WriteLine("Categories: " + string.Join(", ", CivicConnect.Models.PortalOptions.Categories));
+    Console.Write("Granted categories (comma separated): ");
+    categories = (Console.ReadLine() ?? "").Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries).Distinct().ToArray();
+}
+
 Console.Write("Password: ");
 var password = ReadPassword();
 
@@ -24,9 +35,11 @@ if (string.IsNullOrWhiteSpace(username) ||
     username.Length > 100 ||
     string.IsNullOrWhiteSpace(displayName) ||
     displayName.Length > 150 ||
-    password.Length < 12)
+    password.Length < 12 ||
+    role is not ("Requester" or "Staff" or "Management") ||
+    (role == "Staff" && (categories.Length == 0 || categories.Any(c => !CivicConnect.Models.PortalOptions.Categories.Contains(c)))))
 {
-    Console.WriteLine("Invalid details. Password must be at least 12 characters.");
+    Console.WriteLine("Invalid account details. Use an agreed role/category and a password of at least 12 characters.");
     return;
 }
 
@@ -47,7 +60,7 @@ var account = new PortalAccountEntity
     Id = Guid.NewGuid().ToString("N"),
     Username = username,
     DisplayName = displayName,
-    Role = "Requester",
+    Role = role,
     IsActive = true,
     SecurityStamp = Guid.NewGuid().ToString("N")
 };
@@ -55,10 +68,13 @@ var account = new PortalAccountEntity
 var hasher = new PasswordHasher<PortalAccountEntity>();
 account.PasswordHash = hasher.HashPassword(account, password);
 
+foreach (var category in categories)
+    account.Categories.Add(new PortalAccountCategoryEntity { AccountId = account.Id, CategoryId = category });
+
 db.PortalAccounts.Add(account);
 await db.SaveChangesAsync();
 
-Console.WriteLine("Development requester account created successfully.");
+Console.WriteLine($"{role} account created. Account ID: {account.Id}");
 
 static string ReadPassword()
 {

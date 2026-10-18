@@ -31,6 +31,7 @@ public sealed class EfRequestReader : IRequestReader
                 r.Status,
                 r.UpdatedAt,
                 r.Notes
+                    .OrderBy(n => n.CreatedAt).ThenBy(n => n.NoteId)
                     .Select(n => new RequestNote(
                         n.Content,
                         n.IsRequesterVisible))
