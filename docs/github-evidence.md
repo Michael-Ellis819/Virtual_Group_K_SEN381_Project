@@ -29,16 +29,6 @@ Existing repository: https://github.com/Michael-Ellis819/Virtual_Group_K_SEN381_
 
 The root file github_workflows_auto-merge-approved-prs.yml is outside .github/workflows, so its presence does not establish an active automation. No protection weakening or GitHub merge was performed by Codex. Updated upstream main was incorporated into the local feature branch.
 
-## Historical publication and review checklist
-
-1. Open this checkout/branch in GitHub Desktop. Inspect the implementation, test/CI and documentation commits, then publish the branch to the existing repository and open a PR into main.
-2. Bianca independently checks lifecycle/conformance, invalid transitions and the release/register statements. Michael checks transactional integration, version handling, migrations, CI and the State dependency. Each records what was actually checked and any findings on the PR before approving.
-3. Fix review findings on the feature branch; rerun affected checks. Both non-author approvals and required CI must apply to the current revision. Two independent teammates must review the changes.
-4. Merge only after required reviews/checks. Freeze the final assessed commit/tag and align PED, RTM, environment, evidence and recorded demo with it.
-
-Suggested review checklist: reproduce E01/E02; inspect BB03 and A05 no-write/rollback assertions; verify A06 rejects stale category/version; confirm no new input supplies actor/roles; compare unchanged requirement/AC IDs; confirm honest pending scope; check current CI and staging parity. Review comments and any rework must be real; no example comment should be posted as if it occurred.
-
-
 ## 14 October combined-review checkpoint
 
 PR16 remains open on 4a7cebe; one Bianca approval with empty review body. CI run 38518306719 is successful for the existing two suites only. Its source is merged locally with Cameron’s branch and the native PED/RTM consolidated; no GitHub merge/publication/approval is claimed. Local candidate tag: m3-combined-review-20261014. Corrected figures and dependency fix are part of the local candidate, not yet PR16 on GitHub.
