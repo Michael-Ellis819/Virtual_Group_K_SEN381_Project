@@ -4,8 +4,11 @@ using CivicConnect.Security;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using CivicConnect.Data.Entities;
+using Microsoft.AspNetCore.Identity;
 namespace CivicConnect;
 using System.Diagnostics;
+
 public static class Composition
 {
     public static IServiceCollection AddCivicConnect(
@@ -46,8 +49,15 @@ public static class Composition
         services.AddSingleton<Lifecycle.IStatusTransitionService, Lifecycle.StatusTransitionService>();
         services.AddSingleton<Lifecycle.IOwnershipRule, Lifecycle.OwnershipRule>();
         services.AddSingleton<Lifecycle.IServiceActivitySummaryCalculator, Lifecycle.ServiceActivitySummaryCalculator>();
-        services.AddScoped<IRequestStatusWriter, EfRequestStatusWriter>();
+        services.AddScoped<EfRequestStatusWriter>();
+        services.AddScoped<IRequestStatusWriter>(
+            sp => sp.GetRequiredService<EfRequestStatusWriter>());
         services.AddScoped<RequestStatusService>();
+        services.AddScoped<IPasswordHasher<PortalAccountEntity>,
+            PasswordHasher<PortalAccountEntity>>();
+
+        services.AddScoped<IPortalAccounts, EfPortalAccounts>();
+        services.AddScoped<IPortalRequestStore, EfPortalRequestStore>();
         var connectionString =
             configuration.GetConnectionString("CivicConnect")
             ?? throw new InvalidOperationException(
@@ -66,6 +76,7 @@ public static class Composition
             catch (OperationCanceledException) when (context.RequestAborted.IsCancellationRequested) { }
             catch (Exception ex)
             {
+                
                 var logger = context.RequestServices
                     .GetRequiredService<ILoggerFactory>()
                     .CreateLogger("CivicConnect.Observability");

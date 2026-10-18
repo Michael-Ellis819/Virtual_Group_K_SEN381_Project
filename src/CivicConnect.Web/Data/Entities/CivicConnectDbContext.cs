@@ -19,9 +19,41 @@ public sealed class CivicConnectDbContext : DbContext
         Set<RequestNoteEntity>();
     public DbSet<RequestStatusHistoryEntity> RequestStatusHistory =>
         Set<RequestStatusHistoryEntity>();
+    
+    public DbSet<PortalAccountEntity> PortalAccounts =>
+        Set<PortalAccountEntity>();
+
+    public DbSet<PortalAccountCategoryEntity> PortalAccountCategories =>
+        Set<PortalAccountCategoryEntity>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<PortalAccountEntity>(entity =>
+        {
+            entity.HasKey(a => a.Id);
+
+            entity.Property(a => a.Id).HasMaxLength(100);
+            entity.Property(a => a.Username).HasMaxLength(100).IsRequired();
+            entity.Property(a => a.DisplayName).HasMaxLength(150).IsRequired();
+            entity.Property(a => a.PasswordHash).IsRequired();
+            entity.Property(a => a.Role).HasMaxLength(30).IsRequired();
+            entity.Property(a => a.SecurityStamp).HasMaxLength(100).IsRequired();
+
+            entity.HasIndex(a => a.Username).IsUnique();
+        });
+
+        modelBuilder.Entity<PortalAccountCategoryEntity>(entity =>
+        {
+            entity.HasKey(c => new { c.AccountId, c.CategoryId });
+
+            entity.Property(c => c.AccountId).HasMaxLength(100);
+            entity.Property(c => c.CategoryId).HasMaxLength(100);
+
+            entity.HasOne(c => c.Account)
+                .WithMany(a => a.Categories)
+                .HasForeignKey(c => c.AccountId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
         modelBuilder.Entity<ServiceRequestEntity>(entity =>
         {
             entity.HasKey(r => r.RequestId);
@@ -61,6 +93,25 @@ public sealed class CivicConnectDbContext : DbContext
                 .IsRequired()
                 .IsConcurrencyToken()
                 .HasDefaultValue(1L);
+            
+            entity.Property(r => r.CreatedAt)
+                .IsRequired();
+
+            entity.Property(r => r.Priority)
+                .HasMaxLength(20)
+                .IsRequired()
+                .HasDefaultValue("Normal");
+
+            entity.Property(r => r.OwnerId)
+                .HasMaxLength(100);
+
+            entity.Property(r => r.DueAt);
+
+            entity.Property(r => r.SubmissionKey);
+
+            entity.HasIndex(r => new { r.RequesterId, r.SubmissionKey })
+                .IsUnique()
+                .HasFilter("\"SubmissionKey\" IS NOT NULL");
 
             entity.HasMany(r => r.Notes)
                 .WithOne(n => n.ServiceRequest)
@@ -77,6 +128,13 @@ public sealed class CivicConnectDbContext : DbContext
                 .IsRequired();
 
             entity.Property(n => n.IsRequesterVisible)
+                .IsRequired();
+            
+            entity.Property(n => n.AuthorId)
+                .HasMaxLength(100)
+                .IsRequired();
+
+            entity.Property(n => n.CreatedAt)
                 .IsRequired();
         });
         

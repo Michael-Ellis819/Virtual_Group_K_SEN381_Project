@@ -6,6 +6,7 @@ using CivicConnect.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Security.Claims;
+using CivicConnect.Lifecycle;
 
 var configuration = new ConfigurationBuilder()
     .AddUserSecrets<Program>()
@@ -34,6 +35,8 @@ Console.WriteLine("PASS: PostgreSQL connection successful.");
 // Generate unique IDs to avoid conflicting with existing records.
 var requestId = Guid.NewGuid();
 var referenceNumber = $"CC-TEST-{Guid.NewGuid():N}";
+string? assignmentStaffId = null;
+Guid? assignmentRequestId = null;
 
 try
 {
@@ -434,7 +437,165 @@ try
     }
 
     Console.WriteLine("PASS: Requester feedback rolled back.");
+    
+    // Temporary staff account for the portal assignment integration test.
+    assignmentStaffId = $"test-staff-{Guid.NewGuid():N}";
 
+    var assignmentStaff = new PortalAccountEntity
+    {
+        Id = assignmentStaffId,
+        Username = assignmentStaffId,
+        DisplayName = "Assignment Test Staff",
+        PasswordHash = "integration-test-not-for-login",
+        Role = "Staff",
+        IsActive = true,
+        Categories = new List<PortalAccountCategoryEntity>
+        {
+            new()
+            {
+                AccountId = assignmentStaffId,
+                CategoryId = "IT Support"
+            }
+        }
+    };
+
+    dbContext.PortalAccounts.Add(assignmentStaff);
+    await dbContext.SaveChangesAsync();
+
+    Console.WriteLine("PASS: Temporary assignment staff account created.");
+    
+    // Create a separate request for the assignment integration test.
+    assignmentRequestId = Guid.NewGuid();
+
+    var assignmentRequest = new ServiceRequestEntity
+    {
+        RequestId = assignmentRequestId.Value,
+        ReferenceNumber = $"CC-ASSIGN-{Guid.NewGuid():N}",
+        RequesterId = "requester-1",
+        CategoryId = "IT Support",
+        Description = "Assignment integration test request",
+        Location = "Computer Lab",
+        Status = "New",
+        CreatedAt = DateTimeOffset.UtcNow,
+        UpdatedAt = DateTimeOffset.UtcNow,
+        Version = 1
+    };
+
+    dbContext.ServiceRequests.Add(assignmentRequest);
+    await dbContext.SaveChangesAsync();
+
+    Console.WriteLine("PASS: Temporary assignment request created.");
+    
+    // Validate the New -> Assigned transition using the real lifecycle service.
+    var transitionResult = new CivicConnect.Lifecycle.StatusTransitionService().Evaluate(
+        new TransitionRequest(
+            "New",
+            "Assigned",
+            assignmentStaffId,
+            "Request assigned to staff.",
+            assignmentStaffId));
+
+    if (!transitionResult.Allowed || transitionResult.Change is null)
+    {
+        throw new Exception(
+            $"FAIL: Assignment transition rejected: {transitionResult.Message}");
+    }
+
+    Console.WriteLine("PASS: Assignment transition validated.");
+    
+    // Execute the real PostgreSQL-backed assignment operation.
+    var assignmentStore = new EfPortalRequestStore(
+        dbContext,
+        new OwnershipRule(),
+        new EfRequestStatusWriter(dbContext));
+
+    var staffActor = new PortalActor(
+        assignmentStaffId!,
+        "Staff",
+        new[] { "IT Support" });
+
+    var assignmentResult = await assignmentStore.AssignAsync(
+        staffActor,
+        assignmentRequestId!.Value,
+        assignmentStaffId!,
+        1,
+        transitionResult.Change,
+        CancellationToken.None);
+
+    if (assignmentResult.Outcome != PortalWriteOutcome.Saved)
+    {
+        throw new Exception(
+            $"FAIL: Assignment was not saved: {assignmentResult.Outcome}");
+    }
+
+    Console.WriteLine("PASS: PostgreSQL assignment saved.");
+    
+    // Verify the owner and status persisted in PostgreSQL.
+    dbContext.ChangeTracker.Clear();
+
+    var savedAssignment = await dbContext.ServiceRequests
+        .AsNoTracking()
+        .SingleAsync(r => r.RequestId == assignmentRequestId!.Value);
+
+    if (savedAssignment.OwnerId != assignmentStaffId ||
+        savedAssignment.Status != "Assigned")
+    {
+        throw new Exception(
+            "FAIL: Assignment owner or status was not saved correctly.");
+    }
+
+    Console.WriteLine("PASS: Assignment owner and status persisted.");
+
+// Verify the status history.
+    var assignmentHistory = await dbContext.RequestStatusHistory
+        .AsNoTracking()
+        .SingleOrDefaultAsync(h =>
+            h.RequestId == assignmentRequestId!.Value &&
+            h.PreviousStatus == "New" &&
+            h.NewStatus == "Assigned");
+
+    if (assignmentHistory is null ||
+        assignmentHistory.ChangedByUserId != assignmentStaffId)
+    {
+        throw new Exception(
+            "FAIL: Assignment status history was not saved correctly.");
+    }
+
+    Console.WriteLine("PASS: Assignment history persisted.");
+
+// Verify requester-visible feedback.
+    var assignmentFeedback = await dbContext.RequestNotes
+        .AsNoTracking()
+        .SingleOrDefaultAsync(n =>
+            n.RequestId == assignmentRequestId!.Value &&
+            n.Content == "Request assigned to staff.");
+
+    if (assignmentFeedback is null ||
+        !assignmentFeedback.IsRequesterVisible ||
+        assignmentFeedback.AuthorId != assignmentStaffId)
+    {
+        throw new Exception(
+            "FAIL: Assignment feedback was not saved correctly.");
+    }
+
+    Console.WriteLine("PASS: Assignment feedback persisted.");
+    
+    // A stale version must not overwrite the successful assignment.
+    var staleAssignmentResult = await assignmentStore.AssignAsync(
+        staffActor,
+        assignmentRequestId!.Value,
+        assignmentStaffId!,
+        1,
+        transitionResult.Change,
+        CancellationToken.None);
+
+    if (staleAssignmentResult.Outcome != PortalWriteOutcome.Conflict)
+    {
+        throw new Exception(
+            $"FAIL: Stale assignment was not rejected. Outcome: {staleAssignmentResult.Outcome}");
+    }
+
+    Console.WriteLine("PASS: Stale assignment rejected.");
     
     Console.WriteLine("All database integration checks passed.");
 }
@@ -448,6 +609,28 @@ finally
     await dbContext.ServiceRequests
         .Where(r => r.RequestId == requestId)
         .ExecuteDeleteAsync();
+    
+    if (assignmentStaffId is not null)
+    {
+        await dbContext.PortalAccounts
+            .Where(a => a.Id == assignmentStaffId)
+            .ExecuteDeleteAsync();
+    }
+    
+    if (assignmentRequestId is Guid testRequestId)
+    {
+        await dbContext.RequestNotes
+            .Where(n => n.RequestId == testRequestId)
+            .ExecuteDeleteAsync();
+
+        await dbContext.RequestStatusHistory
+            .Where(h => h.RequestId == testRequestId)
+            .ExecuteDeleteAsync();
+
+        await dbContext.ServiceRequests
+            .Where(r => r.RequestId == testRequestId)
+            .ExecuteDeleteAsync();
+    }   
 }
 
 static ClaimsPrincipal CreateUser(
