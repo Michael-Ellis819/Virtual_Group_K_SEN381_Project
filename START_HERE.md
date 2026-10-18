@@ -1,3 +1,7 @@
+# M4 working checkpoint
+
+18 October 2026. Start with README's M4 checkpoint and docs/portal-integration.md. The continuing PED v4.0 is an integration draft; the existing RTM now records provisional per-AC outcomes. Final shared adapters, acceptance, deployment and release freeze remain pending. The M3 guide below is retained as history and for its working verification commands.
+
 # CivicConnect Milestone 3 submission
 
 Prepared for SEN381 Virtual Group K on 15 October 2026.

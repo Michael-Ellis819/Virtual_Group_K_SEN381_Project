@@ -22,3 +22,11 @@ Residual risks include live permission freshness, simultaneous HTTP/audit timing
 Conditions: retain the controlled simulated environment and identify the demonstrated candidate; do not use this assessment as approval for real-user or production deployment. Real login, new-request submission, owner assignment, lists/search and reporting remain unfinished original requirements planned for M4 finalisation. Full pilot-load/recovery acceptance and residual permission/concurrency risks remain recorded. Any code or environment change needs the relevant checks before reusing this judgement.
 
 Bianca's completed review dated 14 October remains a historical conformance record. This 15 October assessment incorporates the team scope agreement confirmed by Cameron.
+
+## M4 checkpoint 18 October 2026
+
+Current recommendation: **NO-GO for real-user production release**, pending trusted account/request adapters, complete original journeys and normal deployment verification. This is a checkpoint recommendation; no team go-live acceptance is invented.
+
+Cameron's screens/controllers and synthetic contract journey are prepared. Local checks pass: 73 read/rule checks, 25 database checks, 19 M3 cases and 30 UI/contract cases. Missing adapters return unavailable responses. The normal startup guard remains unchanged. PR20's successful remote run supports its own revision; it is not remote verification of these additional changes.
+
+Before the final decision: identify the shared commit/tag/environment, connect and reverify the actual persistent journey, confirm important M3 issue outcomes, and update RTM/PED/registers. A staging no-go must name the remaining security/integrity/operational concern and remediation. M3 remains CONDITIONALLY READY only for its agreed controlled increment.

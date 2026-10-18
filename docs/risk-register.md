@@ -19,3 +19,13 @@ Bianca remains the register owner. Cameron consolidated the supplied proposals o
 | R-058; R-012/038 | Documentation differs from final product. | Medium / Medium | Published implementation 668795a, PR17 approvals and main CI aligned in the 15 October documents. Later changes require renewed alignment. | Cameron/Bianca; mitigated at submission. |
 
 M3-R04 continues secrets risk R-005/024: connection configuration uses environment variables; no production credential is introduced. M3-R05 also links NFR-007 recovery: backup/restore evidence remains pending. Residual risk and blockers are in [release-evidence.md](release-evidence.md).
+
+## M4 checkpoint 18 October 2026
+
+The original R-001–R-045 and M3 extensions remain controlled history. Bianca's final status/effectiveness review is pending her latest contribution; the older ZIP is not used to reopen fixed integration findings.
+
+- R-048/049/052 remain relevant: presentation/contract verification exists, but normal-product accounts, queries and writes await real adapters.
+- R-050 / R-015 remain open for simultaneous claims and final HTTP/audit timing. Status rollback/version checks passed again.
+- R-053 coverage now includes M4 contract checks in the workflow; remote execution and merge enforcement for this revision remain to be established separately.
+- R-054 and R-057 remain open: PR20 adds local HTTPS/basic restore and database-read evidence, with the original operational/pilot acceptance gaps retained.
+- R-056/058 are partly mitigated by explicit per-AC scoring and provenance. The 47.2% working score is not final group acceptance and cannot substitute for missing delivery.

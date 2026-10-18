@@ -12,3 +12,17 @@
 | Test/staging demonstration | PED Section 8 and docs/testing-m3.md reproduce Release status API suites on a disposable PostgreSQL database. Staging uses HTTPS and synthetic identities and stops after execution. |
 | Evidence date | Team scope confirmation and final-baseline CI: 15 October 2026. Conformance review and performance: 14 October. Cameron personal run: 13 October, 18:18-18:19 SAST. |
 | Date submitted | 16 October 2026 |
+
+## M4 submission preparation 18 October 2026
+
+| Field | Preparation status |
+| --- | --- |
+| Repository | Same Virtual Group K GitHub repository. |
+| PED | docs/PED_v4.0.docx, PED_v4.0_Draft.pdf and PED_v4.0.md; continuing integration draft. |
+| RTM | Existing docs/CivicConnect_RTM_v2.0.xlsx and Markdown copy; M4 checkpoint columns appended. |
+| Final shared commit/tag | Pending team integration, final rerun/review and freeze. Do not submit the old M3 hash as the M4 final build. |
+| Deployment/access | Normal product adapters/deployment incomplete; test-only preview is not a deployed product. Final declared state/access details pending. |
+| Deadline | End of 18 October 2026, confirmed by Cameron. |
+| Actual submission | Not established. |
+
+The historical M3 submission block above is retained. Promote this preparation block to final only when it identifies the exact assessed shared candidate and authentic evidence.

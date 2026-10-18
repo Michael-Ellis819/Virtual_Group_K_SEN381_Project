@@ -806,3 +806,42 @@ For each requirement row `r` (rows 2–28), the workbook uses:
 
 - Priority: `=INDEX(Requirements!$C$2:$C$28,MATCH(Ar,Requirements!$A$2:$A$28,0))`
 - Current requirement wording: `=INDEX(Requirements!$B$2:$B$28,MATCH(Ar,Requirements!$A$2:$A$28,0))`
+
+
+## M4 checkpoint 18 October 2026
+
+The earlier tables above retain M3 history. New columns W–AE in the same RTM sheet record this provisional assessment. Final group integration and acceptance remain pending. No original requirement or AC was removed.
+
+Scope Completion: 25.5/54 = 47.2% (13 Met, 25 Partially Met, 16 Not Met). Target: 80%. The live workbook derives values from the two AC outcome fields and exposes incomplete inputs.
+
+| Requirement | Original priority | Implementation | AC1 | AC2 | Points | Checkpoint disposition | Remaining gap |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| FR-001 | High | PARTIALLY IMPLEMENTED | Not Met | Partially Met | 0.5 | Not delivered | Valid submissions cannot yet be saved by the normal product. |
+| FR-002 | High | PARTIALLY IMPLEMENTED | Partially Met | Partially Met | 1.0 | Not delivered | Catalogue persistence and retention must be verified with Michael’s adapter. |
+| FR-003 | High | IMPLEMENTED | Met | Met | 2 | Verified | Real account adapter is still absent; this trace covers controlled read/status behaviour. |
+| FR-004 | Medium | PARTIALLY IMPLEMENTED | Not Met | Not Met | 0 | Not delivered | Persistent requester list and empty/history cases await integration. |
+| FR-005 | Medium | PARTIALLY IMPLEMENTED | Partially Met | Met | 1.5 | Not delivered | Dated feedback for every required event is not yet available in the product. |
+| FR-006 | High | PARTIALLY IMPLEMENTED | Not Met | Met | 1 | Not delivered | The authorised persisted collection query is not implemented by this contribution. |
+| FR-007 | Medium | PARTIALLY IMPLEMENTED | Not Met | Not Met | 0 | Not delivered | Actual matching, combined query results and priority/date ordering require the real data adapter. |
+| FR-008 | High | PARTIALLY IMPLEMENTED | Partially Met | Partially Met | 1.0 | Not delivered | Requester/owner/priority/due-date metadata is absent from current persistence. |
+| FR-009 | High | PARTIALLY IMPLEMENTED | Partially Met | Partially Met | 1.0 | Not delivered | Atomic persisted ownership, audit and simultaneous claims remain unverified. |
+| FR-010 | High | IMPLEMENTED | Met | Met | 2 | Verified | Writer bypass remains debt; added entry points and final adapters require another integration run. |
+| FR-011 | High | PARTIALLY IMPLEMENTED | Partially Met | Partially Met | 1.0 | Not delivered | General notes need persisted author/time and correction history. |
+| FR-012 | High | IMPLEMENTED | Met | Met | 2 | Verified | Real-account portal acceptance remains separate from the verified status API. |
+| FR-013 | Medium | PARTIALLY IMPLEMENTED | Partially Met | Partially Met | 1.0 | Not delivered | Saved management data and refresh against persistent changes await integration. |
+| FR-014 | Medium | PARTIALLY IMPLEMENTED | Not Met | Not Met | 0 | Not delivered | The persisted management overview and individual matching request presentation remain incomplete. |
+| FR-015 | High | PARTIALLY IMPLEMENTED | Partially Met | Partially Met | 1.0 | Not delivered | Creation/ownership/priority/due-date/note audit, restart and immutability coverage remain incomplete. |
+| FR-016 | High | PARTIALLY IMPLEMENTED | Not Met | Met | 1 | Not delivered | There is no registered real account adapter or verified enabled-account credential store. |
+| FR-017 | Medium | PARTIALLY IMPLEMENTED | Not Met | Partially Met | 0.5 | Not delivered | Default and updated priorities must be persisted and used by real sorting/filtering. |
+| FR-018 | Medium | PARTIALLY IMPLEMENTED | Not Met | Partially Met | 0.5 | Not delivered | Saved due-date audit and actual overdue records await Michael’s adapter. |
+| NFR-001 | High | IMPLEMENTED | Met | Met | 2 | Verified | Confidence is limited to tested surfaces; review every new adapter/query before final acceptance. |
+| NFR-002 | Medium | PARTIALLY IMPLEMENTED | Not Met | Not Met | 0 | Not delivered | Four separate user-visible operations, specified dataset/load, failures and cold start remain unverified. |
+| NFR-003 | High | PARTIALLY IMPLEMENTED | Partially Met | Partially Met | 1.0 | Not delivered | Durable idempotency, assignment atomicity and full restart acceptance remain open. |
+| NFR-004 | Medium | NOT IMPLEMENTED | Not Met | Not Met | 0 | Not delivered | Five-participant task/time/error records are required; synthetic UI checks are not usability acceptance. |
+| NFR-005 | Medium | PARTIALLY IMPLEMENTED | Not Met | Partially Met | 0.5 | Not delivered | 360/1366 Chrome-and-Edge matrix and complete keyboard/error journey remain unverified. |
+| NFR-006 | High | PARTIALLY IMPLEMENTED | Partially Met | Partially Met | 1.0 | Not delivered | Final deployed certificate, sign-in/protected browser pages and mixed-content checks remain unverified. |
+| NFR-007 | Medium | PARTIALLY IMPLEMENTED | Partially Met | Partially Met | 1.0 | Not delivered | Backup age, timed restoration, RPO/RTO and consistent owner/history recovery are not established. |
+| NFR-008 | High | PARTIALLY IMPLEMENTED | Partially Met | Partially Met | 1.0 | Not delivered | A complete dummy-secret/private-content log audit remains outstanding. |
+| NFR-009 | High | IMPLEMENTED | Met | Met | 2 | Verified | Testability does not imply that the corresponding persistent product journeys are delivered. |
+
+“Verified” means both criteria are evidenced for the current controlled scope, not whole-product or final-release acceptance. Incomplete original commitments remain Not delivered; none was relabelled Deferred. Detailed evidence and limitations are in workbook columns AC/AD and docs/evidence/m4-cameron-20261018/summary.md.

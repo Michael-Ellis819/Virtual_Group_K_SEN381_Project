@@ -1,0 +1,17 @@
+@model ListPage
+@{ ViewData["Title"] = User.IsInRole("Staff") ? "Staff requests" : "My requests"; }
+<h1>@ViewData["Title"]</h1>
+@if (User.IsInRole("Requester")) { <a class="button" href="/portal/requests/new">Submit a request</a> }
+<form class="panel" method="get" action="/portal/requests"><h2>Find requests</h2>
+<div asp-validation-summary="All" class="errors" role="alert" tabindex="0"></div><div class="grid">
+<div class="field"><label for="Search">Search</label><input id="Search" name="Search" value="@Model.Filter.Search" maxlength="200"></div>
+<div class="field"><label for="Status">Status</label><select id="Status" name="Status"><option value="">All statuses</option>@foreach (var status in PortalOptions.Statuses) { <option value="@status" selected="@(Model.Filter.Status == status)">@status</option> }</select></div>
+<div class="field"><label for="Category">Category</label><select id="Category" name="Category"><option value="">All categories</option>@foreach (var category in PortalOptions.Categories) { <option value="@category" selected="@(Model.Filter.Category == category)">@category</option> }</select></div>
+<div class="field"><label for="Priority">Priority</label><select id="Priority" name="Priority"><option value="">All priorities</option>@foreach (var priority in PortalOptions.Priorities) { <option value="@priority" selected="@(Model.Filter.Priority == priority)">@priority</option> }</select></div>
+<div class="field"><label for="From">Submitted from (UTC)</label><input id="From" name="From" type="date" value="@Model.Filter.From?.ToString("yyyy-MM-dd")"></div>
+<div class="field"><label for="To">Submitted to (UTC, inclusive)</label><input id="To" name="To" type="date" value="@Model.Filter.To?.ToString("yyyy-MM-dd")"></div>
+<div class="field"><label for="Sort">Sort by</label><select id="Sort" name="Sort"><option value="date-desc" selected="@(Model.Filter.Sort == "date-desc")">Newest first</option><option value="date-asc" selected="@(Model.Filter.Sort == "date-asc")">Oldest first</option><option value="priority-desc" selected="@(Model.Filter.Sort == "priority-desc")">Highest priority first</option><option value="priority-asc" selected="@(Model.Filter.Sort == "priority-asc")">Lowest priority first</option></select></div>
+</div><div class="actions"><button type="submit">Apply filters</button><a href="/portal/requests">Clear filters</a></div></form>
+@if (!Model.Available) { <p class="notice" role="status">Requests are temporarily unavailable. Please try again later.</p> }
+else if (ViewData.ModelState.IsValid && Model.Requests.Count == 0) { <p role="status">No requests match these filters.</p> }
+else { <ul class="requests">@foreach (var request in Model.Requests) { <li class="panel"><div class="request-head"><a href="/portal/requests/@request.Id"><strong>@request.Reference</strong></a><span class="badge">@request.Status</span></div><dl><dt>Category</dt><dd>@request.Category</dd><dt>Submitted (UTC)</dt><dd>@request.CreatedAt.UtcDateTime.ToString("yyyy-MM-dd HH:mm")</dd><dt>Priority</dt><dd>@request.Priority</dd></dl></li> }</ul> }

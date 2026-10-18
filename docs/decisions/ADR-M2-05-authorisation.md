@@ -38,3 +38,7 @@ Changes to role, category or ownership rules affect this ADR, DTOs, contract, te
 ## M3 later consequence - 13 October 2026
 
 The central policy is retained and extended with CanChangeStatus. Active category-authorised Staff may mutate; requester read ownership grants no mutation rights. RequestStatusService applies the action check for direct and HTTP callers. C03/BB05/A06 passed; E01 verifies owner note filtering after writes. Version transfer closes the stale-category gap between read permission and saving. Live account provisioning/freshness is still unverified. Change impact: CR-M3-C01. Owner: Cameron; combined work reviewed by Bianca and Michael on 14 October; PR17 has both approvals, is merged and passes combined main CI 38594557024.
+
+## M4 observed consequence 18 October 2026
+
+The portal reuses the central record policy for details and staff writes. Actor parsing rejects ambiguous/unknown/inactive principals, and browser sessions re-read server-owned account state and security stamps when the account adapter is connected. UI checks verify role-injection denial, category denial and disabled-session rejection using test-only accounts. The real account store and permission-scoped collection queries remain integration dependencies; these results are not production identity acceptance.

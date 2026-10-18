@@ -20,6 +20,18 @@ public static class Composition
             o.Cookie.SameSite = SameSiteMode.Lax;
             o.Events.OnRedirectToLogin = c => { c.Response.StatusCode = 401; return Task.CompletedTask; };
             o.Events.OnRedirectToAccessDenied = c => { c.Response.StatusCode = 403; return Task.CompletedTask; };
+            o.Events.OnValidatePrincipal = async c =>
+            {
+                // Browser sessions issued by AccountController are checked against live account data.
+                // Legacy synthetic test tickets carry no portal stamp and remain confined to harnesses.
+                var stamp = c.Principal?.FindFirst("portal-stamp")?.Value;
+                if (stamp is null) return;
+                var actor = c.Principal is null ? null : PortalActor.From(c.Principal);
+                var accounts = c.HttpContext.RequestServices.GetServices<IPortalAccounts>().SingleOrDefault();
+                var account = actor is null || accounts is null ? null : await accounts.FindAsync(actor.Id, c.HttpContext.RequestAborted);
+                if (account is null || !account.IsActive || account.Id != actor!.Id || account.SecurityStamp != stamp || account.Role != actor.Role ||
+                    !account.Categories.ToHashSet(StringComparer.Ordinal).SetEquals(actor.Categories)) c.RejectPrincipal();
+            };
         });
         services.AddAuthorization(o => o.FallbackPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build());
         services.AddAntiforgery(o =>

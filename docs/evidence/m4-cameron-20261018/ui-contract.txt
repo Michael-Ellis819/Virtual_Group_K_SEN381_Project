@@ -1,0 +1,29 @@
+PASS UI01 signed-out portal access denied [FR-016]
+PASS UI02 sign-in requires antiforgery
+PASS UI03 invalid credentials issue no session [EP FR-016]
+PASS UI04 posted role cannot elevate requester [NFR-001]
+PASS UI05 password is never echoed into sign-in HTML
+PASS BB-M4-01 unlisted category rejected without write [FR-001/002 EP]
+PASS BB-M4-02 description length 0 rejected without write [BVA]
+PASS BB-M4-02 description length 2001 rejected without write [BVA]
+PASS BB-M4-03 location 251 rejected without write [BVA]
+PASS BB-M4-04 boundary 2000/250 accepted through store contract [BVA]
+PASS UI06 resubmission preserves submission key and returns same record [contract only]
+PASS UI07 list excludes other requester's record [FR-004]
+PASS UI08 direct foreign detail denied [FR-003]
+PASS BB-M4-05 combined filters preserve inclusive UTC boundaries [FR-007]
+PASS BB-M4-06 reversed dates rejected [EP]
+PASS UI09 staff category boundary enforced before assignment
+PASS UI10 assignment calls ownership and transition rules before store [FR-009]
+PASS UI11 stale write reports conflict
+PASS BB-M4-07 blank resolution summary rejected [FR-012 EP]
+PASS UI12 internal note uses explicit private visibility
+PASS UI13 private notes excluded for requester and HTML encoded for staff [FR-011]
+PASS UI14 due date labelled UTC is passed as UTC [FR-017/018]
+PASS E2E-M4-01 sign-in submit assign progress resolve close [synthetic store, not deployed acceptance]
+PASS UI15 terminal status cannot reopen
+PASS UI16 note mutation requires antiforgery
+PASS UI17 management filtered counts use Bianca calculator [FR-013/014]
+PASS UI18 disabled browser account loses access on next request
+PASS UI19 missing real account adapter returns 503 and issues no session
+RESULT 28 UI/contract cases passed; 0 failed. Synthetic in-memory adapters only; no persistence, real-user usability or deployed E2E acceptance claimed.

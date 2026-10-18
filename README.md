@@ -4,7 +4,15 @@ Community service request management for Virtual Group K.
 
 Michael Ellis 600332 · Cameron Purdon 601963 · Bianca Grobler 600537
 
-## Current implementation
+## M4 working checkpoint 18 October 2026
+
+Cameron's Razor presentation and contract checks are prepared on `feature/cameron-m4-finalisation`. [Integration contracts](docs/portal-integration.md) identify the real account/request adapters still needed from Michael. No synthetic adapter is registered in the normal product; dependent operations return unavailable responses. Existing protected details/status services remain connected. M3's conditional readiness is retained for its agreed increment only.
+
+Current records: [PED v4.0 draft](docs/PED_v4.0.docx), [draft PDF](docs/PED_v4.0_Draft.pdf), [Markdown](docs/PED_v4.0.md), [continuing RTM](docs/CivicConnect_RTM_v2.0.xlsx), and [M4 evidence](docs/evidence/m4-cameron-20261018/summary.md). The 47.2% AC checkpoint is provisional while the team integrates. Final deployment, release identifier and submission are pending.
+
+Run `dotnet run --project tests/CivicConnect.M4Tests --configuration Release` for the additional form/HTTP checks. Its submit-to-close journey uses test-only adapters and does not accept the persistent product. The historical commands and evidence below remain valid for their recorded M3 scope.
+
+## Retained M3 implementation
 
 The M3 increment provides protected request-details reads, central authorisation, filtered response data and authorised status updates. Requesters can read their own records and public notes. Staff can read and update records in authorised categories. PostgreSQL persistence, EF Core migrations and the six-state lifecycle are implemented. Status changes, history and public feedback are saved together in one transaction, with stale-record checks.
 

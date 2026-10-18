@@ -16,3 +16,9 @@ The failed gate probe is a deliberate verification experiment, not a product def
 ## DEF-M3-C06 Test-project transitive dependency advisories
 
 Severity: High. Status: Fixed in merged PR16, 14 October 2026; two non-author approvals recorded and main CI run 38579869423 passed. The combined-work review is recorded separately. PR17 now merges the complete increment; main run 38594557024 passes all four projects and dependency checks. NuGetAuditMode=all exposes System.Text.Json 8.0.0 through test configuration packages. Advisories: https://github.com/advisories/GHSA-8g4q-xg66-9fp4 and https://github.com/advisories/GHSA-hh2w-p6rv-4g7w. Database/performance projects explicitly resolve patched 8.0.5. Strict restore audits and repeated 29/25/19 correctness checks pass. Raw failure/fix logs: evidence/m3/combined-20261014. The earlier web-only scan did not cover this test-package graph.
+
+## M4 checkpoint 18 October 2026
+
+DEF-M3-C01/C02 remain fixed for the tested status path: all 19 M3 cases and the PostgreSQL suite pass after presentation changes. C04 remains open because normal non-Development startup is still blocked. C05 remains open: the presentation and rules are prepared, but real account/request adapters and original persistent journeys are not delivered by this contribution.
+
+The AR01 optional-parameter false positive and its passing correction are retained in the [M4 execution evidence](evidence/m4-cameron-20261018/summary.md). No observed product status write was bypassing the service. Synthetic contract checks do not close the outstanding ownership, idempotency, note audit, performance, recovery or usability gaps.
